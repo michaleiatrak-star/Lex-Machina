@@ -12,8 +12,7 @@ source_policy: "RZĄD 1 only"
 
 Kodeks postępowania cywilnego — aktualny tekst jednolity
 **Dz.U. 2026 poz. 468**, stan prawny t.j. 25.03.2026.
-ELI wskazuje późniejsze akty zmieniające — przed użyciem jednostki
-zawsze odczytaj aktualny tekst ujednolicony.
+**Przegląd METODYKA W-2/W-4/W-6:** 2026-11-13 (nowelizacje po t.j. i przepisy przejściowe z ELI; kwalifikatory treści — przegląd W-1 w kolejnej paczce). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
 
 - https://eli.gov.pl/eli/DU/2026/468/ogl
 - https://eli.gov.pl/api/acts/DU/2026/468/text.html
@@ -80,6 +79,24 @@ Odwołanie od decyzji ZUS ma szczególny tor. Ustal:
 - możliwe rozstrzygnięcia sądu, w tym art. 477¹⁴.
 
 Połącz z DR-04; nie stosuj wyłącznie ogólnej apelacyjnej logiki KPC.
+
+**Sprawy z zakresu prawa pracy — zmiany 2026 (w mocy):**
+- ustalenie istnienia lub treści stosunku pracy: posiedzenie niejawne i wyrok wstępny (art. 477¹ᶜ),
+  termin posiedzenia ≤ miesiąc od pozwu (art. 477¹ᵈ); powództwo i udział okręgowego inspektora pracy
+  (art. 63¹–63²); zabezpieczenie trwałości umowy (art. 755⁶) — w brzmieniu od 2026-07-08 (2026/473);
+- odwołanie od decyzji okręgowego inspektora pracy stwierdzającej stosunek pracy (art. 477⁷ᵇ–477⁷ʲ,
+  właściwość art. 461 § 1¹–1², 2³–2⁴); kasacja niedopuszczalna w sprawach odwołań od decyzji z art. 14b
+  ust. 8 ustawy o PIP (art. 398² § 2 pkt 4) — od 2026-07-08 (2026/473; sprawy z powództwa PIP wszczęte
+  wcześniej — dotychczasowe, art. 15);
+- zadośćuczynienie/odszkodowanie za naruszenie dóbr osobistych, równego traktowania, mobbing:
+  art. 477⁶ᵃ, właściwość art. 461 § 1¹, art. 47 § 2 pkt 1 lit. d — w brzmieniu od 2026-11-05 (2026/1046;
+  sprawy w toku — dotychczasowe, art. 5).
+Brzmienie każdej jednostki — tekst nowelizacji w ELI (t.j. 2026/468 go nie zawiera).
+
+## 7a. Sprawy z zakresu sztucznej inteligencji — dział IVfa (od 2026-10-28, 2026/1003)
+
+SOKiK (SO w Warszawie) — odwołania od decyzji i zażalenia na postanowienia Komisji Rozwoju i Bezpieczeństwa
+Sztucznej Inteligencji (art. 479⁸⁸ᵃ i n.); brzmienie z ustawy 2026/1003 w ELI.
 
 ## 8. Ograniczenia egzekucji — art. 829 i 833
 

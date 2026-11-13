@@ -259,19 +259,15 @@ NIE KONSTYTUTYWNY. Oznacza to, że data zasiedzenia w postanowieniu sądu
 wskazuje moment W PRZESZŁOŚCI (upływ terminu), a nie datę wydania
 orzeczenia.
 
-### 12. Ograniczenie dla nieruchomości ROLNYCH (art. 172 §3 KC)
+### 12. Nieruchomości rolne — art. 172 § 3 KC UCHYLONY
 
-```
-Nabycie NIERUCHOMOŚCI ROLNEJ (w rozumieniu ustawy o kształtowaniu
-  ustroju rolnego) przez zasiedzenie MOŻE nastąpić WYŁĄCZNIE na rzecz
-  ROLNIKA INDYWIDUALNEGO (w rozumieniu tej samej ustawy)
-LIMIT POWIERZCHNIOWY: powierzchnia NABYWANEJ nieruchomości rolnej
-  ŁĄCZNIE z nieruchomościami rolnymi JUŻ stanowiącymi własność tej
-  osoby NIE MOŻE przekroczyć 300 HA użytków rolnych
-GENEZA: przepis dodany ustawą o wstrzymaniu sprzedaży nieruchomości
-  Zasobu Własności Rolnej Skarbu Państwa — kontekst ochrony struktury
-  agrarnej przed nadmierną koncentracją ziemi
-```
+Art. 172 § 3 KC jest w t.j. KC (Dz.U. 2026 poz. 795) **„(uchylony)”** (ELI 2026-11-13). Poprzedni opis tej
+sekcji (zasiedzenie nieruchomości rolnej tylko na rzecz rolnika indywidualnego, limit 300 ha) przedstawiał
+jednostkę uchyloną jako obowiązującą — błąd.
+- Ograniczenia nabycia nieruchomości rolnych: ustawa o kształtowaniu ustroju rolnego — brzmienie i stan
+  prawny z ELI, nie z tego modułu.
+- Zasiedzenie następuje z mocy prawa w dniu upływu terminu: przy terminie, który upłynął, gdy § 3 obowiązywał,
+  stosuj brzmienie historyczne KC z ELI na tę datę (W-1, W-4 METODYKA-MODULY-DR).
 
 ### 13. Współwłasność — pułapka praktyczna
 

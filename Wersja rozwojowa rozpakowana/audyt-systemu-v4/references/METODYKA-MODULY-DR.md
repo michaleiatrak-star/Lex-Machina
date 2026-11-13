@@ -49,5 +49,13 @@ Znalezisko obsługuje się krokami W-2…W-7 dla wskazanych modułów.
   wyjątków od daty wejścia dla pojedynczych jednostek — to zawsze W-4 (odczyt nowelizacji).
 - Data w „Akty zmieniające” to jedna data na parę akt–nowelizacja; przy wielu terminach wejścia
   rozstrzyga przepis końcowy nowelizacji.
-- `check_uchylone.py` czyta PDF (`pdftotext`): indeksy górne spłaszczone („art. 21³” = „213”);
-  przy wątpliwości rozstrzyga `/struct` (`arti_21_3` ≠ `arti_213`).
+- `check_uchylone.py` czyta `text.html` (identyfikatory jednostek, `arti_21_3` ≠ `arti_213`) i z niego
+  sprawdza istnienie powołanej jednostki (`NIEISTNIEJACY`, `NIEISTNIEJACA_JEDNOSTKA`). Część t.j. ELI publikuje
+  tylko w PDF (`textHTML: false`, KC 2026/795, KPC 2026/468, PrUp 2026/913): wtedy PDF z indeksami „[n]”
+  zamienianymi na klucz „n_m”, bez kontroli istnienia.
+- W-4 automatycznie: `check_nowelizacje.py` dla nowelizacji bez wiersza w tabeli C czyta jej tekst i dopisuje
+  szkic „DO POTWIERDZENIA” (artykuł zmieniający, przepisy przejściowe, wejście i wyjątki, także przedziały
+  „art. 2–7”). Szkic potwierdza odczyt treści; do tego czasu `W4_DO_POTWIERDZENIA`.
+- Monitoring obejmuje moduły w formacie wskazań i moduły ze znacznikiem „Przegląd METODYKA W-2/W-4/W-6:
+  RRRR-MM-DD” (nowelizacje i przepisy przejściowe przejrzane przed pełną konwersją W-1).
+- Nagłówek z kilkoma aktami: numer nowelizacji liczy się tylko w wierszu z Dz.U. albo skrótem tego aktu.

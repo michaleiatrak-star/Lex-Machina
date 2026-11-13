@@ -1,10 +1,11 @@
 # mod-KPC-egzekucja-windykacja
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** KPC — Dz.U. 2026 poz. 468 t.j. | KSCU — Dz.U. 2025 poz. 1228 t.j. | Ustawa o kosztach komorniczych (u.k.k.) — Dz.U. 2024 poz. 377 t.j. | Ustawa o komornikach sądowych — Dz.U. 2026 poz. 881 t.j. | ✅ ELI 2026-08-25
+**Źródło weryfikacji:** KPC — t.j. Dz.U. 2026 poz. 468 | KSCU — t.j. Dz.U. 2025 poz. 1228 (zm. 2026/473 — art. 35 ust. 2, 36a, 96 ust. 1 pkt 8, w brzmieniu od 2026-07-08; 2026/1003 — art. 3 ust. 2 pkt 9, 32, od 2026-10-28; 2026/346 [OD 2028-09-30: 2026/346] — art. 52 ust. 2, 53 ust. 3: opłaty od wniosków przy wzorcach S24) | Ustawa o kosztach komorniczych (u.k.k.) — Dz.U. 2024 poz. 377 t.j. | Ustawa o komornikach sądowych — Dz.U. 2026 poz. 881 t.j. | ✅ ELI 2026-08-25
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **⚠️ Nowelizacja KPC:** Dz.U. 2025 poz. 1172 — wejście w życie 01.03.2026; weryfikuj aktualne przepisy.
+**Przegląd METODYKA W-2/W-4/W-6:** 2026-11-13 (nowelizacje po t.j. i przepisy przejściowe z ELI; kwalifikatory treści — przegląd W-1 w kolejnej paczce). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
 
 ---
 
@@ -38,9 +39,12 @@ Windykacja polubowna, postępowanie sądowe o zapłatę (nakazowe, upominawcze, 
   skorygowano po głębszym sprawdzeniu chronologii (potwierdzone w 5+
   źródłach z 2023 r.: kancelaria-szip.pl, traple.pl, followlegal.pl,
   prawobiznesu.com, LinkedIn/M.Soszka — wszystkie zgodne co do daty i
-  kwoty). WYJĄTKI od tego progu (do SR mimo wysokiej wartości):
-  alimenty, naruszenie posiadania, rozdzielność majątkowa małżonków,
-  uzgodnienie treści KW, EPU)
+  kwoty). WYJĄTKI od tego progu wg art. 17 pkt 4 (t.j. 2026/468, ELI 2026-11-13):
+  alimenty, naruszenie posiadania, ustanowienie rozdzielności majątkowej
+  między małżonkami, sprawy w EPU — „uzgodnienie treści KW” NIE jest w tym
+  katalogu (wcześniejszy wpis błędny). Inne sprawy SO bez względu na wartość:
+  art. 17 pkt 1–4⁶, m.in. pkt 4⁶ (roszczenia z rozdz. 4e UŚUDE, w brzmieniu
+  od 2026-11-06, 2026/1296))
 □ Czy istnieje tytuł wykonawczy (wyrok / nakaz z klauzulą)?
 □ Czy dłużnik ma majątek: rachunek bankowy / nieruchomość / wynagrodzenie?
 □ Czy roszczenie jest przedawnione?
@@ -328,7 +332,7 @@ Mediacja (art. 183¹ i n. KPC):
 
 ---
 
-## 9. KOSZTY SĄDOWE (KSCU — Dz.U. 2024 poz. 959)
+## 9. KOSZTY SĄDOWE (KSCU — t.j. Dz.U. 2025 poz. 1228; poprzedni t.j. 2024/959 nieaktualny)
 
 > ⚠️ Weryfikuj aktualne stawki w KSCU w ELI (RZĄD 1).
 

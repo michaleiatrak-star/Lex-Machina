@@ -21,7 +21,10 @@ z brzmieniem nowelizacji z ELI).
 tabela A (zmiany nadchodzące) generowana od nowa, tabela B (przepisy czasowe) bez wierszy
 z datą „Do” wcześniejszą niż dziś (USUNIETY_PRZEPIS_CZASOWY) i z kontrolą, że nowelizacja
 istnieje w ELI (PRZEPIS_CZASOWY_BEZ_AKTU); tabela C (odczyt W-4) — każda nowelizacja z tabeli A
-ma wiersz (BRAK_W4), wiersze nowelizacji spoza A i bez wierszy w B są usuwane.
+ma wiersz (BRAK_W4), wiersze nowelizacji spoza A i bez wierszy w B są usuwane. Dla brakującego
+wiersza skrypt czyta nowelizację z ELI (artykuł zmieniający akt, przepisy przejściowe z odesłaniem
+do niego, przepis o wejściu w życie z wyjątkami) i dopisuje wiersz „DO POTWIERDZENIA”
+(W4_DO_POTWIERDZENIA, dopóki człowiek albo model nie zatwierdzi wyniku po odczycie).
 
 Kod wyjścia: 0 brak znalezisk, 1 znaleziska, 2 błąd ELI.
 Użycie: check_nowelizacje.py --root "Wersja rozwojowa rozpakowana" [--skill dr-02-…]
@@ -113,7 +116,62 @@ def changes_after(tj_id: str, cache: Path) -> dict:
     return out
 
 
-def update_registry(path: Path, upcoming: dict, scopes: dict, today: str, cache: Path, report) -> tuple[int, int]:
+MONTHS = "stycznia lutego marca kwietnia maja czerwca lipca sierpnia września października listopada grudnia".split()
+
+
+def amendment_text(eli: str, cache: Path) -> str:
+    out = cache / (eli.replace("/", "-") + ".txt")
+    if out.is_file() and out.stat().st_size:
+        return out.read_text(encoding="utf-8")
+    import subprocess
+    with urllib.request.urlopen(f"{API}/{eli}/text.pdf", timeout=180) as resp:
+        data = resp.read()
+    with tempfile.NamedTemporaryFile(suffix=".pdf") as pdf:
+        pdf.write(data)
+        pdf.flush()
+        text = subprocess.run(["pdftotext", pdf.name, "-"], check=True, capture_output=True, text=True).stdout
+    out.write_text(text, encoding="utf-8")
+    return text
+
+
+def draft_w4(amendment: str, base: str, cache: Path) -> str:
+    """Szkic wiersza tabeli C z treści nowelizacji (do potwierdzenia po odczycie)."""
+    title = eli_json(base, cache).get("title", "")
+    m = re.search(r"z dnia (\d{1,2}) (\w+) (\d{4}) r\.", title)
+    if not m:
+        return "nie ustalono daty aktu bazowego — odczyt ręczny"
+    text = re.sub(r"\s+", " ", re.sub(r"\n\s*Dziennik Ustaw\s*–\s*\d+\s*–\s*Poz\. \d+\s*\n", "\n", amendment_text(amendment, cache)))
+    head = re.search(rf"Art\. (\d+)\. W ustawie z dnia {m.group(1)} {m.group(2)} {m.group(3)} r\.", text)
+    own = head is not None and re.search(rf"^.{{0,400}}?Ustawa z dnia [^.]*? o zmianie ustawy", text) is None
+    k = head.group(1) if head else None
+    parts = []
+    if k:
+        parts.append(f"zmiany: art. {k}")
+    else:
+        parts.append("artykuł zmieniający nie znaleziony (ustawa samodzielna albo inny zapis)")
+    trans = []
+    for t in re.finditer(r"Art\. (\d+)\. ((?:(?!Art\. \d+\. ).){0,700})", text):
+        body = t.group(2)
+        if re.match(r"W ustawie z dnia", body):
+            continue
+        refers = k and re.search(rf"zmienian\w* w art\. {k}\b", body)
+        generic = re.search(r"dotychczasow|wszczęt\w* i niezakończon|przed dniem wejścia w życie niniejszej ustawy|zachowuj\w* moc|dostosuj\w*|w terminie \d+ (?:dni|miesięcy|lat) od dnia wejścia w życie", body)
+        if refers or (generic and not re.search(r"zmienian\w* w art\. \d+", body)):
+            trans.append(f"art. {t.group(1)}" + ("" if refers else " (ogólny)"))
+    parts.append("przejściowe: " + (", ".join(dict.fromkeys(trans)) if trans else "nie znaleziono"))
+    entry = re.search(r"Art\. (\d+)\. Ustawa wchodzi w życie ((?:(?!Prezydent).){0,3000})", text)
+    if entry:
+        exc = False
+        if k:
+            n = int(k)
+            for a_, b_ in re.findall(r"(\d+)\s*[–-]\s*(\d+)", entry.group(2)):
+                exc = exc or int(a_) <= n <= int(b_)
+            exc = exc or bool(re.search(rf"\bart\. {k}\b(?!\s*(?:ust|pkt|§))", entry.group(2)))
+        parts.append(f"wejście: art. {entry.group(1)}" + (f" — art. {k} wśród wyjątków" if exc else " — reguła ogólna"))
+    return "; ".join(parts)
+
+
+def update_registry(path: Path, upcoming: dict, scopes: dict, today: str, cache: Path, report, per_act: dict | None = None) -> tuple[int, int]:
     """Tabela A od nowa; z tabeli B usuwa wiersze po terminie i sprawdza nowelizacje w ELI."""
     text = path.read_text(encoding="utf-8")
     start, end = "<!-- GENEROWANE:check_nowelizacje.py START -->", "<!-- GENEROWANE:check_nowelizacje.py KONIEC -->"
@@ -160,9 +218,24 @@ def update_registry(path: Path, upcoming: dict, scopes: dict, today: str, cache:
                 continue
             read.add(m.group(1))
         final.append(line)
+    bases = {cid: (per_act or {}).get(tj_id, {}).get("base") for (_, cid, _, tj_id) in upcoming}
+    drafts = []
     for tag in sorted(pending - read):
         found += 1
-        report(f"BRAK_W4\t{tag}\tprzepisy przejściowe i daty wejścia nieodczytane (METODYKA W-4)")
+        cid = "DU/" + tag
+        try:
+            draft = draft_w4(cid, bases[cid], cache) if bases.get(cid) else "brak aktu bazowego"
+        except Exception as exc:
+            draft = f"odczyt nieudany ({exc})"
+        report(f"BRAK_W4\t{tag}\tszkic z treści nowelizacji: {draft}")
+        drafts.append(f"| {tag} | {today} | DO POTWIERDZENIA: {draft} |")
+    for line in final:
+        if re.match(r"\| \d{4}/\d+ \| \d{4}-\d{2}-\d{2} \| DO POTWIERDZENIA", line):
+            found += 1
+            report(f"W4_DO_POTWIERDZENIA\t{line.split('|')[1].strip()}\tzatwierdź wynik po odczycie nowelizacji (METODYKA W-4)")
+    if drafts:
+        # Wiersze szkicu na końcu tabeli C.
+        final = final + drafts if final[-1].startswith("|") else final[:-1] + drafts if not final[-1].strip() else final + drafts
     path.write_text("\n".join(final) + "\n", encoding="utf-8")
     return found, errors
 
@@ -176,7 +249,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--root", type=Path, required=True)
     ap.add_argument("--skill", action="append", default=[])
-    ap.add_argument("--tylko-wskazania", action="store_true", help="tylko moduły w formacie wskazanie + kwalifikator")
+    ap.add_argument("--tylko-wskazania", action="store_true", help="tylko moduły w formacie wskazanie + kwalifikator albo z „Przegląd METODYKA” (W-2/W-4)")
     ap.add_argument("--raport", type=Path)
     ap.add_argument("--rejestr", type=Path, help="REJESTR-ZMIAN-W-CZASIE.md do aktualizacji")
     ap.add_argument("--dzis", default=dt.date.today().isoformat())
@@ -199,7 +272,7 @@ def main() -> int:
     scopes: dict[str, set] = {}
     for path in files:
         text = path.read_text(encoding="utf-8")
-        if args.tylko_wskazania and CONVERTED.lower() not in text[:3000].lower():
+        if args.tylko_wskazania and CONVERTED.lower() not in text[:3000].lower() and "Przegląd METODYKA" not in text[:3000]:
             continue
         head = "\n".join(text.splitlines()[:30])
         main_, abbr = header_acts(text.splitlines())
@@ -253,7 +326,7 @@ def main() -> int:
                     for zm in re.finditer(rf"\[OD {re.escape(date)}: {year_c}/{pos_c}\]\**\s*—\s*([^;)\n|]+)", head):
                         scopes.setdefault(cid, set()).add(zm.group(1).replace("*", "").strip().rstrip("."))
     if args.rejestr:
-        found_r, errors_r = update_registry(args.rejestr, upcoming, scopes, args.dzis, args.cache, report)
+        found_r, errors_r = update_registry(args.rejestr, upcoming, scopes, args.dzis, args.cache, report, per_act)
         found += found_r
         errors += errors_r
         print(f"REJESTR={args.rejestr} ZMIANY_NADCHODZACE={len(upcoming)}")

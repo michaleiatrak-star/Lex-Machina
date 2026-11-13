@@ -1,7 +1,7 @@
 21bcb564ba9b68b989989e4312872ef6583f8cfd173cb70504ea2ffa1df16e6e  ./MAPA-AKTOW.md
 c3baa5e256c73658f09cd07050b7c2c896c010d65c42127bd0bd40a45d99f824  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-d3bc354db6f2d35184fbd8b2467c6a68843ec14d0235577fe170833985b70cab  ./SKILL.md
+cd5067768c95a06042b8915b5d7eca08182aa10206b81dc7b415a006024d9a58  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 bc1802487f84e7c9daaa7a1e5deefb78e89e483e8f99614a25448b16b6764f14  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -29,12 +29,12 @@ ab8df6a052de17d302fd2c453b0d571590363213d62b6f0c4d2ea4770217d8f8  ./modules/mod-
 3bfb3b7adbc4257d5230dcfa33dcb4a9c11738cad4ca0c00abca244c0d1b6f24  ./modules/mod-KC-spadki.md
 237903dc24559fd9e386a34438cad2f46f2adfd4f702ccefa097b8dc1ef416d6  ./modules/mod-KC-ubezpieczenia.md
 9b17944d92a0668ada92fd259a5f318e0d041c139708ef0a10f941f30c49de12  ./modules/mod-KP-art943-mobbing-dyskryminacja.md
-f21d56500a171786451de10e3a54d0c9c9d70f9cd2717f7bfe2e2e7ddcbd22ff  ./modules/mod-KPC-art162-zastrzezenie-protokol.md
-3f5d379a1f9a25b012b406fb16ac0313cfca24e291ca07d9fa31c78a05603def  ./modules/mod-KPC-current-state-COV.md
-e52ac7643ce49e02cb1d266f3e7df96511576c8d305fd31ebd9bf8276c826c80  ./modules/mod-KPC-egzekucja-windykacja.md
-c40dcb6efb5e0f40988fa44d3edd15753d68d0957c702f7c708157d5c83b46e6  ./modules/mod-KPC-nieproces-czesc-ogolna.md
-4dc8dda9590b354c75216e39ceba00c76e31bbb2530c9e719462cb6a01ff7b72  ./modules/mod-KPC-prawomocnosc-granice-apelacji.md
-506bd84ee72a919b68d03a89c0e6eae5e361a8c36a11a0bcecede4ce067a73fa  ./modules/mod-KPC-uzupelnienie-pokrycia-2026.md
+66e90564718c241814be0195a140b536913da68875af238abbcba3f0e0278991  ./modules/mod-KPC-art162-zastrzezenie-protokol.md
+b3e0d0dd98db449024656ec6e59a1686081f875f5ae3d4353e740a4a1877a126  ./modules/mod-KPC-current-state-COV.md
+8af98f5994dea093122fa7fc2e359f49a607c72c64b3cf1957c308d1c10068dd  ./modules/mod-KPC-egzekucja-windykacja.md
+d6270df541356061d7a6a5f5df5814c6b4d0d1be0aa2b9fd040d7b6f28fa7e75  ./modules/mod-KPC-nieproces-czesc-ogolna.md
+9f15f8930ea71270f9478aedd7d1ec8e569a586f656fee3f573c240f96104b84  ./modules/mod-KPC-prawomocnosc-granice-apelacji.md
+8c283684238e25bab034341ecfcb6a277851e391a12ab9930cb327702b036e32  ./modules/mod-KPC-uzupelnienie-pokrycia-2026.md
 66ddbe8145b8fdc2c5349524e25ac47ed27b80cb7827a12640806d34127d6c5d  ./modules/mod-KRO-opieka-i-kuratela.md
 4a7c62e04009b1ab7d1ebd505d2860508d9761463bc0dcd5befdbe8e0b83993a  ./modules/mod-KRO-przysposobienie-adopcja-miedzynarodowa.md
 12c93559313a3ba20dbde2b663ca1ab5ee95de8543a239a5f5d55ffb527e6248  ./modules/mod-KRO-rodzinne.md
@@ -81,7 +81,7 @@ de227378845c5135a18d80231cced36cc80c1e391d238c26683f620f1b83cf1e  ./modules/mod-
 8c0afcc5f455bb134e04e0e34998aff09d2a8aaad52f2d5fedc390c5864f496a  ./modules/mod-prawo-spoldzielcze.md
 111a341504d60bd16fa6c96a6f1b853713f1ba302096146e72c62bcc52f679f0  ./modules/mod-prawo-wekslowe-czekowe.md
 75eb55717dae573cbf2d6c3c0a3ca62421b0f4cc61110e741c193b0fc55b287f  ./modules/mod-reklama-wobec-nieletnich.md
-7d5976d5486ba1a3b65091e9922d51bd2310d61d6a15df129997e83fad72f360  ./modules/mod-rzeczy-znalezione-zasiedzenie.md
+e0dc56f03915b51c458d4ab23ad843d6f24de5fa5ab79017055759ad8ccd80da  ./modules/mod-rzeczy-znalezione-zasiedzenie.md
 e8f9f3e56aedd19f386373e470326bcc71f1d469085cca561ba101974c4b5b9f  ./modules/mod-sklad-sadu-liczba-sedziow.md
 3860e89a8f0dee505b411525ecefd84caf7b703897a09188600995cd5b532ac1  ./modules/mod-transakcje-handlowe-opoznienia.md
 281e1142049ff3e3f1d5c078e47bddbb69b9956ce091cffee107c91bb185228b  ./modules/mod-ubezwlasnowolnienie-opieka-kuratela.md
@@ -106,7 +106,7 @@ a556920b43699e8c2ffa51b8b166a6175ca0e78afa95c3d86d6dd2d3d1cd1de7  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 62ebf3d9f84110b425cc254c4e4e2cb9ce3042847ff9c28b85a892441f7c437a  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-0d1407aee3dffb5a3e0ea21807ed86ea9a7affb64c02b5f7828a1ad08aa21d02  ./references/CHANGELOG.md
+64cddb8bf9ee8d3080c3c5055cd728a639d155143d7aa7e2d345f3f05e603f0d  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json
