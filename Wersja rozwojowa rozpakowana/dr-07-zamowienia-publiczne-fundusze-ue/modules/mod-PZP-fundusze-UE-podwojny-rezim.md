@@ -1,5 +1,9 @@
 # mod-PZP-fundusze-UE-podwojny-rezim
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** UPSPP (ustawa o postępowaniu w sprawach dotyczących pomocy publicznej) — t.j. Dz.U. 2026 poz. 500.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-18
 **Rola w systemie:** odpowiedź na pytanie użytkownika o "przetargi
 dotowane przez Unię Europejską" — dotąd temat funduszy UE był pokryty

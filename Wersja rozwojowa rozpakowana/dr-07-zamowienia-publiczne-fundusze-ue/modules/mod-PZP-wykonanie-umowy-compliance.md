@@ -1,5 +1,10 @@
 # mod-PZP-wykonanie-umowy-compliance
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** UCW (ustawa o certyfikacji wykonawców zamówień publicznych) — akt pierwotny, bez t.j.: Dz.U. 2025 poz. 1235.
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Hasła spraw:** kary umowne w zamówieniu publicznym, waloryzacja wynagrodzenia, zmiana umowy o zamówienie, nienależyte wykonanie umowy, podwykonawca
 
 **Status:** moduł uzupełniający do `mod-PZP-zamowienia-publiczne-KIO.md`

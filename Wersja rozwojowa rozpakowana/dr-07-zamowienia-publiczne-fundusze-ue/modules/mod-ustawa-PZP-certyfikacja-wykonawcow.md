@@ -1,5 +1,9 @@
 # mod-ustawa-PZP-certyfikacja-wykonawcow
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** UCW (ustawa o certyfikacji wykonawców zamówień publicznych) — akt pierwotny, bez t.j.: Dz.U. 2025 poz. 1235.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o certyfikacji wykonawców zamówień publicznych — Dz.U. 2025 poz. 1235 (od 12.07.2026)
 **Data weryfikacji online:** 2026-06-05

@@ -1,5 +1,9 @@
 # mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** UKonc (ustawa o umowie koncesji na roboty budowlane lub usługi) — t.j. Dz.U. 2025 poz. 1688.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0.0 | **Dodano:** 2026-08-14 (NAPRAWA — F-71: raport
 zewnętrzny wykazał, że Dział II PZP [183 art., ponad 1/4 całej ustawy]
 jest pokryty TYLKO punktowo — tryby udzielania i wykluczenie wykonawcy

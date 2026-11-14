@@ -1,5 +1,8 @@
 # Modul - Najwyzsza Izba Kontroli (NIK)
 
+**Akt:** NIK (ustawa o Najwyższej Izbie Kontroli) — t.j. Dz.U. 2022 poz. 623 (zm. po t.j.: 2026/26 [OD 2027-01-01: 2026/26] — art. 92, 93).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 23.12.1994 r. o Najwyzszej Izbie Kontroli**
 - Tekst jednolity: **Dz.U. 2022 poz. 623** (ze zm.)

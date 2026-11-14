@@ -1,5 +1,8 @@
 # mod-PZP-opis-przedmiotu-zakaz-znakow-towarowych
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-18
 **Rola w systemie:** bezpośrednia odpowiedź na pytanie użytkownika o
 "ograniczenie zabraniające wskazać np. konkretnego producenta i próby

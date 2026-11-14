@@ -1,5 +1,10 @@
 # mod-PrNotariat-notariat-rejestry
 
+**Akt:** PrNot (Prawo o notariacie) — t.j. Dz.U. 2026 poz. 614 (zm. po t.j.: 2026/1099 [OD 2026-11-19: 2026/1099] — art. 2, 92a).
+**Akt:** KPC (Kodeks postępowania cywilnego) — t.j. Dz.U. 2026 poz. 468 (zm. po t.j.: 2026/473 od 2026-07-08 — art. 460, 461, 465, 476, 631, 632, 3982, 4771b, 4771c, 4771d, 4777a, 7555, 7556; 2026/830 od 2026-07-08 — art. 4; 2026/1003 od 2026-10-28 — zakres: tekst nowelizacji w ELI; 2026/1046 od 2026-11-05 — art. 1, 2, 47, 94, 461, 477; 2026/1296 od 2026-11-06 — art. 17).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Prawo o notariacie — Dz.U. 2026 poz. 614 t.j. ze zm. — weryfikuj aktualny stan w ELI (RZĄD 1)
 **Data weryfikacji online:** 2026-06-05

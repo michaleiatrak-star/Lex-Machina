@@ -1,5 +1,13 @@
 # mod-PZP-zamowienia-publiczne-KIO
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** UCW (ustawa o certyfikacji wykonawców zamówień publicznych) — akt pierwotny, bez t.j.: Dz.U. 2025 poz. 1235.
+**Akt:** UNDFP (ustawa o odpowiedzialności za naruszenie dyscypliny finansów publicznych) — t.j. Dz.U. 2025 poz. 1484.
+**Akt:** UPSPP (ustawa o postępowaniu w sprawach dotyczących pomocy publicznej) — t.j. Dz.U. 2026 poz. 500.
+**Akt:** KPC (Kodeks postępowania cywilnego) — t.j. Dz.U. 2026 poz. 468 (zm. po t.j.: 2026/473 od 2026-07-08 — art. 460, 461, 465, 476, 631, 632, 3982, 4771b, 4771c, 4771d, 4777a, 7555, 7556; 2026/830 od 2026-07-08 — art. 4; 2026/1003 od 2026-10-28 — zakres: tekst nowelizacji w ELI; 2026/1046 od 2026-11-05 — art. 1, 2, 47, 94, 461, 477; 2026/1296 od 2026-11-06 — art. 17).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** PZP — Dz.U. 2026 poz. 793 t.j. (obwieszczenie Marszałka Sejmu z 27.05.2026, publ. 16.06.2026) | Progi UE 2026–2027: M.P. 2025 poz. 1247 / UZP | Wpisy KIO: Dz.U. 2020 poz. 2437, § 2; art. 517–519 PZP — re-ver 2026-08-28
 **Data weryfikacji online:** 2026-08-15 (FAZA 3E — audyt-systemu-v4, korekta numeru t.j. + treść art. 226 pkt 17/19)

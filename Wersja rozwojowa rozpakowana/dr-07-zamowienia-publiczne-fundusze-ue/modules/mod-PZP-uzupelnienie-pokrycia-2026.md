@@ -8,6 +8,10 @@ source_policy: "RZĄD 1 only"
 
 # PZP — uzupełnienie pozostałego pokrycia
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** UNDFP (ustawa o odpowiedzialności za naruszenie dyscypliny finansów publicznych) — t.j. Dz.U. 2025 poz. 1484.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## 1. Źródło
 
 Prawo zamówień publicznych — aktualny tekst jednolity

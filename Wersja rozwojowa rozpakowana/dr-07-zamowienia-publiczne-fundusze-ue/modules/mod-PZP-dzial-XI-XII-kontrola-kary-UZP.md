@@ -1,5 +1,11 @@
 # mod-PZP-dzial-XI-XII-kontrola-kary-UZP
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** NIK (ustawa o Najwyższej Izbie Kontroli) — t.j. Dz.U. 2022 poz. 623 (zm. po t.j.: 2026/26 [OD 2027-01-01: 2026/26] — art. 92, 93).
+**Akt:** URIO (ustawa o regionalnych izbach obrachunkowych) — t.j. Dz.U. 2025 poz. 7.
+**Akt:** UNDFP (ustawa o odpowiedzialności za naruszenie dyscypliny finansów publicznych) — t.j. Dz.U. 2025 poz. 1484.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-18
 **Rola w systemie:** wypełnia lukę z audytu — kontrola i kary Prezesa
 UZP to mechanizm SPECYFICZNY dla PZP, ODRĘBNY od ogólnych organów

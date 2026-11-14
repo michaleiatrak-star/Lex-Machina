@@ -1,5 +1,10 @@
 # mod-ustawa-PPP-i-koncesja
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** UKonc (ustawa o umowie koncesji na roboty budowlane lub usługi) — t.j. Dz.U. 2025 poz. 1688.
+**Akt:** PPP (ustawa o partnerstwie publiczno-prywatnym) — t.j. Dz.U. 2023 poz. 1637 (zm. po t.j.: 2026/426 od 2026-04-14 — art. 7).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** PPP — Dz.U. 2023 poz. 1688 ze zm. | Koncesja — Dz.U. 2023 poz. 140 ze zm. (zm.: Dz.U. 2025 poz. 1165)
 **Data weryfikacji online:** 2026-06-05

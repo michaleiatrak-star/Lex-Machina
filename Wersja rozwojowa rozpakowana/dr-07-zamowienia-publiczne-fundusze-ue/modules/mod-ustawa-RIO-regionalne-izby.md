@@ -1,5 +1,11 @@
 # Moduł — Regionalne Izby Obrachunkowe (RIO)
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** URIO (ustawa o regionalnych izbach obrachunkowych) — t.j. Dz.U. 2025 poz. 7.
+**Akt:** UDJST (ustawa o dochodach jednostek samorządu terytorialnego) — t.j. Dz.U. 2026 poz. 1252.
+**Akt:** UNDFP (ustawa o odpowiedzialności za naruszenie dyscypliny finansów publicznych) — t.j. Dz.U. 2025 poz. 1484.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Ustawa o regionalnych izbach obrachunkowych — Dz.U. 2025 poz. 7 (t.j., obwieszczenie
   Marszałka Sejmu z 23.12.2024; zastępuje t.j. 2023.1325)

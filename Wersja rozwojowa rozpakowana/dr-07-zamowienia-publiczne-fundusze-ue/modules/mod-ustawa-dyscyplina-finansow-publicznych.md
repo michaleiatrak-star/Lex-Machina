@@ -1,12 +1,17 @@
 # Modul - Odpowiedzialnosc za naruszenie dyscypliny finansow publicznych
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** URIO (ustawa o regionalnych izbach obrachunkowych) — t.j. Dz.U. 2025 poz. 7.
+**Akt:** UNDFP (ustawa o odpowiedzialności za naruszenie dyscypliny finansów publicznych) — t.j. Dz.U. 2025 poz. 1484.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 17.12.2004 r. o odpowiedzialnosci za naruszenie dyscypliny finansow publicznych**
 - Tekst jednolity: **Dz.U. 2025 poz. 1484** (obwieszczenie Marszałka Sejmu z 20.10.2025,
   w życie 28.10.2025; zastępuje t.j. 2024.104) ze zm.
   VER: isap.sejm.gov.pl [2026-08-15] — FAZA 3E: kary (art. 31: pieniężna 0,25-3x
   wynagrodzenia miesięcznego, zapasowo 0,25-5x przeciętnego gdy nie da się ustalić
-  wynagrodzenia; zakaz pełnienia funkcji 1-5 lat wg art. 34) POTWIERDZONE bez zmian;
+  wynagrodzenia; zakaz pełnienia funkcji 1-5 lat wg art. 31 ust. 4; art. 34 — przesłanki tej kary: rażące naruszenie albo ponowne ukaranie) POTWIERDZONE bez zmian;
   jedyne wyłączenie z t.j. dotyczy niezwiązanego z tym modułem art. 5 ustawy zmieniającej
   Ordynację podatkową (Dz.U. 2025 poz. 497)
 
@@ -39,8 +44,10 @@ Kasacja:            Naczelny Sad Administracyjny
 Kary:
 - Upomnienie
 - Nagana
-- Kara pieniezna (do 3x miesiecznego wynagrodzenia)
-- Zakaz pelnienia funkcji (1-5 lat)
+- Kara pieniezna (art. 31 ust. 2: 0,25-3x miesiecznego wynagrodzenia; ust. 3: 0,25-5x przecietnego, gdy wynagrodzenia nie da sie ustalic)
+- Zakaz pelnienia funkcji (art. 31 ust. 4: od roku do 5 lat; przeslanki art. 34)
+Bagatela: art. 26 — brak naruszenia do kwoty minimalnej (przecietne wynagrodzenie z roku poprzedniego)
+Przedawnienie: art. 38 ust. 1 — 3 lata od popelnienia; po wszczeciu postepowania w tym okresie — 2 lata od konca okresu
 ```
 
 ## Weryfikacja online

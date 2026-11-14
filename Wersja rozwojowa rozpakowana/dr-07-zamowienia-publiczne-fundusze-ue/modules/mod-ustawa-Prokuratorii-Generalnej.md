@@ -1,5 +1,8 @@
 # Modul - Prokuratoria Generalna Rzeczypospolitej Polskiej
 
+**Akt:** UPGRP (ustawa o Prokuratorii Generalnej RP) — t.j. Dz.U. 2024 poz. 1192 (zm. po t.j.: 2025/1172 od 2026-03-01 — art. 4, 7, 8, 9, 12, 14, 31, 77; 2026/370 od 2026-04-03 — art. 54).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 15.12.2016 r. o Prokuratorii Generalnej Rzeczypospolitej Polskiej**
 - Tekst jednolity: **Dz.U. 2024 poz. 1192** (obwieszczenie Marszałka Sejmu z 28.07.2024; zastępuje t.j. 2023.1109) ze zm.
