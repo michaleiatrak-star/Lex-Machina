@@ -1,6 +1,9 @@
 # mod-KP-art943-mobbing-dyskryminacja
 
-**Źródło weryfikacji:** KP art. 94³ i art. 18³a–18³e — Dz.U. 2026 poz. 1245 t.j. ze zm.
+**Akt:** KP — t.j. Dz.U. 2026 poz. 1245 (stan 2026-08-27; zm. 2026/1046 od 2026-11-05 — nowe art. 94³, 94³ᵃ, 18³d: definicja mobbingu, zadośćuczynienie, regulamin antymobbingowy; t.j. zawiera już oba brzmienia z odnośnikami).
+**Akt:** KPC — t.j. Dz.U. 2026 poz. 468 (zm. po t.j., w mocy: 2026/473, 2026/830 od 2026-07-08; 2026/1003 od 2026-10-28; 2026/1046 od 2026-11-05 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ; 2026/1296 od 2026-11-06).
+**Akt:** KSCU (ustawa o kosztach sądowych w sprawach cywilnych) — t.j. Dz.U. 2025 poz. 1228 (zm. 2026/473 od 2026-07-08 — art. 35 ust. 2, 36a, 96 ust. 1 pkt 8; 2026/1003 od 2026-10-28 — art. 3, 32; 2026/346 [OD 2028-09-30: 2026/346] — art. 52, 53, 55; art. 35 ust. 1 i 96 ust. 1 pkt 4 bez zmian).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; ⛔ moduł opierał się na brzmieniu art. 94³ sprzed 2026-11-05: „uporczywe i długotrwałe”, pięć łącznych przesłanek, zadośćuczynienie tylko przy rozstroju zdrowia, odszkodowanie przy rozwiązaniu umowy — zastąpione brzmieniem nadanym przez 2026/1046; przejściowe: art. 3 noweli — nowe przepisy także do nękania rozpoczętego przed 2026-11-05 i trwającego po tej dacie; art. 5 — postępowania wszczęte wcześniej: KPC w dotychczasowym brzmieniu).
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **Uwaga:** Mobbing jest uregulowany w KP — ale jako roszczenie majątkowe trafia do DR-02 (prawo cywilne). Prawo pracy → DR-04.
@@ -12,11 +15,12 @@
 ```
 □ Czy stosunek pracy istniał / istnieje (pracownik – pracodawca)?
 □ Jaki jest charakter zachowań: mobbing / dyskryminacja / molestowanie seksualne?
-□ Jak długo trwają zachowania? (kluczowe dla mobbingu — „długotrwałe")
+□ Czy zachowania są powtarzalne, nawracające lub stałe (art. 94³ § 3) — incydent nie wystarczy?
+□ Kiedy się zaczęły i czy trwały po 2026-11-05 (art. 3 ustawy 2026/1046)?
 □ Kto jest sprawcą: przełożony / współpracownicy / pracodawca?
 □ Jakie skutki: rozstrój zdrowia / zwolnienie chorobowe / wypowiedzenie / rezygnacja?
 □ Czy są dowody: maile, SMS, nagrania, zeznania świadków, dokumentacja medyczna?
-□ Czy pracownik rozwiązał umowę wskutek mobbingu? → art. 94³ §5 KP
+□ Czy pracodawca ma regulamin antymobbingowy (art. 94³ᵃ; dostosowanie w 6 miesięcy — art. 4 ustawy 2026/1046)?
 ```
 
 ---
@@ -29,26 +33,22 @@
 |---|---|---|---|
 | Podstawa | Nękanie, zastraszanie — bez konkretnej cechy | Cecha chroniona (płeć, wiek, niepełnosprawność, religia itd.) | Zachowanie o charakterze seksualnym |
 | Ciężar dowodu | **Pracownik — przez cały proces** | Pracownik uprawdopodabnia → ciężar PRZESUWA SIĘ na pracodawcę | Pracodawca NIE może uzasadnić obiektywnie |
-| Skutek | Rozstrój zdrowia LUB zwolnienie wskutek mobbingu | Nierówne traktowanie | Naruszenie godności, poniżenie |
+| Skutek | Doznanie mobbingu (rozstrój zdrowia nie jest już przesłanką) | Nierówne traktowanie | Naruszenie godności, poniżenie |
 
 ---
 
-## PIĘĆ PRZESŁANEK MOBBINGU — WSZYSTKIE ŁĄCZNIE (art. 94³ §2 KP)
+## DEFINICJA MOBBINGU — art. 94³ KP w brzmieniu od 2026-11-05
 
-> ⚠️ Weryfikuj aktualne brzmienie art. 94³ §2 KP w ELI (RZĄD 1).
+| Przepis | Kwalifikator |
+|---|---|
+| art. 94³ § 1 | pracodawca systematycznie przeciwdziała mobbingowi (prewencja, wykrywanie, reagowanie, naprawa, wsparcie) |
+| art. 94³ § 2–3 | mobbing = uporczywe nękanie pracownika; uporczywość = powtarzalne, nawracające lub stałe; zachowania incydentalne nie są mobbingiem, choćby naruszały dobra osobiste |
+| art. 94³ § 4 | przejawy (samodzielnie lub łącznie, katalog otwarty): upokarzanie, uwłaczanie, zastraszanie, zaniżanie oceny przydatności, nieuzasadniona krytyka, poniżanie, ośmieszanie, utrudnianie funkcjonowania w pracy, izolowanie lub eliminowanie z zespołu — gdy mają postać uporczywego nękania |
+| art. 94³ § 5–7 | elementy fizyczne, werbalne, pozawerbalne; nakazywanie i zachęcanie do takich zachowań; cel nękania nie jest wymagany |
+| art. 94³ § 8 | sprawca: pracodawca, przełożony, równorzędny, podwładny, inny pracownik, osoba na innej podstawie — pojedyncza osoba lub grupa |
+| art. 94³ § 9–10 | nie jest mobbingiem uzasadniona krytyka i rozliczanie z pracy w odpowiedniej formie; ocena zindywidualizowana |
 
-```
-WSZYSTKIE PIĘĆ muszą być spełnione łącznie:
-
-1. Działania / zachowania dotyczące lub skierowane PRZECIWKO pracownikowi
-2. UPORCZYWE I DŁUGOTRWAŁE nękanie lub zastraszanie
-   (orzecznictwo: co najmniej kilka miesięcy; pojedyncze zdarzenia NIE wystarczą)
-3. Wywołujące ZANIŻONĄ OCENĘ PRZYDATNOŚCI ZAWODOWEJ
-4. LUB mające na celu PONIŻENIE / OŚMIESZENIE
-5. LUB IZOLOWANIE / ELIMINOWANIE Z ZESPOŁU PRACOWNICZEGO
-
-Brak choćby jednej przesłanki = brak mobbingu (sąd oddali powództwo).
-```
+Długotrwałość i pięć łącznych przesłanek dotyczą tylko stanów sprzed 2026-11-05 (dawne brzmienie § 2), z zastrzeżeniem art. 3 ustawy 2026/1046.
 
 ---
 
@@ -56,10 +56,9 @@ Brak choćby jednej przesłanki = brak mobbingu (sąd oddali powództwo).
 
 | Roszczenie | Podstawa | Warunek |
 |---|---|---|
-| Zadośćuczynienie za rozstrój zdrowia | art. 94³ §3 KP | Rozstrój zdrowia wskutek mobbingu (dokumentacja medyczna!) |
-| Odszkodowanie za rozwiązanie umowy | art. 94³ §4–5 KP | Pracownik rozwiązał umowę pisemnie z powodu mobbingu |
-| Odszkodowanie min. = MINIMALNE WYNAGRODZENIE ZA PRACĘ (⚠️ POPRAWKA 2026-07-27, FAZA 3E/ZASADA 14 — było błędnie "wynagrodzenie za 6 tygodni"; dosłowne brzmienie art. 943 §4 in fine: "odszkodowania w wysokości nie niższej niż minimalne wynagrodzenie za pracę" — potwierdzone jednogłośnie w 8 źródłach: arslege.pl, lexlege.pl, tvn24.pl, infor.pl, pwrz.pl, gofin.pl, prawnik.cc, fzzpkis.pl) | art. 94³ §4 in fine | brak górnej granicy odszkodowania — to WYŁĄCZNIE dolna granica |
-| Odszkodowanie za dyskryminację | art. 18³d KP | Min. minimalne wynagrodzenie za pracę |
+| Zadośćuczynienie | art. 94³ § 11 KP | doznanie mobbingu; **nie niższe niż sześciokrotność minimalnego wynagrodzenia** (rozstrój zdrowia nie jest przesłanką) |
+| Odszkodowanie | art. 94³ § 11 KP | szkoda majątkowa (alternatywnie do zadośćuczynienia — „lub”); regres pracodawcy do sprawcy — § 12 |
+| Zadośćuczynienie / odszkodowanie za dyskryminację | art. 18³d § 1–3 KP | zadośćuczynienie nie niższe niż minimalne wynagrodzenie albo odszkodowanie; przy wielokrotnym naruszeniu — nie niższe niż trzykrotność |
 
 ---
 
@@ -81,14 +80,13 @@ Brak choćby jednej przesłanki = brak mobbingu (sąd oddali powództwo).
 
 ```
 Typowe kontrargumenty pracodawcy:
-  → Zarządzanie zespołem / dyscyplinowanie = nie mobbing
-  → Krytyka zawodowa mieści się w uprawnieniach pracodawcy
-  → Brak „długotrwałości" — jednostkowe zdarzenia
+  → Uzasadnione i wyrażone we właściwej formie rozliczanie z pracy lub krytyka (art. 94³ § 9)
+  → Zachowania incydentalne, nie powtarzalne/nawracające/stałe (art. 94³ § 3) — „długotrwałość” nie jest już przesłanką od 2026-11-05
   → Subiektywne odczucie pracownika ≠ obiektywne znamiona mobbingu
   → Pracownik nadużywa roszczenia po wypowiedzeniu
 
 Obowiązek pracodawcy: przeciwdziałanie mobbingowi (art. 94³ §1 KP)
-  → Wewnętrzna polityka antymobbingowa (WPA) — brak nie zwalnia od odpowiedzialności
+  → regulamin antymobbingowy (art. 94³ᵃ); pracodawca dostosowuje regulamin pracy w 6 miesięcy od 2026-11-05 (art. 4 ustawy 2026/1046)
 ```
 
 ---
@@ -157,7 +155,7 @@ Wynik pracy modułu:
 
 1. Prowadź dziennik zdarzeń na bieżąco — każde zdarzenie z datą, godziną, opisem, świadkami.
 2. Zbierz dokumentację medyczną — zaświadczenia o leczeniu, zwolnienia chorobowe, historia psychiatryczna jeśli dotyczy.
-3. Przed rozwiązaniem umowy skonsultuj się z prawnikiem — pismo z art. 94³ §5 KP musi być precyzyjne.
+3. Rozwiązanie umowy nie jest już warunkiem roszczenia z art. 94³ § 11; przy rozwiązaniu bez wypowiedzenia — art. 55 § 1¹ KP i DR-04.
 4. Ciężar dowodu całości spoczywa na pracowniku (mobbing) — brak dowodów = oddalenie powództwa.
 5. Dla dyskryminacji: uprawdopodobnij → ciężar przechodzi na pracodawcę.
 
@@ -183,21 +181,18 @@ Wynik pracy modułu:
 
 ```
 Roszczenia z art. 94³ KP i art. 18³a KP są ROSZCZENIAMI PRACOWNICZYMI
-  → właściwy: SĄDU PRACY (SR lub SO — wydział pracy), NIE sąd cywilny
+  → właściwy: sąd pracy — sąd rejonowy (art. 461 § 1¹ KPC w brzmieniu od 2026-11-05), NIE wydział cywilny
   → tryb: KPC art. 459–477 (postępowanie odrębne w sprawach z zakresu prawa pracy)
   → właściwość przemienna: siedziba pracodawcy / zakład / miejsce zamieszkania pracownika
 
-Opłata: pracownik zwolniony od kosztów sądowych do wartości sporu 50 000 zł
-  (⚠️ POPRAWKA 2026-07-27, FAZA 3E/ZASADA 14 — było błędnie "75 000 zł".
-  Art. 35 ust. 1 ustawy o kosztach sądowych w sprawach cywilnych: opłata
-  podstawowa 30 zł od apelacji/zażalenia/skargi kasacyjnej WYŁĄCZNIE,
-  jeśli WPS ≤50 000 zł; powyżej tej kwoty — opłata stosunkowa 5% od
-  NADWYŻKI ponad 50 000 zł, od wszystkich pism. Potwierdzone jednogłośnie
-  w 10 niezależnych źródłach [poradnikprzedsiebiorcy.pl marzec 2026,
-  infor.pl, solidarnosc.org.pl, prawo.pl, kpmg.com, pckp.pl i inne].
-  ⚠️ SPRAWDŹ AKTUALNY STAN: część źródeł [kpmg.com] wskazuje na dalszą
-  reformę CAŁKOWICIE znoszącą opłaty dla pracowników niezależnie od WPS
-  — NIEROZSTRZYGNIĘTE w tej sesji, czy ta reforma weszła w życie)
+Koszty: pracownik wnoszący powództwo nie ma obowiązku uiszczania kosztów sądowych
+  (art. 96 ust. 1 pkt 4 KSCU), z zastrzeżeniem art. 35 ust. 1 zd. 2 KSCU — gdy WPS
+  przewyższa 50 000 zł, od nadwyżki ponad tę kwotę pobiera się od pracownika opłatę
+  od apelacji na zasadach art. 13 KSCU; opłata podstawowa z art. 35 ust. 1 zd. 1
+  dotyczy pracodawcy.
+  Właściwość: sprawy mobbingu, dóbr osobistych i równego traktowania — sąd rejonowy
+  bez względu na wartość (art. 461 § 1¹ KPC, od 2026-11-05); skład z ławnikami — art. 47
+  § 2 pkt 1 lit. b–d KPC; zakaz oddalenia przy innej podstawie prawnej — art. 477⁶ᵃ KPC.
 
 Przedawnienie:
   → Art. 291 KP: 3 lata od wymagalności roszczenia (nie art. 118 KC!)

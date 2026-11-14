@@ -1,6 +1,8 @@
 # mod-ustawa-timeshare-zastaw-rejestrowy
 
-**Źródło weryfikacji:** Ustawa o timeshare — Dz.U. 2011 Nr 230, poz. 1370 (publikacja pierwotna; akt obowiązujący, VER RZĄD 1 ELI 2026-08-26) | Ustawa o zastawie rejestrowym — Dz.U. 2018 poz. 2017 ze zm. (weryfikuj w ELI)
+**Akt:** Timeshare (ustawa o timeshare) — Dz.U. 2011 nr 230 poz. 1370 (ELI DU/2011/1370; bez t.j. i bez aktów zmieniających w ELI na 2026-11-14).
+**Akt:** ZastawRej (ustawa o zastawie rejestrowym i rejestrze zastawów) — t.j. Dz.U. 2018 poz. 2017 (zm. 2026/1073 [OD 2027-05-11: 2026/1073] — m.in. art. 3 ust. 2 pkt 2, 18a, 19, 36–43; 2025/1792 [OD 2027-06-17: 2025/1792] — art. 40 ust. 4).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z tekstu w ELI 2026-11-14 (W-1; poprawka: definicja timeshare — umowa na okres dłuższy niż rok (art. 2 ust. 1), nie „≥1 tydzień rocznie przez ≥3 lata”; usunięty niezweryfikowany wymóg „pisemnie pod rygorem nieważności” dla timeshare).
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -12,10 +14,7 @@
 
 Reguluje umowy timeshare (prawo do korzystania z miejsca zakwaterowania przez określony czas każdego roku), umowy o długoterminowy produkt wakacyjny, umowy odsprzedaży i wymiany.
 
-**Definicja umowy timeshare:**
-- prawo do korzystania ≥ 1 tydzień rocznie
-- przez ≥ 3 lata
-- z odpłatnością
+**Definicja umowy timeshare (art. 2 ust. 1):** konsument, odpłatnie, nabywa prawo do korzystania w okresach wskazanych w umowie z co najmniej jednego miejsca zakwaterowania; umowa zawarta na okres **dłuższy niż rok**. Długoterminowy produkt wakacyjny — art. 3 ust. 1 (rabaty i zniżki, także na okres dłuższy niż rok).
 
 ## Ochrona konsumenta — Quick Check
 
@@ -23,17 +22,19 @@ Reguluje umowy timeshare (prawo do korzystania z miejsca zakwaterowania przez ok
 
 ```
 PRAWO DO ODSTĄPIENIA:
-  14 dni kalendarzowych — bez podania przyczyny (weryfikuj art. 25 ustawy)
+  14 dni od zawarcia albo doręczenia dokumentu umowy, bez podania przyczyny (art. 25 ust. 1);
+  wydłużenie o rok — brak standardowego formularza odstąpienia, o 3 miesiące — brak pełnych informacji (art. 25 ust. 2);
+  oświadczenie na piśmie lub trwałym nośniku, wystarczy wysłanie przed upływem terminu (art. 28)
   Formularz wzorcowy z załącznika do ustawy
 
 ZAKAZ ZALICZKI:
-  Podczas okresu odstąpienia zakaz żądania jakichkolwiek świadczeń
-  Naruszenie = nieważność klauzuli
+  art. 34 — zakaz żądania lub przyjmowania świadczeń przed upływem terminu do odstąpienia
+  odstąpienie skuteczne także wobec powiązanego kredytu (art. 31)
 
 WYMOGI FORMALNE:
-  Umowa pisemna pod rygorem nieważności
-  W języku kraju UE zamieszkania konsumenta lub wybranym przez niego
-  Formularz informacyjny PRZED zawarciem umowy
+  art. 17 ust. 1 — obowiązkowa treść umowy (m.in. prawo i termin odstąpienia, zakaz z art. 34); ust. 2 — te postanowienia odrębnie podpisane
+  art. 10 ust. 5 — informacje w języku urzędowym państwa UE zamieszkania albo obywatelstwa konsumenta (wybór konsumenta)
+  art. 9–10 — informacje przed zawarciem umowy; art. 18 ust. 1 — są integralną częścią umowy
 ```
 
 ## Weryfikacja online
@@ -56,10 +57,10 @@ web_search: "timeshare prawo odstąpienia polskie przepisy UOKiK klauzule"
 ## Kluczowe zasady
 
 ```
-Pierwszeństwo:   Wg daty złożenia wniosku o wpis (nie daty wpisu)
-Wpis:            Konstytutywny — zastaw powstaje z chwilą wpisu
-Forma umowy:     Pisemna pod rygorem nieważności
-Rejestr:         Prowadzony przez sądy rejonowe (wydziały gospodarcze)
+Pierwszeństwo:   dzień złożenia wniosku o wpis (art. 16)
+Wpis:            konstytutywny — umowa i wpis (art. 2 ust. 1)
+Forma umowy:     pisemna pod rygorem nieważności (art. 3 ust. 1); treść minimalna — art. 3 ust. 2
+Rejestr:         sądy rejonowe (sądy gospodarcze) — art. 36 ust. 2
 Jawność:         Rejestr jawny — każdy może sprawdzić (rzs.ms.gov.pl)
 
 Wykonanie zastawu:
@@ -68,8 +69,9 @@ Wykonanie zastawu:
   → Przejęcie na własność zastawnika (gdy umowa tak stanowi)
 
 Wygaśnięcie:
-  → Wygaśnięcie zabezpieczonej wierzytelności
-  → Na wniosek zastawnika
+  → wygaśnięcie wierzytelności, z wyjątkiem z art. 18 ust. 2 (art. 18)
+  → po 20 latach od wpisu, chyba że przedłużony (art. 18a)
+  → wykreślenie z rejestru (art. 19)
 ```
 
 ## Opłaty (KSCU — weryfikuj aktualne w ELI (RZĄD 1))

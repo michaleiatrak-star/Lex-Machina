@@ -1,5 +1,9 @@
 # Skład sądu — kiedy więcej niż jeden sędzia, wszystkie sytuacje
 (w tym skład 5-osobowy)
+
+**Akt:** KPC — t.j. Dz.U. 2026 poz. 468 (zm. po t.j., w mocy: 2026/473, 2026/830, 2026/1003, 2026/1046, 2026/1296 — art. 47 § 2 pkt 1 lit. d dodany 2026/1046 od 2026-11-05; pozostałe nie dotyczą art. 47, 367¹, 398¹⁰).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87; nie dotyczą art. 28–30).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawki: art. 29 § 2 KPK zamiast art. 30 § 2; art. 47 § 4 KPC — zarządzenie prezesa; art. 367¹ § 1 pkt 1–3 KPC — trzy odrębne kategorie; reguła posiedzenia niejawnego z art. 367¹ § 2 dotyczy apelacji).
 v1.0.0 (dodany 2026-08-07, na żądanie użytkownika)
 
 Zweryfikowano 2026-08-07 (ZASADA 14): Rząd 2B — arslege.pl/lexlege.pl
@@ -45,17 +49,13 @@ ZASADA (art. 47 §1 KPC): w PIERWSZEJ instancji sąd rozpoznaje sprawy
      skład JEDNEGO SĘDZIEGO, NAWET w sprawach z powyższej listy —
      ławnicy uczestniczą TYLKO na samej ROZPRAWIE
 
-⭐⭐ SKŁAD: TRZECH SĘDZIÓW (art. 47 §4 KPC) — sprawy wskazane w
-  przepisach SZCZEGÓLNYCH — konkretna, ZAMKNIĘTA lista wymaga
-  weryfikacji w konkretnym przepisie odsyłającym w danej sprawie
-  (NIE jest to jednolity, ogólny katalog analogiczny do ławników —
-  rozproszona w różnych przepisach szczególnych)
-  ⭐ WAŻNY NIUANS: NAWET gdy sprawa PODLEGA rozpoznaniu w składzie 3
-    sędziów — NA POSIEDZENIU NIEJAWNYM sąd I INSTANCJI orzeka w
-    składzie JEDNEGO sędziego, Z WYJĄTKIEM wydania POSTANOWIENIA o
-    zamknięciu rozprawy (art. 224 §3 KPC) LUB WYROKU — TE dwie
-    czynności WYMAGAJĄ pełnego składu nawet formalnie "poza
-    rozprawą"
+⭐⭐ SKŁAD: TRZECH SĘDZIÓW (art. 47 §4 KPC) — PREZES SĄDU MOŻE
+  ZARZĄDZIĆ rozpoznanie sprawy w składzie trzech sędziów ze względu
+  na szczególną zawiłość lub precedensowy charakter sprawy (uznaniowe
+  zarządzenie, nie katalog przepisów szczególnych)
+  ⭐ Postanowienia poza rozprawą — skład jednego sędziego (art. 47 §3);
+    reguła „posiedzenie niejawne 1 sędzia, z wyjątkiem postanowienia z
+    art. 224 §3 lub wyroku” dotyczy APELACJI (art. 367¹ §2), nie I instancji
 
 ⭐⭐⭐ APELACJA — FUNDAMENTALNA ZMIANA (nowelizacja, WAŻNA data
   graniczna): OD nowelizacji WPROWADZAJĄCEJ art. 367¹ KPC —
@@ -63,11 +63,14 @@ ZASADA (art. 47 §1 KPC): w PIERWSZEJ instancji sąd rozpoznaje sprawy
   ZASADY, w składzie **JEDNEGO SĘDZIEGO** — TO RADYKALNA zmiana
   względem WCZEŚNIEJSZEGO stanu (uchylony art. 367 §3 KPC wymagał
   DOMYŚLNIE 3 sędziów w apelacji)
-  ⭐ WYJĄTEK: TRZECH SĘDZIÓW w apelacji WYŁĄCZNIE dla spraw
-    WYRAŹNIE wskazanych w art. 367¹ §1 pkt 1-3 KPC (sprawy, które W
-    PIERWSZEJ instancji podlegały rozpoznaniu w składzie 3 sędziów
-    NA PODSTAWIE art. 47 §4 KPC) — trzy KONKRETNE kategorie, WYMAGA
-    sprawdzenia dokładnej treści pkt 1-3 dla KONKRETNEJ sprawy
+  ⭐ WYJĄTEK: TRZECH SĘDZIÓW w apelacji (art. 367¹ §1): pkt 1 — prawa
+    majątkowe, gdy wartość przedmiotu zaskarżenia choćby w jednej
+    apelacji przekracza milion złotych; pkt 2 — sprawy rozpoznawane w I
+    instancji przez sąd okręgowy jako właściwy rzeczowo; pkt 3 — sprawy
+    rozpoznane w I instancji w składzie trzech sędziów (art. 47 §4);
+    §2 — w tych sprawach na posiedzeniu niejawnym 1 sędzia, z wyjątkiem
+    postanowienia z art. 224 §3 i wyroku; §3 — prezes może zarządzić
+    skład trzech sędziów w sprawie jednoosobowej
   ⭐ DODATKOWA MOŻLIWOŚĆ ROZSZERZENIA składu — PREZES SĄDU decyduje:
     jeżeli USTAWA przewiduje rozpoznanie sprawy w II instancji w
     składzie JEDNEGO sędziego — PREZES SĄDU MOŻE mimo to ZARZĄDZIĆ
@@ -153,7 +156,7 @@ ZASADA (art. 28 §1 KPK): NA ROZPRAWIE GŁÓWNEJ sąd orzeka w składzie
 ⚠️ NIE MYLIĆ z inną, ODRĘBNĄ instytucją — SKŁAD POWIĘKSZONY SN (5
   LUB 7 sędziów) do rozstrzygania ZAGADNIEŃ PRAWNYCH (analogicznie
   do mechanizmu opisanego w sekcji 1 dla KPC) — TO SĄ RÓŻNE
-  mechanizmy: skład 5 sędziów w art. 30 §2 KPK dotyczy KONKRETNEJ,
+  mechanizmy: skład 5 sędziów w art. 29 §2 KPK dotyczy KONKRETNEJ,
   MERYTORYCZNEJ apelacji/kasacji w sprawie o dożywocie w SĄDZIE
   APELACYJNYM, NIE uchwały SN w trybie odpowiedzi na zagadnienie
   prawne
@@ -174,10 +177,10 @@ Potwierdzone w 8+ zgodnych, jednolitych źródłach (arslege.pl
 | Postępowanie | Sytuacja                                    | Skład                    |
 |---|---|---|
 | KPC I inst.  | Zasada ogólna                                | 1 sędzia                 |
-| KPC I inst.  | Praca (5 kategorii) / rodzinne (4 kategorie) | 1 sędzia + 2 ławników    |
-| KPC I inst.  | Przepis szczególny (art. 47 §4)              | 3 sędziów                |
+| KPC I inst.  | Praca (art. 47 §2 pkt 1 lit. a–c) / rodzinne (pkt 2 lit. a–d) | 1 sędzia + 2 ławników    |
+| KPC I inst.  | Zarządzenie prezesa (art. 47 §4: zawiłość/precedens) | 3 sędziów          |
 | KPC apelacja | Zasada ogólna (po reformie art. 367¹)        | 1 sędzia                 |
-| KPC apelacja | Wyjątki z art. 367¹ §1 pkt 1-3                | 3 sędziów                |
+| KPC apelacja | art. 367¹ §1 pkt 1–3 (WPZ > 1 mln zł, SO w I inst., art. 47 §4) | 3 sędziów |
 | KPC apelacja | Decyzja prezesa sądu (zawiłość/precedens)     | 3 sędziów (uznaniowo)    |
 | SN kasacja   | Przedsąd (przyjęcie do rozpoznania)           | 1 sędzia                 |
 | SN kasacja   | Rozpoznanie merytoryczne                      | 3 sędziów                |

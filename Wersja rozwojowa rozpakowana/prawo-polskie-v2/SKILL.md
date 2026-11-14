@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.101"
+version: "6.102"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.101 (2026-11-14): DR-02: spółdzielnie, własność lokali, UOKiK, KW, prawa konsumenta, ochrona lokatorów, prawo spółdzielcze, fundacje/stowarzyszenia, deweloperska, UZNK w formacie wskazań
+  Wersja bieżąca: 6.102 (2026-11-14): DR-02: mobbing wg art. 94³ KP od 2026-11-05 (2026/1046), skład sądu, timeshare/zastaw, transakcje handlowe, przedsiębiorcy zagraniczni
+  6.101 (2026-11-14): DR-02: spółdzielnie, własność lokali, UOKiK, KW, prawa konsumenta, ochrona lokatorów, prawo spółdzielcze, fundacje/stowarzyszenia, deweloperska, UZNK w formacie wskazań
   6.100 (2026-11-14): DR-01: wszystkie 15 modułów w formacie wskazań z kwalifikatorem (poprawki: art. 157-160 Konstytucji, referendum lokalne, inicjatywa obywatelska, referendum zatwierdzające)
   6.99 (2026-11-14): 2026/912 w modułach DR-08/DR-09; poprawki: skarga na uchwałę RIO do WSA (art. 98 USG), decyzja WZ wygasa po 5 latach (art. 64c UPZP)
   6.98 (2026-11-14): Bazy urzędów i sądów dyscyplinarnych w orzeczenia-sadowe-v2; KAS na t.j. 2026/1492 (poprawki art. 63, 77, 82-83 UKAS); DR-02: Prawo przedsiębiorców, zastaw rejestrowy (2025/1792 i 2026/1073 jeszcze nie obowiązują)
@@ -23,7 +24,6 @@ changelog: |
   6.91 (2026-11-13): REJESTR-ZMIAN-W-CZASIE (JUR:rejestr-zmian-w-czasie): zmiany z datą przyszłą (tabela generowana z ELI, wiersz znika w dniu wejścia w życie) i przepisy czasowe z okresem Od–Do (2026/1440 art. 3; 2026/176 art. 28, 29, 31–34 — z treści nowelizacji w ELI 2026-11-13); STAN-PRAWNY-PL: odesłanie przed KROKIEM T-2; JURYSDYKCJA: nowy klucz
   6.90 (2026-11-13): mod-FA-founders: odesłanie JDG / działalność nierejestrowana → DR-02 mod-prawo-przedsiebiorcow
   6.89 (2026-11-13): nowe t.j. (ELI 2026-11-13): Prawo przedsiębiorców Dz.U. 2026 poz. 1484 (zastępuje 2025/1480; obejmuje 2025/1795, 1826, 2026/507), KAS Dz.U. 2026 poz. 1492 (zastępuje 2025/1131; obejmuje 2026/1281) — ROUTING-MAP, ISAP-METRYKI-AKTOW, DEF-PODATKOWE, DEF-PODMIOTY-WLASNOSC, leksykon ORKA-BAS, mod-FA-founders; ROUTING-MAP: ustawa antymobbingowa 2026/1046 opisana jako ustawa zmieniająca, nie t.j.
-  6.88 (2026-11-13): konektory MCP po zgłoszeniu ActiFlow: eurlex_tekst (treść aktu UE z Cellar, artykuł, domyślnie najnowsza konsolidacja); eurlex_lookup bez fałszywej daty końca (MAX z dat Cellar, data sprzeczna ze statusem pominięta), tytul_aktu bez „- Deklaracja”, konsolidacja_najnowsza i tekst_url_cellar; CBOSA: awaria kanału zawsze ERROR z przyczyną (kod, etap DNS/TCP/TLS/HTTP, IP, retryable) i kanałem zastępczym, cbosa_diagnoza, User-Agent z LEX_CBOSA_USER_AGENT; isap_lookup: „ustawa o …” rozpoznaje akt bazowy.
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

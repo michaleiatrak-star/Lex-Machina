@@ -7,6 +7,9 @@ coverage: "B — rdzeń cywilny; administracyjne i historyczne gałęzie częśc
 
 # Transakcje handlowe — opóźnienia, odsetki i rekompensata
 
+**Akt:** UTH (ustawa o przeciwdziałaniu nadmiernym opóźnieniom w transakcjach handlowych) — t.j. Dz.U. 2023 poz. 1790 (po t.j. bez zmian, ELI 2026-11-14; art. 7 ust. 2 — 60 dni, art. 8 ust. 2 — 30/60 dni, art. 9 ust. 1 — badanie do 30 dni, art. 10 ust. 1 — 40/70/100 euro, art. 13b ust. 2 — 2 mln zł w 3 kolejnych miesiącach).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## 1. Zakres i źródło
 
 Ustawa z 8 marca 2013 r. o przeciwdziałaniu nadmiernym opóźnieniom

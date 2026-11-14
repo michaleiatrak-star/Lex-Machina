@@ -1,5 +1,8 @@
 # Ustawa o zasadach uczestnictwa przedsiębiorców zagranicznych i innych osób zagranicznych w obrocie gospodarczym na terytorium RP — oddziały i przedstawicielstwa v1.0.0 (dodany 2026-10-20)
 
+**Akt:** UPZagr (ustawa o zasadach uczestnictwa przedsiębiorców zagranicznych w obrocie gospodarczym) — t.j. Dz.U. 2026 poz. 1313 (stan 2026-09-22; obejmuje 2026/507 — art. 4 ust. 9 od 2026-11-01; po t.j. bez zmian).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 > ⛔ Ustawa z 6.03.2018 (dalej: **u.p.z.**) — „konstytucja dostępu" osób zagranicznych do działalności gospodarczej w PL.
 > Moduł obejmuje: kto i w jakiej formie może działać (rozdz. 2), oddział (rozdz. 4), przedstawicielstwo (rozdz. 5),
 > relację do Prawa przedsiębiorców. Transgraniczne usługi (rozdz. 3) i współpraca organów (rozdz. 6) — tylko skrót.
