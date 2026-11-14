@@ -7,6 +7,9 @@ source_policy: "RZĄD 1 only"
 
 # Prawo spółdzielcze — F-108/13
 
+**Akt:** PrSpółdz (Prawo spółdzielcze) — t.j. Dz.U. 2026 poz. 521 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## Źródło kanoniczne
 
 Ustawa z 16.09.1982 r. — Prawo spółdzielcze. Aktualny tekst jednolity: **Dz.U. 2026 poz. 521**; ELI oznacza akt jako obowiązujący, data stanu prawnego tekstu jednolitego: 23.03.2026.
@@ -64,11 +67,11 @@ Przy każdej uchwale sprawdź:
 - podstawę zaskarżenia;
 - właściwy sąd i termin.
 
-Terminów nie utrwalaj z pamięci — odczytaj właściwy przepis dla konkretnej uchwały.
+Uchwały walnego zgromadzenia — art. 42: § 2 sprzeczna z ustawą → nieważna; § 3 sprzeczna ze statutem, dobrymi obyczajami, godząca w interes spółdzielni lub członka → powództwo o uchylenie; § 4 legitymacja: członek lub zarząd (wykluczenie/wykreślenie — tylko ten członek); § 6 termin **6 tygodni** od odbycia WZ (członek nieobecny wskutek wadliwego zwołania — 6 tygodni od wiadomości, najpóźniej rok od WZ).
 
 ## Lustracja
 
-Dział VIII stanowi odrębny blok operacyjny. Ustal podmiot przeprowadzający lustrację, okres objęty badaniem, protokół, wnioski polustracyjne i relację ze związkiem rewizyjnym albo Krajową Radą Spółdzielczą. Częstotliwość zależy od wariantu ustawowego — fresh gate obowiązkowy.
+Dział VIII stanowi odrębny blok operacyjny. Ustal podmiot przeprowadzający lustrację, okres objęty badaniem, protokół, wnioski polustracyjne i relację ze związkiem rewizyjnym albo Krajową Radą Spółdzielczą. Art. 91 § 1 — lustracja co najmniej raz na **trzy lata**, w likwidacji corocznie; § 1¹ — warianty dla spółdzielni mieszkaniowych.
 
 ## Reorganizacja i niewypłacalność
 

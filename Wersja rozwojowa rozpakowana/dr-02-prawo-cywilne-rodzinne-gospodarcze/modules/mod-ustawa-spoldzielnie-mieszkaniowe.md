@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # Ustawa o spółdzielniach mieszkaniowych — current-state COV
 
+**Akt:** USM (ustawa o spółdzielniach mieszkaniowych) — t.j. Dz.U. 2026 poz. 889 (stan 2026-06-10; po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## Źródło
 Ustawa z 15 grudnia 2000 r. o spółdzielniach mieszkaniowych. Aktualny tekst jednolity: **Dz.U. 2026 poz. 889**, stan prawny 10.06.2026, status ELI: obowiązujący.
 

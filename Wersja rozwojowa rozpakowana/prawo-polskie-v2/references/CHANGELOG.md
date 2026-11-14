@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.101 (2026-11-14): DR-02: spółdzielnie, własność lokali, UOKiK, KW, prawa konsumenta, ochrona lokatorów, prawo spółdzielcze, fundacje/stowarzyszenia, deweloperska, UZNK w formacie wskazań
 - 6.100 (2026-11-14): DR-01: wszystkie 15 modułów w formacie wskazań z kwalifikatorem (poprawki: art. 157-160 Konstytucji, referendum lokalne, inicjatywa obywatelska, referendum zatwierdzające)
 - 6.99 (2026-11-14): 2026/912 w modułach DR-08/DR-09; poprawki: skarga na uchwałę RIO do WSA (art. 98 USG), decyzja WZ wygasa po 5 latach (art. 64c UPZP)
 - 6.98 (2026-11-14): Bazy urzędów i sądów dyscyplinarnych w orzeczenia-sadowe-v2; KAS na t.j. 2026/1492 (poprawki art. 63, 77, 82-83 UKAS); DR-02: Prawo przedsiębiorców, zastaw rejestrowy (2025/1792 i 2026/1073 jeszcze nie obowiązują)

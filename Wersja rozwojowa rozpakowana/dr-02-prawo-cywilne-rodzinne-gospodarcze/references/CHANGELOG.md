@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.122 (2026-11-14): DR-02: spółdzielnie, własność lokali, UOKiK, KW, prawa konsumenta, ochrona lokatorów, prawo spółdzielcze, fundacje/stowarzyszenia, deweloperska, UZNK w formacie wskazań
 - 3.121 (2026-11-14): Bazy urzędów i sądów dyscyplinarnych w orzeczenia-sadowe-v2; KAS na t.j. 2026/1492 (poprawki art. 63, 77, 82-83 UKAS); DR-02: Prawo przedsiębiorców, zastaw rejestrowy (2025/1792 i 2026/1073 jeszcze nie obowiązują)
 - 3.120 (2026-11-14): DR-02: konwersja modułów KC i KRO na wskazania z kwalifikatorem (W-1; poprawki: art. 442¹, 88 § 2, 388 § 2, 554, 1007 § 2–4)
 - 3.119 (2026-11-14): METODYKA W-1: 26 modułów PrRestr (t.j. 2026/533) i PrUp (t.j. 2026/913) — wartości i terminy zgodne z t.j.; nagłówki z kontraktem wskazań i znacznikami [OD] (2026/1206, 2026/176, 2026/1466)

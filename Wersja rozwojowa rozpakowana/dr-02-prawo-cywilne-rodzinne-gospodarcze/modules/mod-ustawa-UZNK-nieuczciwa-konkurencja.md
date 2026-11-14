@@ -1,6 +1,7 @@
 # mod-ustawa-UZNK-nieuczciwa-konkurencja
 
-**Akt:** ustawa z 16.04.1993 r. o zwalczaniu nieuczciwej konkurencji (UZNK) — t.j. Dz.U. 2026 poz. 85.
+**Akt:** UZNK (ustawa o zwalczaniu nieuczciwej konkurencji) — t.j. Dz.U. 2026 poz. 85 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
 **Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo odczyt `https://api.sejm.gov.pl/eli/acts/DU/2026/85/text.pdf` kanałem hosta; zmiany po t.j. — ELI, pole „Akty zmieniające”.
 **Ten moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
 

@@ -1,5 +1,8 @@
 # mod-ustawa-prawa-konsumenta
 
+**Akt:** PrKons (ustawa o prawach konsumenta) — t.j. Dz.U. 2026 poz. 1244 (zm. 2026/1353 [OD 2027-09-27: 2026/1353] — art. 2, 7ac, 8, 12, 17: definicje i obowiązki informacyjne).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Hasła spraw:** reklamacja, rękojmia, niezgodność towaru z umową, wadliwy towar, zwrot towaru, odstąpienie od umowy zawartej na odległość, zakupy w internecie, sklep internetowy, konsument
 
 **Stan operacyjny:** 2026-08-28  

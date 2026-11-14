@@ -2,10 +2,9 @@
 
 **Stan operacyjny:** 2026-08-28
 
-**Źródła kanoniczne:**
-- ustawa z 6.04.1984 r. o fundacjach — t.j. Dz.U. 2023 poz. 166, z obowiązującą zmianą Dz.U. 2026 poz. 316;
-- ustawa z 7.04.1989 r. — Prawo o stowarzyszeniach — t.j. Dz.U. 2020 poz. 2261, z obowiązującą zmianą Dz.U. 2026 poz. 316;
-- Dz.U. 2026 poz. 346 jest aktem ogłoszonym, ale jego wejście w życie nastąpi 30.09.2028 — nie stosuj tej zmiany jako prawa obowiązującego 28.08.2026.
+**Akt:** UFund (ustawa o fundacjach) — t.j. Dz.U. 2023 poz. 166 (zm. 2026/316 od 2026-03-27 — art. 5 ust. 1b uchylony).
+**Akt:** PrStow (Prawo o stowarzyszeniach) — t.j. Dz.U. 2020 poz. 2261 (zm. 2026/316 od 2026-03-27 — art. 10 ust. 1e uchylony; 2026/346 [OD 2028-09-30: 2026/346] — art. 9, 9a, 12 (rejestracja); do tej daty stosuj brzmienie dotychczasowe).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
 
 ## 1. Kwalifikator: fundacja czy stowarzyszenie
 

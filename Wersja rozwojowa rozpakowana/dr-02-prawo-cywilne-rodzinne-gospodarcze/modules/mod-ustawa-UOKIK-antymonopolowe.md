@@ -1,5 +1,8 @@
 # mod-ustawa-UOKIK-antymonopolowe
 
+**Akt:** UOKiK (ustawa o ochronie konkurencji i konsumentów) — t.j. Dz.U. 2025 poz. 1714 (zm. 2026/1296 od 2026-11-06 — art. 29, 31).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Źródło kanoniczne:** ELI — ustawa z 16.02.2007 r. o ochronie konkurencji i konsumentów, Dz.U. 2025 poz. 1714 t.j., status obowiązujący.
 
@@ -53,7 +56,7 @@ Przed zgłoszeniem lub oceną koncentracji ustal:
 □ możliwe decyzje: zgoda / zgoda warunkowa / zakaz / inne skutki ustawowe
 ```
 
-Nie przechowuj w runtime kwot progów — pobieraj je z aktualnego art. 13 i przepisów powiązanych.
+Art. 13 ust. 1 — zgłoszeniu podlega zamiar koncentracji, gdy łączny obrót światowy uczestników w roku poprzedzającym przekracza równowartość **1 000 000 000 euro** albo obrót w Polsce — **50 000 000 euro**; ust. 2 — rodzaje koncentracji (połączenie, przejęcie kontroli, wspólny przedsiębiorca, nabycie mienia); wyłączenia — art. 14.
 
 ## Zbiorowe interesy konsumentów i wzorce
 

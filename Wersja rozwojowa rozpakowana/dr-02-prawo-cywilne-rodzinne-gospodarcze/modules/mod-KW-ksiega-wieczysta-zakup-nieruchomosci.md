@@ -1,5 +1,8 @@
 # mod-KW-ksiega-wieczysta-zakup-nieruchomosci
 
+**Akt:** UKWH (ustawa o księgach wieczystych i hipotece) — t.j. Dz.U. 2026 poz. 1066 (zm. 2025/1669 [OD 2027-04-02: 2025/1669] — art. 36⁴ ust. 8 pkt 25; 2025/1792 [OD 2027-06-17: 2025/1792] — art. 26 ust. 4; nie dotyczą art. 3, 5–9).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Źródło kanoniczne:** ELI — ustawa z 6.07.1982 r. o księgach wieczystych i hipotece, Dz.U. 2026 poz. 1066 t.j.  
 **Obwieszczenie:** 31.07.2026; publikacja: 06.08.2026; stan prawny tekstu jednolitego: 21.07.2026; status: obowiązujący.
@@ -23,9 +26,9 @@ Moduł obejmuje księgi wieczyste, jawność i domniemania, rękojmię wiary pub
 
 - Księgi wieczyste służą ustaleniu stanu prawnego nieruchomości.
 - Jawność księgi oznacza, że przy czynności dotyczącej nieruchomości nie wolno zakładać, iż brak wiedzy o ujawnionym wpisie będzie chronił stronę.
-- Aktualny art. 3 ustanawia domniemania związane z prawem ujawnionym w księdze. Zakres i możliwość obalenia oceniaj w konkretnej sprawie.
+- Art. 3 ust. 1 — domniemanie, że prawo jawne z księgi jest wpisane zgodnie z rzeczywistym stanem prawnym; ust. 2 — prawo wykreślone nie istnieje (domniemania wzruszalne).
 - **Rękojmia wiary publicznej ksiąg wieczystych** z art. 5 i nast. chroni nabywcę tylko przy spełnieniu ustawowych przesłanek i z uwzględnieniem wyłączeń.
-- Przed zastosowaniem rękojmi zawsze sprawdź art. 6–9, w szczególności złą wiarę, prawa nieobjęte rękojmią oraz wpływ wzmianki/ostrzeżenia.
+- Art. 5 — rękojmia chroni nabywcę przez czynność prawną z osobą uprawnioną według księgi; art. 6 — nie chroni rozporządzeń nieodpłatnych ani nabywcy w złej wierze (wie albo z łatwością mógł się dowiedzieć); art. 7 — nie działa przeciw prawom z mocy ustawy, dożywociu, niektórym służebnościom; art. 8 — wyłącza ją wzmianka o wniosku, skardze, apelacji, skardze kasacyjnej albo ostrzeżenie.
 
 ## Aktualna struktura odczytu księgi
 

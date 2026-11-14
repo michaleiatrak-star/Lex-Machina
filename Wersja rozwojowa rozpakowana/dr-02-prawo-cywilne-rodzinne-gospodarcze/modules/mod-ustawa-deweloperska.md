@@ -1,6 +1,7 @@
 # mod-ustawa-deweloperska
 
-**Źródło weryfikacji:** Ustawa deweloperska (ochrona nabywcy) — t.j. Dz.U. 2026 poz. 880 ze zm. (✅ [VER] RZĄD 1 2026-09-16e; akt pierwotny: Dz.U. 2021 poz. 1177)
+**Akt:** UDew (ustawa o ochronie praw nabywcy lokalu mieszkalnego lub domu jednorodzinnego oraz DFG) — t.j. Dz.U. 2026 poz. 880 (zm. 2026/1077 od 2026-11-11 — art. 19b ust. 1, 2a–2b).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawka: 14 dni na stanowisko dewelopera — art. 41 ust. 4, skutek milczenia — ust. 5).
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -42,7 +43,7 @@ Odbiór lokalu → protokół odbioru (sporządzić na piśmie!)
 Deweloper: 14 DNI na pisemne uznanie LUB odrzucenie zgłoszonych wad
   od podpisania protokołu — ⚠️ DODANE 2026-07-27 (FAZA 3E/ZASADA 14,
   poprzednia wersja pomijała ten termin całkowicie). Potwierdzone w
-  6+ źródłach zgodnych (art. 41 ust. 5 ustawy). BRAK ODPOWIEDZI W TYM
+  6+ źródłach zgodnych (art. 41 ust. 4; skutek — ust. 5). BRAK ODPOWIEDZI W TYM
   TERMINIE = MILCZĄCE UZNANIE WAD (skutek dla dewelopera niekorzystny,
   warto to podnieść, jeśli deweloper spóźni się z odpowiedzią).
   ↓

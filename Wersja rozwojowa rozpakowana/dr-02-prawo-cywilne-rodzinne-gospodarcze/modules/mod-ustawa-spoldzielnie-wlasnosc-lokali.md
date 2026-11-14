@@ -1,5 +1,8 @@
 # mod-ustawa-spoldzielnie-wlasnosc-lokali
 
+**Akt:** UWL (ustawa o własności lokali) — t.j. Dz.U. 2026 poz. 232 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Źródło kanoniczne dla tego modułu:** ELI — ustawa z 24.06.1994 r. o własności lokali, Dz.U. 2026 poz. 232 t.j., status obowiązujący.
 
@@ -32,7 +35,7 @@ Przed oceną wyodrębnienia lokalu sprawdź aktualne art. 2 i nast. Ustal samodz
 
 ## Wspólnota mieszkaniowa
 
-Aktualny art. 6 określa wspólnotę jako ogół właścicieli lokali wchodzących w skład danej nieruchomości; wspólnota może nabywać prawa, zaciągać zobowiązania, pozywać i być pozwana.
+Art. 6 określa wspólnotę jako ogół właścicieli lokali wchodzących w skład danej nieruchomości; wspólnota może nabywać prawa, zaciągać zobowiązania, pozywać i być pozwana.
 
 Przy każdym sporze ustal:
 
@@ -56,7 +59,7 @@ Rozdział 4 jest główną podstawą sporów o zarząd, uchwały, reprezentację
 
 ### Zaskarżenie uchwały
 
-Termin, legitymację, podstawy zaskarżenia i skutek pozwu ustalaj bezpośrednio z aktualnego art. 25 i KPC. Nie traktuj każdego konfliktu we wspólnocie jako powództwa z art. 25 — czasem właściwa jest inna podstawa cywilna lub żądanie dotyczące zarządu.
+Art. 25 ust. 1 — zaskarżenie przez właściciela lokalu: niezgodność z prawem lub umową właścicieli, naruszenie zasad prawidłowego zarządzania albo interesów; ust. 1a — powództwo przeciwko wspólnocie w **6 tygodni** od podjęcia uchwały na zebraniu albo od powiadomienia o uchwale podjętej w trybie indywidualnego zbierania głosów; ust. 2 — uchwała podlega wykonaniu, chyba że sąd wstrzyma. Nie traktuj każdego konfliktu we wspólnocie jako powództwa z art. 25 — czasem właściwa jest inna podstawa cywilna lub żądanie dotyczące zarządu.
 
 ## Powiązania
 

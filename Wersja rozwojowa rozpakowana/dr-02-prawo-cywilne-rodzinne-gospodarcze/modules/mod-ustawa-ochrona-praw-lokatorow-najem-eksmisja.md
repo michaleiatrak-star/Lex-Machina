@@ -1,7 +1,8 @@
 # mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja
 
 **Stan operacyjny:** 2026-08-28  
-**Źródło kanoniczne:** ELI — ustawa z 21.06.2001 r. o ochronie praw lokatorów, mieszkaniowym zasobie gminy i o zmianie Kodeksu cywilnego, Dz.U. 2023 poz. 725 t.j., status obowiązujący.  
+**Akt:** OchrLok (ustawa o ochronie praw lokatorów) — t.j. Dz.U. 2023 poz. 725 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
 **Powiązania:** aktualny KC i KPC, a dla zasobu gminnego również DR-08.
 
 ## Zakres ustawy
@@ -32,11 +33,11 @@
 
 ## Wypowiedzenie
 
-Nie stosuj ogólnego „okresu wypowiedzenia z KC”, jeżeli ustawa lokatorska w danej konfiguracji zawiera szczególne przesłanki i terminy. Przed sporządzeniem oświadczenia pobierz aktualny art. 11 i przepisy właściwe dla konkretnego rodzaju najmu.
+Nie stosuj ogólnego „okresu wypowiedzenia z KC”, jeżeli ustawa lokatorska w danej konfiguracji zawiera szczególne przesłanki i terminy. Art. 11 ust. 1 — wypowiedzenie przez właściciela tylko z przyczyn ustawowych, na piśmie pod rygorem nieważności, z podaniem przyczyny; ust. 2 — nie później niż na miesiąc naprzód, na koniec miesiąca, m.in. przy zwłoce z czynszem lub opłatami za co najmniej **trzy pełne okresy płatności** po pisemnym uprzedzeniu i wyznaczeniu dodatkowego **miesięcznego** terminu do zapłaty (pkt 2); dalsze przesłanki — ust. 2 pkt 1, 3, 4 i ust. 3–5.
 
 ## Kaucja
 
-Ustawa rozróżnia reżimy kaucji w zależności od rodzaju najmu. Nie utrwalaj w odpowiedzi jednej maksymalnej krotności bez ustalenia, czy chodzi o najem zwykły, okazjonalny czy instytucjonalny. Kwotę maksymalną, waloryzację, potrącenia i termin zwrotu pobierz z aktualnej jednostki właściwej dla danego trybu.
+Ustawa rozróżnia reżimy kaucji w zależności od rodzaju najmu. Nie utrwalaj w odpowiedzi jednej maksymalnej krotności bez ustalenia, czy chodzi o najem zwykły, okazjonalny czy instytucjonalny. Najem zwykły — art. 6: kaucja najwyżej **12-krotność** miesięcznego czynszu z dnia zawarcia (ust. 1), zwrot zwaloryzowany (ust. 3) w ciągu **miesiąca** od opróżnienia (ust. 4). Najem okazjonalny — art. 19a i instytucjonalny — art. 19f: najwyżej **6-krotność** czynszu.
 
 ## Najem okazjonalny
 
@@ -56,7 +57,7 @@ B. Czy istnieje prawomocny/wykonalny tytuł nakazujący opróżnienie?
 C. Jakie ograniczenia wykonawcze i obowiązki gminy obowiązują w aktualnym KPC i ustawie lokatorskiej?
 ```
 
-Nie przenoś z pamięci sezonowych zakazów, katalogu osób chronionych ani wyjątków. Przed wykonaniem orzeczenia sprawdź aktualne art. 14–18 ustawy i art. 1046 KPC oraz przepisy szczególne dla najmu okazjonalnego/instytucjonalnego.
+Art. 14 ust. 1 i 3 — w wyroku eksmisyjnym sąd z urzędu orzeka o uprawnieniu do lokalu socjalnego; ust. 4 — nie może orzec braku uprawnienia m.in. wobec kobiety w ciąży, małoletniego, osoby niepełnosprawnej, ubezwłasnowolnionego (pełny katalog i wyjątki — ust. 4–7). Art. 16 — wyroków eksmisyjnych nie wykonuje się od **1 listopada do 31 marca** włącznie, jeżeli nie wskazano lokalu do przekwaterowania. Wykonanie — art. 1046 KPC; najem okazjonalny/instytucjonalny — przepisy szczególne.
 
 ## Zasób gminny
 
