@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # KSH — uzupełnienie pokrycia pozostałych tytułów
 
+**Akt:** KSH — t.j. Dz.U. 2024 poz. 18 (zm. 2024/96; 2026/176 [OD 2027-02-18: 2026/176]; 2026/187 art. 138 [OD 2028-05-19: 2026/187] — art. 88; 2026/644 [OD 2030-01-10: 2026/644] — art. 402⁷, 421¹; **2026/1440 [OD 2026-12-03: 2026/1440]** — art. 238 § 1, 243 § 2, 300⁹⁵ § 2: zgoda i pełnomocnictwo w formie dokumentowej, przepis przejściowy art. 3).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## 1. Źródło i zasada
 
 Akt bazowy: ustawa z 15.09.2000 r. — Kodeks spółek handlowych.

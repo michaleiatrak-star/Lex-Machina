@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # Fundacja rodzinna — organizacja, sukcesja i governance
 
+**Akt:** UFR (ustawa o fundacji rodzinnej) — Dz.U. 2023 poz. 326 (bez t.j.; zm. 2023/825 od 2023-05-22; ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; art. 79 — audyt co 4 lata/corocznie, art. 82 ust. 2 — miesiąc/6 miesięcy, art. 85 — 6 miesięcy potwierdzone).
+
 ## 1. Źródło
 
 Ustawa z 26 stycznia 2023 r. o fundacji rodzinnej, Dz.U. 2023 poz. 326,

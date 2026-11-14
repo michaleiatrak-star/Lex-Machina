@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # Ubezpieczenia obowiązkowe, UFG i PBUK — rdzeń operacyjny
 
+**Akt:** UbezpObow (ustawa o ubezpieczeniach obowiązkowych, UFG i PBUK) — t.j. Dz.U. 2026 poz. 783 (stan 2026-05-27; zm. 2025/1843 od 2026-06-24 — art. 2, 23, 27, 29, 32–33a, 35, 41: pojazdy, w tym art. 23).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## 1. Źródło i stan temporalny
 
 **Akt:** ustawa z 22 maja 2003 r. o ubezpieczeniach obowiązkowych,
@@ -68,8 +71,10 @@ uzupełniaj jej domniemaniem.
 w terminie 30 dni od zawiadomienia o szkodzie. Jeżeli w tym terminie nie da
 się wyjaśnić okoliczności koniecznych do ustalenia odpowiedzialności lub
 wysokości odszkodowania, art. 14 ust. 2 ustanawia dalszy mechanizm czasowy.
-Przed wyliczeniem daty granicznej odczytaj pełne ust. 2–4; nie sprowadzaj
-mechanizmu do hasła „90 dni” bez sprawdzenia wyjątków.
+Art. 14 ust. 2: wtedy wypłata w **14 dni** od dnia, w którym przy należytej
+staranności wyjaśnienie było możliwe, **najpóźniej w 90 dni** od zawiadomienia,
+chyba że ustalenie zależy od postępowania karnego lub cywilnego; ust. 3–4 —
+dalsze obowiązki informacyjne zakładu.
 
 **Art. 19:** poszkodowany może dochodzić roszczenia bezpośrednio od zakładu
 ubezpieczeń; ustawa przewiduje też actio directa wobec UFG w przypadkach

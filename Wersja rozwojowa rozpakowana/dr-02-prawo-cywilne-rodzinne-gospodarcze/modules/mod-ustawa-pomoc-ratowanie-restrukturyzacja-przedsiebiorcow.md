@@ -1,5 +1,9 @@
 # mod-ustawa-pomoc-ratowanie-restrukturyzacja-przedsiebiorcow
 
+**Akt:** UPomRatRestr (ustawa o udzielaniu pomocy publicznej w celu ratowania lub restrukturyzacji przedsiębiorców) — t.j. Dz.U. 2026 poz. 113 (stan 2026-01-23; po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** PrRestr — t.j. Dz.U. 2026 poz. 533 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 4 ust. 2 pkt 4; 2026/176 [OD 2027-02-18: 2026/176] — art. 156 ust. 5 pkt 4 uchylony; nie dotyczą art. 141, 148).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; t.j. 2026/113 zastępuje odesłanie do aktu pierwotnego 2020/1298).
+
 **Wersja:** 1.0.0 | **Dodano:** 2026-08-20 (NAPRAWA — F-98: ustawa
 CAŁKOWICIE nieobecna w systemie mimo że jest bezpośrednią następczynią
 materii dawnego art. 139a Prawa restrukturyzacyjnego, uchylonego WŁAŚNIE

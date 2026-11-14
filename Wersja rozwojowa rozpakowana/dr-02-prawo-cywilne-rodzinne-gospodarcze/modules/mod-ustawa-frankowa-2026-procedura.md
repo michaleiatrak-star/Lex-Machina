@@ -1,5 +1,8 @@
 # Ustawa frankowa 2026 — szczególne rozwiązania w sprawach CHF,
 sprawy "w locie", posiedzenia niejawne
+
+**Akt:** UFrank (ustawa o szczególnych rozwiązaniach w zakresie rozpoznawania spraw dotyczących umów kredytu denominowanego lub indeksowanego do CHF) — Dz.U. 2026 poz. 985 (akt pierwotny, bez t.j.; w mocy od 2026-08-07; bez zmian w ELI na 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z tekstu ogłoszonego w ELI 2026-11-14 (W-1; art. 3 ust. 1–6, art. 4 ust. 2 — co najmniej 2 tygodnie, art. 16 — zwrot połowy opłaty przy cofnięciu do 6 miesięcy od wejścia w życie, art. 17 — sprawy w toku; poprawka: wniosek o zabezpieczenie pozostawia w aktach przewodniczący, art. 3 ust. 5).
 v1.0.0 (dodany 2026-08-07, na żądanie użytkownika)
 
 Zweryfikowano 2026-08-07 (ZASADA 14): Rząd 1 — gov.pl/sprawiedliwosc
@@ -85,8 +88,8 @@ TO ODPOWIADA WPROST NA WĄTPLIWOŚĆ UŻYTKOWNIKA ("czy naprawdę złapie
   wniosku o zabezpieczenie (co WCZEŚNIEJ wydłużało procedurę,
   zwłaszcza gdy wniosek przechodził przez DWIE instancje)
   → ⚠️ CIEKAWY SZCZEGÓŁ PROCEDURALNY: jeśli konsument MIMO TO złoży
-    formalny wniosek o zabezpieczenie w piśmie procesowym — sąd
-    POZOSTAWIA go BEZ ROZPOZNANIA (art. 3 ust. 5) — bo
+    formalny wniosek o zabezpieczenie w piśmie procesowym — PRZEWODNICZĄCY
+    pozostawia go w aktach bez dalszych czynności (art. 3 ust. 5) — bo
     zabezpieczenie już DZIAŁA z mocy samej ustawy, więc odrębny
     wniosek jest ZBĘDNY
   → Wstrzymanie DZIAŁA aż do PRAWOMOCNEGO zakończenia sprawy

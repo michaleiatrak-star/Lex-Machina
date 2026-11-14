@@ -1,5 +1,8 @@
 # mod-piecza-zastepcza-rodzina-zastepcza
 
+**Akt:** UWRPZ (ustawa o wspieraniu rodziny i systemie pieczy zastępczej) — t.j. Dz.U. 2026 poz. 980 (stan 2026-07-15; zm. 2026/187 [OD 2028-05-19: 2026/187] — art. 26, 98 (psycholog)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; art. 61 ust. 1–2 — limit 8 osób w RDD potwierdzony; art. 85 ust. 1 — kwota bazowa 4 100 zł, waloryzowana kwota oznaczona jako niezweryfikowana).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-19
 **Rola w systemie:** odpowiedź na pytanie użytkownika o "opiekę
 zastępczą" — dotąd CAŁKOWITA LUKA w całym systemie, mimo że to
@@ -121,10 +124,11 @@ FORMA INSTYTUCJONALNA — ✅ CZĘŚCIOWO UZUPEŁNIONE 2026-08-13c (Rząd 3,
 Orientacyjne kwoty miesięczne — ⚠️ UZUPEŁNIONE 2026-07-27 (FAZA 3E/
 ZASADA 14): to NIE są stawki ogólnokrajowe sztywne, tylko WYNIK
 lokalnych uchwał POSZCZEGÓLNYCH POWIATÓW, każdy powyżej ustawowego
-MINIMUM. Ustawowe minimum (art. 85 ustawy o wspieraniu rodziny i
-systemie pieczy zastępczej, po waloryzacji): zawodowa rodzina
-zastępcza/RDD — MIN. 4 902 zł; pogotowie rodzinne — MIN. 124% tej
-kwoty (ok. 6 079 zł). POTWIERDZONY REALNY ZAKRES między powiatami
+MINIMUM. Art. 85 ust. 1 t.j. 2026/980: wynagrodzenie zawodowej rodziny
+zastępczej/RDD nie niższe niż **4 100 zł** (kwota z ustawy); ust. 2 —
+pogotowie rodzinne nie mniej niż 124% tej kwoty. Kwota po waloryzacji
+(w module: 4 902 zł / ok. 6 079 zł) ⚠️ [NIEWERYFIKOWANE] — sprawdź aktualne
+obwieszczenie waloryzacyjne przed powołaniem. POTWIERDZONY REALNY ZAKRES między powiatami
 (2026 r.): od ustawowego minimum do znacznie wyższych stawek lokalnych
 (np. Świebodzin: pogotowie 9 136 zł, RDD 9 136 zł; Puławy: pogotowie
 6 079 zł, zawodowa 4 902 zł; Szczecinek: pogotowie 124%×6000 zł=7 440

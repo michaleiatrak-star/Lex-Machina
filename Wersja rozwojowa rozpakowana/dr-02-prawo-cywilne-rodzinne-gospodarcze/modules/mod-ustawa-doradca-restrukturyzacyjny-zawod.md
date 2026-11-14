@@ -1,5 +1,11 @@
 # mod-ustawa-doradca-restrukturyzacyjny-zawod — Doradca restrukturyzacyjny (syndyk / nadzorca / zarządca) jako zawód regulowany
 
+**Akt:** ULicDR (ustawa o licencji doradcy restrukturyzacyjnego) — t.j. Dz.U. 2022 poz. 1007 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** PrUp — t.j. Dz.U. 2026 poz. 913 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 452, 456; nie dotyczy art. 157).
+**Akt:** PrRestr — t.j. Dz.U. 2026 poz. 533 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 4 ust. 2 pkt 4; 2026/176 [OD 2027-02-18: 2026/176] — art. 156 ust. 5 pkt 4 uchylony).
+**Akt:** UKRZ (ustawa o Krajowym Rejestrze Zadłużonych) — t.j. Dz.U. 2025 poz. 1584 (zm. 2025/1792 [OD 2027-06-17: 2025/1792] — art. 9 ust. 5).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14/15 (audyt: pokrycie zawodów
 prawniczych i pokrewnych — kontynuacja po module zawodów zaufania

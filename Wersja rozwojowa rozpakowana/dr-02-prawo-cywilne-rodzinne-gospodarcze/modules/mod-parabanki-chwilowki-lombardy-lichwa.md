@@ -1,4 +1,9 @@
 # Parabanki, chwilówki, lombardy i lichwa
+
+**Akt:** KredKons (ustawa o kredycie konsumenckim) — t.j. Dz.U. 2025 poz. 1362 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 5 pkt 2a lit. a; nie dotyczy art. 36a).
+**Akt:** PożLomb (ustawa o konsumenckiej pożyczce lombardowej) — t.j. Dz.U. 2024 poz. 1111 (zm. 2026/875 [OD 2027-01-01: 2026/875] — art. 37 ust. 2, 38 ust. 2 pkt 5a, 39).
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — nie dotyczy art. 304).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawka: pułap pozaodsetkowych kosztów 45% (art. 36a ust. 2 ukk), nie 100%; art. 304 § 2–3 KK — od 3 miesięcy do 5 lat potwierdzone).
 v1.0.0 (dodany 2026-08-05, na żądanie użytkownika)
 
 Zweryfikowano ponownie 2026-08-28 (ZASADA 14): KNF + RZĄD 1 ELI. **Ustawa o konsumenckiej pożyczce lombardowej NIE jest projektem: obowiązuje, t.j. Dz.U. 2024 poz. 1111.** Wcześniejszy status projektowy był błędny/przestarzały. Pomocniczo użyto także źródeł branżowych:
@@ -62,11 +67,10 @@ PODSTAWA: art. 36a ustawy o kredycie konsumenckim (ukk) — WZÓR na
   Maksymalną wysokość Pozaodsetkowych Kosztów Kredytu (MPKK)
 
 ⭐ DWA OGRANICZENIA RÓWNOCZEŚNIE:
-  → Pozaodsetkowe koszty kredytu NIE MOGĄ przekraczać kwoty
-    OBLICZONEJ wg WZORU ustawowego (zależnego od kwoty i okresu
-    kredytowania)
+  → wzór (art. 36a ust. 1): MPKK = (K × 10%) + (K × n/R × 10%) dla okresu
+    spłaty co najmniej 30 dni; krótszy niż 30 dni — MPKK = K × 5% (ust. 1a)
   → NIEZALEŻNIE od wzoru: pozaodsetkowe koszty NIE MOGĄ przekroczyć
-    CAŁKOWITEJ KWOTY KREDYTU (czyli max 100% pożyczonej kwoty) — JEŚLI
+    **45%** CAŁKOWITEJ KWOTY KREDYTU (art. 36a ust. 2; dawne 100% — nieaktualne) — JEŚLI
     umowa ZASTRZEGA koszty WYŻSZE — TA NADWYŻKA po prostu NIE NALEŻY
     SIĘ kredytodawcy (nieważność częściowa z mocy prawa, konsument
     NIE MUSI jej płacić)

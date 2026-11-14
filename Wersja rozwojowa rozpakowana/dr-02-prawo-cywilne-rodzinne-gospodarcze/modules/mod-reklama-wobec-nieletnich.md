@@ -1,5 +1,10 @@
 # mod-reklama-wobec-nieletnich
 
+**Akt:** URTV (ustawa o radiofonii i telewizji) — t.j. Dz.U. 2022 poz. 1722 (zm. 2024/96 — ogłoszenie wyroku; 2024/1222 od 2024-11-10 — art. 4, 26, 37, 38a–38b, 40; 2026/1003 od 2026-10-28 — art. 6; 2026/1296 od 2026-11-06 — art. 10, 10a, 47t; nie dotyczą art. 16b, 18, 53).
+**Akt:** UNPR (ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym) — t.j. Dz.U. 2023 poz. 845 (zm. 2026/1353 [OD 2027-09-27: 2026/1353] — art. 2, 5, 6, 7).
+**Akt:** UOKiK — t.j. Dz.U. 2025 poz. 1714 (zm. 2026/1296 od 2026-11-06 — art. 29, 31).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; kara do 10% obrotu — art. 106 ust. 1 pkt 4 UOKiK potwierdzone).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-18
 **Rola w systemie:** odpowiedź na pytanie użytkownika o "reklamę
 agresywną wobec nieletnich" — dotąd całkowita luka, mimo BARDZO AKTUALNEJ

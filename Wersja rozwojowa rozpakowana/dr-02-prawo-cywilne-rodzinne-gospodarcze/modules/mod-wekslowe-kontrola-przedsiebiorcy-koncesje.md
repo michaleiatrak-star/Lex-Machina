@@ -1,5 +1,10 @@
 # mod-wekslowe-kontrola-przedsiebiorcy-koncesje
 
+**Akt:** PrWeksl (Prawo wekslowe) — t.j. Dz.U. 2022 poz. 282 (po t.j. bez zmian).
+**Akt:** PrCzek (Prawo czekowe) — t.j. Dz.U. 2016 poz. 462 (po t.j. bez zmian).
+**Akt:** PrPrzeds (Prawo przedsiębiorców) — t.j. Dz.U. 2026 poz. 1484 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; art. 70 PrWeksl i art. 48, 55 PrPrzeds potwierdzone; szczegóły wekslowe — `mod-prawo-wekslowe-czekowe`).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-19
 **Rola w systemie:** odpowiedź na 3 luki wskazane w audycie pokrycia
 prawa gospodarczego — prawo wekslowe/czekowe (całkowity brak), kontrola
@@ -140,10 +145,11 @@ WEKSEL WŁASNY (art. 101) — analogiczne elementy, BEZ trasata (bo
 ```
 ⚠️ Terminy przedawnienia z prawa wekslowego są ZNACZĄCO KRÓTSZE niż
 ogólne terminy cywilne — ZAWSZE weryfikuj dokładne terminy w ELI (RZĄD 1)
-przy konkretnej sprawie (orientacyjnie: roszczenia przeciw akceptantowi
-— 3 lata; przeciw indosantom/wystawcy — 1 rok; regres między
-indosantami — 6 miesięcy — ⚠️ dokładne terminy niepotwierdzone
-precyzyjnie w tej sesji, sprawdź art. 70 wprost)
+przy konkretnej sprawie: art. 70 — przeciw akceptantowi **3 lata** od
+dnia płatności; posiadacza przeciw indosantom i wystawcy — **rok** od dnia
+protestu (przy „bez kosztów” — od dnia płatności); indosantów między sobą i
+przeciw wystawcy — **6 miesięcy** od wykupu albo pozwania; art. 71 —
+przerwanie działa tylko wobec dłużnika, którego dotyczy)
 ```
 
 ### 10. Prawo czekowe (ustawa równoległa, t.j. Dz.U. 2016 poz. 462)
@@ -234,14 +240,10 @@ precyzyjnie w tej sesji, sprawdź art. 70 wprost)
 ### 15. Czas trwania kontroli i "Konstytucja Biznesu" jako filozofia ograniczeń
 
 ```
-⚠️ Dokładne LIMITY czasu trwania kontroli (uzależnione od WIELKOŚCI
-przedsiębiorcy — mikro/mały/średni/duży) oraz zasady ŁĄCZENIA kontroli
-różnych organów NIE zostały w pełni zweryfikowane w tej sesji z
-dokładnymi liczbami dni — zweryfikuj art. 54-56 Prawa przedsiębiorców
-na ISAP przy konkretnej sprawie (ustawa poprzedniczka — ustawa o
-swobodzie działalności gospodarczej — miała analogiczny mechanizm w
-art. 83, z limitami zależnymi od wielkości przedsiębiorcy i możliwością
-przedłużenia w szczególnych przypadkach).
+Art. 55 ust. 1 Prawa przedsiębiorców — łączny czas wszystkich kontroli
+jednego organu w roku kalendarzowym: mikro **6**, mały **18**, średni **24**,
+pozostali **48** dni roboczych; wyjątki — art. 55 ust. 2; zakaz równoczesnych
+kontroli i ich łączenie — art. 54 i n. (odczytaj przy konkretnej sprawie).
 ```
 
 ### 16. KSIĄŻKA KONTROLI
