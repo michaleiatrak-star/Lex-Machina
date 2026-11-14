@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.95 (2026-11-14): Moduł wrogiego przejęcia: skrót OfPubl (monitoring ustawy o ofercie publicznej); rejestr: W-4 dla 2026/1074 i 2026/1206
 - 6.94 (2026-11-14): METODYKA W-1…W-7: mod-ustawa-KRS-rejestr-sadowy (t.j. 2025/869 + 7 nowelizacji, pułapka MSiG od 2025-11-29) i mod-KSH-wrogie-przejecie (KSH + uoof t.j. 2025/592, art. 80a–80b); DR-12: OIRP Katowice i Rzeszów; rejestr zmian w czasie
 - 6.93 (2026-11-13): REJESTR-ZMIAN-W-CZASIE: zmiany nadchodzące modułów paczki 2 DR-02 (UGH 2026/1040, KK 2026/1466, NBP 2026/1098) i odczyty W-4 w tabeli C
 - 6.92 (2026-11-13): REJESTR-ZMIAN-W-CZASIE: KSCU 2026/346 (od 2028-09-30) w tabeli A; tabela B: przepisy przejściowe KPC 2026/473 art. 15, 2026/830 art. 19, 2026/1046 art. 5; tabela C: odczyty W-4 dla 2026/346, 473, 830, 1046

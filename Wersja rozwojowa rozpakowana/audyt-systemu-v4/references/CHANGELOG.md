@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.268 (2026-11-14): Moduł wrogiego przejęcia: skrót OfPubl (monitoring ustawy o ofercie publicznej); rejestr: W-4 dla 2026/1074 i 2026/1206
 - 6.267 (2026-11-14): Moduł wekslowy: skróty PrWeksl/PrCzek rozpoznawane przez monitoring; METODYKA: forma skrótu w nagłówku
 - 6.266 (2026-11-13): check_nowelizacje.py: lista numerów z rokiem przy pierwszym („2026/473, 830, 1003”); szkic W-4 dopasowuje akt po dacie i tytule (NBP i Ordynacja podatkowa z 29.08.1997); scalenie z paczką 2 DR-02 (#154)
 - 6.265 (2026-11-13): check_uchylone.py: jednostki z text.html ELI (identyfikatory, art. 21³ ≠ 213), NIEISTNIEJACY i NIEISTNIEJACA_JEDNOSTKA, PDF tylko dla t.j. bez HTML z indeksami [n] i [na], zapis 519(1), wszystkie pozycje Dz.U. w segmencie nagłówka, skróty małymi literami, inny akt nazwany przed powołaniem, cache bez utrwalania nieudanych pobrań; check_nowelizacje.py: szkic W-4 z treści nowelizacji (przejściowe, wejście i wyjątki z przedziałami), W4_DO_POTWIERDZENIA, monitoring modułów „Przegląd METODYKA”, nowelizacja liczona tylko przy wierszu swojego aktu; METODYKA-MODULY-DR i SKRYPTY-RECZNE zaktualizowane

@@ -17,9 +17,12 @@ w dniu wejścia zmiany w życie; ten sam przebieg zgłasza moduły do wdrożenia
 | 2026-12-03 | 2026/1440 — Ustawa z dnia 4 września 2026 r. o zmianie ustawy - Kodeks spółek hand | 2024/18 | art. 238 § 1, 243 § 2; art. 238 § 1, 243 § 2, 300⁹⁵ § 2: zgoda i pełnomocnictwo w formie dokumentowej, przepis przejściowy art. 3; art. 238, 243, 300⁹⁵; art. 238, 243, 300⁹⁵, nie art. 22–124 | dr-02/mod-KSH-organy-spolki-zoo, dr-02/mod-KSH-spolki-handlowe, dr-02/mod-KSH-spolki-osobowe-rada-nadzorcza, dr-02/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz |
 | 2027-01-01 | 2026/1040 — Ustawa z dnia 19 czerwca 2026 r. o zmianie ustawy o działalności pożyt | 2025/595 | art. 88a | dr-02/mod-ustawa-monopole-panstwowe |
 | 2027-01-01 | 2026/1098 — Ustawa z dnia 3 lipca 2026 r. o osobistych kontach inwestycyjnych | 2022/2025 | art. 38 ust. 2 pkt 6, nie dotyczy art. 4 | dr-02/mod-ustawa-monopole-panstwowe |
-| 2027-01-11 | 2026/1206 — Ustawa z dnia 31 lipca 2026 r. o zmianie ustawy - Prawo bankowe oraz n | 2025/595 | art. 63; tylko art. 452, 456 | dr-02/mod-ustawa-monopole-panstwowe |
-| 2027-01-11 | 2026/1206 — Ustawa z dnia 31 lipca 2026 r. o zmianie ustawy - Prawo bankowe oraz n | 2026/913 | art. 63; tylko art. 452, 456 | dr-02/mod-KSH-spolki-handlowe |
+| 2027-01-11 | 2026/1206 — Ustawa z dnia 31 lipca 2026 r. o zmianie ustawy - Prawo bankowe oraz n | 2025/592 | art. 63; art. 6a; tylko art. 452, 456 | dr-02/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz |
+| 2027-01-11 | 2026/1206 — Ustawa z dnia 31 lipca 2026 r. o zmianie ustawy - Prawo bankowe oraz n | 2025/595 | art. 63; art. 6a; tylko art. 452, 456 | dr-02/mod-ustawa-monopole-panstwowe |
+| 2027-01-11 | 2026/1206 — Ustawa z dnia 31 lipca 2026 r. o zmianie ustawy - Prawo bankowe oraz n | 2026/913 | art. 63; art. 6a; tylko art. 452, 456 | dr-02/mod-KSH-spolki-handlowe |
+| 2027-02-11 | 2026/1074 — Ustawa z dnia 17 lipca 2026 r. o zmianie niektórych ustaw w związku z  | 2025/592 | art. 93–93c | dr-02/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz |
 | 2027-02-18 | 2026/176 — Ustawa z dnia 23 stycznia 2026 r. o zmianie ustawy - Kodeks spółek han | 2024/18 | S.A./PSA, nie art. 201–254; S.A./PSA/S.K.A., nie art. 22–124; art. 10, 25da, 38; art. 10, 42, 43; art. 337, 351, 352, 361; art. 91 | dr-02/mod-KSH-organy-spolki-zoo, dr-02/mod-KSH-spolki-handlowe, dr-02/mod-KSH-spolki-osobowe-rada-nadzorcza, dr-02/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz |
+| 2027-02-18 | 2026/176 — Ustawa z dnia 23 stycznia 2026 r. o zmianie ustawy - Kodeks spółek han | 2025/592 | S.A./PSA, nie art. 201–254; S.A./PSA/S.K.A., nie art. 22–124; art. 10, 25da, 38; art. 10, 42, 43; art. 337, 351, 352, 361; art. 91 | dr-02/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz |
 | 2027-02-18 | 2026/176 — Ustawa z dnia 23 stycznia 2026 r. o zmianie ustawy - Kodeks spółek han | 2025/595 | S.A./PSA, nie art. 201–254; S.A./PSA/S.K.A., nie art. 22–124; art. 10, 25da, 38; art. 10, 42, 43; art. 337, 351, 352, 361; art. 91 | dr-02/mod-ustawa-monopole-panstwowe |
 | 2027-02-18 | 2026/176 — Ustawa z dnia 23 stycznia 2026 r. o zmianie ustawy - Kodeks spółek han | 2025/869 | S.A./PSA, nie art. 201–254; S.A./PSA/S.K.A., nie art. 22–124; art. 10, 25da, 38; art. 10, 42, 43; art. 337, 351, 352, 361; art. 91 | dr-02/mod-ustawa-KRS-rejestr-sadowy |
 | 2028-01-10 | 2026/644 — Ustawa z dnia 17 kwietnia 2026 r. o zmianie niektórych ustaw w związku | 2025/869 | art. 4, 20; art. 402⁷, 421¹ | dr-02/mod-ustawa-KRS-rejestr-sadowy |
@@ -53,6 +56,7 @@ przegląda się przy każdej zmianie aktu. Daty końcowe terminów liczonych w l
 | 2025/1556 art. 10 pkt 1 | ustawa o KRS (zmiany 2025/1556 od 2025-11-29) | postępowania przed sądem rejestrowym wszczęte i niezakończone przed 2025-11-29 — przepisy dotychczasowe | 2025-11-29 | bez terminu: do zakończenia tych postępowań | dr-02/mod-ustawa-KRS-rejestr-sadowy |
 | 2025/1556 art. 10 pkt 2 | ustawa o KRS art. 9, 19 | postępowania wszczęte i niezakończone przed 2027-04-01 — art. 9 i 19 w brzmieniu dotychczasowym | 2027-04-01 | bez terminu: do zakończenia tych postępowań | dr-02/mod-ustawa-KRS-rejestr-sadowy |
 | 2025/1792 art. 12 ust. 3 | ustawa o KRS art. 20e, 22 | podmioty, które do 2026-12-31 nie zmienią w KRS przedmiotu działalności na PKD 2025 — art. 20e i 22 stosuje się odpowiednio (zamiana automatyczna) | 2025-12-31 | 2026-12-31 | dr-02/mod-ustawa-KRS-rejestr-sadowy |
+| 2026/1074 art. 7 | OfPubl (opłaty na rzecz KNF, art. 93–93c) i inne ustawy zmieniane w art. 1–6 | wnioski, zawiadomienia i informacje złożone lub przekazane przed 2027-02-11 — przepisy dotychczasowe | 2027-02-11 | bez terminu: sprawy z tych wniosków | dr-02/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz |
 
 ## C. Odczyt W-4 (przepisy przejściowe i daty wejścia nowelizacji)
 
@@ -65,7 +69,7 @@ Każda nowelizacja z tabeli A ma wiersz: data odczytu treści nowelizacji w ELI 
 | 2026/176 | 2026-11-13 | art. 28, 29, 31–34 → tabela B; wejście: art. 35 (12 miesięcy; art. 28 i 33 od 2026-02-28) |
 | 2026/187 | 2026-11-13 | brak przepisów przejściowych dla art. 138 (KSH art. 88); wejście: art. 161 (2 lata i 3 miesiące) |
 | 2026/644 | 2026-11-13 | art. 18 dotyczy rachunkowości, nie KSH; art. 6 (KSH) wchodzi 2030-01-10 (art. 19 pkt 3 lit. a); u.KRS art. 4, 20 (art. 2) — brak przepisów przejściowych, wejście 2028-01-10 (art. 19 pkt 2 lit. b), odczyt 2026-11-14 |
-| 2026/1206 | 2026-11-13 | brak przepisów przejściowych dla art. 7 (PrUp art. 452, 456); art. 7 wchodzi 2027-01-11 (art. 57) |
+| 2026/1206 | 2026-11-13 | brak przepisów przejściowych dla art. 7 (PrUp art. 452, 456); art. 7 wchodzi 2027-01-11 (art. 57); OfPubl art. 6a (art. 11) — brak przepisów przejściowych, odczyt 2026-11-14 |
 | 2026/346 | 2026-11-13 | KSCU art. 52 ust. 2, 53 ust. 3 (art. 3); brak przepisów przejściowych (art. 1–4); wejście art. 4: 2028-09-30; u.KRS art. 3a, 20a (art. 2) — brak przepisów przejściowych, odczyt 2026-11-14 |
 | 2026/473 | 2026-11-13 | KPC (art. 2), KSCU (art. 7); przejściowy art. 15 → tabela B; wejście art. 20: 3 miesiące od ogłoszenia (2026-07-08) |
 | 2026/830 | 2026-11-13 | KPC art. 4¹ zd. 2 (art. 18); przejściowy art. 19 → tabela B; wejście art. 20: 14 dni (2026-07-08) |
@@ -75,3 +79,4 @@ Każda nowelizacja z tabeli A ma wiersz: data odczytu treści nowelizacji w ELI 
 | 2026/1466 | 2026-11-13 | KK (art. 2 noweli) — moduł: nie dotyczy art. 109–111, 206; brak przepisów przejściowych; wejście art. 4: 14 dni (2026-11-21) |
 | 2025/1556 | 2026-11-14 | art. 9, art. 10 pkt 1–2 → tabela B; wejście: art. 11 (14 dni od ogłoszenia; art. 1 pkt 3 i 7 oraz art. 10 pkt 2 od 2027-04-01) |
 | 2025/1792 | 2026-11-14 | art. 12 ust. 3 → tabela B (art. 11 — PKD 93.29.Z do 2026-01-01, wygasły); wejście: art. 19 (14 dni; art. 6 pkt 2 w zakresie art. 20e i pkt 3 od 2025-12-31; art. 6 pkt 2 w zakresie art. 20f — 18 miesięcy od ogłoszenia 2025-12-16) |
+| 2026/1074 | 2026-11-14 | art. 7 → tabela B (art. 8 — przepisy wykonawcze innej ustawy); zmiany OfPubl: art. 4 (art. 93–93c); wejście: art. 9 (6 miesięcy od ogłoszenia) |

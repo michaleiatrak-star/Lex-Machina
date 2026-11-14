@@ -59,4 +59,4 @@ Znalezisko obsługuje się krokami W-2…W-7 dla wskazanych modułów.
 - Monitoring obejmuje moduły w formacie wskazań i moduły ze znacznikiem „Przegląd METODYKA W-2/W-4/W-6:
   RRRR-MM-DD” (nowelizacje i przepisy przejściowe przejrzane przed pełną konwersją W-1).
 - Nagłówek z kilkoma aktami: numer nowelizacji liczy się tylko w wierszu z Dz.U. albo skrótem tego aktu.
-- Nagłówek z kilkoma aktami: skrót aktu w wierszu „**Akt:**” w formie z dwiema wielkimi literami (`KSH`, `PrWeksl`, `PrCzek`, `uoof` nie — wtedy pełna nazwa obok Dz.U.); „pr. weksl.” skrypt nie rozpozna (`BRAK_NAGLOWKA_TJ`). Tego samego skrótu używaj w tabelach wskazań.
+- Nagłówek z kilkoma aktami: skrót aktu w wierszu „**Akt:**” w formie z dwiema wielkimi literami (`KSH`, `PrWeksl`, `PrCzek`, `OfPubl`); „pr. weksl.” ani „uoof” skrypt nie rozpozna (`BRAK_NAGLOWKA_TJ`). Tego samego skrótu używaj w tabelach wskazań.

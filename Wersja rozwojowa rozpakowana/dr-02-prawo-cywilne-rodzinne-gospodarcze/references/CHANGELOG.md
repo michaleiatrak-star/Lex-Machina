@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.117 (2026-11-14): Moduł wrogiego przejęcia: skrót OfPubl (monitoring ustawy o ofercie publicznej); rejestr: W-4 dla 2026/1074 i 2026/1206
 - 3.116 (2026-11-14): Moduł wekslowy: skróty PrWeksl/PrCzek rozpoznawane przez monitoring; METODYKA: forma skrótu w nagłówku
 - 3.115 (2026-11-14): METODYKA W-1…W-7: mod-prawo-wekslowe-czekowe (pr. weksl. t.j. 2022/282, pr. czek. t.j. 2016/462, bez zmian po t.j.)
 - 3.114 (2026-11-14): METODYKA W-1…W-7: mod-ustawa-KRS-rejestr-sadowy (t.j. 2025/869 + 7 nowelizacji, pułapka MSiG od 2025-11-29) i mod-KSH-wrogie-przejecie (KSH + uoof t.j. 2025/592, art. 80a–80b); DR-12: OIRP Katowice i Rzeszów; rejestr zmian w czasie

@@ -1,7 +1,7 @@
 21bcb564ba9b68b989989e4312872ef6583f8cfd173cb70504ea2ffa1df16e6e  ./MAPA-AKTOW.md
 c3baa5e256c73658f09cd07050b7c2c896c010d65c42127bd0bd40a45d99f824  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-eb8c47535db0513e5c7bc5166c9afa099af9107b9a02d02767ba59b34c45fb6f  ./SKILL.md
+19f2b21145e55ab4d3a4c9fae533e018c26e0814b298e734292b532eb837da50  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 bc1802487f84e7c9daaa7a1e5deefb78e89e483e8f99614a25448b16b6764f14  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -43,7 +43,7 @@ eca1b78857e2df1a4713db9c8001e6c44e7b1f6fb324433c2edb70a31a91b2c3  ./modules/mod-
 baa0be0642033e52e22acb8e47b866b004f95ff4e54e7c912f925bf68078d4dc  ./modules/mod-KSH-spolki-handlowe.md
 fcaab29d6e0c814ba349e4cb6d9750a67dceff17771c78a7b8dc4abe0600b136  ./modules/mod-KSH-spolki-osobowe-rada-nadzorcza.md
 2a9dd3bf61bd9a8e48691671b011a301d36908f8a2597cd62bae7d5fc51f3593  ./modules/mod-KSH-uzupelnienie-pokrycia-2026.md
-ab2c7a344daaa00810d37c719b9884fc93e8e2ef9f44ddc164aac15301b19a29  ./modules/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz.md
+82ef13df985179fba5f2874b0a63bb436d91acc6321ba02abfdcf05c66d134a7  ./modules/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz.md
 bd0768a47690a6d9ddc9f0991258263208bee017ddb8cf7cd37a66ba51aa36b3  ./modules/mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md
 062ded48b438343ade272e8542ec4e10ef31d1942021fcec7e30711375a3d275  ./modules/mod-PrRestr-dzial-III-nadzorca-zarzadca.md
 3f374d6d6e21bfab02985e7d89305995018c064736cd1ee5b1180e74771af6e6  ./modules/mod-PrRestr-dzial-IV-uczestnicy-wierzyciele.md
@@ -106,7 +106,7 @@ a556920b43699e8c2ffa51b8b166a6175ca0e78afa95c3d86d6dd2d3d1cd1de7  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 62ebf3d9f84110b425cc254c4e4e2cb9ce3042847ff9c28b85a892441f7c437a  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-ad4483a4b2c7aa66d5ed03fdcd13dcb1c86fdc19997aab5132c2a2f7eefa01e3  ./references/CHANGELOG.md
+fcf4b9f92fd81aa5f543458ab82c7c407a96b2d875d151c86b87673c87f2901d  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json
