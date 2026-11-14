@@ -9,7 +9,7 @@ posiadania własnego pokrycia merytorycznego w żadnym module DR-.)
 
 > ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP przed użyciem w piśmie.
 > Akt bazowy: KPC, t.j. Dz.U. 2026 poz. 468.
-> **Przegląd METODYKA W-2/W-4/W-6:** 2026-11-13 (nowelizacje po t.j. i przepisy przejściowe z ELI; kwalifikatory treści — przegląd W-1 w kolejnej paczce). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
+> **Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawka: nieważność z urzędu — art. 378 § 1 zd. 2, nie § 2). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
 
 **Rola w systemie:** KPC jest używany w DR-02, DR-05, DR-12, DR-16 bez
 JEDNEGO, kanonicznego miejsca dla podstawowych instytucji procesowych
@@ -98,9 +98,12 @@ tę lukę dla dwóch najpilniejszych tematów.
   MOŻE być objęta kontrolą sądu odwoławczego (⭐ powiązanie z sekcją 1
   wyżej — częściowe zaskarżenie = częściowa prawomocność pozostałej
   części, NATYCHMIAST po upływie terminu apelacji dla tej części)
-  §2 — SĄD II instancji BIERZE jednak Z URZĘDU pod uwagę NIEWAŻNOŚĆ
-    postępowania (art. 379) — ⭐ JEDYNY wyjątek od związania granicami
-    — nieważność bada się ZAWSZE, niezależnie od zarzutów apelacji
+  §1 zd. 2 — w granicach ZASKARŻENIA sąd II instancji BIERZE z urzędu pod
+    uwagę NIEWAŻNOŚĆ postępowania (art. 379) — niezależnie od zarzutów
+    apelacji, ale tylko w części zaskarżonej
+  §2 — w granicach zaskarżenia sąd może z urzędu rozpoznać sprawę także na
+    rzecz WSPÓŁUCZESTNIKÓW, którzy wyroku nie zaskarżyli, gdy prawa lub
+    obowiązki są dla nich wspólne (wymaga zawiadomienia ich o terminie)
 
 ⭐⭐ ART. 380 — ROZSZERZENIE ZAKRESU ROZPOZNANIA: sąd II instancji NA
   WNIOSEK strony — MOŻE rozpoznać RÓWNIEŻ postanowienia sądu I
@@ -129,8 +132,9 @@ tę lukę dla dwóch najpilniejszych tematów.
   ŻĄDANIA: w postępowaniu apelacyjnym NIE MOŻNA rozszerzyć żądania
   pozwu ANI wystąpić z NOWYMI roszczeniami — ⚠️ WYJĄTEK: w RAZIE
   zmiany OKOLICZNOŚCI można żądać, ZAMIAST pierwotnego przedmiotu
-  sporu, JEGO WARTOŚCI lub INNEGO przedmiotu (⚠️ dokładne brzmienie
-  wyjątku NIE zweryfikowane w tej sesji — punkt startowy)
+  sporu, JEGO WARTOŚCI lub INNEGO przedmiotu; w sprawach o świadczenie
+  powtarzające się można rozszerzyć żądanie o świadczenia za dalsze
+  okresy (brzmienie z t.j. 2026/468)
 
 ⭐⭐⭐ ART. 384 — ZAKAZ REFORMATIONIS IN PEIUS (⭐⭐⭐ jeden z
   najważniejszych mechanizmów ochronnych całego postępowania
@@ -149,17 +153,20 @@ tę lukę dla dwóch najpilniejszych tematów.
   konkretnej sprawie nieprocesowej
 
 ⭐⭐ ART. 385 — ODDALENIE APELACJI: gdy apelacja jest BEZZASADNA — sąd
-  ODDALA (⚠️ dokładne brzmienie i szczegóły proceduralne NIE
-  zweryfikowane w tej sesji)
+  ODDALA (art. 385); uwzględnienie apelacji → ZMIANA wyroku i orzeczenie
+  co do istoty (art. 386 § 1)
 
 ⭐⭐⭐ ART. 386 — POZOSTAŁE ROZSTRZYGNIĘCIA sądu II instancji (⭐
   katalog rozstrzygnięć POZA samym oddaleniem/uwzględnieniem —
   KLUCZOWY dla zrozumienia co może zrobić sąd odwoławczy):
-  §4 (wzmiankowany w orzecznictwie) — MOŻLIWOŚĆ UCHYLENIA wyroku I
-    instancji i PRZEKAZANIA sprawy do PONOWNEGO rozpoznania (⭐
-    rozstrzygnięcie KASATORYJNE — ⚠️ dokładne przesłanki KIEDY sąd
-    MOŻE/MUSI wybrać uchylenie zamiast merytorycznej zmiany — NIE
-    zweryfikowane szczegółowo w tej sesji, punkt startowy) — orzecznictwo
+  §2 — NIEWAŻNOŚĆ postępowania → uchylenie, zniesienie postępowania w
+    zakresie nią dotkniętym i przekazanie sprawy I instancji
+  §3 — pozew podlega odrzuceniu albo zachodzi podstawa umorzenia →
+    uchylenie wyroku oraz odrzucenie pozwu lub umorzenie
+  §4 — poza §2 i §3 uchylenie i PRZEKAZANIE do ponownego rozpoznania
+    (rozstrzygnięcie KASATORYJNE) TYLKO w razie NIEROZPOZNANIA ISTOTY
+    SPRAWY przez sąd I instancji albo gdy wydanie wyroku WYMAGA
+    przeprowadzenia POSTĘPOWANIA DOWODOWEGO W CAŁOŚCI — orzecznictwo
     SN: WYJŚCIE przez sąd II instancji, W TOKU formułowania sentencji
     na podstawie art. 386 §4, POZA granice apelacji I granice
     zaskarżenia (np. uchylenie CAŁOŚCI wyroku, gdy zaskarżono TYLKO

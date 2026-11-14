@@ -1,11 +1,11 @@
 # mod-KPC-egzekucja-windykacja
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** KPC — t.j. Dz.U. 2026 poz. 468 | KSCU — t.j. Dz.U. 2025 poz. 1228 (zm. 2026/473 — art. 35 ust. 2, 36a, 96 ust. 1 pkt 8, w brzmieniu od 2026-07-08; 2026/1003 — art. 3 ust. 2 pkt 9, 32, od 2026-10-28; 2026/346 [OD 2028-09-30: 2026/346] — art. 52 ust. 2, 53 ust. 3: opłaty od wniosków przy wzorcach S24) | Ustawa o kosztach komorniczych (u.k.k.) — Dz.U. 2024 poz. 377 t.j. | Ustawa o komornikach sądowych — Dz.U. 2026 poz. 881 t.j. | ✅ ELI 2026-08-25
+**Źródło weryfikacji:** KPC — t.j. Dz.U. 2026 poz. 468 | KSCU — t.j. Dz.U. 2025 poz. 1228 (zm. 2026/473 — art. 35 ust. 2, 36a, 96 ust. 1 pkt 8, w brzmieniu od 2026-07-08; 2026/1003 — art. 3 ust. 2 pkt 9, 32, od 2026-10-28; 2026/346 [OD 2028-09-30: 2026/346] — art. 52 ust. 2, 53 ust. 3: opłaty od wniosków przy wzorcach S24) | Ustawa o kosztach komorniczych (KosztKom, u.k.k.) — Dz.U. 2024 poz. 377 t.j. | Ustawa o komornikach sądowych (KomSad) — Dz.U. 2026 poz. 881 t.j. | ✅ ELI 2026-08-25
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **⚠️ Nowelizacja KPC:** Dz.U. 2025 poz. 1172 — wejście w życie 01.03.2026; weryfikuj aktualne przepisy.
-**Przegląd METODYKA W-2/W-4/W-6:** 2026-11-13 (nowelizacje po t.j. i przepisy przejściowe z ELI; kwalifikatory treści — przegląd W-1 w kolejnej paczce). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawki: terminy zarzutów i sprzeciwu — art. 480² § 2; EPU — art. 505²⁹ᵃ, 505³⁶; art. 805; opłaty komornicze — u.k.k. t.j. 2024/377 art. 27, 48). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
 
 ---
 
@@ -100,9 +100,9 @@ CZY roszczenie pieniężne, dłużnik w Polsce, max 3-letnie?
 
 | Tryb | Warunki | Środek dłużnika | Termin | Skutek |
 |---|---|---|---|---|
-| Nakazowy (art. 485 KPC) | Dokumenty z art. 485 §1–2 | **Zarzuty** | 2 tygodnie od doręczenia | Sprawa na rozprawę; nakaz nie traci mocy automatycznie |
-| Upominawczy | Roszczenie pieniężne, niebudzące wątpliwości | **Sprzeciw** | 2 tygodnie od doręczenia | Nakaz traci moc; sprawa do trybu zwykłego |
-| EPU | Roszczenie pieniężne, nie przedawnione | **Sprzeciw** | 2 tygodnie od doręczenia | Nakaz traci moc; przekazanie do SR właściwości ogólnej dłużnika |
+| Nakazowy (art. 485 KPC) | Dokumenty z art. 485 §1–2 | **Zarzuty** (art. 493) | **miesiąc** od doręczenia w UE, 3 miesiące poza UE (art. 480² § 2 pkt 3–4) | Sprawa na rozprawę; nakaz nie traci mocy automatycznie |
+| Upominawczy | Roszczenie pieniężne, niebudzące wątpliwości | **Sprzeciw** (art. 505) | 2 tygodnie od doręczenia w kraju; miesiąc w innym państwie UE; 3 miesiące poza UE (art. 480² § 2 pkt 1, 2, 4) | Nakaz traci moc w części zaskarżonej (art. 505 § 2); sprawa według przepisów ogólnych (art. 480¹ § 2) |
+| EPU | Roszczenie wymagalne w ciągu 3 lat przed wniesieniem pozwu (art. 505²⁹ᵃ) | **Sprzeciw** | jak w upominawczym (art. 480² § 2) | Nakaz traci moc; sąd **umarza** postępowanie w tym zakresie (art. 505³⁶) — powód wnosi pozew w zwykłym trybie |
 
 > ⚠️ Terminy ZAWITE — niedotrzymanie = utrata prawa do zaskarżenia. Weryfikuj art. 491–505 KPC w ELI (RZĄD 1).
 
@@ -141,7 +141,7 @@ Wniosek o klauzulę (art. 781 KPC):
         małżonkowi dłużnika, lub na rzecz/przeciwko innej osobie niż
         wskazana w tytule (np. następca prawny) → 50 zł
       • Odpis tytułu egzekucyjnego (jeśli potrzebny) → 6 zł/strona
-  → Zażalenie na postanowienie o klauzuli: 7 dni od doręczenia (art. 795 KPC)
+  → Zażalenie na postanowienie o klauzuli: tydzień (art. 394 § 2); dla dłużnika biegnie od doręczenia zawiadomienia o wszczęciu egzekucji (art. 795 § 2)
     ⛔ ADRESAT — PUŁAPKA: mimo literalnego brzmienia "sąd drugiej instancji"
     w art. 795 §2, zażalenie jest w rzeczywistości POZIOME (SN, uchwała
     III CZP 58/20 z 20.08.2021) — rozpoznaje INNY SKŁAD TEGO SAMEGO sądu
@@ -219,8 +219,10 @@ Wybór komornika (art. 10 u.k.s.):
   → WYJĄTEK: egzekucja z nieruchomości → wyłącznie komornik rewiru
 
 Zawiadomienie dłużnika (art. 805 KPC):
-  → Komornik doręcza odpis wniosku wierzyciela
-  → Wzywa do zapłaty w terminie 7 dni od doręczenia
+  → Przy pierwszej czynności egzekucyjnej komornik doręcza zawiadomienie o
+    wszczęciu egzekucji (treść tytułu, sposób egzekucji, pouczenia, odpis tytułu)
+  → Od doręczenia tego zawiadomienia biegnie miesiąc na zapłatę z niższą opłatą
+    3% (art. 27 ust. 2 u.k.k.) i termin dłużnika na zażalenie na klauzulę (art. 795 § 2)
 ```
 
 ### Sposoby egzekucji — szczegóły
@@ -260,12 +262,12 @@ Z WIERZYTELNOŚCI (art. 895–912 KPC):
 
 ```
 Opłata egzekucyjna (od dłużnika):
-  → 10% wyegzekwowanego świadczenia (art. 27 §1 u.k.k.)
-  → 3% jeśli dłużnik sam zapłacił w ciągu 1 miesiąca od zawiadomienia (art. 27 §2)
-  → Min. 150 zł, max 50 000 zł (weryfikuj aktualne progi w u.k.k.)
+  → 10% wyegzekwowanego świadczenia (art. 27 ust. 1 u.k.k., t.j. Dz.U. 2024 poz. 377)
+  → 3%, gdy dłużnik wpłaci komornikowi w miesiąc od doręczenia zawiadomienia o wszczęciu egzekucji (art. 27 ust. 2)
+  → u.k.k. w art. 27 nie przewiduje kwot minimalnej ani maksymalnej opłaty (dawne „150 zł / 50 000 zł” — nieaktualne)
 
 Wniosek o obniżenie opłaty (art. 48 u.k.k.):
-  → Termin: 7 dni od czynności
+  → Termin: 7 dni od doręczenia postanowienia o pobraniu lub ustaleniu opłaty (art. 48 ust. 2)
   → Przesłanki: szczególne okoliczności, nakład pracy komornika, sytuacja dłużnika
 ```
 

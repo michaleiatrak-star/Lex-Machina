@@ -1,7 +1,7 @@
 # Moduł — KPC Księga druga: POSTĘPOWANIE NIEPROCESOWE, część ogólna
 v1.0.0 (utworzony 2026-08-14d — naprawa flagi F-65)
 
-**Akt:** KPC — t.j. Dz.U. 2026 poz. 468. **Przegląd METODYKA W-2/W-4/W-6:** 2026-11-13 (nowelizacje po t.j. i przepisy przejściowe z ELI; kwalifikatory treści — przegląd W-1 w kolejnej paczce). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
+**Akt:** KPC — t.j. Dz.U. 2026 poz. 468. **Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawki: art. 519¹, art. 511 § 2, numery art. 509, 509¹, 514 § 2, 515, 516, 518¹). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
 
 > ⛔ **DLACZEGO TEN MODUŁ POWSTAŁ:** audyt pokrycia KPC z 2026-08-13
 > wykazał, że CAŁA Księga II KPC (0×🟢 / 6×🔴) nie miała w systemie
@@ -20,26 +20,11 @@ v1.0.0 (utworzony 2026-08-14d — naprawa flagi F-65)
 ## ⛔ HARD GATE — STATUS WERYFIKACJI ŹRÓDŁOWEJ
 
 ```
-Ten moduł powstał w sesji audytowej BEZ dostępu do isap.sejm.gov.pl
-przez web_fetch (ROBOTS_DISALLOWED — ograniczenie znane, opisane
-w ZASADZIE 8 audyt-systemu-v4).
-
-POZIOM ŹRÓDŁA: Rząd 2 — lexlege.pl, arslege.pl, e-prawnik.pl,
-next-kp.pl, standardyprawa.pl (5 niezależnych serwisów, zgodnych
-ze sobą co do brzmienia i numeracji).
-
-⚠️ [ZALECANA WERYFIKACJA RZĄD 1] — przed powołaniem KTÓREJKOLWIEK
-jednostki redakcyjnej z tego modułu w piśmie procesowym potwierdź
-jej brzmienie w ISAP lub LEX/Legalis.
-
-⭐ ROZRÓŻNIENIE STOSOWANE W CAŁYM MODULE:
-  [NR ✓]  = numer artykułu ODCZYTANY ze źródła wraz z treścią
-  [NR ?]  = treść przepisu odczytana, ale NUMER NIE był podany
-            w źródle wprost — ⛔ NIE POWOŁUJ tego numeru, zanim
-            go nie potwierdzisz; treść możesz wykorzystać
-            merytorycznie, numer WYMAGA sprawdzenia
-Numer t.j. KPC — bierz z wiersza macierzystego MAPA-AKTOW.md
-(nie powielamy go tutaj, żeby nie tworzyć drugiego źródła prawdy).
+Brzmienie i numery jednostek sprawdzone z t.j. KPC Dz.U. 2026 poz. 468
+w ELI (RZĄD 1) 2026-11-14 — krok W-1 METODYKI. Wcześniejsze oznaczenia
+[NR ?] zastąpione numerami z t.j.; [art. … ✓] = brzmienie zgodne z t.j.
+Przed powołaniem w piśmie pobierz brzmienie z ELI (zmiany po t.j. —
+nagłówek modułu).
 ```
 
 ---
@@ -52,7 +37,7 @@ Numer t.j. KPC — bierz z wiersza macierzystego MAPA-AKTOW.md
   przekłada się na konstrukcję pisma, na krąg podmiotów, które
   trzeba wskazać, i na to, kto może zaskarżyć orzeczenie.
 □ FORMA ORZECZENIA: POSTANOWIENIE, nie wyrok — chyba że przepis
-  szczególny stanowi inaczej. [NR ?]
+  szczególny stanowi inaczej. [art. 516 ✓]
 □ WSZCZĘCIE: co do zasady NA WNIOSEK; z urzędu TYLKO w wypadkach
   wskazanych w ustawie. [art. 506 ✓]
 □ Konsekwencja praktyczna: „pozew" w sprawie nieprocesowej to błąd
@@ -163,11 +148,9 @@ OBOWIĄZEK SĄDU [art. 510 § 2 ✓]
     zainteresowanych — wskazanych wg kryterium materialnego
     z art. 510 § 1, a nie wg wygody wnioskodawcy
 
-[art. 511 § 2 ✓ — treść niepełna w źródle]
+[art. 511 § 2 ✓]
   □ Do wniosków PROKURATORA o wszczęcie postępowania nie stosuje
-    się określonych przepisów — ⛔ KATALOG WYŁĄCZEŃ NIE ZOSTAŁ
-    ODCZYTANY w tej sesji; jeżeli sprawa dotyczy wniosku
-    prokuratorskiego, sprawdź pełne brzmienie § 2 w ELI (RZĄD 1)
+    się art. 55 i 56 KPC
 ```
 
 ---
@@ -175,7 +158,7 @@ OBOWIĄZEK SĄDU [art. 510 § 2 ✓]
 ## 5. PRZEBIEG POSTĘPOWANIA — ODRĘBNOŚCI DOWODOWE
 
 ```
-ODDALENIE WNIOSKU NA POSIEDZENIU NIEJAWNYM [NR ?]
+ODDALENIE WNIOSKU NA POSIEDZENIU NIEJAWNYM [art. 514 § 2 ✓]
   □ Nawet gdy ustawa WYMAGA przeprowadzenia rozprawy, sąd może
     ODDALIĆ WNIOSEK na posiedzeniu niejawnym, BEZ wzywania
     zainteresowanych, jeżeli z treści wniosku wynika OCZYWISTY
@@ -185,7 +168,7 @@ ODDALENIE WNIOSKU NA POSIEDZENIU NIEJAWNYM [NR ?]
     rzeczywiście wynikał Z TREŚCI SAMEGO WNIOSKU, a nie z ustaleń
     wymagających postępowania dowodowego. To realne pole zarzutu.
 
-ODRĘBNOŚCI DOWODOWE [NR ?]
+ODRĘBNOŚCI DOWODOWE [art. 515 ✓]
   □ Sąd może — stosownie do okoliczności — przesłuchać ŚWIADKÓW
     i BIEGŁYCH BEZ PRZYRZECZENIA
   □ Może przesłuchać ich W NIEOBECNOŚCI UCZESTNIKÓW
@@ -197,13 +180,13 @@ ODRĘBNOŚCI DOWODOWE [NR ?]
     o ograniczonej kontroli tego dowodu jest dopuszczalny, ale
     sam fakt zastosowania tego trybu NIE JEST uchybieniem.
 
-SKŁAD SĄDU — PRZYSPOSOBIENIE [NR ?]
+SKŁAD SĄDU — PRZYSPOSOBIENIE [art. 509 ✓]
   □ Sprawy o przysposobienie sąd rozpoznaje w I instancji
     w składzie JEDNEGO SĘDZIEGO I DWÓCH ŁAWNIKÓW
   ⭐ Jeden z nielicznych zachowanych składów ławniczych — skład
     sprzeczny z tym wymogiem to podstawa nieważności postępowania.
 
-REFERENDARZ SĄDOWY [NR ?]
+REFERENDARZ SĄDOWY [art. 509¹ § 1–3 ✓; skarga — art. 518¹ § 1¹ ✓]
   □ Czynności w postępowaniu WIECZYSTOKSIĘGOWYM może wykonywać
     referendarz sądowy
   □ Analogicznie w postępowaniach dotyczących rejestrów i ewidencji
@@ -286,17 +269,27 @@ PREKLUZJA DOWODOWA (art. 205¹-205¹²) A NIEPROCES — ✅ ZWERYFIKOWANE
   (bramka wprowadzona przy fladze F-13) — dotyczy KAŻDEGO pisma
   zawierającego środek zaskarżenia, w tym w nieprocesie.
 
-SKARGA KASACYJNA W NIEPROCESIE [art. 519¹ ✓ — zakres CZĘŚCIOWO]
-  □ Nieproces ma WŁASNĄ, odrębną regulację dopuszczalności skargi
-    kasacyjnej — NIE stosuje się wprost reguł z procesu
-  □ Potwierdzone fragmentarycznie: § 1 obejmuje m.in. sprawy
-    z zakresu NADZORU NAD DZIAŁALNOŚCIĄ FUNDACJI; § 4 pkt 4 i pkt 5
-    dotyczą spraw depozytowych (w tym likwidacji niepodjętego
-    depozytu)
-  ⛔ PEŁNY KATALOG § 1–§ 4 NIE ZOSTAŁ ODCZYTANY. Przed wnoszeniem
-    lub opiniowaniem skargi kasacyjnej w sprawie nieprocesowej
-    ODCZYTAJ CAŁY art. 519¹ w ISAP — dopuszczalność jest tu
-    wyliczeniowa, a błąd oznacza odrzucenie skargi.
+SKARGA KASACYJNA W NIEPROCESIE [art. 519¹ ✓ — t.j. 2026/468]
+  □ § 1 — od postanowienia II instancji co do istoty oraz w przedmiocie
+    odrzucenia wniosku i umorzenia kończących postępowanie — w sprawach
+    z zakresu prawa OSOBOWEGO, RZECZOWEGO i SPADKOWEGO, chyba że przepis
+    szczególny stanowi inaczej
+  □ § 2 — prawo rodzinne, opiekuńcze, kuratela: TYLKO przysposobienie
+    oraz podział majątku wspólnego po ustaniu wspólności (gdy wartość
+    przedmiotu zaskarżenia ≥ 150 000 zł)
+  □ § 2¹–2² — odebranie osoby w trybie konwencji haskiej z 1980 r.:
+    skargę wnosi PG, RPD albo RPO w 4 miesiące od uprawomocnienia
+  □ § 3 — postępowanie REJESTROWE: tylko postanowienia II instancji
+    w przedmiocie wpisu lub wykreślenia podmiotu z rejestru
+  □ § 4 — NIE przysługuje: 1) przepadek rzeczy; 2) zarząd przy
+    współwłasności lub użytkowaniu; 3) zabezpieczenie spadku, spis
+    inwentarza, wyjawienie przedmiotów spadkowych, zarząd spadku
+    nieobjętego, zwolnienie wykonawcy testamentu; 4) zniesienie
+    współwłasności i dział spadku, gdy wartość przedmiotu zaskarżenia
+    < 150 000 zł; 5) likwidacja niepodjętych depozytów
+  ⛔ Wcześniejsza wersja modułu podawała błędnie, że § 1 obejmuje
+    nadzór nad fundacjami, a § 4 pkt 4–5 sprawy depozytowe (korekta
+    W-1 2026-11-14).
 ```
 
 ---
@@ -402,5 +395,5 @@ niemal zawsze modyfikuje regułę ogólną (zwłaszcza właściwość).
 web_search: "art. 510 KPC zainteresowany uczestnik orzecznictwo SN"
 web_search: "art. 519(1) KPC skarga kasacyjna nieproces pełny katalog"
 web_search: "KPC Księga druga zakres artykułów 694(8) czy 729 ISAP"
-ISAP: potwierdzić brzmienie każdej jednostki oznaczonej [NR ?]
+ELI: brzmienie jednostek — t.j. KPC 2026/468 i zmiany po t.j. z nagłówka
 ```

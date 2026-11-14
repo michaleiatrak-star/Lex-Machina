@@ -1,7 +1,7 @@
 21bcb564ba9b68b989989e4312872ef6583f8cfd173cb70504ea2ffa1df16e6e  ./MAPA-AKTOW.md
 c3baa5e256c73658f09cd07050b7c2c896c010d65c42127bd0bd40a45d99f824  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-19f2b21145e55ab4d3a4c9fae533e018c26e0814b298e734292b532eb837da50  ./SKILL.md
+22ecd8ebbd7384ae42e8b5577f8035f7f22f6e2fe5679806c4800a39dcf699a1  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 bc1802487f84e7c9daaa7a1e5deefb78e89e483e8f99614a25448b16b6764f14  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -29,12 +29,12 @@ ab8df6a052de17d302fd2c453b0d571590363213d62b6f0c4d2ea4770217d8f8  ./modules/mod-
 3bfb3b7adbc4257d5230dcfa33dcb4a9c11738cad4ca0c00abca244c0d1b6f24  ./modules/mod-KC-spadki.md
 237903dc24559fd9e386a34438cad2f46f2adfd4f702ccefa097b8dc1ef416d6  ./modules/mod-KC-ubezpieczenia.md
 9b17944d92a0668ada92fd259a5f318e0d041c139708ef0a10f941f30c49de12  ./modules/mod-KP-art943-mobbing-dyskryminacja.md
-66e90564718c241814be0195a140b536913da68875af238abbcba3f0e0278991  ./modules/mod-KPC-art162-zastrzezenie-protokol.md
-b3e0d0dd98db449024656ec6e59a1686081f875f5ae3d4353e740a4a1877a126  ./modules/mod-KPC-current-state-COV.md
-8af98f5994dea093122fa7fc2e359f49a607c72c64b3cf1957c308d1c10068dd  ./modules/mod-KPC-egzekucja-windykacja.md
-d6270df541356061d7a6a5f5df5814c6b4d0d1be0aa2b9fd040d7b6f28fa7e75  ./modules/mod-KPC-nieproces-czesc-ogolna.md
-9f15f8930ea71270f9478aedd7d1ec8e569a586f656fee3f573c240f96104b84  ./modules/mod-KPC-prawomocnosc-granice-apelacji.md
-8c283684238e25bab034341ecfcb6a277851e391a12ab9930cb327702b036e32  ./modules/mod-KPC-uzupelnienie-pokrycia-2026.md
+63f80d2a0a4a77dabe867fd6bfb1081c22ac04994bdf60de5235f56647f3920b  ./modules/mod-KPC-art162-zastrzezenie-protokol.md
+d0d4829ad296da9ed47bb7029c9a2f34d39ce118e9841c0a03e6abf6c8f6aa64  ./modules/mod-KPC-current-state-COV.md
+0e07d4a357e40cfdc7a811c72f00fed6d0f537719c632b6b5b879e08256748b7  ./modules/mod-KPC-egzekucja-windykacja.md
+1182d444f0bf410baffe1840688c2f7d7f1442f18ba2969d90ccf5c914472c36  ./modules/mod-KPC-nieproces-czesc-ogolna.md
+67e67ac67086f77a119e51dbbe66e79971ecd3a05b6c130071d6c8bc2c1126f4  ./modules/mod-KPC-prawomocnosc-granice-apelacji.md
+d30b9c933ce386b7066940ab968e810e745f114860d7e4f4efd60ad3baf0ae6f  ./modules/mod-KPC-uzupelnienie-pokrycia-2026.md
 66ddbe8145b8fdc2c5349524e25ac47ed27b80cb7827a12640806d34127d6c5d  ./modules/mod-KRO-opieka-i-kuratela.md
 4d1b489fcea372dbd8c4fdb08ca211b8e8e5cad7a58fd2fb40738e601a2accb6  ./modules/mod-KRO-przysposobienie-adopcja-miedzynarodowa.md
 12c93559313a3ba20dbde2b663ca1ab5ee95de8543a239a5f5d55ffb527e6248  ./modules/mod-KRO-rodzinne.md
@@ -106,7 +106,7 @@ a556920b43699e8c2ffa51b8b166a6175ca0e78afa95c3d86d6dd2d3d1cd1de7  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 62ebf3d9f84110b425cc254c4e4e2cb9ce3042847ff9c28b85a892441f7c437a  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-fcf4b9f92fd81aa5f543458ab82c7c407a96b2d875d151c86b87673c87f2901d  ./references/CHANGELOG.md
+a6b75ddee03da757263a8da7434f427180695dc8488f379fd73982f616fdb60a  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json

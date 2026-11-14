@@ -1,7 +1,7 @@
 ---
 module: mod-KPC-art162-zastrzezenie-protokol
 akt: Kodeks postępowania cywilnego — Dz.U. 2026 poz. 468 t.j.
-zakres: art. 162 (+ powiązania: art. 172 §2¹, art. 380)
+zakres: art. 162 (+ powiązania: art. 210 § 2¹, art. 380)
 wersja: 1.0.0
 data: 2026-08-22
 ---
@@ -9,7 +9,7 @@ data: 2026-08-22
 # KPC art. 162 — ZASTRZEŻENIE DO PROTOKOŁU (PREKLUZJA ZARZUTÓW PROCESOWYCH)
 
 **Akt:** KPC — t.j. Dz.U. 2026 poz. 468.
-**Przegląd METODYKA W-2/W-4/W-6:** 2026-11-13 (nowelizacje po t.j. i przepisy przejściowe z ELI; kwalifikatory treści — przegląd W-1 w kolejnej paczce). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawka: pouczenie strony niezastępowanej — art. 210 § 2¹, nie art. 172). **Zmiany KPC po t.j. 2026/468 (ELI 2026-11-13, wszystkie w mocy):** 2026/473 — art. 63¹–63², 398² § 2 pkt 4, 460 § 1, 461 § 1¹–1², 2³–2⁴, 465 § 1², 476 § 1 pkt 12–13, 477¹ᶜ–477¹ᵈ, 477⁷ᵇ–477⁷ʲ, 755⁶ (w brzmieniu od 2026-07-08; przejściowy art. 15: sprawy z powództwa PIP wszczęte wcześniej — dotychczasowe); 2026/830 — art. 4¹ zd. 2 (w brzmieniu od 2026-07-08; art. 19: w sprawach w toku do czynności po tej dacie); 2026/1003 — dział IVfa, art. 479⁸⁸ᵃ i n. (od 2026-10-28); 2026/1046 — art. 47 § 2 pkt 1 lit. d, 461 § 1¹, 477⁶ᵃ (w brzmieniu od 2026-11-05; art. 5: sprawy w toku — dotychczasowe); 2026/1296 — art. 17 pkt 4⁶ (od 2026-11-06). Brzmienie po zmianie: tekst nowelizacji w ELI.
 
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
@@ -107,7 +107,7 @@ to najsilniejszy element podobieństwa między obiema procedurami.
   reprezentowana np. przez pełnomocnika niebędącego adwokatem/radcą —
   jeśli dopuszczalne w danej kategorii spraw) — rygoru § 2 NIE
   stosuje się wprost do niej; ⭐ ale sąd ma **obowiązek pouczenia** tej
-  strony o treści art. 162 § 1 na podstawie art. 172 § 2¹ KPC
+  strony o treści art. 162 § 1 na podstawie art. 210 § 2¹ KPC
   (przepis wprowadzony tą samą nowelą — pouczenie obejmuje łącznie
   art. 162 § 1, art. 205¹² § 2, art. 229 i art. 230 KPC).
 - ⭐⭐ **Pułapka zmiany pełnomocnika w toku sprawy:** jeśli strona była
@@ -202,7 +202,7 @@ razem z bezpośrednim zarzutem apelacyjnym.
 4. Założenie, że zmiana pełnomocnika unieważnia wcześniej powstałą
    prekluzję — nie unieważnia (§ 2 zdanie drugie).
 5. Pominięcie obowiązku pouczenia strony niereprezentowanej
-   zawodowo (art. 172 § 2¹ KPC) — po stronie sądu, ale istotne przy
+   zawodowo (art. 210 § 2¹ KPC) — po stronie sądu, ale istotne przy
    ocenie, czy strona mogła skutecznie bronić swojego stanowiska.
 6. Zgłoszenie zastrzeżenia po zamknięciu posiedzenia, na którym
    doszło do uchybienia, zamiast najpóźniej na posiedzeniu kolejnym —
