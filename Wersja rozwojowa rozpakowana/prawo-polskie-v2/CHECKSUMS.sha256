@@ -1,7 +1,7 @@
 0053d557b3770071af8e0a415eaae342e885a09269f638ea5f38bd38e4bf087b  ./JURYSDYKCJA.md
 f1cdf3365cc65a0884824ee41adb40058b6541d2073a03b2d7b6978e1d62d5f9  ./PORTABILITY-MANIFEST.md
 ea2960603a4a6317ac3c81028cefb0dd84910a0e82f6e42eb34c9936b43518bf  ./ROUTING-MAP.md
-2a64891211885e39d13e0626a10b189f71c5182ae88151cb1a9e80396077bad5  ./SKILL.md
+31fefab2ac71211b8da1291efe0da964ab7e8a1b552f60f5bded0cb1ca6df56b  ./SKILL.md
 9534a6fc6d1ced5da09bf3de3cd8763e08a0cbe70a3b41813ce56de9f74c9015  ./agents/openai.yaml
 51a6923974188748638a424aa59b42b6afad2d910f910a1d43bb13ee10f3ce26  ./assets/icon.svg
 c07fe8367fe79ca5c5e2b5338523373f221a16a7a6f88eea95cda4bd7a825653  ./krajowe/analiza-sadowa-v6/references/koszty-terminy.md
@@ -62,7 +62,7 @@ f546ee8dcf86581087eda8e47764c34222cdeb1e4a28187640598036feb46d30  ./krajowe/shar
 4978803e84020fb2758ffd6450d606b6087679c265b9444e96ce38fe0899f264  ./krajowe/shared/PRE-W2-VERIFICATION-GATE.md
 94694cf9d08da4af399d850d16503ad9d097496a3956a550c0cbee858ba7c469  ./krajowe/shared/PREKLUZJA-DOWODOWA.md
 0ae2db7321b716bbc4103a850a68bbc7844f7417273d465bfd8d764a77a35003  ./krajowe/shared/PRZESLUCHANIE-SWIADKOW-KPC.md
-2d2dd9d83713d53b3ab3c38fc8dc0f9343311c7df25b0415e1ae84a55faf65f7  ./krajowe/shared/REJESTR-ZMIAN-W-CZASIE.md
+db61f7b9a21c5be2b82ef27b64fa0c8f9d728c9beb2672f52a73353f5619f88f  ./krajowe/shared/REJESTR-ZMIAN-W-CZASIE.md
 bf0b9bcb50353ef6f6904ad377a9d1117c50dcc5f6bc3f783c982da297ae87eb  ./krajowe/shared/RYZYKO-DEZAKTUALIZACJI.md
 bdac9e0666b216ad43b7dfe52beaa538d005e3261e0e65d0e8f197f7879b0bb3  ./krajowe/shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md
 6c054870d323d16cede19104aec6dbbde588d37b25e63787545f88a4a7644c5e  ./krajowe/shared/STALKING-NEKANIE.md
@@ -95,12 +95,12 @@ a478a8d5d70d9c3f681f5aef9bff8f5ea12dc5076d347994d9298ac282b055c0  ./krajowe/shar
 5f79861acad51aa6af208b83c1e59f26a00da922e678cde145ea66ada3cd14a6  ./krajowe/shared/oplaty/06-administracyjne-wieczystoksiegowe-KIO.md
 c624a291d2efa9a4ba0fda34716daff1e94e9e38096092e7e511da0a6a89ad47  ./krajowe/shared/oplaty/07-komornicze-skarbowe-notarialne.md
 702cb14ed4b2db3a6e22971f6c41e5d78ea00ebcfd39558d3ee2e6033338d3c4  ./krajowe/shared/orka-bas-leksykon/czesc-01-praca-admin-drogowe.md
-5d2b9e107e73a66f8645eaff4b05005f2ac8ad6cc2b954972e0cb253b7437554  ./krajowe/shared/orka-bas-leksykon/czesc-02-finanse-nieruchomosci-energetyczne.md
+daf82e778a2489eece013936d04fb82f1a8d147879d9e846f8d052ea8e8d23db  ./krajowe/shared/orka-bas-leksykon/czesc-02-finanse-nieruchomosci-energetyczne.md
 4d982114ec44a3d359e35e9f1527b9a086d16f4858fe8e758d08e10aac0552ea  ./krajowe/shared/orka-bas-leksykon/czesc-03-cywilne-niepelnosprawnosc.md
 f1162baa6b9dc3fc6611484c9709ce596f3731b90ef225f9e8dcedb7dd87c605  ./krajowe/shared/orka-bas-leksykon/czesc-04-karne.md
 309b4a40921818e067f448198b77fbd90aa6c0690ffa177cdef811c077f89eb0  ./krajowe/shared/orka-bas-leksykon/czesc-05-kandydaci-prawa-obywatelskie-sporne.md
 5d4d4e90706ca39ff83ac6dba58edd56c24cfc2aee8103d40a868c288fad6df8  ./krajowe/shared/orka-bas-leksykon/czesc-06-priorytety-P1.md
-dadc01fd3c8061960575675a63a948bf1bbf039a2f96407747a4ef436e99cf80  ./krajowe/shared/orka-bas-leksykon/czesc-07-priorytety-P2-bas-v18.md
+0df60641cdd8bd5482ac8274d63fecc6082bb63c223ecf716e4e60ee02e59357  ./krajowe/shared/orka-bas-leksykon/czesc-07-priorytety-P2-bas-v18.md
 f86d87ff0e95d7da3f4f26f95e58570bdd7c3fca85e5afce39d521095a8c2932  ./krajowe/shared/orka-bas-leksykon/czesc-08-praktyka-prawnicza.md
 4d777e95a26cda2f3c8974aafd0d418337e088a128899f2d26e5b8507b6b0a38  ./krajowe/shared/terminy.md
 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986  ./mcp-servers/LICENSE
@@ -190,5 +190,5 @@ f7fae1f207120d39495399a975f2efe8c88850c28f895abc4a34f0a24f83a86d  ./mcp-servers/
 37db3fcf1fd27379de4b60519712293c7456b62dadf3a55deffb25cc45b44921  ./mcp-servers/wspolne/sesja-przegladarki.mjs
 dd57ad59b047ce6e68151a423de62c7f51a995ef146374808a2db819e709ce5a  ./mcp-servers/wspolne/test_siec.mjs
 bb692d5e777e49ac05c434e1fa7b570e08191f5a166b39ccf68d97c49f0db24e  ./mcp-servers/zbuduj_pakiet.py
-87f2e0b47922a44021ccec73c5e1d41d533c3d3fffbc62d39f5e26d290357223  ./references/CHANGELOG.md
+3be523925ed383d04ebaaf19d137d2e8922135d01897c80786cc9ac2abcd335a  ./references/CHANGELOG.md
 68b8052c1361e3a07733ee1fd2ad97e9169620b287e603c50b217ba4ffb57c48  ./references/HISTORIA-ZMIAN-PLIKOW.md

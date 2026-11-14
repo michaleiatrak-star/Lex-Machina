@@ -1,5 +1,13 @@
 # mod-lokalne-podatki-oplaty-taryfy
 
+**Akt:** USG (ustawa o samorządzie gminnym) — t.j. Dz.U. 2026 poz. 662 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 10b; 2026/1273 [OD 2027-03-30: 2026/1273] — art. 1, 36, 37, 37d, 37e).
+**Akt:** UWoj (ustawa o wojewodzie i administracji rządowej w województwie) — t.j. Dz.U. 2025 poz. 428.
+**Akt:** UPOL (ustawa o podatkach i opłatach lokalnych) — t.j. Dz.U. 2025 poz. 707 (zm. po t.j.: 2026/1354 [OD 2027-01-01: 2026/1354] — art. 1a, 17, 19, 20, 20a).
+**Akt:** UZZW (ustawa o zbiorowym zaopatrzeniu w wodę i zbiorowym odprowadzaniu ścieków) — t.j. Dz.U. 2024 poz. 757 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 1, 1a, 1b, 2, 2a, 2b, 4a, 4b, 4c, 4d, 4e, 4f, 4g, 4i, 4j, 4k, 4m, 4p, 5, 7).
+**Akt:** UCPG (ustawa o utrzymaniu czystości i porządku w gminach) — t.j. Dz.U. 2025 poz. 733 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 3, 4c, 4ca).
+**Akt:** UOAN (ustawa o ogłaszaniu aktów normatywnych) — t.j. Dz.U. 2019 poz. 1461 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 13).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o podatkach i opłatach lokalnych — **Dz.U. 2025 poz. 707 t.j.** (reforma od 01.01.2025) → patrz DR-06 | Ustawa wod-kan — Dz.U. 2024 poz. 757
 **Data weryfikacji online:** 2026-06-05

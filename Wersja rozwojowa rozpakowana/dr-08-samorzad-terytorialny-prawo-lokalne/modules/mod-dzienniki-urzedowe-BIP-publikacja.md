@@ -1,5 +1,10 @@
 # mod-dzienniki-urzedowe-BIP-publikacja
 
+**Akt:** UWoj (ustawa o wojewodzie i administracji rządowej w województwie) — t.j. Dz.U. 2025 poz. 428.
+**Akt:** UOAN (ustawa o ogłaszaniu aktów normatywnych) — t.j. Dz.U. 2019 poz. 1461 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 13).
+**Akt:** UDIP (ustawa o dostępie do informacji publicznej) — t.j. Dz.U. 2022 poz. 902 (zm. po t.j.: 2025/1844 od 2026-07-01 — art. 10).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o ogłaszaniu aktów normatywnych — weryfikuj aktualny t.j. w ELI (RZĄD 1)
 **Data weryfikacji online:** 2026-06-05

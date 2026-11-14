@@ -1,5 +1,14 @@
 # mod-EJ-lokalne-dane-publiczne-dip-rodo-bip — Lokalne dane publiczne, DIP, RODO i BIP
 
+**Akt:** USG (ustawa o samorządzie gminnym) — t.j. Dz.U. 2026 poz. 662 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 10b; 2026/1273 [OD 2027-03-30: 2026/1273] — art. 1, 36, 37, 37d, 37e).
+**Akt:** UWoj (ustawa o wojewodzie i administracji rządowej w województwie) — t.j. Dz.U. 2025 poz. 428.
+**Akt:** UZK (ustawa o zarządzaniu kryzysowym) — t.j. Dz.U. 2026 poz. 574 (zm. po t.j.: 2026/815 od 2026-07-04 — art. 1, 2, 3, 4, 4c, 5, 6, 6d, 6e, 6g, 6j, 6k, 6l, 6p, 6r, 6s, 6t, 6u, 6v, 6z; 2026/1206 [OD 2027-01-11: 2026/1206] — zakres: tekst nowelizacji w ELI).
+**Akt:** UOLOC (ustawa o ochronie ludności i obronie cywilnej) — akt pierwotny, bez t.j.: Dz.U. 2024 poz. 1907.
+**Akt:** UOAN (ustawa o ogłaszaniu aktów normatywnych) — t.j. Dz.U. 2019 poz. 1461 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 13).
+**Akt:** UDIP (ustawa o dostępie do informacji publicznej) — t.j. Dz.U. 2022 poz. 902 (zm. po t.j.: 2025/1844 od 2026-07-01 — art. 10).
+**Akt:** URIO (ustawa o regionalnych izbach obrachunkowych) — t.j. Dz.U. 2025 poz. 7.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Status modułu
 Moduł ekspercki prawa polskiego. Budowany do poziomu funkcjonalnego prawa pracy i prawa karnego: pełny intake, kwalifikacja, procedura, dowody, strategia, ryzyka, orzecznictwo, quality gate i źródła.
 

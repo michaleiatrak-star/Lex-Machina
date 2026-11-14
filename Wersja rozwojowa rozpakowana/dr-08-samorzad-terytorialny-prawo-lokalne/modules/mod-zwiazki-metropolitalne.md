@@ -1,5 +1,16 @@
 # Moduł — Związki metropolitalne (pomorski i śląski)
 
+**Akt:** USG (ustawa o samorządzie gminnym) — t.j. Dz.U. 2026 poz. 662 (zm. po t.j.: 2026/1273 [OD 2027-03-30: 2026/1273] — art. 1, 36, 37, 37d, 37e).
+**Akt:** USW (ustawa o samorządzie województwa) — t.j. Dz.U. 2026 poz. 720.
+**Akt:** UWoj (ustawa o wojewodzie i administracji rządowej w województwie) — t.j. Dz.U. 2025 poz. 428.
+**Akt:** UDJST (ustawa o dochodach jednostek samorządu terytorialnego z 1.10.2024) — t.j. Dz.U. 2026 poz. 1252.
+**Akt:** UZZW (ustawa o zbiorowym zaopatrzeniu w wodę i zbiorowym odprowadzaniu ścieków) — t.j. Dz.U. 2024 poz. 757 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 1, 1a, 1b, 2, 2a, 2b, 4a, 4b, 4c, 4d, 4e, 4f, 4g, 4i, 4j, 4k, 4m, 4p, 5, 7).
+**Akt:** UZM (ustawa o związku metropolitalnym w województwie śląskim) — t.j. Dz.U. 2025 poz. 186.
+**Akt:** UOAN (ustawa o ogłaszaniu aktów normatywnych) — t.j. Dz.U. 2019 poz. 1461.
+**Akt:** UDIP (ustawa o dostępie do informacji publicznej) — t.j. Dz.U. 2022 poz. 902 (zm. po t.j.: 2025/1844 od 2026-07-01 — art. 10).
+**Akt:** URIO (ustawa o regionalnych izbach obrachunkowych) — t.j. Dz.U. 2025 poz. 7.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Ustawa z dnia 11 czerwca 2026 r. o związku metropolitalnym w województwie pomorskim — **Dz.U. 2026 poz. 912**, w życie 31.07.2026 (art. 98). ✅ [VER: api.sejm.gov.pl ELI DU/2026/912 text.pdf, 2026-11-11]
 - Ustawa z dnia 9 marca 2017 r. o związku metropolitalnym w województwie śląskim — **Dz.U. 2025 poz. 186 t.j.**; po t.j. zmieniona art. 81 ustawy 2026/912 (od 31.07.2026). ✅ [VER: ELI DU/2017/730 references, 2026-11-11]

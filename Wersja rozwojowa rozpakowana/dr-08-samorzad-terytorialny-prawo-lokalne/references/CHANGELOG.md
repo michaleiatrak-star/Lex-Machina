@@ -1,5 +1,6 @@
 # CHANGELOG — dr-08-samorzad-terytorialny-prawo-lokalne
 
+- 3.27 (2026-11-14): DR-08: wskazania z kwalifikatorem; dochody JST — model ustawy z 1.10.2024 (art. 8: udziały od dochodów), t.j. 2026/1252; UDP art. 13b ust. 4–5 i 13f z płacą min. 2026/2027; W-4 2024/1907
 - 3.26 (2026-11-14): 2026/912 w modułach DR-08/DR-09; poprawki: skarga na uchwałę RIO do WSA (art. 98 USG), decyzja WZ wygasa po 5 latach (art. 64c UPZP)
 - 3.25 (2026-11-11, ELI 2026-11-11): NOWY mod-zwiazki-metropolitalne: ustawa o związku metropolitalnym w woj. pomorskim (Dz.U. 2026 poz. 912, od 31.07.2026; związek nieutworzony — brak rozporządzenia RM w ELI) i ustawa śląska (t.j. 2025/186 + 2026/912 art. 81; rozporządzenie RM 2017/1290); MAPA-AKTOW: wiersze związków i zmiany po t.j. (USG 912 art. 65, ⏳ 2026/1273; USP 2026/252, 912; ogłaszanie aktów 912 art. 71; MPZP 2026/781, 864, 912; czystość 912 art. 68; rewitalizacja 912 art. 80); MAPA-POKRYCIA.
 - 3.24 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)

@@ -1,5 +1,16 @@
 # JST — ustrój gminy, powiatu i województwa
 
+**Akt:** USG (ustawa o samorządzie gminnym) — t.j. Dz.U. 2026 poz. 662 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 10b; 2026/1273 [OD 2027-03-30: 2026/1273] — art. 1, 36, 37, 37d, 37e).
+**Akt:** USP (ustawa o samorządzie powiatowym) — t.j. Dz.U. 2025 poz. 1684 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 6a, 6b; 2026/912 od 2026-07-31 — art. 6b).
+**Akt:** USW (ustawa o samorządzie województwa) — t.j. Dz.U. 2026 poz. 720.
+**Akt:** UWoj (ustawa o wojewodzie i administracji rządowej w województwie) — t.j. Dz.U. 2025 poz. 428.
+**Akt:** UPZP (ustawa o planowaniu i zagospodarowaniu przestrzennym) — t.j. Dz.U. 2026 poz. 538 (zm. po t.j.: 2026/781 od 2026-07-01 — art. 1, 2, 8f, 8g, 8h, 14, 15, 17, 20, 37ea, 37eb, 37eba, 37ebb, 37ec, 37ed, 37ee, 37eea, 37ef, 37efa, 37g; 2026/912 od 2026-07-31 — art. 8e, 17, 38b; 2026/864 od 2026-10-01 — art. 53).
+**Akt:** PPSA (Prawo o postępowaniu przed sądami administracyjnymi) — t.j. Dz.U. 2026 poz. 143 (zm. po t.j.: 2026/846 od 2026-06-26 — art. 53, 264).
+**Akt:** UOAN (ustawa o ogłaszaniu aktów normatywnych) — t.j. Dz.U. 2019 poz. 1461 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 13).
+**Akt:** UDIP (ustawa o dostępie do informacji publicznej) — t.j. Dz.U. 2022 poz. 902 (zm. po t.j.: 2025/1844 od 2026-07-01 — art. 10).
+**Akt:** URIO (ustawa o regionalnych izbach obrachunkowych) — t.j. Dz.U. 2025 poz. 7.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Stan weryfikacji:** 2026-08-28  
 **Źródła kanoniczne:** ELI/ISAP oraz właściwy wojewódzki dziennik urzędowy dla aktu prawa miejscowego.
 

@@ -1,5 +1,8 @@
 # Moduł — Referendum lokalne
 
+**Akt:** URL (ustawa o referendum lokalnym) — t.j. Dz.U. 2025 poz. 472.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Ustawa o referendum lokalnym — **Dz.U. 2025 poz. 472 t.j.**, stan t.j. 14.03.2025. ✅ RZĄD 1 ELI, VER 2026-08-28.
 

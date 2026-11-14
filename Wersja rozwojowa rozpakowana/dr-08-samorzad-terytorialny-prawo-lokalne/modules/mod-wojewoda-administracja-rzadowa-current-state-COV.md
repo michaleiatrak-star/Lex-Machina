@@ -8,6 +8,11 @@ source_policy: "RZĄD 1 only"
 
 # Wojewoda i administracja rządowa w województwie — current-state COV
 
+**Akt:** USW (ustawa o samorządzie województwa) — t.j. Dz.U. 2026 poz. 720.
+**Akt:** UWoj (ustawa o wojewodzie i administracji rządowej w województwie) — t.j. Dz.U. 2025 poz. 428.
+**Akt:** UKAR (ustawa o kontroli w administracji rządowej) — t.j. Dz.U. 2026 poz. 158.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## 1. Źródło urzędowe
 
 Ustawa z 23 stycznia 2009 r. o wojewodzie i administracji rządowej w województwie.

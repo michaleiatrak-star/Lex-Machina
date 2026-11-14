@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.107 (2026-11-14): DR-08: wskazania z kwalifikatorem; dochody JST — model ustawy z 1.10.2024 (art. 8: udziały od dochodów), t.j. 2026/1252; UDP art. 13b ust. 4–5 i 13f z płacą min. 2026/2027; W-4 2024/1907
 - 6.106 (2026-11-14): DR-07: wskazania z kwalifikatorem (PZP 2026/793, PrNot, NIK, RIO, UNDFP, UZRFE, pomoc publiczna); UNDFP art. 31 ust. 4 zamiast art. 34; W-4 2026/1099
 - 6.105 (2026-11-14): DR-06: wskazania z kwalifikatorem (OP, VAT, PIT, CIT, PCC, akcyza, KAS, AML); akcyza 2026 — podstawa art. 165a; PCC próg 3000 zł od 3.11.2026; W-4 dla 2026/1102, 1270, 1347, 1354, 1446
 - 6.104 (2026-11-14): DR-03 komplet: 71 modułów + 8 części kwalifikatora w formacie wskazań; poprawki zagrożeń art. 234-244b KK, przedawnienie cyber, art. 244 przy nakazie Policji, tabela kar frameworku

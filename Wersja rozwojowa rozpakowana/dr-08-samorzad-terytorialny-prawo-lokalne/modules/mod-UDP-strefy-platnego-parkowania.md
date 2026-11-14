@@ -1,5 +1,13 @@
 # mod-UDP-strefy-platnego-parkowania
 
+**Akt:** USG (ustawa o samorządzie gminnym) — t.j. Dz.U. 2026 poz. 662 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 10b; 2026/1273 [OD 2027-03-30: 2026/1273] — art. 1, 36, 37, 37d, 37e).
+**Akt:** UDP (ustawa o drogach publicznych) — t.j. Dz.U. 2025 poz. 889 (zm. po t.j.: 2026/982 od 2026-09-21 — art. 13, 13k, 13naa, 40a).
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** UPEA (ustawa o postępowaniu egzekucyjnym w administracji) — t.j. Dz.U. 2026 poz. 1311.
+**Akt:** UDIP (ustawa o dostępie do informacji publicznej) — t.j. Dz.U. 2022 poz. 902 (zm. po t.j.: 2025/1844 od 2026-07-01 — art. 10).
+**Akt:** KW (Kodeks wykroczeń) — t.j. Dz.U. 2026 poz. 1372.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** nowy moduł 2026-06-09 (weryfikacja online)
 **Zakres:** SPP, ŚSPP — opłaty, opłaty dodatkowe, tryb obrony, egzekucja, orzecznictwo NSA
 
@@ -85,21 +93,19 @@ KTO USTANAWIA:
 
 ### Stawki opłat (powiązane z płacą minimalną — WERYFIKUJ co roku)
 ```
-Minimalne wynagrodzenie 2026: weryfikuj web_search "minimalne wynagrodzenie 2026 wysokość"
-  (w 2025 r. wynosiło 4 666 zł; w 2026 r. zmieniło się — weryfikuj)
+Minimalne wynagrodzenie: 2026 — 4 806 zł (rozp. RM Dz.U. 2025 poz. 1242 § 1); 2027 — 4 950 zł (Dz.U. 2026 poz. 1213 § 1)
+  ✅ [VER: ELI text.pdf, RZĄD 1, 2026-11-14]
 
-MAKSYMALNE STAWKI ZA GODZINĘ (art. 13b ust. 4 UDP — weryfikuj aktualne):
-  SPP   — 1. godzina: 0,15% płacy min. (2026: ok. 7,20 zł — weryfikuj!)
-         2. godzina: max 1,20× stawki z 1. godziny (progresja max 20%)
-         3. godzina: max 1,20× stawki z 2. godziny (progresja max 20%)
-         4. godzina i kolejne: ≤ stawce za 1. godzinę
-  ŚSPP  — 1. godzina: 0,45% płacy min. (2026: ok. 21,60 zł — weryfikuj!)
-         Progresja: analogiczna zasada co SPP
+MAKSYMALNE STAWKI ZA 1. GODZINĘ (art. 13b ust. 4 pkt 1 UDP; nie może przekraczać — zaokrąglaj w dół do grosza):
+  SPP   — 0,15% płacy min. (lit. a): 2026 → 7,20 zł (7,209); 2027 → 7,42 zł (7,425)
+  ŚSPP  — 0,45% płacy min. (lit. b): 2026 → 21,62 zł (21,627); 2027 → 22,27 zł (22,275)
+PROGRESJA (art. 13b ust. 5): przez pierwsze 3 godziny, max +20% względem poprzedniej godziny;
+  4. godzina i kolejne ≤ stawce za 1. godzinę
 
 OPŁATA DODATKOWA (art. 13f UDP):
   → Za NIEUISZCZENIE opłaty za postój
   → Określa: RADA GMINY uchwałą
-  → Max (2026): weryfikuj! (2025: 466,60 zł; 2026: ok. 480,60 zł — zależy od płacy min.)
+  → Max (art. 13f ust. 2): 10% płacy min. — 2026: 480,60 zł; 2027: 495,00 zł (2025: 466,60 zł)
   → UPRAWNIENIE do ulgowej stawki: gdy zapłacono za SPP zamiast ŚSPP
     (niektóre gminy stosują 50% opłaty dodatkowej — weryfikuj lokalną uchwałę)
 

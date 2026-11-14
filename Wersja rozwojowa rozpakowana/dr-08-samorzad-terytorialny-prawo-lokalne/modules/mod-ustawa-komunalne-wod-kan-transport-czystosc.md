@@ -1,5 +1,10 @@
 # mod-ustawa-komunalne-wod-kan-transport-czystosc
 
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** UZZW (ustawa o zbiorowym zaopatrzeniu w wodę i zbiorowym odprowadzaniu ścieków) — t.j. Dz.U. 2024 poz. 757 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 1, 1a, 1b, 2, 2a, 2b, 4a, 4b, 4c, 4d, 4e, 4f, 4g, 4i, 4j, 4k, 4m, 4p, 5, 7).
+**Akt:** UCPG (ustawa o utrzymaniu czystości i porządku w gminach) — t.j. Dz.U. 2025 poz. 733 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 3, 4c, 4ca).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji — RZĄD 1 / VER 2026-08-28:**
 - Wod-kan: Dz.U. 2024 poz. 757 t.j. ✅ VER: 2026-06-05

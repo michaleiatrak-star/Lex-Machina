@@ -1,5 +1,12 @@
 # mod-ustawa-zabytki-rewitalizacja
 
+**Akt:** UPZP (ustawa o planowaniu i zagospodarowaniu przestrzennym) — t.j. Dz.U. 2026 poz. 538 (zm. po t.j.: 2026/781 od 2026-07-01 — art. 1, 2, 8f, 8g, 8h, 14, 15, 17, 20, 37ea, 37eb, 37eba, 37ebb, 37ec, 37ed, 37ee, 37eea, 37ef, 37efa, 37g; 2026/912 od 2026-07-31 — art. 8e, 17, 38b; 2026/864 od 2026-10-01 — art. 53).
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** UOZ (ustawa o ochronie zabytków i opiece nad zabytkami) — t.j. Dz.U. 2024 poz. 1292 (zm. po t.j.: 2025/1168 od 2026-02-26 — art. 45, 47, 93, 93a; 2026/483 od 2026-04-16 — art. 1, 59, 108a, 108b, 109; 2025/1673 od 2026-06-03 — art. 1, 36, 36a, 36aa, 37, 43, 44, 45, 47, 107d, 107da; 2024/1907 [OD 2027-01-01: 2024/1907] — art. 88; 2026/875 [OD 2027-01-01: 2026/875] — art. 10).
+**Akt:** URew (ustawa o rewitalizacji) — t.j. Dz.U. 2024 poz. 278 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 2, 3, 17).
+**Akt:** UCCZ (ustawa o cmentarzach i chowaniu zmarłych) — t.j. Dz.U. 2025 poz. 1590.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:**
 - Zabytki: Dz.U. 2024 poz. 1292 t.j. z 19.08.2024 ✅ VER: 2026-06-05

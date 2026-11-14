@@ -8,6 +8,14 @@ source_policy: "RZĄD 1 only"
 
 # Ustawa o samorządzie województwa — current-state COV
 
+**Akt:** USW (ustawa o samorządzie województwa) — t.j. Dz.U. 2026 poz. 720.
+**Akt:** UWoj (ustawa o wojewodzie i administracji rządowej w województwie) — t.j. Dz.U. 2025 poz. 428.
+**Akt:** PPSA (Prawo o postępowaniu przed sądami administracyjnymi) — t.j. Dz.U. 2026 poz. 143 (zm. po t.j.: 2026/846 od 2026-06-26 — art. 53, 264).
+**Akt:** UDJST (ustawa o dochodach jednostek samorządu terytorialnego z 1.10.2024) — t.j. Dz.U. 2026 poz. 1252.
+**Akt:** UOAN (ustawa o ogłaszaniu aktów normatywnych) — t.j. Dz.U. 2019 poz. 1461 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 13).
+**Akt:** URIO (ustawa o regionalnych izbach obrachunkowych) — t.j. Dz.U. 2025 poz. 7.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## 1. Źródło
 
 Ustawa z 5 czerwca 1998 r. o samorządzie województwa.  

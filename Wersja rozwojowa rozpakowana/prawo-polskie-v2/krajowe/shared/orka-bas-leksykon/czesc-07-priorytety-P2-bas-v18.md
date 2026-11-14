@@ -197,11 +197,11 @@ Przykłady: Polska Agencja Rozwoju Przedsiębiorczości, Agencja Restrukturyzacj
 
 ### BAS-076 / BAS-040 — Subwencja ogólna JST
 ```
-Weryfikacja: ustawa o dochodach JST (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego)
+Weryfikacja: ustawa o dochodach JST (ustawa z 1.10.2024 — **t.j. Dz.U. 2026 poz. 1252** ✅ [VER] RZĄD 1 2026-11-14; stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` ma status *uchylony* — nie podstawiać go jako aktualnego)
   web_search: "ustawa o dochodach jednostek samorządu terytorialnego 2025 t.j."
 Definicja: Świadczenie publicznoprawne z budżetu państwa przekazywane JST
   bez obowiązku rozliczania konkretnego celu — JST swobodnie decyduje o przeznaczeniu.
-Podstawa: ustawa o dochodach JST (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego)
+Podstawa: ustawa o dochodach JST (ustawa z 1.10.2024 — **t.j. Dz.U. 2026 poz. 1252** ✅ [VER] RZĄD 1 2026-11-14; stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` ma status *uchylony* — nie podstawiać go jako aktualnego)
 Składowe: część oświatowa (BAS-077), część wyrównawcza (BAS-078),
   część równoważąca/regionalna (BAS-079/080)
 Reguła: Subwencja ogólna ≠ dotacja celowa (ta wymaga rozliczenia konkretnego celu
@@ -210,7 +210,7 @@ Reguła: Subwencja ogólna ≠ dotacja celowa (ta wymaga rozliczenia konkretnego
 
 ### BAS-081–BAS-084 — Dochody własne JST (gmina/powiat/województwo)
 ```
-Weryfikacja: ustawa o dochodach JST art. 4–10 (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego)
+Weryfikacja: ustawa o dochodach JST art. 4–10 (ustawa z 1.10.2024 — **t.j. Dz.U. 2026 poz. 1252** ✅ [VER] RZĄD 1 2026-11-14; stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` ma status *uchylony* — nie podstawiać go jako aktualnego)
   web_search: "ustawa o dochodach JST 2025 aktualny tekst jednolity"
 Definicja: Dochody należne JST na podstawie ustaw, pozostające w ich dyspozycji.
 Podstawa: ustawa o dochodach JST art. 4–10
@@ -234,7 +234,7 @@ Reguła: Budżet JST nie może mieć deficytu bieżącego — zakaz art. 242 UFP
 
 ### BAS-090 — System dochodów JST
 ```
-Weryfikacja: ustawa o dochodach JST (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego) — struktura trójfilarowa
+Weryfikacja: ustawa o dochodach JST (ustawa z 1.10.2024 — **t.j. Dz.U. 2026 poz. 1252** ✅ [VER] RZĄD 1 2026-11-14; stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` ma status *uchylony* — nie podstawiać go jako aktualnego) — struktura trójfilarowa
 Definicja: Trójfilarowy system finansowania JST oparty na:
   1. Dochodach własnych (podatki, udziały w PIT/CIT, opłaty)
   2. Subwencji ogólnej (bez wskazania celu)

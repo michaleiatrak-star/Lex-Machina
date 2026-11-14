@@ -1,7 +1,14 @@
 # mod-ustawa-zarzadzanie-kryzysowe
 
+**Akt:** UWoj (ustawa o wojewodzie i administracji rządowej w województwie) — t.j. Dz.U. 2025 poz. 428.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** UZK (ustawa o zarządzaniu kryzysowym) — t.j. Dz.U. 2026 poz. 574.
+**Akt:** UOLOC (ustawa o ochronie ludności i obronie cywilnej) — akt pierwotny, bez t.j.: Dz.U. 2024 poz. 1907.
+**Akt:** o dozorze technicznym — t.j. Dz.U. 2024 poz. 1194 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 37).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o zarządzaniu kryzysowym — **Dz.U. 2026 poz. 574 t.j.** ✅ [VER] RZĄD 1 2026-09-10c (F-148a); ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026), Dz.U. 2026 poz. 1206 (od 11.01.2027) | Ustawa o ochronie ludności i obronie cywilnej — Dz.U. 2024 poz. 1907 (brak t.j.) ze zm. (Dz.U. 2025 poz. 1705, Dz.U. 2026 poz. 646, Dz.U. 2026 poz. 815 — od 4.07.2026) ✅ [VER] RZĄD 1 2026-10-09
+**Źródło weryfikacji:** Ustawa o zarządzaniu kryzysowym — **Dz.U. 2026 poz. 574 t.j.** ✅ [VER] RZĄD 1 2026-09-10c (F-148a); ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026), Dz.U. 2026 poz. 1206 [OD 2027-01-11: 2026/1206] (od 11.01.2027) | Ustawa o ochronie ludności i obronie cywilnej — Dz.U. 2024 poz. 1907 (brak t.j.) ze zm. (Dz.U. 2025 poz. 1705, Dz.U. 2026 poz. 646, Dz.U. 2026 poz. 815 — od 4.07.2026) ✅ [VER] RZĄD 1 2026-10-09
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 

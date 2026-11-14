@@ -1,5 +1,9 @@
 # Modul - Pracownicy samorzadowi
 
+**Akt:** USG (ustawa o samorządzie gminnym) — t.j. Dz.U. 2026 poz. 662 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 10b; 2026/1273 [OD 2027-03-30: 2026/1273] — art. 1, 36, 37, 37d, 37e).
+**Akt:** UPS (ustawa o pracownikach samorządowych) — t.j. Dz.U. 2024 poz. 1135.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 21.11.2008 r. o pracownikach samorzadowych**
 - Tekst jednolity: **Dz.U. 2024 poz. 1135** (t.j. - AKTUALNY!)

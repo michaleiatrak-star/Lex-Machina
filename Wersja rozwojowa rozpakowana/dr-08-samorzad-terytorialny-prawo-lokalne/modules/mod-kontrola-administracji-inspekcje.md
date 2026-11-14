@@ -1,5 +1,11 @@
 # mod-DA-procedury-kontrolne-inspekcje.md — Procedury kontrolne inspekcji i organów administracji
 
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** PPSA (Prawo o postępowaniu przed sądami administracyjnymi) — t.j. Dz.U. 2026 poz. 143 (zm. po t.j.: 2026/846 od 2026-06-26 — art. 53, 264).
+**Akt:** UKAR (ustawa o kontroli w administracji rządowej) — t.j. Dz.U. 2026 poz. 158.
+**Akt:** UDIP (ustawa o dostępie do informacji publicznej) — t.j. Dz.U. 2022 poz. 902 (zm. po t.j.: 2025/1844 od 2026-07-01 — art. 10).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej. **RZĄD 1 VER 2026-08-28:** ustawa z 15.07.2011 r. o kontroli w administracji rządowej — **Dz.U. 2026 poz. 158 t.j.**, stan t.j. 06.02.2026; uwzględnia m.in. cyfryzację trybu kontroli.
 
 ## 1. Akt macierzysty i zakres ustawowy
