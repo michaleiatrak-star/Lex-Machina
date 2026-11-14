@@ -1,7 +1,13 @@
 # Moduł — VAT: przeliczanie walut obcych (art. 31a–31b), rachunek VAT i uwolnienie środków (art. 108b), system zwrotu podatku podróżnym TAX FREE (art. 126–130)
 
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263 (zm. po t.j.: 2026/1446 [OD 2026-11-18: 2026/1446] — art. 1, 2, 33, 33a, 33b, 34, 41, 52, 138i).
+**Akt:** PIT (ustawa o podatku dochodowym od osób fizycznych) — t.j. Dz.U. 2026 poz. 592 (zm. po t.j.: 2026/779 od 2026-07-01 — art. 24a; 2026/1079 od 2026-09-10 — art. 21; 2026/846 od 2026-10-01 — art. 25b, 30f, 31d; 2026/1287 od 2026-11-01 — art. 52zt, 52zu; 2026/1371 od 2026-11-05 — art. 14, 22p, 23q, 23zf; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 14; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 2, 45ba, 45c, 45cd, 45ce, 45cf; 2026/1354 [OD 2027-01-01: 2026/1354] — art. 14; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 21, 22).
+**Akt:** CIT (ustawa o podatku dochodowym od osób prawnych) — t.j. Dz.U. 2026 poz. 554 (zm. po t.j.: 2026/779 od 2026-07-01 — art. 9, 38ab; 2026/912 od 2026-07-31 — art. 17; 2026/846 od 2026-10-01 — art. 24a, 24aa, 24m; 2026/1287 od 2026-11-01 — art. 38za, 38zb; 2026/1371 od 2026-11-05 — art. 11e, 11t, 12, 15d; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 15).
+**Akt:** Akcyza (ustawa o podatku akcyzowym) — t.j. Dz.U. 2026 poz. 412.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
-> ⚠️ t.j. 2026/1263 OBEJMUJE Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811; Dz.U. 2026 poz. 507 (⛔ art. 6 — art. 96 ust. 3e–3f — w życie dopiero 1.11.2028, art. 31 pkt 4; do tej daty NIE stosować), 846. ⏳ Po t.j.: Dz.U. 2026 poz. 1270 — sprawdź w ELI przed każdym powołaniem.
+> ⚠️ t.j. 2026/1263 OBEJMUJE Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811; Dz.U. 2026 poz. 507 (⛔ art. 6 — art. 96 ust. 3e–3f — w życie dopiero 1.11.2028, art. 31 pkt 4; do tej daty NIE stosować), 846. ⏳ Po t.j.: Dz.U. 2026 poz. 1270 [OD 2027-01-01: 2026/1270] — sprawdź w ELI przed każdym powołaniem.
 >
 > ⛔ **HARD GATE — `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.**
 >

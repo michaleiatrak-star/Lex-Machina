@@ -1,5 +1,10 @@
 # mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci
 
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263 (zm. po t.j.: 2026/1446 [OD 2026-11-18: 2026/1446] — art. 1, 2, 33, 33a, 33b, 34, 41, 52, 138i; 2026/1270 [OD 2027-01-01: 2026/1270] — art. 2, 12, 13, 14, 15, 15a, 17, 19a, 22, 29a, 33, 33a, 37, 41, 42, 43, 45, 83, 86, 88).
+**Akt:** UKAS (ustawa o Krajowej Administracji Skarbowej) — t.j. Dz.U. 2026 poz. 1492.
+**Akt:** UWT (ustawa o wychowaniu w trzeźwości i przeciwdziałaniu alkoholizmowi) — t.j. Dz.U. 2023 poz. 2151 (zm. po t.j.: 2026/875 [OD 2027-01-01: 2026/875] — art. 18).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-19
 **Rola w systemie:** odpowiedź na pytanie użytkownika o zależność stawki
 VAT od klasyfikacji tego SAMEGO fizycznie produktu (przykład: rękawice

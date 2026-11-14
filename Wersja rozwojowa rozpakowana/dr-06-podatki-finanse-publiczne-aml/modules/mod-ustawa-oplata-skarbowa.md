@@ -1,12 +1,17 @@
 # mod-ustawa-oplata-skarbowa
 
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 299; 2026/825 od 2026-09-24 — art. 14i, 14j; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 3b, 297, 298, 299, 299c, 306; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 119zg).
+**Akt:** UOpłSkarb (ustawa o opłacie skarbowej) — t.j. Dz.U. 2026 poz. 1395.
+**Akt:** UKAS (ustawa o Krajowej Administracji Skarbowej) — t.j. Dz.U. 2026 poz. 1492.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł dziedzinowy — dodany 2026-09-16 (O-11(d): ustawa była w `dr-06` powoływana
 tylko ubocznie; stawki kanoniczne i wyłączenia przedmiotowe — `prawo-polskie-v2/krajowe/shared/oplaty/07-…` sekcja 6c).
 **Źródło:** ustawa z 16.11.2006 o opłacie skarbowej — **t.j. `Dz.U. 2026 poz. 1395`** (obwieszczenie
 z 9.10.2026, ogł. 23.10.2026; obejmuje zmiany Dz.U. 2025 poz. 1795, 1847 i 2026 poz. 846, 875, 912, 1206).
 ✅ [VER] RZĄD 1 2026-10-31 — ELI DU/2026/1395 (art. 1, 9; po t.j. brak zmian); poprzednio t.j. `Dz.U. 2025 poz. 1154`
 (✅ RZĄD 1 2026-09-16: art. 1, 3–12). KPA — t.j. `Dz.U. 2025 poz. 1691` (art. 261). KROK 2C — przy sprawie (nowelizacje po t.j.).
-⏳ **Od 1.01.2027** art. 1 ust. 3 (Dz.U. 2026 poz. 875): w sprawie załatwionej milcząco czynność / zezwolenie uznaje się
+⏳ **Od 1.01.2027** art. 1 ust. 3 (Dz.U. 2026 poz. 875 [OD 2027-01-01: 2026/875]): w sprawie załatwionej milcząco czynność / zezwolenie uznaje się
 za dokonane w dniu milczącego załatwienia sprawy (ten dzień decyduje o obowiązku zapłaty).
 
 ⛔ **Opłata skarbowa NIE jest opłatą sądową** — nie stosuj do niej KSCU. Jedyny jej styk

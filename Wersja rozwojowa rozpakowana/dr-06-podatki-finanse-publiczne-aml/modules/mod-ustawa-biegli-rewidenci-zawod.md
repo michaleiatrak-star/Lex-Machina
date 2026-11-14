@@ -1,5 +1,11 @@
 # mod-ustawa-biegli-rewidenci-zawod — Biegły rewident jako zawód zaufania publicznego
 
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 299; 2026/825 od 2026-09-24 — art. 14i, 14j; 2026/846 od 2026-10-01 — art. 11j, 12, 14b, 17, 17a, 18c, 21, 23v, 52, 59, 60, 62, 62b, 63, 67a, 67d, 74, 75, 76b, 77; 2026/875 [OD 2027-01-01: 2026/875] — art. 67a; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 3b, 297, 298, 299, 299c, 306; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 119zg).
+**Akt:** CIT (ustawa o podatku dochodowym od osób prawnych) — t.j. Dz.U. 2026 poz. 554 (zm. po t.j.: 2026/779 od 2026-07-01 — art. 9, 38ab; 2026/912 od 2026-07-31 — art. 17; 2026/846 od 2026-10-01 — art. 24a, 24aa, 24m; 2026/1287 od 2026-11-01 — art. 38za, 38zb; 2026/1371 od 2026-11-05 — art. 11e, 11t, 12, 15d; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 15).
+**Akt:** AML (ustawa o przeciwdziałaniu praniu pieniędzy oraz finansowaniu terroryzmu) — t.j. Dz.U. 2025 poz. 644 (zm. po t.j.: 2025/1669 od 2026-06-30 — art. 72; 2026/875 [OD 2027-01-01: 2026/875] — art. 129f, 129h; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 2, 89).
+**Akt:** URach (ustawa o rachunkowości) — t.j. Dz.U. 2026 poz. 522 (zm. po t.j.: 2026/640 od 2026-05-28 — art. 2, 66; 2026/644 od 2026-05-29 — art. 3, 45; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 3, 64, 69).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (c) zawody powstałe w wyniku rozwoju gospodarki rynkowej,

@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.105 (2026-11-14): DR-06: wskazania z kwalifikatorem (OP, VAT, PIT, CIT, PCC, akcyza, KAS, AML); akcyza 2026 — podstawa art. 165a; PCC próg 3000 zł od 3.11.2026; W-4 dla 2026/1102, 1270, 1347, 1354, 1446
 - 6.104 (2026-11-14): DR-03 komplet: 71 modułów + 8 części kwalifikatora w formacie wskazań; poprawki zagrożeń art. 234-244b KK, przedawnienie cyber, art. 244 przy nakazie Policji, tabela kar frameworku
 - 6.103 (2026-11-14): DR-02 komplet: ostatnie 10 modułów (ubezpieczenia obowiązkowe, cudzoziemcy, parabanki, piecza, fundacja rodzinna, pomoc publiczna, frankowa 2026/985, doradca restr., reklama, KSH-uzupełnienie, weksle/kontrola)
 - 6.102 (2026-11-14): DR-02: mobbing wg art. 94³ KP od 2026-11-05 (2026/1046), skład sądu, timeshare/zastaw, transakcje handlowe, przedsiębiorcy zagraniczni

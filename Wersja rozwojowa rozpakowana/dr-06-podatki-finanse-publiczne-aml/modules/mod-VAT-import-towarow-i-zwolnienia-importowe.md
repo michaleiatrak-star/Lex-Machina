@@ -1,7 +1,15 @@
 # Moduł — VAT: import towarów — wymiar i pobór (Dział VII, art. 33–40), procedura uproszczona art. 33a, miejsce świadczenia przy imporcie (art. 26a), zwolnienia z tytułu importu (Dział VIII rozdz. 3, art. 45–82a)
 
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 299; 2026/825 od 2026-09-24 — art. 14i, 14j; 2026/846 od 2026-10-01 — art. 11j, 12, 14b, 17, 17a, 18c, 21, 23v, 52, 59, 60, 62, 62b, 63, 67a, 67d, 74, 75, 76b, 77; 2026/875 [OD 2027-01-01: 2026/875] — art. 67a; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 3b, 297, 298, 299, 299c, 306; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 119zg).
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263 (zm. po t.j.: 2026/1446 [OD 2026-11-18: 2026/1446] — art. 1, 2, 33, 33a, 33b, 34, 41, 52, 138i).
+**Akt:** Akcyza (ustawa o podatku akcyzowym) — t.j. Dz.U. 2026 poz. 412.
+**Akt:** UKAS (ustawa o Krajowej Administracji Skarbowej) — t.j. Dz.U. 2026 poz. 1492.
+**Akt:** UWT (ustawa o wychowaniu w trzeźwości i przeciwdziałaniu alkoholizmowi) — t.j. Dz.U. 2023 poz. 2151 (zm. po t.j.: 2026/875 [OD 2027-01-01: 2026/875] — art. 18).
+**Akt:** UTyt (ustawa o ochronie zdrowia przed następstwami używania tytoniu) — t.j. Dz.U. 2026 poz. 1214.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
-> ⚠️ t.j. 2026/1263 OBEJMUJE Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811; Dz.U. 2026 poz. 507 (⛔ art. 6 — art. 96 ust. 3e–3f — w życie dopiero 1.11.2028, art. 31 pkt 4; do tej daty NIE stosować), 846. ⏳ Po t.j.: Dz.U. 2026 poz. 1270 — sprawdź w ELI przed każdym powołaniem.
+> ⚠️ t.j. 2026/1263 OBEJMUJE Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811; Dz.U. 2026 poz. 507 (⛔ art. 6 — art. 96 ust. 3e–3f — w życie dopiero 1.11.2028, art. 31 pkt 4; do tej daty NIE stosować), 846. ⏳ Po t.j.: Dz.U. 2026 poz. 1270 [OD 2027-01-01: 2026/1270] — sprawdź w ELI przed każdym powołaniem.
 >
 > ⛔ **HARD GATE — `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.** Ten moduł opisuje obszar
 > o najwyższej w całej ustawie gęstości odesłań do prawa celnego UE (UKC)

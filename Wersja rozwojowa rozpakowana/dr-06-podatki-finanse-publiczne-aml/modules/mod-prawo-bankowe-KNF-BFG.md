@@ -1,5 +1,12 @@
 # mod-prawo-bankowe-KNF-BFG
 
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 299; 2026/825 od 2026-09-24 — art. 14i, 14j; 2026/846 od 2026-10-01 — art. 11j, 12, 14b, 17, 17a, 18c, 21, 23v, 52, 59, 60, 62, 62b, 63, 67a, 67d, 74, 75, 76b, 77; 2026/875 [OD 2027-01-01: 2026/875] — art. 67a; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 3b, 297, 298, 299, 299c, 306; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 119zg).
+**Akt:** AML (ustawa o przeciwdziałaniu praniu pieniędzy oraz finansowaniu terroryzmu) — t.j. Dz.U. 2025 poz. 644 (zm. po t.j.: 2025/1669 od 2026-06-30 — art. 72; 2026/875 [OD 2027-01-01: 2026/875] — art. 129f, 129h; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 2, 89).
+**Akt:** UKAS (ustawa o Krajowej Administracji Skarbowej) — t.j. Dz.U. 2026 poz. 1492.
+**Akt:** o Bankowym Funduszu Gwarancyjnym, systemie gwarantowania depozytów oraz przymusowej restru — t.j. Dz.U. 2026 poz. 620 (zm. po t.j.: 2026/1206 od 2026-09-29 — art. 2, 98, 99a; 2026/644 [OD 2030-01-10: 2026/644] — art. 2, 99a, 99b, 109, 113, 154a, 154b, 339).
+**Akt:** o nadzorze nad rynkiem finansowym — t.j. Dz.U. 2026 poz. 935 (zm. po t.j.: 2026/1206 od 2026-09-29 — art. 2, 6b, 8, 9, 9a, 10, 12, 14, 14a, 15, 15a, 17ca, 17g, 19c, 20; 2026/1003 od 2026-10-28 — art. 17g, 17h; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 1, 6, 6b).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Prawo bankowe — **Dz.U. 2026 poz. 38 t.j.** (nowelizacje 2025: poz. 1170, 1191) ✅ VER: 2026-06-05 | KNF — Dz.U. 2026 poz. 935 t.j. | BFG — Dz.U. 2026 poz. 620 t.j.
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl

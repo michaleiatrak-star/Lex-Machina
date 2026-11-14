@@ -21,6 +21,10 @@ compatibility:
 
 # mod-UCC — Cło: Taryfa Celna / Kodeks Celny UE (UCC)
 
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263 (zm. po t.j.: 2026/1446 [OD 2026-11-18: 2026/1446] — art. 1, 2, 33, 33a, 33b, 34, 41, 52, 138i; 2026/1270 [OD 2027-01-01: 2026/1270] — art. 2, 12, 13, 14, 15, 15a, 17, 19a, 22, 29a, 33, 33a, 37, 41, 42, 43, 45, 83, 86, 88).
+**Akt:** Akcyza (ustawa o podatku akcyzowym) — t.j. Dz.U. 2026 poz. 412.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł uzupełniający do `mod-ustawa-akcyzowa-i-clo-UCC.md`
 **Wydzielony:** 2026-06-14 (audyt — podział tematyczny: akcyza domestic vs. cło UE)
 

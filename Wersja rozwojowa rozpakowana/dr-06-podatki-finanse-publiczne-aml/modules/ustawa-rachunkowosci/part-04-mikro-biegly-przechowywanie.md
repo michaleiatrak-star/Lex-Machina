@@ -1,5 +1,11 @@
 # Ustawa o rachunkowości — część 4: jednostki mikro/małe, badanie przez biegłego rewidenta, przechowywanie dokumentacji
 
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 299; 2026/825 od 2026-09-24 — art. 14i, 14j; 2026/846 od 2026-10-01 — art. 11j, 12, 14b, 17, 17a, 18c, 21, 23v, 52, 59, 60, 62, 62b, 63, 67a, 67d, 74, 75, 76b, 77; 2026/875 [OD 2027-01-01: 2026/875] — art. 67a; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 3b, 297, 298, 299, 299c, 306; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 119zg).
+**Akt:** PIT (ustawa o podatku dochodowym od osób fizycznych) — t.j. Dz.U. 2026 poz. 592 (zm. po t.j.: 2026/779 od 2026-07-01 — art. 24a; 2026/1079 od 2026-09-10 — art. 21; 2026/846 od 2026-10-01 — art. 25b, 30f, 31d; 2026/1287 od 2026-11-01 — art. 52zt, 52zu; 2026/1371 od 2026-11-05 — art. 14, 22p, 23q, 23zf; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 14; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 2, 45ba, 45c, 45cd, 45ce, 45cf; 2026/1354 [OD 2027-01-01: 2026/1354] — art. 14; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 21, 22).
+**Akt:** CIT (ustawa o podatku dochodowym od osób prawnych) — t.j. Dz.U. 2026 poz. 554 (zm. po t.j.: 2026/779 od 2026-07-01 — art. 9, 38ab; 2026/912 od 2026-07-31 — art. 17; 2026/846 od 2026-10-01 — art. 24a, 24aa, 24m; 2026/1287 od 2026-11-01 — art. 38za, 38zb; 2026/1371 od 2026-11-05 — art. 11e, 11t, 12, 15d; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 15).
+**Akt:** URach (ustawa o rachunkowości) — t.j. Dz.U. 2026 poz. 522 (zm. po t.j.: 2026/640 od 2026-05-28 — art. 2, 66; 2026/644 od 2026-05-29 — art. 3, 45; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 3, 64, 69).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > Część modułu `mod-ustawa-rachunkowosci.md` (podział 2026-08-20,
 > naprawa F-78, priorytet 4). Podstawowe informacje i zakres podmiotowy
 > — zobacz plik nadrzędny (indeks). Ten plik ładowany WYŁĄCZNIE na

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99.18 (2026-11-14): DR-06: wskazania z kwalifikatorem (OP, VAT, PIT, CIT, PCC, akcyza, KAS, AML); akcyza 2026 — podstawa art. 165a; PCC próg 3000 zł od 3.11.2026; W-4 dla 2026/1102, 1270, 1347, 1354, 1446
 - 3.99.17 (2026-11-14): Bazy urzędów i sądów dyscyplinarnych w orzeczenia-sadowe-v2; KAS na t.j. 2026/1492 (poprawki art. 63, 77, 82-83 UKAS); DR-02: Prawo przedsiębiorców, zastaw rejestrowy (2025/1792 i 2026/1073 jeszcze nie obowiązują)
 - 3.99.16 (2026-11-13): mod-VAT-WIS: opłata — art. 42e (art. 42d uchylony); mod-podatki-sektorowe: reglamentacja → mod-wekslowe-kontrola-przedsiebiorcy-koncesje (ELI 2026-11-13)
 - 3.99.15 (2026-11-13): t.j. (ELI 2026-11-13): KAS Dz.U. 2026 poz. 1492 (zastępuje 2025/1131; obejmuje 2026/1281), Prawo przedsiębiorców Dz.U. 2026 poz. 1484 — MAPA-AKTOW, SKILL, mod-KAS, mod-limit-platnosci-gotowkowych

@@ -1,5 +1,11 @@
 # Akcyza — część 7: klasyfikacja taryfowa CN i oszustwa celne, strategia procesowa, quality gate
 
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263 (zm. po t.j.: 2026/1446 [OD 2026-11-18: 2026/1446] — art. 1, 2, 33, 33a, 33b, 34, 41, 52, 138i; 2026/1270 [OD 2027-01-01: 2026/1270] — art. 2, 12, 13, 14, 15, 15a, 17, 19a, 22, 29a, 33, 33a, 37, 41, 42, 43, 45, 83, 86, 88).
+**Akt:** AML (ustawa o przeciwdziałaniu praniu pieniędzy oraz finansowaniu terroryzmu) — t.j. Dz.U. 2025 poz. 644 (zm. po t.j.: 2025/1669 od 2026-06-30 — art. 72; 2026/875 [OD 2027-01-01: 2026/875] — art. 129f, 129h; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 2, 89).
+**Akt:** Akcyza (ustawa o podatku akcyzowym) — t.j. Dz.U. 2026 poz. 412.
+**Akt:** UKAS (ustawa o Krajowej Administracji Skarbowej) — t.j. Dz.U. 2026 poz. 1492.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > Część modułu `mod-ustawa-akcyzowa-i-clo-UCC.md` (podział 2026-08-20,
 > naprawa F-78, priorytet 5). Akty prawne — zobacz plik nadrzędny
 > (indeks). Ten plik ładowany WYŁĄCZNIE na żądanie konkretnego

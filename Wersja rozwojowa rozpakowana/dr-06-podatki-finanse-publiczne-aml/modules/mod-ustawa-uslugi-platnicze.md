@@ -1,5 +1,8 @@
 # Modul - Uslugi platnicze (PSD2/PSD3)
 
+**Akt:** o usługach płatniczych — t.j. Dz.U. 2026 poz. 623 (zm. po t.j.: 2026/875 [OD 2027-01-01: 2026/875] — art. 117b, 117k, 119a, 136, 136c, 136d; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 4, 4a, 9a, 77, 78, 125, 132n; 2026/1074 [OD 2027-02-11: 2026/1074] — art. 61, 114, 115, 132zf, 132zg, 132zj, 139).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 19.08.2011 r. o uslugach platniczych**
 - Tekst jednolity: **Dz.U. 2026 poz. 623** (t.j. z 24.04.2025)

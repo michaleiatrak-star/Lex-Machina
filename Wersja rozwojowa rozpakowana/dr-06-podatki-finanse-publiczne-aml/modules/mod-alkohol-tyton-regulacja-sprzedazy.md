@@ -1,5 +1,10 @@
 # mod-alkohol-tyton-regulacja-sprzedazy
 
+**Akt:** Akcyza (ustawa o podatku akcyzowym) — t.j. Dz.U. 2026 poz. 412.
+**Akt:** UWT (ustawa o wychowaniu w trzeźwości i przeciwdziałaniu alkoholizmowi) — t.j. Dz.U. 2023 poz. 2151 (zm. po t.j.: 2026/875 [OD 2027-01-01: 2026/875] — art. 18).
+**Akt:** UTyt (ustawa o ochronie zdrowia przed następstwami używania tytoniu) — t.j. Dz.U. 2026 poz. 1214.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.2 | **Dodano:** 2026-07-19 | **Zaktualizowano:** 2026-07-20 (Część C — bimbrownictwo; sekcja monitorująca projekty zmian ustawy alkoholowej)
 **Rola w systemie:** odpowiedź na pytanie użytkownika o "alkohole,
 papierosy" — dotąd tylko przelotne wzmianki (przy jeździe pod wpływem,

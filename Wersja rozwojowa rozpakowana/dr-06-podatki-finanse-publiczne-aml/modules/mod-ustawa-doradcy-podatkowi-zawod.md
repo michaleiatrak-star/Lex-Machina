@@ -1,5 +1,11 @@
 # mod-ustawa-doradcy-podatkowi-zawod — Doradca podatkowy jako zawód zaufania publicznego
 
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 299; 2026/825 od 2026-09-24 — art. 14i, 14j; 2026/846 od 2026-10-01 — art. 11j, 12, 14b, 17, 17a, 18c, 21, 23v, 52, 59, 60, 62, 62b, 63, 67a, 67d, 74, 75, 76b, 77; 2026/875 [OD 2027-01-01: 2026/875] — art. 67a; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 3b, 297, 298, 299, 299c, 306; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 119zg).
+**Akt:** AML (ustawa o przeciwdziałaniu praniu pieniędzy oraz finansowaniu terroryzmu) — t.j. Dz.U. 2025 poz. 644 (zm. po t.j.: 2025/1669 od 2026-06-30 — art. 72; 2026/875 [OD 2027-01-01: 2026/875] — art. 129f, 129h; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 2, 89).
+**Akt:** Akcyza (ustawa o podatku akcyzowym) — t.j. Dz.U. 2026 poz. 412.
+**Akt:** UWT (ustawa o wychowaniu w trzeźwości i przeciwdziałaniu alkoholizmowi) — t.j. Dz.U. 2023 poz. 2151 (zm. po t.j.: 2026/875 [OD 2027-01-01: 2026/875] — art. 18).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (c) zawody powstałe w wyniku rozwoju gospodarki rynkowej,

@@ -1,5 +1,8 @@
 # Modul - AML - Instytucje obowiazkowe
 
+**Akt:** AML (ustawa o przeciwdziałaniu praniu pieniędzy oraz finansowaniu terroryzmu) — t.j. Dz.U. 2025 poz. 644 (zm. po t.j.: 2025/1669 od 2026-06-30 — art. 72; 2026/875 [OD 2027-01-01: 2026/875] — art. 129f, 129h; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 2, 89).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 01.03.2018 r. o przeciwdzialaniu praniu pieniedzy oraz finansowaniu terroryzmu**
 - Tekst jednolity: **Dz.U. 2025 poz. 644** (t.j. z 03.04.2025 - NAJNOWSZY!)

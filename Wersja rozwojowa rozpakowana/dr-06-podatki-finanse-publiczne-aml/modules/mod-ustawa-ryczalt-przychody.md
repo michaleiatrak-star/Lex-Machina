@@ -1,5 +1,9 @@
 # Modul - Ryczalt od przychodow ewidencjonowanych
 
+**Akt:** PIT (ustawa o podatku dochodowym od osób fizycznych) — t.j. Dz.U. 2026 poz. 592 (zm. po t.j.: 2026/779 od 2026-07-01 — art. 24a; 2026/1079 od 2026-09-10 — art. 21; 2026/846 od 2026-10-01 — art. 25b, 30f, 31d; 2026/1287 od 2026-11-01 — art. 52zt, 52zu; 2026/1371 od 2026-11-05 — art. 14, 22p, 23q, 23zf; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 14; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 2, 45ba, 45c, 45cd, 45ce, 45cf; 2026/1354 [OD 2027-01-01: 2026/1354] — art. 14; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 21, 22).
+**Akt:** o zryczałtowanym podatku dochodowym od niektórych przychodów osiąganych przez osoby fizycz — t.j. Dz.U. 2025 poz. 843 (zm. po t.j.: 2026/779 od 2026-06-16 — art. 1, 15, 24a; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 21c, 21d).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 20.11.1998 r. o zryczaltowanym podatku dochodowym od niektorych przychodow osiaganych przez osoby fizyczne**
 - Tekst jednolity: **Dz.U. 2025 poz. 843** (t.j. z 13.06.2025)

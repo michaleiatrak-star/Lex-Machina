@@ -1,4 +1,8 @@
 # Rachunkowość budżetowa — jednostki sektora finansów publicznych
+
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263 (zm. po t.j.: 2026/1446 [OD 2026-11-18: 2026/1446] — art. 1, 2, 33, 33a, 33b, 34, 41, 52, 138i; 2026/1270 [OD 2027-01-01: 2026/1270] — art. 2, 12, 13, 14, 15, 15a, 17, 19a, 22, 29a, 33, 33a, 37, 41, 42, 43, 45, 83, 86, 88).
+**Akt:** URach (ustawa o rachunkowości) — t.j. Dz.U. 2026 poz. 522 (zm. po t.j.: 2026/640 od 2026-05-28 — art. 2, 66; 2026/644 od 2026-05-29 — art. 3, 45; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 3, 64, 69).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
 (JSFP)
 
 v1.0.0 (utworzony 2026-08-13, na żądanie użytkownika — moduł

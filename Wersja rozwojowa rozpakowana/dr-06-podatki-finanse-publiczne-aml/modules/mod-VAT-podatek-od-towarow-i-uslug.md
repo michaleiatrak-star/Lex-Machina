@@ -1,3 +1,7 @@
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263.
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263 (zm. po t.j.: 2026/1446 [OD 2026-11-18: 2026/1446] — art. 1, 2, 33, 33a, 33b, 34, 41, 52, 138i; 2026/1270 [OD 2027-01-01: 2026/1270] — art. 2, 12, 13, 14, 15, 15a, 17, 19a, 22, 29a, 33, 33a, 37, 41, 42, 43, 45, 83, 86, 88).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > ⚡ **ZMIANA STRUKTURALNA 2026-08-20 (F-78, priorytet 3):** ten plik był
 > 1901 linii. Treść mechanizmów VAT (sekcje 3-7, ~35 podtematów)
 > PODZIELONA na 6 plików w podkatalogu
@@ -30,6 +34,7 @@
 ---
 
 # mod-VAT-podatek-od-towarow-i-uslug
+
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** VAT — Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263; ⏳ po t.j. Dz.U. 2026 poz. 1270 — od 1.12.2026/1.01.2027 i dalej, ELI 2026-10-09) t.j. z 21.05.2025 (poprzedni t.j.: Dz.U. 2024 poz. 361)

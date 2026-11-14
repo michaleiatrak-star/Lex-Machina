@@ -1,5 +1,9 @@
 # Akcyza — część 1: wyroby węglowe/gazowe, wyroby nikotynowe/e-papierosy
 
+**Akt:** Akcyza (ustawa o podatku akcyzowym) — t.j. Dz.U. 2026 poz. 412.
+**Akt:** UTyt (ustawa o ochronie zdrowia przed następstwami używania tytoniu) — t.j. Dz.U. 2026 poz. 1214.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > Część modułu `mod-ustawa-akcyzowa-i-clo-UCC.md` (podział 2026-08-20,
 > naprawa F-78, priorytet 5). Akty prawne — zobacz plik nadrzędny
 > (indeks). Ten plik ładowany WYŁĄCZNIE na żądanie konkretnego

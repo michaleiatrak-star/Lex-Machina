@@ -1,5 +1,11 @@
 # VAT — część 1: CORE, INTAKE, stawki VAT (baza weryfikacyjna)
 
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263 (zm. po t.j.: 2026/1446 [OD 2026-11-18: 2026/1446] — art. 1, 2, 33, 33a, 33b, 34, 41, 52, 138i; 2026/1270 [OD 2027-01-01: 2026/1270] — art. 2, 12, 13, 14, 15, 15a, 17, 19a, 22, 29a, 33, 33a, 37, 41, 42, 43, 45, 83, 86, 88).
+**Akt:** PCC (ustawa o podatku od czynności cywilnoprawnych) — t.j. Dz.U. 2026 poz. 191 (zm. po t.j.: 2026/1354 od 2026-11-03 — art. 1, 9, 17).
+**Akt:** Akcyza (ustawa o podatku akcyzowym) — t.j. Dz.U. 2026 poz. 412.
+**Akt:** URach (ustawa o rachunkowości) — t.j. Dz.U. 2026 poz. 522 (zm. po t.j.: 2026/640 od 2026-05-28 — art. 2, 66; 2026/644 od 2026-05-29 — art. 3, 45; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 3, 64, 69).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > Część modułu `mod-VAT-podatek-od-towarow-i-uslug.md` (podział
 > 2026-08-20, naprawa F-78, priorytet 3). Alerty legislacyjne [PKWiU
 > 2025, KSeF obowiązkowy], CORE i INTAKE — zobacz plik nadrzędny

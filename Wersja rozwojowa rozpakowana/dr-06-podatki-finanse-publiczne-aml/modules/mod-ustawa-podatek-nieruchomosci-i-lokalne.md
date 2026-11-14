@@ -1,5 +1,9 @@
 # mod-ustawa-podatek-nieruchomosci-i-lokalne
 
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 299; 2026/825 od 2026-09-24 — art. 14i, 14j; 2026/846 od 2026-10-01 — art. 11j, 12, 14b, 17, 17a, 18c, 21, 23v, 52, 59, 60, 62, 62b, 63, 67a, 67d, 74, 75, 76b, 77; 2026/875 [OD 2027-01-01: 2026/875] — art. 67a; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 3b, 297, 298, 299, 299c, 306; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 119zg).
+**Akt:** o podatkach i opłatach lokalnych — t.j. Dz.U. 2025 poz. 707 (zm. po t.j.: 2026/1354 [OD 2027-01-01: 2026/1354] — art. 1a, 17, 19, 20, 20a).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o podatkach i opłatach lokalnych — **Dz.U. 2025 poz. 707 t.j.** (NOWE! zawiera reformę od 01.01.2025) | Ustawa o podatku rolnym — Dz.U. 2025 poz. 1344 t.j.
 **Data weryfikacji online:** 2026-06-05

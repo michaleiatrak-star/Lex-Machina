@@ -1,5 +1,9 @@
 # Moduł — VAT: nieodpłatne przekazania, zbycie przedsiębiorstwa/ZCP, miejsce dostawy i transakcje łańcuchowe, organy władzy publicznej, odwrotne obciążenie krajowe, fakturowanie, procedury szczególne
 
+**Akt:** VAT (ustawa o podatku od towarów i usług) — t.j. Dz.U. 2026 poz. 1263 (zm. po t.j.: 2026/1446 [OD 2026-11-18: 2026/1446] — art. 1, 2, 33, 33a, 33b, 34, 41, 52, 138i; 2026/1270 [OD 2027-01-01: 2026/1270] — art. 2, 12, 13, 14, 15, 15a, 17, 19a, 22, 29a, 33, 33a, 37, 41, 42, 43, 45, 83, 86, 88).
+**Akt:** PCC (ustawa o podatku od czynności cywilnoprawnych) — t.j. Dz.U. 2026 poz. 191 (zm. po t.j.: 2026/1354 od 2026-11-03 — art. 1, 9, 17).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików VAT, PODZIELONEJ
 > 2026-08-12 (NOTA-4, audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł
 > źródłowy miał 3652 linie). Moduł MACIERZYSTY (z aktualnym stanem

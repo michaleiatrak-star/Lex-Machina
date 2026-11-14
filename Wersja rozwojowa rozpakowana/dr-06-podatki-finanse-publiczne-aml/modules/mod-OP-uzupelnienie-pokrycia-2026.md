@@ -8,6 +8,10 @@ source_policy: "RZĄD 1 only"
 
 # Ordynacja podatkowa — uzupełnienie pokrycia
 
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622.
+**Akt:** UKAS (ustawa o Krajowej Administracji Skarbowej) — t.j. Dz.U. 2026 poz. 1492.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## 1. Źródło i alert temporalny
 
 Aktualny tekst jednolity: **Dz.U. 2026 poz. 622**, stan prawny 21.04.2026.
@@ -23,9 +27,9 @@ DU/1997/926 references + art. końcowe DU/2026/825, 846, 875, 1098, 1154, 1206, 
 | 2026/825 | art. 14i, 14j | 24.09.2026 |
 | 2026/846 art. 1 | m.in. art. 12, 14b, 17, 17a, 18c, 21, 52, 59–63, 67a, 67d, 73–81b, 86a–86i, 119g, 165 (szeroka nowelizacja) | 1.10.2026; art. 1 pkt 9 — od 26.06.2026 |
 | 2026/1154 art. 2 | art. 39k, 299 § 3 | 16.09.2026 (w mocy) |
-| 2026/875 art. 6 | art. 13, 67a | ⏳ 1.01.2027 |
-| 2026/1098 art. 35 | m.in. art. 2, 3b, 13, 182, 297–299c, 306 (osobiste konta inwestycyjne) | ⏳ 1.01.2027 |
-| 2026/1206 art. 3 | art. 119zg pkt 1 | ⏳ 11.01.2027 |
+| 2026/875 [OD 2027-01-01: 2026/875] art. 6 | art. 13, 67a | ⏳ 1.01.2027 |
+| 2026/1098 [OD 2027-01-01: 2026/1098] art. 35 | m.in. art. 2, 3b, 13, 182, 297–299c, 306 (osobiste konta inwestycyjne) | ⏳ 1.01.2027 |
+| 2026/1206 [OD 2027-01-11: 2026/1206] art. 3 | art. 119zg pkt 1 | ⏳ 11.01.2027 |
 
 ⛔ Lista jednostek to inwentarz dyspozycji nowelizującej, NIE treść. Przed
 powołaniem któregokolwiek z tych przepisów odczytaj brzmienie z aktu

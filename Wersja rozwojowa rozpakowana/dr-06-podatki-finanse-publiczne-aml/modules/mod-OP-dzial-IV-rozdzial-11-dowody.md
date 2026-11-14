@@ -1,5 +1,10 @@
 # mod-OP-dzial-IV-rozdzial-11-dowody
 
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 299; 2026/825 od 2026-09-24 — art. 14i, 14j; 2026/846 od 2026-10-01 — art. 11j, 12, 14b, 17, 17a, 18c, 21, 23v, 52, 59, 60, 62, 62b, 63, 67a, 67d, 74, 75, 76b, 77; 2026/875 [OD 2027-01-01: 2026/875] — art. 67a; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 3b, 297, 298, 299, 299c, 306; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 119zg).
+**Akt:** UKAS (ustawa o Krajowej Administracji Skarbowej) — t.j. Dz.U. 2026 poz. 1492.
+**Akt:** URach (ustawa o rachunkowości) — t.j. Dz.U. 2026 poz. 522 (zm. po t.j.: 2026/640 od 2026-05-28 — art. 2, 66; 2026/644 od 2026-05-29 — art. 3, 45; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 3, 64, 69).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0.0 | **Dodano:** 2026-08-14 (NAPRAWA — F-70: raport
 zewnętrzny wykazał, że Dział IV Rozdz. 11 Ordynacji podatkowej [dowody,
 art. 180-200] miał ZERO treści, mimo że to etap DECYDUJĄCY o wyniku
