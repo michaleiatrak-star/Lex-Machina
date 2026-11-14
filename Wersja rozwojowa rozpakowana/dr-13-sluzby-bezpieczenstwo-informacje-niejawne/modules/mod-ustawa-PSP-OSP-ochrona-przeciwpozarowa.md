@@ -1,9 +1,20 @@
 # mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa.md — Państwowa Straż Pożarna, Ochotnicze Straże Pożarne, ochrona przeciwpożarowa
 
+**Akt:** UABW (ustawa o ABW oraz AW) — t.j. Dz.U. 2026 poz. 937 (zm. po t.j.: 2026/1003 od 2026-10-28 — art. 7; 2026/1281 od 2026-10-31 — art. 27).
+**Akt:** UCBA (ustawa o Centralnym Biurze Antykorupcyjnym) — t.j. Dz.U. 2025 poz. 712 (zm. po t.j.: 2025/718 od 2026-01-01 — art. 100, 101, 101a; 2026/1281 od 2026-10-31 — art. 17).
+**Akt:** UPSP (ustawa o Państwowej Straży Pożarnej) — t.j. Dz.U. 2026 poz. 1473.
+**Akt:** UOPpoz (ustawa o ochronie przeciwpożarowej) — t.j. Dz.U. 2025 poz. 188.
+**Akt:** UOSP (ustawa o ochotniczych strażach pożarnych) — t.j. Dz.U. 2025 poz. 244 (zm. po t.j.: 2025/900 od 2026-04-08 — art. 1, 10, 29; 2026/426 od 2026-04-14 — art. 56; 2026/180 od 2026-05-18 — art. 11; 2026/1159 od 2026-09-16 — art. 1, 2, 2a, 3, 7, 124o, 124z).
+**Akt:** UZK (ustawa o zarządzaniu kryzysowym) — t.j. Dz.U. 2026 poz. 574 (zm. po t.j.: 2026/1206 [OD 2027-01-11: 2026/1206] — zakres: tekst nowelizacji w ELI).
+**Akt:** UOLOC (ustawa o ochronie ludności i obronie cywilnej) — akt pierwotny, bez t.j.: Dz.U. 2024 poz. 1907.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** KPK (Kodeks postępowania karnego) — t.j. Dz.U. 2026 poz. 490 (zm. po t.j.: 2026/421 od 2026-04-14 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332; 2026/882 od 2026-07-16 — art. 607k, 607m, 607t, 607y, 607ya, 607zb; 2026/901 od 2026-07-21 — art. 87).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej (poziom A wg `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`). Stan metodyczny: 2026-07-07 — naprawa WARN-29 (audyt kompletności DR-13 z 2026-07-06, sesja dedykowana). Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis/portale branżowe dopuszczalne wyłącznie pomocniczo.
 
 ## 1. Akty i źródła do weryfikacji
-- Ustawa z dnia 24 sierpnia 1991 r. o Państwowej Straży Pożarnej — Dz.U. 2026 poz. 1473 t.j. (obwieszczenie Marszałka Sejmu 2.10.2026, stan prawny na 23.09.2026; VER: ELI DU/2026/1473, 2026-11-11). Uwzględnia zmiany: Dz.U. 2025 poz. 1366, 2026 poz. 252, 646, 821, 1123. Poza t.j. (pkt 2 obwieszczenia): przepisy przejściowe i końcowe tych ustaw (m.in. art. 12, 13, 15, 18, 23 ustawy 2025/1366 — dotychczasowe lokale i kwatery). ⏳ Zmiana z 2026 poz. 1123 (art. 5: art. 105b ust. 2 pkt 5 lit. a, art. 105e ust. 8) od 1.01.2028.
+- Ustawa z dnia 24 sierpnia 1991 r. o Państwowej Straży Pożarnej — Dz.U. 2026 poz. 1473 t.j. (obwieszczenie Marszałka Sejmu 2.10.2026, stan prawny na 23.09.2026; VER: ELI DU/2026/1473, 2026-11-11). Uwzględnia zmiany: Dz.U. 2025 poz. 1366, 2026 poz. 252, 646, 821, 1123. Poza t.j. (pkt 2 obwieszczenia): przepisy przejściowe i końcowe tych ustaw (m.in. art. 12, 13, 15, 18, 23 ustawy 2025/1366 — dotychczasowe lokale i kwatery). ⏳ Zmiana z 2026 poz. 1123 [OD 2028-01-01: 2026/1123] (art. 5: art. 105b ust. 2 pkt 5 lit. a, art. 105e ust. 8) od 1.01.2028.
 - Ustawa z dnia 24 sierpnia 1991 r. o ochronie przeciwpożarowej — Dz.U. 2025 poz. 188 t.j. (obwieszczenie Marszałka Sejmu 5.02.2025; VER: isap.sejm.gov.pl WDU20250000188); ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026 — art. 5: nowe brzmienie art. 14fa ust. 3)
 - Ustawa z dnia 17 grudnia 2021 r. o ochotniczych strażach pożarnych (OSP) — Dz.U. 2025 poz. 244 t.j. (obwieszczenie Marszałka Sejmu 21.02.2025, akt pierwotny Dz.U. 2021 poz. 2490; VER: isap.sejm.gov.pl WDU20250000244)
 

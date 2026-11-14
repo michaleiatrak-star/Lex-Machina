@@ -1,5 +1,11 @@
 # mod-CK-informacje-niejawne-bezpieczenstwo.md — Informacje niejawne i postępowania sprawdzające
 
+**Akt:** UABW (ustawa o ABW oraz AW) — t.j. Dz.U. 2026 poz. 937 (zm. po t.j.: 2026/1003 od 2026-10-28 — art. 7; 2026/1281 od 2026-10-31 — art. 27; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 136b, 136e).
+**Akt:** USKW (ustawa o SKW oraz SWW) — t.j. Dz.U. 2026 poz. 157 (zm. po t.j.: 2026/1281 od 2026-10-31 — art. 31).
+**Akt:** UOIN (ustawa o ochronie informacji niejawnych) — t.j. Dz.U. 2025 poz. 1209.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji
@@ -174,16 +180,24 @@ Klauzule tajności:
   POUFNE (P)
   ZASTRZEŻONE (Z) — najniższa
 
-Postępowanie sprawdzające:
-  → Wszczyna: ABW (cywilne) lub SKW (wojskowe) na wniosek kierownika jednostki
-  → Zwykłe (Poufne/Zastrzeżone): prowadzi służba
-  → Poszerzone (Tajne/Ściśle Tajne): rozszerzone badanie
-  → Decyzja: poświadczenie bezpieczeństwa albo odmowa
+Dostęp i postępowanie sprawdzające (UOIN — t.j. Dz.U. 2025 poz. 1209):
+  → „zastrzeżone”: BEZ postępowania — pisemne upoważnienie kierownika jednostki + szkolenie (art. 21 ust. 4)
+  → „poufne”: ZWYKŁE postępowanie (art. 22 ust. 1 pkt 1) — prowadzi PEŁNOMOCNIK OCHRONY na pisemne
+    polecenie kierownika jednostki (art. 23 ust. 1)
+  → „tajne”/„ściśle tajne”: POSZERZONE postępowanie (art. 22 ust. 1 pkt 2) — ABW albo SKW (art. 23 ust. 2–3)
+  → Poświadczenie ważne (art. 29 ust. 3): „poufne” 10 lat, „tajne” 7 lat, „ściśle tajne” 5 lat
+  → Cudzoziemiec: bez dostępu do „tajne”/„ściśle tajne”, z wyjątkami (art. 21 ust. 2–3)
 
-Odmowa poświadczenia — tryb zaskarżenia:
-  → Odwołanie do organu wyższego stopnia (ABW → Prezes RM / szef ABW)
-  → Skarga do WSA (art. 7 ustawy — weryfikuj w ELI (RZĄD 1))
-  → Postępowanie częściowo niejawne (sąd zaznajamia się z materiałami tajnymi)
+Odmowa / cofnięcie poświadczenia — tryb zaskarżenia:
+  → po ZWYKŁYM postępowaniu (decyzja pełnomocnika ochrony): odwołanie do Szefa ABW albo Szefa SKW,
+    składane za pośrednictwem pełnomocnika (art. 37 ust. 1, 3)
+  → po POSZERZONYM (ABW/SKW): odwołanie do Prezesa Rady Ministrów w 14 dni od doręczenia, bez uzasadnienia,
+    za pośrednictwem organu, który wydał decyzję (art. 35 ust. 1–2); niedopuszczalność/uchybienie — art. 36
+  → Skarga do sądu administracyjnego na rozstrzygnięcie organu odwoławczego: 30 dni od doręczenia;
+    sąd rozpoznaje na posiedzeniu niejawnym (art. 38 ust. 1–2)
+  → Wznowienie po umorzeniu/uniewinnieniu w sprawie karnej (art. 39)
+  ✅ [VER: ELI DU/2025/1209 art. 21–23, 29, 35–39, RZĄD 1, 2026-11-14] (poprzednio błędnie: „zwykłe —
+     poufne/zastrzeżone”, „wszczyna ABW”, „odwołanie ABW → Prezes RM” bez rozróżnienia trybów, „skarga — art. 7”)
 
 Cofnięcie poświadczenia:
   → Skutek: utrata dostępu do stanowiska wymagającego poświadczenia

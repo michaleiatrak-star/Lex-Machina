@@ -1,5 +1,10 @@
 # mod-BH — Ochrona ludności i obrona cywilna
 
+**Akt:** UZK (ustawa o zarządzaniu kryzysowym) — t.j. Dz.U. 2026 poz. 574.
+**Akt:** UOLOC (ustawa o ochronie ludności i obronie cywilnej) — akt pierwotny, bez t.j.: Dz.U. 2024 poz. 1907.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 Status modułu: produkcyjny `.md skill`, stan kontrolny 2026-05-28. Źródła prawa: wyłącznie ISAP dla aktów krajowych oraz oficjalne źródła UE dla prawa UE.
 
@@ -15,7 +20,7 @@ ochrona ludności, obrona cywilna, obowiązki JST, przedsiębiorców i podmiotó
 | Zmiana ustawy o ochronie ludności i obronie cywilnej (zm. 2025) | Dz.U. 2025 poz. 1705 |
 | Zmiana ustawy o ochronie ludności i obronie cywilnej (zm. 2026) | Dz.U. 2026 poz. 646 |
 | Zmiana ustawy o ochronie ludności i obronie cywilnej — art. 27 ustawy z 29.05.2026 o zmianie ustawy o zarządzaniu kryzysowym (art. 5 ust. 2, art. 15 ust. 1 pkt 6, art. 38, 40, 44) | ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026) |
-| Ustawa o zarządzaniu kryzysowym (plany zarządzania kryzysowego — art. 3 pkt 16, do których odsyłają art. 5 ust. 2 i art. 38 ustawy o ochronie ludności) | t.j. Dz.U. 2026 poz. 574; ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026), Dz.U. 2026 poz. 1206 (od 11.01.2027) |
+| Ustawa o zarządzaniu kryzysowym (plany zarządzania kryzysowego — art. 3 pkt 16, do których odsyłają art. 5 ust. 2 i art. 38 ustawy o ochronie ludności) | t.j. Dz.U. 2026 poz. 574; ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026), Dz.U. 2026 poz. 1206 [OD 2027-01-11: 2026/1206] (od 11.01.2027) |
 | Program Ochrony Ludności i Obrony Cywilnej 2025–2026 | M.P. 2025 poz. 541 |
 | KPA | Dz.U. 2025 poz. 1691 |
 

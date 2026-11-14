@@ -1,9 +1,17 @@
 # Moduł — Szczególne środki zabezpieczające i izolacja sprawców
 
+**Akt:** UPOZP (ustawa o postępowaniu wobec osób z zaburzeniami psychicznymi stwarzających zagrożenie) — t.j. Dz.U. 2022 poz. 1689.
+**Akt:** UPZPS (ustawa o przeciwdziałaniu zagrożeniom przestępczością na tle seksualnym i ochronie małoletnich) — t.j. Dz.U. 2026 poz. 110 (zm. po t.j.: 2026/421 od 2026-04-14 — art. 7, 12; 2026/187 [OD 2028-05-19: 2026/187] — art. 22j).
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
-- Ustawa o szczególnych środkach zabezpieczających wobec sprawców najcięższych przestępstw
-  przeciwko wolności seksualnej — Dz.U. 2020 poz. 2001 ze zm.
-  ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
+- ⛔ KOREKTA 2026-11-14: poprzednio wskazana „ustawa o szczególnych środkach zabezpieczających wobec
+  sprawców najcięższych przestępstw przeciwko wolności seksualnej — Dz.U. 2020 poz. 2001” NIE ISTNIEJE
+  pod tą nazwą; Dz.U. 2020 poz. 2001 to t.j. ustawy o systemie identyfikacji i rejestracji zwierząt
+  (ELI DU/2020/2001). Izolację sprawców reguluje ustawa z 22.11.2013 (niżej); rejestr sprawców —
+  ustawa z 13.05.2016 o przeciwdziałaniu zagrożeniom przestępczością na tle seksualnym i ochronie
+  małoletnich (ELI DU/2016/862 — t.j. w nagłówku modułu).
 - Ustawa z 22.11.2013 r. o postępowaniu wobec osób z zaburzeniami psychicznymi
   stwarzających zagrożenie życia, zdrowia lub wolności seksualnej innych osób
   — Dz.U. 2022 poz. 1689 t.j. (obwieszczenie z 11.08.2022)

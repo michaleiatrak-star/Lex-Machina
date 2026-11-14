@@ -1,5 +1,15 @@
 # mod-DG-prawo-wojskowe-obrona-mobilizacja — Prawo wojskowe, obrona Ojczyzny i mobilizacja
 
+**Akt:** UABW (ustawa o ABW oraz AW) — t.j. Dz.U. 2026 poz. 937 (zm. po t.j.: 2026/1003 od 2026-10-28 — art. 7; 2026/1281 od 2026-10-31 — art. 27; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 136b, 136e).
+**Akt:** UCBA (ustawa o Centralnym Biurze Antykorupcyjnym) — t.j. Dz.U. 2025 poz. 712 (zm. po t.j.: 2025/718 od 2026-01-01 — art. 100, 101, 101a; 2026/1281 od 2026-10-31 — art. 17; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 102b, 102e).
+**Akt:** USKW (ustawa o SKW oraz SWW) — t.j. Dz.U. 2026 poz. 157 (zm. po t.j.: 2026/1281 od 2026-10-31 — art. 31).
+**Akt:** UOO (ustawa o obronie Ojczyzny) — t.j. Dz.U. 2025 poz. 825 (zm. po t.j.: 2025/1080 od 2025-09-07 — art. 11a, 41, 45, 46, 46a, 48, 48a; 2026/426 od 2026-04-14 — art. 1, 2, 3, 4, 5, 7, 8g, 9, 32, 40, 43, 50, 53, 112, 114, 116, 120, 122, 124, 138a; 2026/635 od 2026-05-27 — art. 41, 42; 2026/815 od 2026-07-04 — art. 650; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 276, 279).
+**Akt:** UPSP (ustawa o Państwowej Straży Pożarnej) — t.j. Dz.U. 2026 poz. 1473.
+**Akt:** UZK (ustawa o zarządzaniu kryzysowym) — t.j. Dz.U. 2026 poz. 574 (zm. po t.j.: 2026/815 od 2026-07-04 — art. 1, 2, 3, 4, 4c, 5, 6, 6d, 6e, 6g, 6j, 6k, 6l, 6p, 6r, 6s, 6t, 6u, 6v, 6z; 2026/1206 [OD 2027-01-11: 2026/1206] — zakres: tekst nowelizacji w ELI).
+**Akt:** KPK (Kodeks postępowania karnego) — t.j. Dz.U. 2026 poz. 490 (zm. po t.j.: 2026/421 od 2026-04-14 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332; 2026/882 od 2026-07-16 — art. 607k, 607m, 607t, 607y, 607ya, 607zb; 2026/901 od 2026-07-21 — art. 87).
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status modułu: pełny moduł prawa polskiego klasy wzorcowej — analogiczny funkcjonalnie do modułów prawa pracy i prawa karnego.
 Data wdrożenia: 2026-05-28
 Źródło prawa: ISAP jako źródło podstawowe; LEX/Legalis pomocniczo wyłącznie przy braku bezpośredniego dostępu do aktu lub komentarza.
@@ -13,7 +23,7 @@ Moduł obejmuje obowiązek obrony, służbę wojskową, kwalifikację wojskową,
 - Ustawa o obronie Ojczyzny — Dz.U. 2025 poz. 825 t.j. (obwieszczenie Marszałka
   Sejmu z 11.06.2025) — poprzedni t.j./pierwotna publikacja Dz.U. 2022 poz. 655
   NIEAKTUALNA, zastąpiona przez t.j. 2025.825; ⏳ Po t.j. (ELI 2026-10-12): Dz.U.
-  2025 poz. 1014, 1080; Dz.U. 2026 poz. 26, 426, 635, 815 (od 4.07.2026), 1123. ⚠️ [F-57, 2026-08-14] wcześniejsza wersja tego modułu błędnie podawała
+  2025 poz. 1014, 1080; Dz.U. 2026 poz. 26 [OD 2027-01-01: 2026/26], 426, 635, 815 (od 4.07.2026), 1123. ⚠️ [F-57, 2026-08-14] wcześniejsza wersja tego modułu błędnie podawała
   2022.655 jako podstawę mimo że mapa DR-13 od 2026-07-02 wskazywała już 2025.825
   jako aktualny t.j. — naprawione.
 - Kodeks karny — część wojskowa i przepisy szczególne, kontrola ISAP.

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-13-sluzby-bezpieczenstwo-informacje-niejawne
 
+- 3.24 (2026-11-14): DR-13: wskazania z kwalifikatorem (UPol, ABW/AW, CBA, SKW, SG, ŻW, UOIN, UOO, PSP 2026/1473); UOIN art. 21–23, 29, 35–38 tryby; usunięty nieistniejący akt Dz.U. 2020/2001
 - 3.23 (2026-11-13): mod-ustawa-straz-graniczna: odesłanie do kontroli przedsiębiorcy → mod-wekslowe-kontrola-przedsiebiorcy-koncesje cz. B
 - 3.22 (2026-11-11, ELI 2026-11-11): mod-ustawa-PSP-OSP: ustawa o PSP — t.j. Dz.U. 2026 poz. 1473 (obwieszczenie 2.10.2026, stan na 23.09.2026) zamiast 2025/1312; porównanie t.j. artykuł po artykule i odczyt ustaw zmieniających w ELI: rozdz. 8 zakwaterowanie po zm. 2025/1366 (art. 74–82a, uchylone 77–81 i 83–84, przepisy przejściowe poza t.j.), art. 93 ust. 1 pkt 8 i 97g (2026/252), art. 37r ust. 3 i 37u (2026/646), art. 106 ust. 1a–1f (2026/821), ⏳ art. 105b i 105e od 1.01.2028 (2026/1123); dyscyplinarka art. 115–124n bez zmian treści. MAPA-AKTOW i rejestr modułów.
 - 3.21 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)

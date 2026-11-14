@@ -1,5 +1,19 @@
 # mod-BronAmunU-pozwolenia-cofniecie-strzelnice
 
+**Akt:** UBiA (ustawa o broni i amunicji) — t.j. Dz.U. 2024 poz. 485 (zm. po t.j.: 2025/1795 od 2026-03-18 — art. 10, 29; 2026/187 [OD 2028-05-19: 2026/187] — art. 15c).
+**Akt:** USPB (ustawa o środkach przymusu bezpośredniego i broni palnej) — t.j. Dz.U. 2026 poz. 244 (zm. po t.j.: 2026/737 od 2026-06-23 — art. 3; 2026/815 od 2026-07-04 — art. 4, 11, 12, 23, 33a, 33b, 33c, 47).
+**Akt:** UABW (ustawa o ABW oraz AW) — t.j. Dz.U. 2026 poz. 937 (zm. po t.j.: 2026/1003 od 2026-10-28 — art. 7; 2026/1281 od 2026-10-31 — art. 27; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 136b, 136e).
+**Akt:** UCBA (ustawa o Centralnym Biurze Antykorupcyjnym) — t.j. Dz.U. 2025 poz. 712 (zm. po t.j.: 2025/718 od 2026-01-01 — art. 100, 101, 101a; 2026/1281 od 2026-10-31 — art. 17; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 102b, 102e).
+**Akt:** USKW (ustawa o SKW oraz SWW) — t.j. Dz.U. 2026 poz. 157 (zm. po t.j.: 2026/1281 od 2026-10-31 — art. 31).
+**Akt:** UPol (ustawa o Policji) — t.j. Dz.U. 2025 poz. 636 (zm. po t.j.: 2025/1366 od 2025-07-01 — art. 28a, 88, 88a, 88b, 89, 90, 93; 2025/718 od 2026-01-01 — art. 119, 120; 2026/421 od 2026-04-14 — art. 3, 14b, 14c, 21h, 21k, 21l; 2026/646 od 2026-06-01 — art. 36k; 2026/760 od 2026-06-12 — art. 20, 21h, 21i, 21j, 21k, 21l, 21m, 21n, 21nb, 145j; 2026/821 od 2026-06-23 — art. 34, 34a; 2026/815 od 2026-07-04 — art. 16, 18c; 2026/1004 od 2026-08-27 — art. 15g, 15h; 2026/864 od 2026-10-01 — art. 1, 4, 7, 22b, 22c, 22d, 25, 28a, 71a, 72, 94, 106, 145kc, 145ke; 2026/1281 od 2026-10-31 — art. 19; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 121b, 121e; 2026/187 [OD 2028-05-19: 2026/187] — art. 25, 35a).
+**Akt:** USGr (ustawa o Straży Granicznej) — t.j. Dz.U. 2026 poz. 367 (zm. po t.j.: 2026/646 od 2026-06-01 — art. 41i; 2026/821 od 2026-06-23 — art. 37b, 37c, 55, 90a; 2026/815 od 2026-07-04 — art. 10e, 23; 2026/864 od 2026-10-01 — art. 1, 20, 20a, 20c, 20e, 30, 30a, 30b, 34a, 75a, 76, 94, 106; 2026/1281 od 2026-10-31 — art. 9e; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 125b, 125e).
+**Akt:** UZW (ustawa o Żandarmerii Wojskowej i wojskowych organach porządkowych) — t.j. Dz.U. 2026 poz. 159 (zm. po t.j.: 2026/815 od 2026-07-04 — art. 42, 51; 2026/1281 od 2026-10-31 — art. 31).
+**Akt:** USOP (ustawa o Służbie Ochrony Państwa) — t.j. Dz.U. 2025 poz. 34 (zm. po t.j.: 2025/179 od 2025-02-27 — art. 37; 2024/1871 od 2025-03-19 — art. 112, 174, 193; 2025/1366 od 2025-07-01 — art. 89, 152, 152a, 152b, 172, 172b, 178, 178a, 178c, 178d, 178g, 179, 182, 183, 184, 184a, 185, 186; 2025/1823 od 2025-07-01 — art. 1, 178g, 187a; 2025/718 od 2026-01-01 — art. 189; 2026/646 od 2026-06-01 — art. 98; 2026/821 od 2026-06-23 — art. 81, 119, 120, 157, 157a; 2026/815 od 2026-07-04 — art. 37, 39; 2026/1281 od 2026-10-31 — art. 42, 46, 49, 49a, 50, 53, 54; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 194, 198).
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** KPK (Kodeks postępowania karnego) — t.j. Dz.U. 2026 poz. 490 (zm. po t.j.: 2026/421 od 2026-04-14 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332; 2026/882 od 2026-07-16 — art. 607k, 607m, 607t, 607y, 607ya, 607zb; 2026/901 od 2026-07-21 — art. 87).
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.1 | **Dodano:** 2026-08-16 | **Zaktualizowano:** 2026-08-19 (F-92)
 **Akt:** ustawa z 21.05.1999 r. o broni i amunicji — **t.j. Dz.U. 2024 poz. 485**
 (obwieszczenie Marszałka Sejmu z 21.03.2024, ogł. 2.04.2024)

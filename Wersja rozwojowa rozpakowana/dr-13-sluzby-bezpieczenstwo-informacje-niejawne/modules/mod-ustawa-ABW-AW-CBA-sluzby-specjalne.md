@@ -1,5 +1,13 @@
 # mod-CA-sluzby-specjalne-abw-aw-cba-sop.md — Służby specjalne i SOP — procedury, kontrola, odpowiedzialność
 
+**Akt:** UABW (ustawa o ABW oraz AW) — t.j. Dz.U. 2026 poz. 937 (zm. po t.j.: 2026/1003 od 2026-10-28 — art. 7; 2026/1281 od 2026-10-31 — art. 27; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 136b, 136e).
+**Akt:** UCBA (ustawa o Centralnym Biurze Antykorupcyjnym) — t.j. Dz.U. 2025 poz. 712 (zm. po t.j.: 2025/718 od 2026-01-01 — art. 100, 101, 101a; 2026/1281 od 2026-10-31 — art. 17; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 102b, 102e).
+**Akt:** UPol (ustawa o Policji) — t.j. Dz.U. 2025 poz. 636 (zm. po t.j.: 2025/1366 od 2025-07-01 — art. 28a, 88, 88a, 88b, 89, 90, 93; 2025/718 od 2026-01-01 — art. 119, 120; 2026/421 od 2026-04-14 — art. 3, 14b, 14c, 21h, 21k, 21l; 2026/646 od 2026-06-01 — art. 36k; 2026/760 od 2026-06-12 — art. 20, 21h, 21i, 21j, 21k, 21l, 21m, 21n, 21nb, 145j; 2026/821 od 2026-06-23 — art. 34, 34a; 2026/815 od 2026-07-04 — art. 16, 18c; 2026/1004 od 2026-08-27 — art. 15g, 15h; 2026/864 od 2026-10-01 — art. 1, 4, 7, 22b, 22c, 22d, 25, 28a, 71a, 72, 94, 106, 145kc, 145ke; 2026/1281 od 2026-10-31 — art. 19; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 121b, 121e; 2026/187 [OD 2028-05-19: 2026/187] — art. 25, 35a).
+**Akt:** USOP (ustawa o Służbie Ochrony Państwa) — t.j. Dz.U. 2025 poz. 34 (zm. po t.j.: 2025/179 od 2025-02-27 — art. 37; 2024/1871 od 2025-03-19 — art. 112, 174, 193; 2025/1366 od 2025-07-01 — art. 89, 152, 152a, 152b, 172, 172b, 178, 178a, 178c, 178d, 178g, 179, 182, 183, 184, 184a, 185, 186; 2025/1823 od 2025-07-01 — art. 1, 178g, 187a; 2025/718 od 2026-01-01 — art. 189; 2026/646 od 2026-06-01 — art. 98; 2026/821 od 2026-06-23 — art. 81, 119, 120, 157, 157a; 2026/815 od 2026-07-04 — art. 37, 39; 2026/1281 od 2026-10-31 — art. 42, 46, 49, 49a, 50, 53, 54; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 194, 198).
+**Akt:** UOIN (ustawa o ochronie informacji niejawnych) — t.j. Dz.U. 2025 poz. 1209.
+**Akt:** UDA (ustawa o działaniach antyterrorystycznych) — t.j. Dz.U. 2025 poz. 194 (zm. po t.j.: 2026/815 od 2026-07-04 — art. 2, 4, 5, 12, 15, 16, 17).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji
