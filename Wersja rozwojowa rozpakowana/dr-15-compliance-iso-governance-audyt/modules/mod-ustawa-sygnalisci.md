@@ -1,5 +1,14 @@
 # mod-ustawa-sygnalisci.md — Ochrona sygnalistów [PERSPEKTYWA COMPLIANCE PRACODAWCY]
 
+**Akt:** AML (ustawa o przeciwdziałaniu praniu pieniędzy oraz finansowaniu terroryzmu) — t.j. Dz.U. 2025 poz. 644 (zm. po t.j.: 2025/1669 od 2026-06-30 — art. 72; 2026/875 [OD 2027-01-01: 2026/875] — art. 129f, 129h; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 2, 89).
+**Akt:** UNRF (ustawa o nadzorze nad rynkiem finansowym) — t.j. Dz.U. 2026 poz. 935 (zm. po t.j.: 2026/1206 od 2026-09-29 — art. 2, 6b, 8, 9, 9a, 10, 12, 14, 14a, 15, 15a, 17ca, 17g, 19c, 20; 2026/1003 od 2026-10-28 — art. 17g, 17h; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 1, 6, 6b).
+**Akt:** UODO (ustawa o ochronie danych osobowych) — t.j. Dz.U. 2019 poz. 1781 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 104; 2026/548 od 2026-07-23 — art. 34; 2026/1003 od 2026-10-28 — art. 59, 59a).
+**Akt:** UOS (ustawa o ochronie sygnalistów) — akt pierwotny, bez t.j.: Dz.U. 2024 poz. 928.
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** KP (Kodeks pracy) — t.j. Dz.U. 2026 poz. 1245.
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Zakres modułu:** PRACODAWCA / organizacja — wdrożenie kanału zgłoszeń, obowiązki compliance, integracja z CMS (ISO 37301) i AML, RODO w rejestrze zgłoszeń, audyt procedury.
 **Wersja kanoniczna dla perspektywy procesowej sygnalisty:** `dr-05` → `mod-ustawa-sygnalisci.md`
 **Świadome utrzymanie dwóch wersji:** TAK — zakresy się nie pokrywają; tu perspektywa compliance pracodawcy, w DR-05 perspektywa procesowo-pracownicza sygnalisty.

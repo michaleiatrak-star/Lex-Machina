@@ -1,5 +1,12 @@
 # mod-ISO-37001-antykorupcja.md — ISO 37001: System Zarządzania Antykorupcyjnego (ABMS)
 
+**Akt:** UOPZ (ustawa o odpowiedzialności podmiotów zbiorowych za czyny zabronione pod groźbą kary) — t.j. Dz.U. 2024 poz. 1822 (zm. po t.j.: 2026/516 od 2026-04-30 — art. 7a, 7b, 16).
+**Akt:** UOS (ustawa o ochronie sygnalistów) — akt pierwotny, bez t.j.: Dz.U. 2024 poz. 928.
+**Akt:** UAnt (ustawa o ograniczeniu prowadzenia działalności gospodarczej przez osoby pełniące funkcje publiczne) — t.j. Dz.U. 2025 poz. 499 (zm. po t.j.: 2026/160 od 2026-02-27 — art. 12; 2026/177 od 2026-03-04 — art. 1, 8, 10; 2026/1003 od 2026-10-28 — art. 2, 5, 10).
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł norm ISO klasy wzorcowej. Stan metodyczny: 2026-06-07.
 Normy ISO są standardami dobrowolnymi — nie aktami prawnymi. Weryfikuj ich aktualność
 na iso.org lub PKN (pkn.pl). Powiązane akty prawne weryfikuj w ELI (RZĄD 1).

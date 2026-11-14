@@ -1,5 +1,6 @@
 # CHANGELOG — dr-15-compliance-iso-governance-audyt
 
+- 3.22 (2026-11-14): DR-15: wskazania z kwalifikatorem (AML, UNRF, KSC, UODO, podmioty zbiorowe, sygnaliści, ustawa antykorupcyjna, KN 2026/515)
 - 3.21 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.20 (2026-10-22, AUDYT-2026-10-22): PSWiN: t.j. Dz.U. 2026 poz. 1362 (było 2024/1571) w SKILL.md i MAPA-AKTOW.
 - 3.19 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości

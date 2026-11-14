@@ -1,5 +1,8 @@
 # mod-CW-zamowienia-obronne-bezpieczenstwa.md — Zamówienia obronne, bezpieczeństwa i infrastruktura krytyczna
 
+**Akt:** PZP (Prawo zamówień publicznych) — t.j. Dz.U. 2026 poz. 793 (zm. po t.j.: 2026/1347 [OD 2026-12-01: 2026/1347] — art. 214, 364).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji

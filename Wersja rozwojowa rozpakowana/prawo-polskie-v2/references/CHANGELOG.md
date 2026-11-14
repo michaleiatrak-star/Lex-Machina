@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.113 (2026-11-14): DR-15: wskazania z kwalifikatorem (AML, UNRF, KSC, UODO, podmioty zbiorowe, sygnaliści, ustawa antykorupcyjna, KN 2026/515)
 - 6.112 (2026-11-14): DR-13: wskazania z kwalifikatorem (UPol, ABW/AW, CBA, SKW, SG, ŻW, UOIN, UOO, PSP 2026/1473); UOIN art. 21–23, 29, 35–38 tryby; usunięty nieistniejący akt Dz.U. 2020/2001
 - 6.111 (2026-11-14): DR-12: wskazania z kwalifikatorem (USP, PrProk 2026/810, PrAdw, URP, PrNot, komornicy 2026/881, UKSC, kuratorzy 2026/200, regulatorzy)
 - 6.110 (2026-11-14): DR-11: wskazania z kwalifikatorem (UODO, KSC 2026/20, PKE 2024/1221, PrAut, PWP, UZNK 2026/85); MiCA — brak krajowej ustawy wykonawczej w ELI, organ oznaczony jako niezweryfikowany

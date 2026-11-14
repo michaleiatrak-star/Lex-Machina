@@ -1,5 +1,9 @@
 # mod-CV-aml-finansowe-nadzor.md — AML, rynek finansowy i nadzór
 
+**Akt:** AML (ustawa o przeciwdziałaniu praniu pieniędzy oraz finansowaniu terroryzmu) — t.j. Dz.U. 2025 poz. 644 (zm. po t.j.: 2025/1669 od 2026-06-30 — art. 72; 2026/875 [OD 2027-01-01: 2026/875] — art. 129f, 129h; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 2, 89).
+**Akt:** UNRF (ustawa o nadzorze nad rynkiem finansowym) — t.j. Dz.U. 2026 poz. 935 (zm. po t.j.: 2026/1206 od 2026-09-29 — art. 2, 6b, 8, 9, 9a, 10, 12, 14, 14a, 15, 15a, 17ca, 17g, 19c, 20; 2026/1003 od 2026-10-28 — art. 17g, 17h; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 1, 6, 6b).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji
