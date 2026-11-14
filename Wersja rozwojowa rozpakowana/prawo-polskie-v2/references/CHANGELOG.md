@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.111 (2026-11-14): DR-12: wskazania z kwalifikatorem (USP, PrProk 2026/810, PrAdw, URP, PrNot, komornicy 2026/881, UKSC, kuratorzy 2026/200, regulatorzy)
 - 6.110 (2026-11-14): DR-11: wskazania z kwalifikatorem (UODO, KSC 2026/20, PKE 2024/1221, PrAut, PWP, UZNK 2026/85); MiCA — brak krajowej ustawy wykonawczej w ELI, organ oznaczony jako niezweryfikowany
 - 6.109 (2026-11-14): DR-10: wskazania z kwalifikatorem (PrFarm, URef, UDL, UPP, UOZP, SIOZ 2026/1304, weterynaria, żywność); PrFarm art. 99 ust. 3–3d (1%, 4 apteki, 3000 mieszk. i 500 m); medycyna laboratoryjna
 - 6.108 (2026-11-14): DR-09: wskazania z kwalifikatorem (PrBud, POŚ 2026/1453, UOP, PrLow, PrWod, PrEn, OZE, transport); PrBud art. 29 altana/basen; UOP art. 83f progi i zgłoszenie

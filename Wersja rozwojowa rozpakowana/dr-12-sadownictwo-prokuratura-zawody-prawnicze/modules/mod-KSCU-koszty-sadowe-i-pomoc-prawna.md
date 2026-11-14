@@ -1,5 +1,13 @@
 # KSCU — koszty sądowe w sprawach cywilnych
 
+**Akt:** USP (Prawo o ustroju sądów powszechnych) — t.j. Dz.U. 2024 poz. 334 (zm. po t.j.: 2024/1907 od 2025-01-01 — art. 49; 2025/526 od 2025-05-07 — art. 77; 2025/820 od 2025-07-25 — art. 16; 2025/1609 od 2025-12-09 — art. 1, 2, 22a; 2025/1172 od 2026-03-01 — art. 20, 53e, 157b; 2025/1178 od 2026-03-01 — art. 41, 53e; 2026/370 od 2026-04-03 — art. 147, 149, 155, 155a, 155ca, 155cb, 155d, 155e; 2026/26 [OD 2027-01-01: 2026/26] — art. 70, 94, 94b, 94d; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 94).
+**Akt:** PrAdw (Prawo o adwokaturze) — t.j. Dz.U. 2024 poz. 1564 (zm. po t.j.: 2025/1172 od 2026-03-01 — art. 4, 37d; 2026/370 od 2026-04-03 — art. 66, 78a; 2026/846 od 2026-10-01 — art. 6; 2026/1290 od 2026-10-17 — art. 1, 1a, 3, 4, 4b, 4c, 4ca, 7, 8a, 10, 11, 12, 16a, 16b, 16c, 16d, 16e, 37a, 40, 42).
+**Akt:** UKS (ustawa o komornikach sądowych) — t.j. Dz.U. 2026 poz. 881.
+**Akt:** UKSC (ustawa o kosztach sądowych w sprawach cywilnych) — t.j. Dz.U. 2025 poz. 1228 (zm. po t.j.: 2026/473 od 2026-07-08 — art. 35, 36, 36a, 96; 2026/1003 od 2026-10-28 — art. 3, 32; 2026/346 [OD 2028-09-30: 2026/346] — art. 52, 53, 55).
+**Akt:** KPC (Kodeks postępowania cywilnego) — t.j. Dz.U. 2026 poz. 468 (zm. po t.j.: 2026/473 od 2026-07-08 — art. 460, 461, 465, 476, 631, 632, 3982, 4771b, 4771c, 4771d, 4777a, 7555, 7556; 2026/830 od 2026-07-08 — art. 4; 2026/1003 od 2026-10-28 — zakres: tekst nowelizacji w ELI; 2026/1046 od 2026-11-05 — art. 1, 2, 47, 94, 461, 477; 2026/1296 od 2026-11-06 — art. 17).
+**Akt:** PPSA (Prawo o postępowaniu przed sądami administracyjnymi) — t.j. Dz.U. 2026 poz. 143 (zm. po t.j.: 2026/846 od 2026-06-26 — art. 53, 264).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Stan weryfikacji:** 2026-08-28  
 **Tekst jednolity:** Dz.U. 2025 poz. 1228  
 **Źródło kanoniczne:** ELI/ISAP  

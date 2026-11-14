@@ -1,5 +1,12 @@
 # Moduł [AU] — Postępowania regulacyjne: UOKiK / URE / UKE / KNF
 
+**Akt:** UOKiK (ustawa o ochronie konkurencji i konsumentów) — t.j. Dz.U. 2025 poz. 1714 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 29, 31).
+**Akt:** PrEn (Prawo energetyczne) — t.j. Dz.U. 2026 poz. 43 (zm. po t.j.: 2026/516 od 2026-04-30 — art. 2, 3, 4, 4j, 5, 5ad, 5ga, 5gb, 6g, 6h, 6i, 7, 16, 31d, 49, 71, 72, 306i, 777; 2026/607 od 2026-05-21 — art. 23r, 35; 2026/900 od 2026-07-21 — art. 3, 3a, 4j, 5, 7, 7b, 11, 23, 32, 33, 43, 45, 46, 47, 54, 62c; 2026/1348 od 2026-10-17 — art. 3, 4k, 7, 9g, 9j, 9ja, 11, 11t, 11y, 11zc, 11zh, 11zha, 20d, 20e, 20f, 28, 32d, 43c, 56; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 3, 7, 7a, 9g, 16, 23, 56).
+**Akt:** PKE (Prawo komunikacji elektronicznej) — akt pierwotny, bez t.j.: Dz.U. 2024 poz. 1221.
+**Akt:** UNRF (ustawa o nadzorze nad rynkiem finansowym) — t.j. Dz.U. 2026 poz. 935 (zm. po t.j.: 2026/1206 od 2026-09-29 — art. 2, 6b, 8, 9, 9a, 10, 12, 14, 14a, 15, 15a, 17ca, 17g, 19c, 20; 2026/1003 od 2026-10-28 — art. 17g, 17h; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 1, 6, 6b).
+**Akt:** PPSA (Prawo o postępowaniu przed sądami administracyjnymi) — t.j. Dz.U. 2026 poz. 143 (zm. po t.j.: 2026/846 od 2026-06-26 — art. 53, 264).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 ---
 WSPÓLNE ZASADY DLA MODUŁU:

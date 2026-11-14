@@ -1,5 +1,13 @@
 # mod-KM — Komornik sądowy jako zawód (Ustawa o komornikach sądowych)
 
+**Akt:** PrAdw (Prawo o adwokaturze) — t.j. Dz.U. 2024 poz. 1564 (zm. po t.j.: 2025/1172 od 2026-03-01 — art. 4, 37d; 2026/370 od 2026-04-03 — art. 66, 78a; 2026/846 od 2026-10-01 — art. 6; 2026/1290 od 2026-10-17 — art. 1, 1a, 3, 4, 4b, 4c, 4ca, 7, 8a, 10, 11, 12, 16a, 16b, 16c, 16d, 16e, 37a, 40, 42).
+**Akt:** PrNot (Prawo o notariacie) — t.j. Dz.U. 2026 poz. 614 (zm. po t.j.: 2026/1099 [OD 2026-11-19: 2026/1099] — art. 2, 92a).
+**Akt:** UKS (ustawa o komornikach sądowych) — t.j. Dz.U. 2026 poz. 881.
+**Akt:** UKK (ustawa o kosztach komorniczych) — t.j. Dz.U. 2024 poz. 377.
+**Akt:** UKSC (ustawa o kosztach sądowych w sprawach cywilnych) — t.j. Dz.U. 2025 poz. 1228 (zm. po t.j.: 2026/473 od 2026-07-08 — art. 35, 36, 36a, 96; 2026/1003 od 2026-10-28 — art. 3, 32; 2026/346 [OD 2028-09-30: 2026/346] — art. 52, 53, 55).
+**Akt:** KPC (Kodeks postępowania cywilnego) — t.j. Dz.U. 2026 poz. 468 (zm. po t.j.: 2026/473 od 2026-07-08 — art. 460, 461, 465, 476, 631, 632, 3982, 4771b, 4771c, 4771d, 4777a, 7555, 7556; 2026/830 od 2026-07-08 — art. 4; 2026/1003 od 2026-10-28 — zakres: tekst nowelizacji w ELI; 2026/1046 od 2026-11-05 — art. 1, 2, 47, 94, 461, 477; 2026/1296 od 2026-11-06 — art. 17).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.MD`.
 ---
 WSPÓLNE ZASADY DLA MODUŁU:

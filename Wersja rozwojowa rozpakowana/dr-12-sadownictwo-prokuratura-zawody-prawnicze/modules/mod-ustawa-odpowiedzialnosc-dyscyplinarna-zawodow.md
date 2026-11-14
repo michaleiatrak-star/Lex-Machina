@@ -1,5 +1,14 @@
 # Moduł [AZ] — Postępowania dyscyplinarne zawodów zaufania publicznego
 
+**Akt:** USP (Prawo o ustroju sądów powszechnych) — t.j. Dz.U. 2024 poz. 334 (zm. po t.j.: 2024/1907 od 2025-01-01 — art. 49; 2025/526 od 2025-05-07 — art. 77; 2025/820 od 2025-07-25 — art. 16; 2025/1609 od 2025-12-09 — art. 1, 2, 22a; 2025/1172 od 2026-03-01 — art. 20, 53e, 157b; 2025/1178 od 2026-03-01 — art. 41, 53e; 2026/370 od 2026-04-03 — art. 147, 149, 155, 155a, 155ca, 155cb, 155d, 155e; 2026/26 [OD 2027-01-01: 2026/26] — art. 70, 94, 94b, 94d; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 94).
+**Akt:** PrAdw (Prawo o adwokaturze) — t.j. Dz.U. 2024 poz. 1564 (zm. po t.j.: 2025/1172 od 2026-03-01 — art. 4, 37d; 2026/370 od 2026-04-03 — art. 66, 78a; 2026/846 od 2026-10-01 — art. 6; 2026/1290 od 2026-10-17 — art. 1, 1a, 3, 4, 4b, 4c, 4ca, 7, 8a, 10, 11, 12, 16a, 16b, 16c, 16d, 16e, 37a, 40, 42).
+**Akt:** URP (ustawa o radcach prawnych) — t.j. Dz.U. 2024 poz. 499 (zm. po t.j.: 2025/1172 od 2026-03-01 — art. 6, 2211; 2026/370 od 2026-04-03 — art. 25, 362; 2026/731 od 2026-06-18 — art. 1, 5a, 5b, 5c, 5d, 8, 8a, 12, 12a, 22, 28, 35, 37, 45, 52, 52a, 60, 60a, 62, 64; 2026/846 od 2026-10-01 — art. 3).
+**Akt:** PrNot (Prawo o notariacie) — t.j. Dz.U. 2026 poz. 614 (zm. po t.j.: 2026/1099 [OD 2026-11-19: 2026/1099] — art. 2, 92a).
+**Akt:** UKS (ustawa o komornikach sądowych) — t.j. Dz.U. 2026 poz. 881.
+**Akt:** URzP (ustawa o rzecznikach patentowych) — t.j. Dz.U. 2026 poz. 778 (zm. po t.j.: 2026/846 od 2026-10-01 — art. 14).
+**Akt:** PPSA (Prawo o postępowaniu przed sądami administracyjnymi) — t.j. Dz.U. 2026 poz. 143 (zm. po t.j.: 2026/846 od 2026-06-26 — art. 53, 264).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 ---
 WSPÓLNE ZASADY DLA MODUŁU:

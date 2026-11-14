@@ -1,5 +1,10 @@
 # mod-BM-biegli-sadowi-opinie-eksperckie — BIEGLI SĄDOWI I OPINIE EKSPERCKIE
 
+**Akt:** UKSC (ustawa o kosztach sądowych w sprawach cywilnych) — t.j. Dz.U. 2025 poz. 1228 (zm. po t.j.: 2026/473 od 2026-07-08 — art. 35, 36, 36a, 96; 2026/1003 od 2026-10-28 — art. 3, 32; 2026/346 [OD 2028-09-30: 2026/346] — art. 52, 53, 55).
+**Akt:** KPC (Kodeks postępowania cywilnego) — t.j. Dz.U. 2026 poz. 468 (zm. po t.j.: 2026/473 od 2026-07-08 — art. 460, 461, 465, 476, 631, 632, 3982, 4771b, 4771c, 4771d, 4777a, 7555, 7556; 2026/830 od 2026-07-08 — art. 4; 2026/1003 od 2026-10-28 — zakres: tekst nowelizacji w ELI; 2026/1046 od 2026-11-05 — art. 1, 2, 47, 94, 461, 477; 2026/1296 od 2026-11-06 — art. 17).
+**Akt:** KPK (Kodeks postępowania karnego) — t.j. Dz.U. 2026 poz. 490 (zm. po t.j.: 2026/421 od 2026-04-14 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332; 2026/882 od 2026-07-16 — art. 607k, 607m, 607t, 607y, 607ya, 607zb; 2026/901 od 2026-07-21 — art. 87).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej, uzupełniony do standardu prawa pracy i prawa karnego.
 Data wdrożenia: 2026-05-28.
 Zakres: powołanie biegłego, opinia, opinia uzupełniająca, zarzuty, wynagrodzenie, metodologia.
