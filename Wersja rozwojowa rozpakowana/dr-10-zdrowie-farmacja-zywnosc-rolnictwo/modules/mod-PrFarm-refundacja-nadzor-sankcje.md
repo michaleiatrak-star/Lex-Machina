@@ -1,5 +1,12 @@
 # mod-PrFarm-refundacja-nadzor-sankcje
 
+**Akt:** PrFarm (Prawo farmaceutyczne) — t.j. Dz.U. 2026 poz. 612 (zm. po t.j.: 2026/1004 od 2026-08-27 — art. 72; 2026/1079 od 2026-09-10 — art. 37av, 37ava, 42, 70, 96, 103).
+**Akt:** URef (ustawa o refundacji leków, środków spożywczych specjalnego przeznaczenia żywieniowego oraz wyrobów medycznych) — t.j. Dz.U. 2026 poz. 253.
+**Akt:** UPP (ustawa o prawach pacjenta i Rzeczniku Praw Pacjenta) — t.j. Dz.U. 2024 poz. 581 (zm. po t.j.: 2026/26 [OD 2027-01-01: 2026/26] — art. 28).
+**Akt:** USOZ (ustawa o świadczeniach opieki zdrowotnej finansowanych ze środków publicznych) — t.j. Dz.U. 2025 poz. 1461 (zm. po t.j.: 2025/1537 od 2026-01-01 — art. 2, 4, 7, 7a, 19a, 20, 22, 23, 23b, 23c, 23e, 23h, 30, 31d, 40, 42d, 42f, 42i, 42j, 47c; 2025/1739 od 2026-01-01 — art. 97, 116, 132c, 132d; 2026/203 od 2026-03-05 — art. 12, 50, 87; 2026/972 od 2026-08-05 — art. 31lc, 31n, 31o; 2026/986 od 2026-08-07 — art. 42b, 159a, 189a, 189b; 2026/1007 od 2026-08-11 — art. 23e, 97, 102; 2026/26 [OD 2027-01-01: 2026/26] — art. 87a).
+**Akt:** UWM (ustawa o wyrobach medycznych) — t.j. Dz.U. 2024 poz. 1620.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł uzupełniający do `mod-PrFarm-szczegolowy.md`
 **Wydzielony:** 2026-06-14 (audyt — moduł nadrzędny >400 linii, podział tematyczny)
 

@@ -1,5 +1,13 @@
 # mod-ustawa-psycholog-zawod — Psycholog jako zawód zaufania publicznego (STAN PRZEJŚCIOWY 2026-2028)
 
+**Akt:** USOZ (ustawa o świadczeniach opieki zdrowotnej finansowanych ze środków publicznych) — t.j. Dz.U. 2025 poz. 1461 (zm. po t.j.: 2025/1537 od 2026-01-01 — art. 2, 4, 7, 7a, 19a, 20, 22, 23, 23b, 23c, 23e, 23h, 30, 31d, 40, 42d, 42f, 42i, 42j, 47c; 2025/1739 od 2026-01-01 — art. 97, 116, 132c, 132d; 2026/203 od 2026-03-05 — art. 12, 50, 87; 2026/791 od 2026-07-01 — art. 49, 50, 51, 188e, 240; 2026/972 od 2026-08-05 — art. 31lc, 31n, 31o; 2026/986 od 2026-08-07 — art. 42b, 159a, 189a, 189b; 2026/1007 od 2026-08-11 — art. 23e, 97, 102; 2026/26 [OD 2027-01-01: 2026/26] — art. 87a).
+**Akt:** UIL (ustawa o izbach lekarskich) — t.j. Dz.U. 2021 poz. 1342 (zm. po t.j.: 2023/1234 od 2023-07-14 — art. 49).
+**Akt:** UOZP (ustawa o ochronie zdrowia psychicznego) — t.j. Dz.U. 2024 poz. 917 (zm. po t.j.: 2026/187 [OD 2028-05-19: 2026/187] — art. 5).
+**Akt:** UZPs (ustawa o zawodzie psychologa i samorządzie zawodowym psychologów) — t.j. Dz.U. 2019 poz. 1026 (zm. po t.j.: 2026/187 od 2026-03-05 — art. 8).
+**Akt:** PSWN (Prawo o szkolnictwie wyższym i nauce) — t.j. Dz.U. 2026 poz. 1362.
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (b) zawody medyczne i pokrewne, analiza Senatu OT-625).

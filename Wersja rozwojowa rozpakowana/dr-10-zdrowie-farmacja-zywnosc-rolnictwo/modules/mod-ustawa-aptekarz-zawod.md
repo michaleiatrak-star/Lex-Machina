@@ -1,5 +1,12 @@
 # mod-ustawa-aptekarz-zawod — Aptekarz (farmaceuta) jako zawód zaufania publicznego
 
+**Akt:** PrFarm (Prawo farmaceutyczne) — t.j. Dz.U. 2026 poz. 612 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 75, 83; 2026/1004 od 2026-08-27 — art. 72; 2026/1079 od 2026-09-10 — art. 37av, 37ava, 42, 70, 96, 103).
+**Akt:** URef (ustawa o refundacji leków, środków spożywczych specjalnego przeznaczenia żywieniowego oraz wyrobów medycznych) — t.j. Dz.U. 2026 poz. 253 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 38d, 38e).
+**Akt:** UIA (ustawa o izbach aptekarskich) — t.j. Dz.U. 2025 poz. 1693.
+**Akt:** UWM (ustawa o wyrobach medycznych) — t.j. Dz.U. 2024 poz. 1620.
+**Akt:** UPIS (ustawa o Państwowej Inspekcji Sanitarnej) — t.j. Dz.U. 2024 poz. 416 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 2, 2b, 3, 4, 4c, 4d, 4e, 4g, 4j, 4k, 4m, 4n, 4p, 8, 11, 13, 13a, 13d, 13e, 20).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (b) zawody medyczne i pokrewne, analiza Senatu OT-625).

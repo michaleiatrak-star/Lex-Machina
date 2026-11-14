@@ -1,5 +1,10 @@
 # Modul - Zawood lekarza i lekarza dentysty
 
+**Akt:** UPP (ustawa o prawach pacjenta i Rzeczniku Praw Pacjenta) — t.j. Dz.U. 2024 poz. 581 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 7, 10, 14, 26, 30a, 30b, 35; 2026/26 [OD 2027-01-01: 2026/26] — art. 28).
+**Akt:** UZL (ustawa o zawodach lekarza i lekarza dentysty) — t.j. Dz.U. 2026 poz. 37 (zm. po t.j.: 2026/203 od 2026-03-05 — art. 7; 2026/791 od 2026-07-01 — art. 3, 15b, 15d, 15f, 15g, 15h, 41a).
+**Akt:** UIL (ustawa o izbach lekarskich) — t.j. Dz.U. 2021 poz. 1342 (zm. po t.j.: 2023/1234 od 2023-07-14 — art. 49).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 05.12.1996 r. o zawodach lekarza i lekarza dentysty**
 - Tekst jednolity: **Dz.U. 2026 poz. 37** (t.j. z 13.01.2026)

@@ -1,5 +1,11 @@
 # mod-CG-zawody-prawnicze-i-pokrewne.md — Zawody prawnicze i pokrewne — doradcy, rzecznicy patentowi, syndycy, mediatorzy
 
+**Akt:** PrFarm (Prawo farmaceutyczne) — t.j. Dz.U. 2026 poz. 612 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 75, 83; 2026/1004 od 2026-08-27 — art. 72; 2026/1079 od 2026-09-10 — art. 37av, 37ava, 42, 70, 96, 103).
+**Akt:** UZPs (ustawa o zawodzie psychologa i samorządzie zawodowym psychologów) — t.j. Dz.U. 2019 poz. 1026 (zm. po t.j.: 2026/187 od 2026-03-05 — art. 8).
+**Akt:** UDPod (ustawa o doradztwie podatkowym) — t.j. Dz.U. 2026 poz. 1274.
+**Akt:** URzP (ustawa o rzecznikach patentowych) — t.j. Dz.U. 2026 poz. 778 (zm. po t.j.: 2026/846 od 2026-10-01 — art. 14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > ⚠️ PRZEMIANOWANIE PLIKU 2026-07-15 (naprawa F-2): ten plik nazywał się wcześniej
 > `mod-ustawa-zawody-medyczne-i-prawnicze.md`, mimo że jego treść dotyczy
 > WYŁĄCZNIE zawodów prawniczych pokrewnych (doradcy podatkowi, rzecznicy

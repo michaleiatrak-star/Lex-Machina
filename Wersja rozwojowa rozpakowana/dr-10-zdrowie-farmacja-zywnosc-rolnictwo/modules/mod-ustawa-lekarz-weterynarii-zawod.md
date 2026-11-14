@@ -1,5 +1,13 @@
 # mod-ustawa-lekarz-weterynarii-zawod — Lekarz weterynarii jako zawód zaufania publicznego
 
+**Akt:** PrFarm (Prawo farmaceutyczne) — t.j. Dz.U. 2026 poz. 612 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 75, 83; 2026/1004 od 2026-08-27 — art. 72; 2026/1079 od 2026-09-10 — art. 37av, 37ava, 42, 70, 96, 103).
+**Akt:** UZL (ustawa o zawodach lekarza i lekarza dentysty) — t.j. Dz.U. 2026 poz. 37 (zm. po t.j.: 2026/203 od 2026-03-05 — art. 7; 2026/791 od 2026-07-01 — art. 3, 15b, 15d, 15f, 15g, 15h, 41a).
+**Akt:** UIL (ustawa o izbach lekarskich) — t.j. Dz.U. 2021 poz. 1342 (zm. po t.j.: 2023/1234 od 2023-07-14 — art. 49).
+**Akt:** UPPZ (ustawa o produktach pochodzenia zwierzęcego) — t.j. Dz.U. 2026 poz. 981.
+**Akt:** UIW (ustawa o Inspekcji Weterynaryjnej) — t.j. Dz.U. 2024 poz. 12 (zm. po t.j.: 2025/1795 od 2026-03-18 — art. 1, 2, 3, 4, 4a, 4b, 5, 8a, 12, 13, 14, 14c, 15c, 15d, 15e, 15i, 16, 17, 18, 21).
+**Akt:** UZLW (ustawa o zawodzie lekarza weterynarii i izbach lekarsko-weterynaryjnych) — t.j. Dz.U. 2026 poz. 125.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (b) zawody medyczne i pokrewne, analiza Senatu OT-625).

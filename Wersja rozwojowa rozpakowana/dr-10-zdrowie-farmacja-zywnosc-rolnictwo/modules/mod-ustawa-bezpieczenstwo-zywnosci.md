@@ -1,5 +1,18 @@
 # Moduł — Bezpieczeństwo żywności i żywienia
 
+**Akt:** PrFarm (Prawo farmaceutyczne) — t.j. Dz.U. 2026 poz. 612 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 75, 83; 2026/1004 od 2026-08-27 — art. 72; 2026/1079 od 2026-09-10 — art. 37av, 37ava, 42, 70, 96, 103).
+**Akt:** UPIS (ustawa o Państwowej Inspekcji Sanitarnej) — t.j. Dz.U. 2024 poz. 416 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 2, 2b, 3, 4, 4c, 4d, 4e, 4g, 4j, 4k, 4m, 4n, 4p, 8, 11, 13, 13a, 13d, 13e, 20).
+**Akt:** UZChZ (ustawa o zapobieganiu oraz zwalczaniu zakażeń i chorób zakaźnych u ludzi) — t.j. Dz.U. 2025 poz. 1675 (zm. po t.j.: 2026/92 od 2026-02-12 — zakres: tekst nowelizacji w ELI; 2026/791 od 2026-07-01 — art. 21d; 2026/26 [OD 2027-01-01: 2026/26] — art. 47).
+**Akt:** UZP (ustawa o zdrowiu publicznym) — t.j. Dz.U. 2026 poz. 149 (zm. po t.j.: 2026/1004 od 2026-08-27 — art. 1, 8b).
+**Akt:** UBZZ (ustawa o bezpieczeństwie żywności i żywienia) — t.j. Dz.U. 2026 poz. 1399.
+**Akt:** UJHAR (ustawa o jakości handlowej artykułów rolno-spożywczych) — t.j. Dz.U. 2023 poz. 1980 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 2, 3, 4, 5, 6, 7, 8, 10, 12, 12a, 13, 14, 15a, 15b, 15d, 17, 17a, 17d, 17e, 18).
+**Akt:** UPPZ (ustawa o produktach pochodzenia zwierzęcego) — t.j. Dz.U. 2026 poz. 981.
+**Akt:** UIW (ustawa o Inspekcji Weterynaryjnej) — t.j. Dz.U. 2024 poz. 12.
+**Akt:** UZZw (ustawa o zdrowiu zwierząt) — akt pierwotny, bez t.j.: Dz.U. 2025 poz. 1795.
+**Akt:** UARiMR (ustawa o Agencji Restrukturyzacji i Modernizacji Rolnictwa) — t.j. Dz.U. 2026 poz. 942.
+**Akt:** UPSWPR (ustawa o Planie Strategicznym dla Wspólnej Polityki Rolnej 2023–2027) — t.j. Dz.U. 2026 poz. 1462.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > ⚠️ PODZIELONY 2026-08-12 (audyt-systemu-v4/references/CHECKLIST-DEDUP.md —
 > NOTA-4, moduł >400 linii, próg przekroczony ~4.6x przy 1863 liniach).
 > Wydzielono treść o HODOWLI/ZDROWIU ZWIERZĄT (599 l.) →

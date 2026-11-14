@@ -1,5 +1,16 @@
 # mod-CT-farmaceutyczne-sanitarne-gif-gis.md — Prawo farmaceutyczne, sanitarne, GIF/GIS
 
+**Akt:** PrFarm (Prawo farmaceutyczne) — t.j. Dz.U. 2026 poz. 612 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 75, 83; 2026/1004 od 2026-08-27 — art. 72; 2026/1079 od 2026-09-10 — art. 37av, 37ava, 42, 70, 96, 103).
+**Akt:** URef (ustawa o refundacji leków, środków spożywczych specjalnego przeznaczenia żywieniowego oraz wyrobów medycznych) — t.j. Dz.U. 2026 poz. 253 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 38d, 38e).
+**Akt:** UIA (ustawa o izbach aptekarskich) — t.j. Dz.U. 2025 poz. 1693.
+**Akt:** UDL (ustawa o działalności leczniczej) — t.j. Dz.U. 2026 poz. 156 (zm. po t.j.: 2026/972 od 2026-08-05 — art. 27a).
+**Akt:** UPP (ustawa o prawach pacjenta i Rzeczniku Praw Pacjenta) — t.j. Dz.U. 2024 poz. 581 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 7, 10, 14, 26, 30a, 30b, 35; 2026/26 [OD 2027-01-01: 2026/26] — art. 28).
+**Akt:** UWM (ustawa o wyrobach medycznych) — t.j. Dz.U. 2024 poz. 1620.
+**Akt:** UPIS (ustawa o Państwowej Inspekcji Sanitarnej) — t.j. Dz.U. 2024 poz. 416 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 2, 2b, 3, 4, 4c, 4d, 4e, 4g, 4j, 4k, 4m, 4n, 4p, 8, 11, 13, 13a, 13d, 13e, 20).
+**Akt:** UZZw (ustawa o zdrowiu zwierząt) — akt pierwotny, bez t.j.: Dz.U. 2025 poz. 1795.
+**Akt:** UPB (ustawa o produktach biobójczych) — t.j. Dz.U. 2021 poz. 24 (zm. po t.j.: 2025/1716 od 2026-02-06 — art. 3, 7, 8, 11, 12, 13, 17, 19, 20, 21, 23, 24, 26, 27, 28, 29, 30; 2025/1709 od 2026-03-06 — art. 6, 6a, 45, 45a).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej. **RZĄD 1 VER 2026-08-28:** Prawo farmaceutyczne — Dz.U. 2026 poz. 612 t.j.; Państwowa Inspekcja Sanitarna — **Dz.U. 2024 poz. 416 t.j. ze zm.** (ELI nadal wskazuje ten t.j.; po t.j. istnieje nowelizacja, dlatego przed cytatem używaj tekstu ujednoliconego).
 
 ## 1. Akty i źródła do weryfikacji
@@ -282,15 +293,20 @@ NIA (Naczelna Izba Aptekarska):
   → Zakaz: sieci apteczne (>1% aptek w woj.), hurtownie, producenci, sklepy ogólne
   → "Apteka dla aptekarza": zasada z nowelizacji 2017 r. — weryfikuj aktualne wyjątki
 □ Lokal: spełnia wymagania architektoniczne i sanitarne (rozporządzenie MZ)
-□ Kierownik apteki: farmaceuta z 5-letnim stażem (art. 88 PF)
+□ Kierownik apteki (art. 88 ust. 2 PF): 5 lat stażu w aptece ogólnodostępnej albo specjalizacja + 2 lata stażu
 □ Godziny otwarcia: min. 8h/dobę, w woj. i powiatach wg rozporządzenia
 □ Przynależność do izby aptekarskiej
-□ Brak podstaw odmowy z art. 104 PF (zbyt wiele aptek w gminie: 1 apteka / 3 000 mieszkańców)
+□ Brak przesłanek odmowy z art. 99 ust. 3 i 3a PF (niżej)
 
-KRYTERIUM DEMOGRAFICZNO-GEOGRAFICZNE (art. 99 ust. 3a PF):
-  → 1 apteka na 3 000 mieszkańców w gminie (pkt 3a: uwzględnia się gminę)
-  → max 1% aptek w województwie (art. 99 ust. 3a pkt 3b PF)
-  ⚠️ Brak ustawowego kryterium odległości między aptekami — weryfikuj aktualny stan orzecznictwa NSA
+PRZESŁANKI ODMOWY I KRYTERIA (art. 99 PF — t.j. Dz.U. 2026 poz. 612):
+  → ust. 3 pkt 1: hurtownia / pośrednictwo w obrocie lekami — odmowa
+  → ust. 3 pkt 2–3: więcej niż 1% aptek ogólnodostępnych w województwie (sam, podmioty kontrolowane, grupa kapitałowa)
+  → ust. 3a: wnioskodawca/wspólnik prowadzi (sam lub przez spółki/podmioty kontrolowane/grupę) co najmniej 4 apteki
+  → ust. 3b: DEMOGRAFIA I ODLEGŁOŚĆ — co najmniej 3000 mieszkańców gminy na 1 aptekę ORAZ co najmniej 500 m
+    (w linii prostej, między wejściami do izb ekspedycyjnych) od najbliższej apteki; liczba mieszkańców wg GUS (ust. 3c)
+  → ust. 3d: wyłączenie ograniczeń z ust. 3b m.in. przy odległości co najmniej 1000 m (pkt 1) — pozostałe wyjątki odczytaj
+  ✅ [VER: ELI DU/2026/612 art. 88, 99, RZĄD 1, 2026-11-14] (poprzednio błędnie: „art. 104”, „art. 99 ust. 3a pkt 3b”,
+     „brak ustawowego kryterium odległości”)
 ```
 
 ### Cofnięcie zezwolenia (art. 103 PF)

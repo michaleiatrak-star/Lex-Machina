@@ -1,5 +1,16 @@
 # Moduł [V] — Prawo Medyczne
 
+**Akt:** UDL (ustawa o działalności leczniczej) — t.j. Dz.U. 2026 poz. 15 (zm. po t.j.: 2026/203 od 2026-03-05 — art. 35a; 2026/26 od 2026-04-13 — art. 4; 2026/986 od 2026-08-07 — art. 5a; 2026/1123 [OD 2027-01-01: 2026/1123] — art. 4, 5).
+**Akt:** UPP (ustawa o prawach pacjenta i Rzeczniku Praw Pacjenta) — t.j. Dz.U. 2024 poz. 581 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 7, 10, 14, 26, 30a, 30b, 35; 2026/26 [OD 2027-01-01: 2026/26] — art. 28).
+**Akt:** USOZ (ustawa o świadczeniach opieki zdrowotnej finansowanych ze środków publicznych) — t.j. Dz.U. 2025 poz. 1461 (zm. po t.j.: 2025/1537 od 2026-01-01 — art. 2, 4, 7, 7a, 19a, 20, 22, 23, 23b, 23c, 23e, 23h, 30, 31d, 40, 42d, 42f, 42i, 42j, 47c; 2025/1739 od 2026-01-01 — art. 97, 116, 132c, 132d; 2026/203 od 2026-03-05 — art. 12, 50, 87; 2026/791 od 2026-07-01 — art. 49, 50, 51, 188e, 240; 2026/972 od 2026-08-05 — art. 31lc, 31n, 31o; 2026/986 od 2026-08-07 — art. 42b, 159a, 189a, 189b; 2026/1007 od 2026-08-11 — art. 23e, 97, 102; 2026/26 [OD 2027-01-01: 2026/26] — art. 87a).
+**Akt:** UJOZ (ustawa o jakości w opiece zdrowotnej i bezpieczeństwie pacjenta) — akt pierwotny, bez t.j.: Dz.U. 2023 poz. 1692.
+**Akt:** UZL (ustawa o zawodach lekarza i lekarza dentysty) — t.j. Dz.U. 2026 poz. 37 (zm. po t.j.: 2026/203 od 2026-03-05 — art. 7; 2026/791 od 2026-07-01 — art. 3, 15b, 15d, 15f, 15g, 15h, 41a).
+**Akt:** UIL (ustawa o izbach lekarskich) — t.j. Dz.U. 2021 poz. 1342 (zm. po t.j.: 2023/1234 od 2023-07-14 — art. 49).
+**Akt:** UZPP (ustawa o zawodach pielęgniarki i położnej) — t.j. Dz.U. 2026 poz. 15.
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Akt:** o działalności leczniczej — t.j. Dz.U. 2026 poz. 156 (zm. po t.j.: 2026/972 od 2026-08-05 — art. 27a).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Zakres:** Błąd medyczny (diagnostyczny, terapeutyczny, organizacyjny); prawa pacjenta;
 zgoda na leczenie; dokumentacja medyczna; odpowiedzialność cywilna szpitala / lekarza;
 odszkodowanie i zadośćuczynienie; Fundusz Kompensacyjny Zdarzeń Medycznych (FKZM);

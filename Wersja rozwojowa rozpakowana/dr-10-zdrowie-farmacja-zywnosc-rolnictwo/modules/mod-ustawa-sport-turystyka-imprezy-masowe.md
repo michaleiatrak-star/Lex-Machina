@@ -12,6 +12,13 @@ compatibility:
 
 # mod-AQ — Turystyka / Sport / Imprezy Masowe
 
+**Akt:** UPIS (ustawa o Państwowej Inspekcji Sanitarnej) — t.j. Dz.U. 2024 poz. 416 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 2, 2b, 3, 4, 4c, 4d, 4e, 4g, 4j, 4k, 4m, 4n, 4p, 8, 11, 13, 13a, 13d, 13e, 20).
+**Akt:** USport (ustawa o sporcie) — t.j. Dz.U. 2026 poz. 95 (zm. po t.j.: 2026/615 od 2026-05-22 — art. 7, 9, 11, 12, 29, 31, 32, 32a, 32b, 38, 38a).
+**Akt:** UBIM (ustawa o bezpieczeństwie imprez masowych) — t.j. Dz.U. 2023 poz. 616 (zm. po t.j.: 2026/875 [OD 2027-01-01: 2026/875] — art. 25, 25a, 26, 29, 29a, 31, 32, 58).
+**Akt:** UIT (ustawa o imprezach turystycznych i powiązanych usługach turystycznych) — t.j. Dz.U. 2026 poz. 925 (zm. po t.j.: 2026/1006 od 2026-08-11 — art. 47, 47a, 47b).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## AKTY PRAWNE
 
 | Akt | Zakres |

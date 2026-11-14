@@ -1,5 +1,12 @@
 # Moduł — Hodowla zwierząt: zezwolenia i gatunki
 
+**Akt:** UZChZ (ustawa o zapobieganiu oraz zwalczaniu zakażeń i chorób zakaźnych u ludzi) — t.j. Dz.U. 2025 poz. 1675 (zm. po t.j.: 2026/92 od 2026-02-12 — zakres: tekst nowelizacji w ELI; 2026/791 od 2026-07-01 — art. 21d; 2026/26 [OD 2027-01-01: 2026/26] — art. 47).
+**Akt:** UIW (ustawa o Inspekcji Weterynaryjnej) — t.j. Dz.U. 2024 poz. 12.
+**Akt:** UZZw (ustawa o zdrowiu zwierząt) — akt pierwotny, bez t.j.: Dz.U. 2025 poz. 1795.
+**Akt:** UOZw (ustawa o ochronie zwierząt) — t.j. Dz.U. 2026 poz. 1485.
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > WYDZIELONY 2026-08-12 z mod-ustawa-bezpieczenstwo-zywnosci.md, w ramach
 > realizacji NOTA-4 (audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł >400
 > linii). Obejmuje pseudohodowlę, zwierzęta niewymagające zezwolenia,

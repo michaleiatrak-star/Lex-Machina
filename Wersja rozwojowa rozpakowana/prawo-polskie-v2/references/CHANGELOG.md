@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.109 (2026-11-14): DR-10: wskazania z kwalifikatorem (PrFarm, URef, UDL, UPP, UOZP, SIOZ 2026/1304, weterynaria, żywność); PrFarm art. 99 ust. 3–3d (1%, 4 apteki, 3000 mieszk. i 500 m); medycyna laboratoryjna
 - 6.108 (2026-11-14): DR-09: wskazania z kwalifikatorem (PrBud, POŚ 2026/1453, UOP, PrLow, PrWod, PrEn, OZE, transport); PrBud art. 29 altana/basen; UOP art. 83f progi i zgłoszenie
 - 6.107 (2026-11-14): DR-08: wskazania z kwalifikatorem; dochody JST — model ustawy z 1.10.2024 (art. 8: udziały od dochodów), t.j. 2026/1252; UDP art. 13b ust. 4–5 i 13f z płacą min. 2026/2027; W-4 2024/1907
 - 6.106 (2026-11-14): DR-07: wskazania z kwalifikatorem (PZP 2026/793, PrNot, NIK, RIO, UNDFP, UZRFE, pomoc publiczna); UNDFP art. 31 ust. 4 zamiast art. 34; W-4 2026/1099

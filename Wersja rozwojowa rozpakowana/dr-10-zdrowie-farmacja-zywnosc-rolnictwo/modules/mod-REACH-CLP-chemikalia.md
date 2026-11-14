@@ -22,6 +22,12 @@ compatibility:
 
 # mod-AC — Chemikalia: REACH / CLP / Karta Charakterystyki (SDS)
 
+**Akt:** PrFarm (Prawo farmaceutyczne) — t.j. Dz.U. 2026 poz. 612 (zm. po t.j.: 2026/791 od 2026-07-01 — art. 75, 83; 2026/1004 od 2026-08-27 — art. 72; 2026/1079 od 2026-09-10 — art. 37av, 37ava, 42, 70, 96, 103).
+**Akt:** UPIS (ustawa o Państwowej Inspekcji Sanitarnej) — t.j. Dz.U. 2024 poz. 416 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 2, 2b, 3, 4, 4c, 4d, 4e, 4g, 4j, 4k, 4m, 4n, 4p, 8, 11, 13, 13a, 13d, 13e, 20).
+**Akt:** UPB (ustawa o produktach biobójczych) — t.j. Dz.U. 2021 poz. 24 (zm. po t.j.: 2025/1716 od 2026-02-06 — art. 3, 7, 8, 11, 12, 13, 17, 19, 20, 21, 23, 24, 26, 27, 28, 29, 30; 2025/1709 od 2026-03-06 — art. 6, 6a, 45, 45a).
+**Akt:** USCh (ustawa o substancjach chemicznych i ich mieszaninach) — t.j. Dz.U. 2022 poz. 1816.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## AKTY PRAWNE — WERYFIKUJ ZAWSZE NA ISAP / EUR-LEX
 
 | Akt | Oznaczenie | Przedmiot |

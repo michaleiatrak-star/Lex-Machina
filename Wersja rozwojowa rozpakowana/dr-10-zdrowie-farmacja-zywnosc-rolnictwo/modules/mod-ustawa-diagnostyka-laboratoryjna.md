@@ -1,28 +1,12 @@
 # Modul - Diagnostyka laboratoryjna
 
+**Akt:** UML (ustawa o medycynie laboratoryjnej) — t.j. Dz.U. 2025 poz. 1295.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
-**Ustawa z 15.09.2022 r. o medycynie laboratoryjnej**
-- ⚠️ POPRAWKA 2026-07-02s (weryfikacja ISAP na wyraźne żądanie użytkownika):
-  **Dz.U. 2022 poz. 2280** ze zm. — BYŁO błędnie podane 2022 poz. 2162,
-  który to numer w rzeczywistości odpowiada tekstowi jednolitemu STAREJ,
-  zastąpionej ustawy z 2001 r. (patrz niżej) — doszło do pomylenia numerów
-  między dwoma różnymi aktami o zbliżonej tematyce.
-  VER: isap.sejm.gov.pl [2026-07-02]
-- Starszy akt (uchylony w większości od 1.01.2025, przepisy wykonawcze
-  zachowały moc przejściowo do ok. stycznia 2026 — obecnie NIEAKTUALNE):
-  **Ustawa z 15.09.2022 r. o medycynie laboratoryjnej** — t.j. **Dz.U. 2025 poz. 1295** ✅ [VER] RZĄD 1 2026-09-10j
-  ⛔ Ustawa z 27.07.2001 r. o diagnostyce laboratoryjnej (Dz.U. 2001 nr 100 poz. 1083) jest **UCHYLONA** —
-  uchyliła ją ustawa o medycynie laboratoryjnej. Ostatni t.j. starej ustawy: Dz.U. 2022 poz. 2162 (uchylony).
-  Powoływanie starej ustawy jako podstawy jest błędem podstawy prawnej, nie nieścisłością nazewniczą.
-  ⚠️ NIESPÓJNOŚĆ 2026-07-02s: ten moduł cytuje dla starego aktu Dz.U. 2023
-  poz. 1517, podczas gdy dr-10/MAPA-AKTOW.md cytowała (przed poprawką)
-  Dz.U. 2022 poz. 2162 — obie liczby mogą być różnymi t.j. tego samego
-  starego aktu w różnym czasie (2022.2162 → ewentualnie 2023.1517 jako
-  kolejny t.j.) LUB jedna z nich jest błędna. NIE rozstrzygnięto ostatecznie
-  w tej sesji które z 2022.2162/2023.1517 jest poprawnym ostatnim t.j. starej
-  ustawy — praktyczne znaczenie ograniczone, bo stary akt jest już w dużej
-  mierze nieaktualny, ale wymaga domknięcia przy najbliższej pełnej rewizji
-  tego modułu.
+**Ustawa z 15.09.2022 r. o medycynie laboratoryjnej** — t.j. Dz.U. 2025 poz. 1295 (pierwotnie Dz.U. 2022 poz. 2280).
+⛔ Ustawa z 27.07.2001 r. o diagnostyce laboratoryjnej — UCHYLONA (status ELI: „uchylony”); jej ostatni t.j. to Dz.U. 2022 poz. 2162 (ELI: „Inf. o tekście jednolitym” aktu DU/2001/1083). Powołanie jej jako podstawy po uchyleniu to błąd podstawy prawnej. Rozstrzyga to wcześniejszą niespójność 2022/2162 vs 2023/1517.
+✅ [VER: ELI DU/2001/1083, DU/2025/1295, RZĄD 1, 2026-11-14]
 
 **Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem - zmiana prawa w toku!**
 ```

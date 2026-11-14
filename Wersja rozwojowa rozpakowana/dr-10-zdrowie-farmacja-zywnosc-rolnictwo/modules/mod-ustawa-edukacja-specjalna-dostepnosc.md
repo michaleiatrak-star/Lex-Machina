@@ -1,5 +1,11 @@
 # mod-BS-edukacja-specjalna-dostepnosc-ppp — EDUKACJA SPECJALNA, PPP I DOSTĘPNOŚĆ
 
+**Akt:** UZPs (ustawa o zawodzie psychologa i samorządzie zawodowym psychologów) — t.j. Dz.U. 2019 poz. 1026 (zm. po t.j.: 2026/187 od 2026-03-05 — art. 8).
+**Akt:** PrOsw (Prawo oświatowe) — t.j. Dz.U. 2026 poz. 820 (zm. po t.j.: 2026/982 od 2026-08-06 — art. 136, 147, 150; 2026/904 od 2026-09-01 — art. 1, 85, 85a; 2026/1036 od 2026-09-01 — art. 26, 68, 98, 98a, 99, 102, 102a, 172, 173; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 13, 31).
+**Akt:** PSWN (Prawo o szkolnictwie wyższym i nauce) — t.j. Dz.U. 2026 poz. 1362.
+**Akt:** UDost (ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami) — t.j. Dz.U. 2024 poz. 1411.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej, uzupełniony do standardu prawa pracy i prawa karnego.
 Data wdrożenia: 2026-05-28.
 Zakres: orzeczenia PPP, kształcenie specjalne, uczelnie, dostosowania, dyskryminacja.

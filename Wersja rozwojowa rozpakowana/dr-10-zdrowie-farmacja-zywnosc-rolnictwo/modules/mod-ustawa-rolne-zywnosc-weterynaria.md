@@ -12,6 +12,14 @@ compatibility:
 
 # mod-AH — Prawo Rolne / Żywność / Weterynaria
 
+**Akt:** UPIS (ustawa o Państwowej Inspekcji Sanitarnej) — t.j. Dz.U. 2024 poz. 416 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 2, 2b, 3, 4, 4c, 4d, 4e, 4g, 4j, 4k, 4m, 4n, 4p, 8, 11, 13, 13a, 13d, 13e, 20).
+**Akt:** UBZZ (ustawa o bezpieczeństwie żywności i żywienia) — t.j. Dz.U. 2026 poz. 1399.
+**Akt:** UJHAR (ustawa o jakości handlowej artykułów rolno-spożywczych) — t.j. Dz.U. 2023 poz. 1980 (zm. po t.j.: 2026/1154 od 2026-09-16 — art. 2, 3, 4, 5, 6, 7, 8, 10, 12, 12a, 13, 14, 15a, 15b, 15d, 17, 17a, 17d, 17e, 18).
+**Akt:** UPPZ (ustawa o produktach pochodzenia zwierzęcego) — t.j. Dz.U. 2026 poz. 981.
+**Akt:** UARiMR (ustawa o Agencji Restrukturyzacji i Modernizacji Rolnictwa) — t.j. Dz.U. 2026 poz. 942.
+**Akt:** UPSWPR (ustawa o Planie Strategicznym dla Wspólnej Polityki Rolnej 2023–2027) — t.j. Dz.U. 2026 poz. 1462.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Data weryfikacji online:** 2026-07-15 (naprawa F-1 — konkretne numery Dz.U. dla IJHARS/ARiMR/WPR)
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 

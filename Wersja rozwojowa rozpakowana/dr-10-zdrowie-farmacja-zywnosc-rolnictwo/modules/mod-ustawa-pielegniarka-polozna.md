@@ -1,5 +1,11 @@
 # Modul - Zawody pielegniarki i poloznej
 
+**Akt:** UDL (ustawa o działalności leczniczej) — t.j. Dz.U. 2026 poz. 15 (zm. po t.j.: 2026/203 od 2026-03-05 — art. 35a; 2026/26 od 2026-04-13 — art. 4; 2026/986 od 2026-08-07 — art. 5a; 2026/1123 [OD 2027-01-01: 2026/1123] — art. 4, 5).
+**Akt:** UZPP (ustawa o zawodach pielęgniarki i położnej) — t.j. Dz.U. 2026 poz. 15.
+**Akt:** USPP (ustawa o samorządzie pielęgniarek i położnych) — t.j. Dz.U. 2025 poz. 1760.
+**Akt:** o działalności leczniczej — t.j. Dz.U. 2026 poz. 156 (zm. po t.j.: 2026/972 od 2026-08-05 — art. 27a).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 15.07.2011 r. o zawodach pielegniarki i poloznej**
 - Tekst jednolity: **Dz.U. 2026 poz. 15** (obwieszczenie z 4.12.2025 r.)
