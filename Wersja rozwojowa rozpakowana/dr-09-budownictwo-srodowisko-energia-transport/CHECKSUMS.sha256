@@ -1,7 +1,7 @@
 cd0d1535c0727563958c14be6e7a53f883a36cf032ccf748fa8f5502092eb0fc  ./MAPA-AKTOW.md
 83afde5b91959f4ea4969efc140eba5f4e52d255c6cfee1892bb96db1c77ca89  ./MAPA-POKRYCIA.md
 b98cd207fee28b302956c1019e3235e74c558cdb35e87764a20020e630672fdb  ./PORTABILITY-MANIFEST.md
-4a3623aedaf718900d18bbf8acb493b22231cc71c23c6ceb519abedbb4fcdb50  ./SKILL.md
+2f3e0d9aae5dbf9d03bce13979b6bbb8f1347c13945a9f5df674b819e910e0fb  ./SKILL.md
 a26e0ecdd82d926b5fbc5fdb70950895a2b41c69d18c97724274c1394341fae4  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 fa6f414d5b32cd2d84d9462569463771bdb6c4560cf6f16aa5f2ad89e9db8096  ./modules/mod-GDDKiA-specustawa-drogowa-ZRID.md
@@ -12,9 +12,9 @@ fa6f414d5b32cd2d84d9462569463771bdb6c4560cf6f16aa5f2ad89e9db8096  ./modules/mod-
 7a4d824387d4f1267f4c45dfd118b56675427751595eeaeea55e314a8552e0f7  ./modules/mod-PrBud-uzupelnienie-pokrycia-2026.md
 8eea31e93cc15d990f7421b1d5852aad5603b68a01c40eee7b20754e6624c231  ./modules/mod-PrEnergetyczne-URE-OZE.md
 8a2a944402546572c1447264053616d23c455c35811ad47f30a2a37ee1cd50b3  ./modules/mod-PrGeodezyjne-kartografia-wywlaszczenia.md
-2f1e9781842fa7d39e7d8406d82d5375fca069a23365a8c5d26ca32c1308a26e  ./modules/mod-PrWodne-gospodarka-sciekowa.md
+e35a301b9060cff17f6f5dd33341fde44251b29cf54a1f049bac4252ab8c8269  ./modules/mod-PrWodne-gospodarka-sciekowa.md
 9b95af98e3f20ac12b66e8da29219c76177203d9a222f9b76db2c9e82347d77d  ./modules/mod-UE-PPWR-EUDR-rozporzadzenia-srodowiskowe.md
-8df7fd2c417c13287c311f420a9229bf564387552bd4d4c93355636f6bc18af1  ./modules/mod-UGN-gospodarka-nieruchomosciami.md
+2ba3ea304cf2bd6a786dfc7abd9dcd754ae67365d09bb905e80060cbd57a0871  ./modules/mod-UGN-gospodarka-nieruchomosciami.md
 566dc02334999d3e843ce2f4c23f78ec3e789456ab0e05a03967eff64e0cd9f1  ./modules/mod-formy-ochrony-przyrody-obszary-chronione.md
 76e1632cebcd18152b170bb756c5d98bdce0185bec514a0ac9c2bf1644ec4136  ./modules/mod-inspekcja-ochrony-srodowiska-GIOS-WIOS.md
 62729dcaac79f3125796ecc26c9b6a9dee27fdc6546c1e88df4d7eeac6264ed0  ./modules/mod-lowieckie-PZL-kola-nadzor-ministra.md
@@ -40,7 +40,7 @@ df9bda6e013aebdae6c717cc5e0bd2bb2f02d96702a25ada1419a82c1bb00626  ./modules/mod-
 582d3adab76ca16961da451ea0f600a05d0f69f5b7652b9e957ca620f6d3adde  ./modules/mod-ustawa-lesna-lowiecka-ochrona-przyrody.md
 c0a2e899fb8531c9743dfda0ff9aa8812f9561dec4d74facdf13619be5f4128c  ./modules/mod-ustawa-obszary-morskie-administracja-morska.md
 9a734c2340b4711f16820e87408c0f6127a764afbeb939ed70ddc8b3d5bf8c8d  ./modules/mod-ustawa-odpadach-gospodarka-komunalna.md
-7cda1dedfa7e4d12da1eb804c0d404db813b3d794263ff56d4a1430cbb804878  ./modules/mod-ustawa-planowanie-przestrzenne.md
+4aae2fe1ac06572ab3b9d83d1b3bd366f3519fc035271e670c9952beed421298  ./modules/mod-ustawa-planowanie-przestrzenne.md
 8fa88f604981675688e8f3bb24c43a27673ee1e2b98f4f307e0eeda736cd5b6e  ./modules/mod-ustawa-prawo-gazowe.md
 2f573b1f4d0e7e0ddb525916c158aa10aa9077ebc7a4f3cce133aede35be7afb  ./modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski.md
 adc58b3639ad5d06e0796a347783ae14cf6dd8d2b1bf3c948fd4c74f4cd83373  ./modules/ochrona-zabytkow/czesc-01-zabytki-dostepnosc.md
@@ -49,5 +49,5 @@ adc58b3639ad5d06e0796a347783ae14cf6dd8d2b1bf3c948fd4c74f4cd83373  ./modules/ochr
 73b3f563521ce316ef090929d79a34cb3840b9c91b8c4bd000dd9d0dc2553287  ./modules/ochrona-zabytkow/czesc-04-dps-linie-napowietrzne.md
 4828d9f448834cc7f294608adc90329c1569bc4e8e89d5f7cf6ae8c13505c0b3  ./modules/ochrona-zabytkow/czesc-05-plac-zabaw-mikrokawalerki.md
 c4746a4f940f85d463e9290f5dd6295121ae24769e0765dd05bb70a289290960  ./modules/ochrona-zabytkow/czesc-06-parking-przeksztalcenie-cross.md
-738d59abc7fa0246266e8f66c6f1af527c3ec8600e96260289562e4d7571b83c  ./references/CHANGELOG.md
+ca99c8281b491c500e05b2e4eaf04fad1dc914831fef6483dd21ed1c8d43c27f  ./references/CHANGELOG.md
 abe6aa1f0c7be329d8f30b4e26b575581c1ed0421413f61d72d7af313e414223  ./references/HISTORIA-ZMIAN-PLIKOW.md

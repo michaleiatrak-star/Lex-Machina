@@ -1,7 +1,10 @@
 # mod-nadzor-wojewody-RIO-legalnosc-uchwal
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** USG — Dz.U. 2026 poz. 662 t.j. | USP — Dz.U. 2025 poz. 1684 t.j. | USW — Dz.U. 2026 poz. 720 t.j. | Ustawa o Wojewodzie — Dz.U. 2025 poz. 428 t.j. | Ustawa o RIO — Dz.U. 2025 poz. 7 t.j. | ✅ ELI 2026-08-25
+**Akt:** USG — t.j. Dz.U. 2026 poz. 662 (zm. 2026/912 od 2026-07-31 — art. 10b ust. 1; 2026/1273 [OD 2027-03-30: 2026/1273] — art. 36, 37, 37d, 37e; nie dotyczy art. 90–102).
+**Akt:** USP — t.j. Dz.U. 2025 poz. 1684 (zm. 2026/252 od 2026-04-03 — art. 6a, 6b; 2026/912 od 2026-07-31 — art. 6b ust. 1 (związek metropolitalny pomorski)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawka: skarga na uchwałę kolegium RIO do WSA, nie do NSA — art. 98 ust. 1 USG, art. 13 PPSA).
+**Inne akty (nagłówek dawny):** USG — Dz.U. 2026 poz. 662 t.j. | USP — Dz.U. 2025 poz. 1684 t.j. | USW — Dz.U. 2026 poz. 720 t.j. | Ustawa o Wojewodzie — Dz.U. 2025 poz. 428 t.j. | Ustawa o RIO — Dz.U. 2025 poz. 7 t.j. | ✅ ELI 2026-08-25
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -44,7 +47,7 @@ Nadzór Wojewody nad legalnością uchwał i zarządzeń organów JST (nie celow
 
 ```
 JST podjęła uchwałę/zarządzenie → doręczenie Wojewodzie
-  ↓ [30 dni] Wojewoda może:
+  ↓ [30 dni od doręczenia uchwały wojewodzie — art. 91 ust. 1 USG] Wojewoda może:
     A. Nie podjąć działań (milczenie = akceptacja)
     B. Wystąpić z wnioskiem o wyjaśnienia
     C. Stwierdzić nieważność (całość / część) — ROZSTRZYGNIĘCIE NADZORCZE
@@ -71,8 +74,8 @@ RIO sprawuje nadzór nad:
   □ Sprawozdaniami z wykonania budżetu
 
 UCHWAŁA RIO stwierdzająca nieważność uchwały budżetowej:
-  → JST zaskarża do NSA (nie WSA!) — specjalna właściwość
-  → Termin: 30 dni od doręczenia uchwały RIO — weryfikuj w USG/USP/USW
+  → JST zaskarża do sądu administracyjnego — WSA w I instancji (art. 98 ust. 1 USG; analogicznie USP, USW)
+  → Termin: 30 dni od doręczenia (art. 98 ust. 1 USG)
 
 OPINIA RIO (obowiązkowa, niewiążąca):
   → O projekcie budżetu, możliwości spłaty zadłużenia, emisji obligacji
@@ -86,7 +89,7 @@ OPINIA RIO (obowiązkowa, niewiążąca):
 
 **Strategia:** JST kwestionująca rozstrzygnięcie nadzorcze: wykaż że uchwała miała delegację ustawową, była prawidłowo podjęta i opublikowana. Podmiot zewnętrzny zaskarżający uchwałę: wezwij JST do usunięcia naruszenia → skarga do WSA.
 
-**Quality gate:** Termin 30 dni na zaskarżenie rozstrzygnięcia? Aktualny t.j. USG/USP/USW (2025)? Właściwość: WSA (nadzór Wojewody) vs NSA (nadzór RIO)?
+**Quality gate:** Termin 30 dni na zaskarżenie rozstrzygnięcia? Aktualny t.j. USG/USP/USW (2025)? Właściwość: WSA w I instancji także dla rozstrzygnięć RIO; NSA — skarga kasacyjna?
 
 **Output:** 1. Kwalifikacja nadzoru (Wojewoda/RIO); 2. Termin; 3. Środek; 4. Dowody; 5. Strategia; 6. Rekomendacja.
 

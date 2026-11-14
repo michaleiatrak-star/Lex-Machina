@@ -1,5 +1,8 @@
 # mod-UGN-gospodarka-nieruchomosciami
 
+**Akt:** UGN — t.j. Dz.U. 2026 poz. 399 (zm. 2026/912 od 2026-07-31 — art. 10 ust. 2; 2026/875 [OD 2027-01-01: 2026/875] — art. 93).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Źródło kanoniczne:** ELI — ustawa z 21.08.1997 r. o gospodarce nieruchomościami, Dz.U. 2026 poz. 399 t.j., status obowiązujący; data stanu prawnego tekstu jednolitego: 10.03.2026.
 

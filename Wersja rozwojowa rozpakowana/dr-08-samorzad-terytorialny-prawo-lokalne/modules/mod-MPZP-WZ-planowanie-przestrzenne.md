@@ -3,9 +3,8 @@
 **Hasła spraw:** warunki zabudowy, decyzja WZ, miejscowy plan zagospodarowania przestrzennego, MPZP, plan ogólny gminy, przeznaczenie działki, odszkodowanie planistyczne, renta planistyczna
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o planowaniu i zagospodarowaniu przestrzennym — Dz.U. 2026 poz. 538 t.j. ze zm. | Weryfikuj aktualne zmiany w ELI (RZĄD 1)
-**Data weryfikacji online:** 2026-06-05
-**Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
+**Akt:** UPZP (ustawa o planowaniu i zagospodarowaniu przestrzennym) — t.j. Dz.U. 2026 poz. 538 (zm. po t.j., w mocy: 2026/781 od 2026-07-01 — m.in. art. 2, 8g–8h, 15, 17, 20, 37ea–37k, 52–54, 62–64b; 2026/912 od 2026-07-31 — art. 8e ust. 2 pkt 4, 17 pkt 6 lit. a tiret trzecie, 38b ust. 2 pkt 2 lit. e (związek metropolitalny pomorski); 2026/864 od 2026-10-01 — art. 53).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawka: decyzja WZ wygasa po 5 latach od uprawomocnienia — art. 64c, nie „bezterminowa”).
 
 ---
 
@@ -253,7 +252,7 @@ WZ (Warunki Zabudowy):
   → Decyzja administracyjna (gdy brak MPZP dla obszaru)
   → Wydaje: wójt/burmistrz/prezydent
   → Odwołanie: SKO (14 dni) → WSA (30 dni od decyzji SKO)
-  → Ważność: bezterminowa (ale może wygasnąć — weryfikuj przepisy)
+  → Ważność: wygasa po 5 latach od dnia, w którym stała się prawomocna (art. 64c); warunek obszaru uzupełnienia zabudowy — art. 61 ust. 1 pkt 1a
 
 ULICP (Ustalenie Lokalizacji Inwestycji Celu Publicznego):
   → Decyzja dla inwestycji publicznych na obszarze bez MPZP

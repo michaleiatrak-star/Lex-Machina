@@ -2,8 +2,8 @@
 
 ## Akt prawny
 **Ustawa z 27.03.2003 r. o planowaniu i zagospodarowaniu przestrzennym**
-- Tekst jednolity: **Dz.U. 2026 poz. 538 t.j.** (obwieszczenie z 03.07.2024)
-  Zmiany po t.j.: Dz.U. 2024 poz. 1907, poz. 1940; Dz.U. 2025 poz. 527, poz. 680
+**Akt:** UPZP (ustawa o planowaniu i zagospodarowaniu przestrzennym) — t.j. Dz.U. 2026 poz. 538 (zm. po t.j., w mocy: 2026/781 od 2026-07-01 — m.in. art. 2, 8g–8h, 15, 17, 20, 37ea–37k, 52–54, 62–64b; 2026/912 od 2026-07-31 — art. 8e ust. 2 pkt 4, 17 pkt 6 lit. a tiret trzecie, 38b ust. 2 pkt 2 lit. e (związek metropolitalny pomorski); 2026/864 od 2026-10-01 — art. 53).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawki: wykaz zmian po t.j. podawał zmiany sprzed t.j. 2026/538; decyzja WZ wygasa po 5 latach od uprawomocnienia — art. 64c).
   ✅ VER: isap.sejm.gov.pl [2026-06-05] — zawsze weryfikuj aktualny stan w ELI (RZĄD 1)
   REFORMA 2023: Ustawa z 07.07.2023 o zmianie u.p.z.p. — gruntowna reforma narzędzi
 
@@ -43,7 +43,7 @@ Nowe: Zintegrowany Plan Inwestycyjny (ZPI): Zastąpił specustawa 'lex deweloper
 ## WZ (Warunki Zabudowy) po reformie
 ```
 WZ możliwe: Tylko jesli POG danej gminy uchwala taka możliwość (strefa uzupelnienia zabudowy)
-WZ termin:  Maksimum 3 lata od wydania (przedłużalny na wniosek)
+WZ termin:  wygasa po 5 latach od uprawomocnienia (art. 64c); obszar uzupełnienia zabudowy — art. 61 ust. 1 pkt 1a
 WZ wygasniecie: Przy uchwaleniu MPZP obejmujacego teren
 ```
 

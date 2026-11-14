@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # Ustawa o samorządzie powiatowym — current-state COV
 
+**Akt:** USP — t.j. Dz.U. 2025 poz. 1684 (zm. 2026/252 od 2026-04-03 — art. 6a, 6b; 2026/912 od 2026-07-31 — art. 6b ust. 1 (związek metropolitalny pomorski)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## 1. Źródło
 
 Ustawa z 5 czerwca 1998 r. o samorządzie powiatowym.  

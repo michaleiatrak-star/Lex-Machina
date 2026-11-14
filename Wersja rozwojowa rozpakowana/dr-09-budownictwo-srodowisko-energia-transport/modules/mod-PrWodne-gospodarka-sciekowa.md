@@ -24,7 +24,7 @@ praktycznych w gospodarce ściekowej)
 
 ```
 PODSTAWA: art. 5 ust. 1 pkt 2 ustawy z 13.09.1996 o utrzymaniu
-  czystości i porządku w gminach (t.j. Dz.U. 2025 poz. 733) — "ucpg"
+  czystości i porządku w gminach (t.j. Dz.U. 2025 poz. 733; zm. 2026/912 od 2026-07-31 — tytuł rozdz. 2, art. 3 ust. 4, art. 4ca: związek metropolitalny pomorski) — "ucpg"
 
 ZASADA: właściciel nieruchomości ma OBOWIĄZEK przyłączenia do
   ISTNIEJĄCEJ sieci kanalizacyjnej, JEŻELI sieć jest DOSTĘPNA —

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.63 (2026-11-14): 2026/912 w modułach DR-08/DR-09; poprawki: skarga na uchwałę RIO do WSA (art. 98 USG), decyzja WZ wygasa po 5 latach (art. 64c UPZP)
 - 3.62 (2026-11-13): Prawo przedsiębiorców — t.j. Dz.U. 2026 poz. 1484 (ELI 2026-11-13) w odesłaniach Prawa łowieckiego (SKILL, mod-lowieckie-dzialalnosc-gospodarcza)
 - 3.61 (2026-11-11, ELI 2026-11-11): MAPA-AKTOW: UGN — zmiany po t.j. 2026/912 art. 69, ⏳ 2026/875 od 1.01.2027; planowanie przestrzenne — 2026/781, 912 art. 73, 864.
 - 3.60 (2026-11-11, ELI 2026-11-11): POŚ — t.j. Dz.U. 2026 poz. 1453 (zastępuje 2025/647; obejmuje 11 nowelizacji dotąd wymienianych po t.j.; z przepisów powoływanych w modułach zmieniony tylko art. 14 ust. 2; ⏳ art. 421d od 18.02.2027); Prawo geodezyjne — t.j. Dz.U. 2026 poz. 1389 (zastępuje 2024/1151; obejmuje 2024/1824, 2025/1019, 1542, 1792); moduły i MAPA-AKTOW.
