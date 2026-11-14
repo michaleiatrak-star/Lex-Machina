@@ -1,6 +1,9 @@
 # Prawo upadłościowe i restrukturyzacyjne — wspólna nawigacja i status pokrycia
 
 **Źródła:** PrUp t.j. [Dz.U. 2026 poz. 913](https://api.sejm.gov.pl/eli/acts/DU/2026/913/text.pdf), PrRestr t.j. [Dz.U. 2026 poz. 533](https://api.sejm.gov.pl/eli/acts/DU/2026/533/text.pdf); oba „obowiązuje” ✅ [VER: isap_lookup, 2026-10-08].
+**Akt:** PrUp — t.j. Dz.U. 2026 poz. 913 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 452, 456).
+**Akt:** PrRestr — t.j. Dz.U. 2026 poz. 533 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 4 ust. 2 pkt 4; 2026/176 [OD 2027-02-18: 2026/176] — art. 156 ust. 5 pkt 4 uchylony).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i wartości zgodne z t.j.).
 **Status pokrycia (08.10.2026):** wszystkie moduły tematyczne obu ustaw w klasie **A / COV-ART** — każdy aktywny artykuł omówiony z tekstu t.j.; plan i metryki: `references/insolvency/plan-pokrycia.md`.
 **ZASADA:** przed powołaniem przepisu odczyt `scripts/prup.py` / `scripts/prrestr.py article N --verify-online`; reżim czasowy sprawy — `references/insolvency/wersje-i-przepisy-przejsciowe.md` (tabela nowelizacji ze zmienionymi jednostkami i przepisami przejściowymi).
 

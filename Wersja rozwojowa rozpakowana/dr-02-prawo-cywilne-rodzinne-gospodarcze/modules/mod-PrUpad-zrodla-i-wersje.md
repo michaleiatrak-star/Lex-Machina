@@ -1,4 +1,6 @@
 # Prawo upadłościowe — pełny tekst, wersje i nawigacja
+**Akt:** PrUp — t.j. Dz.U. 2026 poz. 913 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 452, 456).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i wartości zgodne z t.j.).
 
 **Zakres:** cała ustawa z 28 lutego 2003 r. — Prawo upadłościowe.
 **Poziom:** pełny urzędowy tekst źródłowy; komentarze i procedury mają własne,

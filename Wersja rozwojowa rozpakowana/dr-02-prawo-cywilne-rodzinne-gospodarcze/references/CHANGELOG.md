@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.119 (2026-11-14): METODYKA W-1: 26 modułów PrRestr (t.j. 2026/533) i PrUp (t.j. 2026/913) — wartości i terminy zgodne z t.j.; nagłówki z kontraktem wskazań i znacznikami [OD] (2026/1206, 2026/176, 2026/1466)
 - 3.118 (2026-11-14): METODYKA W-1: 6 modułów KPC (t.j. 2026/468) — poprawki: art. 210 § 2¹ (nie 172), art. 378 § 1 zd. 2, art. 519¹, art. 511 § 2, terminy art. 480² § 2, EPU art. 505²⁹ᵃ i 505³⁶, art. 805, u.k.k. art. 27 i 48
 - 3.117 (2026-11-14): Moduł wrogiego przejęcia: skrót OfPubl (monitoring ustawy o ofercie publicznej); rejestr: W-4 dla 2026/1074 i 2026/1206
 - 3.116 (2026-11-14): Moduł wekslowy: skróty PrWeksl/PrCzek rozpoznawane przez monitoring; METODYKA: forma skrótu w nagłówku

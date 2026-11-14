@@ -5,6 +5,8 @@
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
 Źródło: [urzędowy tekst jednolity, Dz.U. 2026 poz. 913](https://api.sejm.gov.pl/eli/acts/DU/2026/913/text.pdf).
+**Akt:** PrUp — t.j. Dz.U. 2026 poz. 913 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 452, 456).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i wartości zgodne z t.j.).
 Opracowanie na podstawie korpusu pobranego 04.10.2026. Przed zastosowaniem odczytaj
 przepis przez `python3 scripts/prup.py article NUMER --verify-online` oraz
 `references/insolvency/wersje-i-przepisy-przejsciowe.md`. Dobór prawa do sprawy

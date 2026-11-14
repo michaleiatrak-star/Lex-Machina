@@ -2,6 +2,8 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom A / COV-ART (każdy obowiązujący artykuł z zakresu omówiony; uchylone oznaczone)
 **Źródło:** Prawo restrukturyzacyjne — t.j. [Dz.U. 2026 poz. 533](https://api.sejm.gov.pl/eli/acts/DU/2026/533/text.pdf) (ELI DU/2026/533; akt bazowy DU/2015/978), s. 35–40
+**Akt:** PrRestr — t.j. Dz.U. 2026 poz. 533 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 4 ust. 2 pkt 4; 2026/176 [OD 2027-02-18: 2026/176] — art. 156 ust. 5 pkt 4 uchylony).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i wartości zgodne z t.j.).
 **Weryfikacja:** snapshot PDF 04.10.2026 (SHA-256 zgodny z `references/prrestr/metadata.json`); status t.j. „obowiązuje” potwierdzony w ELI 08.10.2026 ✅ [VER: isap_lookup DU/2015/978 → DU/2026/533, 2026-10-08]
 **Zmiany po t.j. w tym zakresie:** brak. Wprowadzenie do wyliczenia art. 140 ust. 1 w brzmieniu DU/2025/1085 — ujęte w t.j.
 **ZASADA:** przed powołaniem odczytaj przepis: `python3 scripts/prrestr.py article 141 --verify-online`. Akty UE, do których odsyła dział (rozp. KE 651/2014 — definicje MŚP i grupy; rozp. Rady 659/1999 — decyzje KE), oraz aktualne wytyczne KE odczytaj z EUR-Lex przed zastosowaniem; kurs EUR — średni kurs NBP z dnia złożenia planu (148), nie z pamięci.

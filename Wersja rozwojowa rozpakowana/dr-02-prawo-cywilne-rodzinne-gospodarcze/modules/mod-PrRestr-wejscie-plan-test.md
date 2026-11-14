@@ -2,6 +2,8 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom A / COV-ART (każdy obowiązujący artykuł z zakresu omówiony; uchylone oznaczone)
 **Źródło:** Prawo restrukturyzacyjne — t.j. [Dz.U. 2026 poz. 533](https://api.sejm.gov.pl/eli/acts/DU/2026/533/text.pdf) (ELI DU/2026/533; akt bazowy DU/2015/978), s. 3–9
+**Akt:** PrRestr — t.j. Dz.U. 2026 poz. 533 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 4 ust. 2 pkt 4; 2026/176 [OD 2027-02-18: 2026/176] — art. 156 ust. 5 pkt 4 uchylony).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i wartości zgodne z t.j.).
 **Weryfikacja:** snapshot PDF 04.10.2026 (SHA-256 zgodny z `references/prrestr/metadata.json`); status t.j. „obowiązuje” potwierdzony w ELI 08.10.2026 ✅ [VER: isap_lookup DU/2015/978 → DU/2026/533, 2026-10-08]
 **Zmiany po t.j. w tym zakresie:** [DU/2026/1206](https://api.sejm.gov.pl/eli/acts/DU/2026/1206/text.pdf) art. 24 — **art. 4 ust. 2 pkt 4** (oddziały banków zagranicznych) w nowym brzmieniu **od 11.01.2027** (art. 57 nowelizacji); do tej daty stosuj brzmienie t.j. → `references/insolvency/wersje-i-przepisy-przejsciowe.md`. Rozdział 3 (art. 10 ust. 1 pkt 4, 8a, ust. 2a, art. 10a) w brzmieniu nowelizacji DU/2025/1085 (od 23.08.2025) — ujęte w t.j.
 **ZASADA:** przed powołaniem odczytaj przepis: `python3 scripts/prrestr.py article 10a --verify-online`. Niewypłacalność (art. 6 ust. 2) definiuje **Prawo upadłościowe** (art. 11 PrUp → `mod-PrUpad-wniosek-ogloszenie`). Ustawa wdraża dyrektywę (UE) 2019/1023 (odnośnik do tytułu ustawy) — wykładnia prounijna przy wątpliwościach.

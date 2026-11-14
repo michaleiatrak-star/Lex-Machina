@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.96 (2026-11-14): METODYKA W-1: 26 modułów PrRestr (t.j. 2026/533) i PrUp (t.j. 2026/913) — wartości i terminy zgodne z t.j.; nagłówki z kontraktem wskazań i znacznikami [OD] (2026/1206, 2026/176, 2026/1466)
 - 6.95 (2026-11-14): Moduł wrogiego przejęcia: skrót OfPubl (monitoring ustawy o ofercie publicznej); rejestr: W-4 dla 2026/1074 i 2026/1206
 - 6.94 (2026-11-14): METODYKA W-1…W-7: mod-ustawa-KRS-rejestr-sadowy (t.j. 2025/869 + 7 nowelizacji, pułapka MSiG od 2025-11-29) i mod-KSH-wrogie-przejecie (KSH + uoof t.j. 2025/592, art. 80a–80b); DR-12: OIRP Katowice i Rzeszów; rejestr zmian w czasie
 - 6.93 (2026-11-13): REJESTR-ZMIAN-W-CZASIE: zmiany nadchodzące modułów paczki 2 DR-02 (UGH 2026/1040, KK 2026/1466, NBP 2026/1098) i odczyty W-4 w tabeli C

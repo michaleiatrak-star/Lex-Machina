@@ -1,4 +1,7 @@
 # Upadłość — układ w postępowaniu upadłościowym (PrUp art. 266a–266f)
+**Akt:** PrUp — t.j. Dz.U. 2026 poz. 913 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 452, 456).
+**Akt:** PrRestr — t.j. Dz.U. 2026 poz. 533 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 4 ust. 2 pkt 4; 2026/176 [OD 2027-02-18: 2026/176] — art. 156 ust. 5 pkt 4 uchylony).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i wartości zgodne z t.j.).
 
 **Status:** moduł klasy kancelaryjnej — poziom A / COV-ART (każdy obowiązujący artykuł z zakresu omówiony)
 **Źródło:** Prawo upadłościowe — t.j. [Dz.U. 2026 poz. 913](https://api.sejm.gov.pl/eli/acts/DU/2026/913/text.pdf) (ELI DU/2026/913); odesłania do Prawa restrukturyzacyjnego — t.j. [Dz.U. 2026 poz. 533](https://api.sejm.gov.pl/eli/acts/DU/2026/533/text.pdf) (ELI DU/2026/533)

@@ -1,4 +1,6 @@
 # Upadłość konsumencka — osoba fizyczna nieprowadząca działalności (PrUp art. 491¹–491²⁴)
+**Akt:** PrUp — t.j. Dz.U. 2026 poz. 913 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 452, 456).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i wartości zgodne z t.j.).
 
 **Hasła spraw:** ogłosić upadłość konsumencką, upadłość konsumencka, oddłużenie, umorzenie długów, plan spłaty wierzycieli, wniosek o upadłość osoby fizycznej, niewypłacalność konsumenta
 

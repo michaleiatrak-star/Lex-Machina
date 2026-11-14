@@ -1,6 +1,8 @@
 # Prawo restrukturyzacyjne — pełny korpus i sposób użycia
 
 Źródło: [urzędowy tekst jednolity, Dz.U. 2026 poz. 533](https://api.sejm.gov.pl/eli/acts/DU/2026/533/text.pdf).
+**Akt:** PrRestr — t.j. Dz.U. 2026 poz. 533 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 4 ust. 2 pkt 4; 2026/176 [OD 2027-02-18: 2026/176] — art. 156 ust. 5 pkt 4 uchylony).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i wartości zgodne z t.j.).
 Opracowanie na podstawie korpusu pobranego 04.10.2026. Przed zastosowaniem odczytaj
 przepis przez `python3 scripts/prrestr.py article NUMER --verify-online` oraz
 `references/insolvency/wersje-i-przepisy-przejsciowe.md`. Dobór prawa do sprawy
