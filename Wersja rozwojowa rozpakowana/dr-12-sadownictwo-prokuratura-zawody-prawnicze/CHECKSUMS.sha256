@@ -1,7 +1,7 @@
 48ea7e7ea01f5f60a2603a0b9d213d82f8024f7b66a0d10450b9db0f15f016b6  ./MAPA-AKTOW.md
 f939758f67a214649de553c134ff4dafc4f4b325d47ac961644d34837469d35a  ./MAPA-POKRYCIA.md
 eac5e4f81d8a3c6282ed293c7dec591f0c0415e02c2739425f139bb644ff1846  ./PORTABILITY-MANIFEST.md
-50d00d5fad19420cccf1e20c6547cf18f688b1c6a1c81e3cf983e2d789c142e5  ./SKILL.md
+5cd32dd8478893246ec6b13b1b63b37f174dbac582a2c5dfe533399bcfcd6034  ./SKILL.md
 56eed0622890a10e5faf863e13f3e2c692f13d83c5e8e0f49319936852b100c5  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 ee5243bae53abf04b32b085853cbc870918e41225188fd732266515b41964699  ./modules/mod-KPC-arbitraz-mediacja-ADR.md
@@ -12,12 +12,12 @@ dc4fb6c5364ef3e0499351f66bb9b3c82445204b8ab577b3ccbfb265a7ee9aa8  ./modules/mod-
 d883c86c4ba6ca67266680acaf6644405a2650f0d4bd77034dd68256dda389d9  ./modules/mod-ustawa-adwokatura.md
 99bc4e399a1cb163dd1d67ad0de1404112aa7ad475d4629e28833d6da4b5a666  ./modules/mod-ustawa-komornicy-sadowi-zawod.md
 574bf20f5adacd79a986db3170807c861893b5948ca57068960d1c947396b010  ./modules/mod-ustawa-notariat.md
-555052c6e8e6729d141645e85b2ef6583cd821b70137d2e28cc7ce94ba9b493b  ./modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md
+d60b3d950db34c6fb4a259d774b2c2d784de7d4aea36bc74f77f9f0d463df20c  ./modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md
 bf84f95a35ce1fd037ab79b62a482f613ce4402d014892cad29b11fbb2cfe010  ./modules/mod-ustawa-radcowie-prawni.md
 c54b7bc9e1825a0f80e52d88a4135b46bb1b0dfb1cd8f16d8566dcef600c9405  ./modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
 fe51dd2f701783173ed509f61fc2ba7bc44a24e39502fced045c4427a6fe3941  ./modules/mod-ustawa-rzecznicy-patentowi-zawod.md
 d273c5473808367033b11a5e97e85dfea53b6504b7185f334ff7e7728161ba5f  ./modules/mod-ustawa-sedziowie-referendarze-kuratorzy.md
 1a20c49b369978c7b023e671153003be67077be3237019315b0671703f26696b  ./modules/mod-wlasciwosc-miejscowa-sadow-powszechnych.md
-8892743024d049f9ed97ebae840a6ceafe6e13ae22b9e3891b0d4336655ae620  ./references/CHANGELOG.md
+90fb926e2aa06f3cbf554bd528621b58cb423deef7a25ebce0613f122d5fb37f  ./references/CHANGELOG.md
 6d577f0ec1363735343a495462aadeddd8891741a26ca60e27a18a499fc8e5f0  ./references/HISTORIA-ZMIAN-PLIKOW.md
 2dfc25de5c6de2e9a50c66b14af9f7aa0cdff66af29c507f0c7886ae9dfc3508  ./references/wlasciwosc-sadow-tj-2026-492.tsv

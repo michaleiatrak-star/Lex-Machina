@@ -1,5 +1,6 @@
 # CHANGELOG — dr-12-sadownictwo-prokuratura-zawody-prawnicze
 
+- 4.33 (2026-11-14): Tabela OIRP: aktualne adresy archiwów orzeczeń OSD Lublin (oirp.lu) i Warszawa (oirpwarszawa.pl/temidium), zweryfikowane 2026-11-14
 - 4.32 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 4.31 (2026-11-04, AUDYT-2026-11-04): MAPA-AKTOW: Prawo o prokuraturze — art. 11 § 1 (roczna informacja PG o kontroli operacyjnej) zm. Dz.U. 2026 poz. 1281 art. 8, w mocy 31.10.2026.
 - 4.30 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
