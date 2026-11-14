@@ -1,7 +1,9 @@
 # mod-Konstytucja-TK-skarga-konstytucyjna
 
-**Stan operacyjny:** 2026-08-28  
-**Źródła kanoniczne:** ELI — Konstytucja RP, Dz.U. 1997 nr 78 poz. 483 (status: obowiązujący); ustawa o organizacji i trybie postępowania przed TK, Dz.U. 2019 poz. 2393 t.j.; ustawa o statusie sędziów TK — tekst jednolity Dz.U. 2018 poz. 1422.
+**Akt:** Konstytucja RP — Dz.U. 1997 nr 78 poz. 483 (ELI DU/1997/483; zmiany: 2006 nr 200 poz. 1471, 2009 nr 114 poz. 946).
+**Akt:** UTK (ustawa o organizacji i trybie postępowania przed TK) — t.j. Dz.U. 2019 poz. 2393 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** USTK (ustawa o statusie sędziów TK) — t.j. Dz.U. 2018 poz. 1422 (zm. 2026/26 [OD 2027-01-01: 2026/26] — art. 32; nie dotyczy skargi konstytucyjnej).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
 
 ## Zakres
 
@@ -32,7 +34,7 @@ Moduł obejmuje konstytucyjne źródła prawa, wolności i prawa jednostki, orga
 3. **Art. 45 i 78** — oddziel prawo do sądu od prawa do zaskarżenia; nie zakładaj, że każdy środek musi być dwuinstancyjny w identycznym kształcie.
 4. **Art. 79** — skarga konstytucyjna służy kontroli normy prawnej, na podstawie której ostatecznie rozstrzygnięto o konstytucyjnych wolnościach lub prawach skarżącego; nie jest kolejnym środkiem do kontroli samych ustaleń faktycznych lub poprawności orzeczenia.
 5. **Art. 188 i 193** — odróżniaj kontrolę abstrakcyjną od pytania prawnego sądu w konkretnej sprawie.
-6. Każdy termin, wymóg formalny i krąg podmiotów procesowych przed TK sprawdzaj bezpośrednio w aktualnej ustawie o organizacji i trybie postępowania przed TK.
+6. **Skarga konstytucyjna — UTK:** art. 77 ust. 1 — po wyczerpaniu drogi prawnej, w ciągu **3 miesięcy** od doręczenia prawomocnego wyroku, ostatecznej decyzji lub innego ostatecznego rozstrzygnięcia; art. 53 ust. 1 — elementy skargi (kwestionowany przepis, naruszona wolność lub prawo i sposób naruszenia, uzasadnienie); art. 44 ust. 1 — przymus adwokacko-radcowski (wyjątki: sędzia, prokurator, adwokat, radca, notariusz, profesor lub dr hab. nauk prawnych), ust. 2 — wniosek o pełnomocnika z urzędu do sądu rejonowego.
 
 ## Skarga konstytucyjna — workflow
 

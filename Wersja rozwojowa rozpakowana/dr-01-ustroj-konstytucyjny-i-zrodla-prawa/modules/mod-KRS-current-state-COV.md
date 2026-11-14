@@ -1,5 +1,8 @@
 # Ustawa o Krajowej Radzie Sądownictwa — current-state COV
 
+**Akt:** UKRS (ustawa o Krajowej Radzie Sądownictwa) — t.j. Dz.U. 2024 poz. 1186.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
 **Źródło kanoniczne:** ELI, Dz.U. 2024 poz. 1186, stan prawny tekstu jednolitego 01.08.2024.

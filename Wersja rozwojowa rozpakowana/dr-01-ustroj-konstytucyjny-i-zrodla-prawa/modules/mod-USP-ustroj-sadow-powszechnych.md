@@ -1,5 +1,8 @@
 # mod-USP-ustroj-sadow-powszechnych
 
+**Akt:** PUSP (Prawo o ustroju sądów powszechnych) — t.j. Dz.U. 2024 poz. 334 (zm. po t.j., w mocy: 2024/1907 od 2025-01-01 — art. 49; 2025/526 od 2025-05-07 — art. 77; 2025/820 od 2025-07-25 — art. 16; 2025/1609 od 2025-12-09 — art. 2 § 1a pkt 3 uchylony; 2025/1172 i 2025/1178 od 2026-03-01 — art. 20, 41, 53e, 157b; 2026/370 od 2026-04-03 — art. 147, 149, 155–155e (asystenci sędziów); przyszłe: 2026/26 [OD 2027-01-01: 2026/26] — art. 70, 94, 94b, 94d; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 94).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Źródło kanoniczne:** ELI — Prawo o ustroju sądów powszechnych, tekst jednolity Dz.U. 2024 poz. 334, z późniejszymi zmianami.  
 **Istotna zmiana obowiązująca:** Dz.U. 2026 poz. 370 — ustawa z 27.02.2026 r., obowiązująca po 14 dniach od ogłoszenia 19.03.2026; dotyczy m.in. stanowisk asystenckich i przepisów powiązanych.

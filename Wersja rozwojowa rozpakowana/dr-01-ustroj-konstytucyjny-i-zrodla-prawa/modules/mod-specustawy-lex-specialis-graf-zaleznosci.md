@@ -1,5 +1,7 @@
 # MOD-SPECUSTAWY — Specustawy, Lex Specialis, Prawa Tymczasowe i Graf Zależności
 
+**Akt:** ZTP (rozporządzenie w sprawie „Zasad techniki prawodawczej”) — t.j. Dz.U. 2026 poz. 300 (obejmuje 2026/100; § 29a–29c przepisy epizodyczne — rozdział 4a).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
 **Wersja:** 1.0 | **Dodano:** 2026-07-17
 **Rola w systemie:** trzecia warstwa doktrynalna prawa międzyczasowego/kolizyjnego
 w DR-01, obok `mod-ZTP-przepisy-przejsciowe-doktryna.md`. Tamten moduł odpowiada

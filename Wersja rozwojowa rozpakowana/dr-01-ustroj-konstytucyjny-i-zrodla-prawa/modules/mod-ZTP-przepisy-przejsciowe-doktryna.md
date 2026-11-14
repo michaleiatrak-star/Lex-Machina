@@ -1,5 +1,8 @@
 # MOD-ZTP — Zasady Techniki Prawodawczej: Przepisy Przejściowe (warstwa doktrynalna)
 
+**Akt:** ZTP (rozporządzenie w sprawie „Zasad techniki prawodawczej”) — t.j. Dz.U. 2026 poz. 300 (obejmuje 2026/100; § 29a–29c przepisy epizodyczne, § 30–35 przejściowe i dostosowujące).
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — nie dotyczy art. 4).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
 **Wersja:** 1.0 | **Dodano:** 2026-07-17
 **Rola w systemie:** ten moduł dostarcza WARSTWĘ DOKTRYNALNĄ I KONSTYTUCYJNĄ prawa
 międzyczasowego (dlaczego ustawodawca wybrał daną technikę, jaka jest jej podstawa

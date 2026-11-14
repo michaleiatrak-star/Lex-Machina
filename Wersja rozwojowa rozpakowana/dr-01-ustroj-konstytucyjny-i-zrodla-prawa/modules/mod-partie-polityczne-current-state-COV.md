@@ -1,5 +1,8 @@
 # Ustawa o partiach politycznych — current-state COV
 
+**Akt:** UPP (ustawa o partiach politycznych) — t.j. Dz.U. 2023 poz. 1215.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
 **Źródło kanoniczne:** ELI, Dz.U. 2023 poz. 1215, stan prawny tekstu jednolitego 23.05.2023.

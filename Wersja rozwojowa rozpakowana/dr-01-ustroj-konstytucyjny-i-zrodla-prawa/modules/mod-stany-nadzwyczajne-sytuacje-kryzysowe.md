@@ -2,6 +2,12 @@
 
 **Hasła spraw:** stan wyjątkowy, stan wojenny, stan klęski żywiołowej, ograniczenie wolności i praw w stanie nadzwyczajnym, wolność zgromadzeń, sytuacja kryzysowa, epidemia
 
+**Akt:** Konstytucja RP — Dz.U. 1997 nr 78 poz. 483 (art. 228–234).
+**Akt:** USKZ (ustawa o stanie klęski żywiołowej) — t.j. Dz.U. 2025 poz. 112.
+**Akt:** USW (ustawa o stanie wyjątkowym) — t.j. Dz.U. 2017 poz. 1928.
+**Akt:** USWoj (ustawa o stanie wojennym) — t.j. Dz.U. 2025 poz. 504 (zm. 2026/252 od 2026-04-03 — art. 12a (cyberbezpieczeństwo)).
+**Akt:** UZK (ustawa o zarządzaniu kryzysowym) — t.j. Dz.U. 2026 poz. 574 (zm. 2026/815 od 2026-07-04 — m.in. art. 3, uchylone art. 5–6d, nowe rozdziały (odporność podmiotów krytycznych); 2026/1206 [OD 2027-01-11: 2026/1206] — załącznik, sektor bankowy).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; art. 228–232 Konstytucji odczytane z tekstu ogłoszonego).
 **Wersja:** 1.0 | **Dodano:** 2026-07-17
 **Rola w systemie:** czwarty moduł w rodzinie DR-01 poświęconej prawu
 międzyczasowemu/kolizyjnemu, obok `mod-ZTP-przepisy-przejsciowe-doktryna.md`
@@ -77,8 +83,8 @@ zakończeniu stanu — z odpowiednim przedłużeniem kadencji tych organów.
 | Stan | Ustawa | Kto wprowadza |
 |---|---|---|
 | Stan klęski żywiołowej | Ustawa z 18.04.2002 o stanie klęski żywiołowej (t.j. Dz.U. 2025 poz. 112) | Rada Ministrów, rozporządzenie, max 30 dni |
-| Stan wyjątkowy | Ustawa z 21.06.2002 o stanie wyjątkowym (t.j. Dz.U. 2017 poz. 1928) | Prezydent RP na wniosek RM, kontrola Sejmu w 48h |
-| Stan wojenny | Ustawa z 29.08.2002 o stanie wojennym oraz o kompetencjach Naczelnego Dowódcy Sił Zbrojnych... (t.j. Dz.U. 2025 poz. 504) | Prezydent RP na wniosek RM, kontrola Sejmu w 48h |
+| Stan wyjątkowy | Ustawa z 21.06.2002 o stanie wyjątkowym (t.j. Dz.U. 2017 poz. 1928) | Prezydent RP na wniosek RM, najwyżej 90 dni, jedno przedłużenie za zgodą Sejmu do 60 dni (art. 230); rozporządzenie Sejmowi w 48 h (art. 231) |
+| Stan wojenny | Ustawa z 29.08.2002 o stanie wojennym oraz o kompetencjach Naczelnego Dowódcy Sił Zbrojnych... (t.j. Dz.U. 2025 poz. 504) | Prezydent RP na wniosek RM, bez konstytucyjnego limitu czasu (art. 229); rozporządzenie Sejmowi w 48 h, Sejm może uchylić bezwzględną większością (art. 231) |
 
 ✅ VER 2026-08-14 (F-77): numery Dz.U. tabeli zweryfikowane u źródła — stan
 klęski żywiołowej i stan wojenny potwierdzone bezpośrednio (Kancelaria Sejmu,

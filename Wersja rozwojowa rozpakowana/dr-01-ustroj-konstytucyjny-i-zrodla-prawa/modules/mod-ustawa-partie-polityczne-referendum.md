@@ -1,7 +1,12 @@
 # mod-ustawa-partie-polityczne-referendum
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o partiach — Dz.U. 2023 poz. 1215 t.j. ✅ VER: 2026-06-05 | Ustawa o referendum — Dz.U. 2025 poz. 300 t.j. ze zm. ✅ VER: 2026-06-05
+**Akt:** UPP (ustawa o partiach politycznych) — t.j. Dz.U. 2023 poz. 1215 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** URef (ustawa o referendum ogólnokrajowym) — t.j. Dz.U. 2025 poz. 300.
+**Akt:** URefLok (ustawa o referendum lokalnym) — t.j. Dz.U. 2025 poz. 472.
+**Akt:** UInic (ustawa o wykonywaniu inicjatywy ustawodawczej przez obywateli) — t.j. Dz.U. 2018 poz. 2120.
+**Akt:** Konstytucja RP — Dz.U. 1997 nr 78 poz. 483 (art. 11, 13, 118, 125, 235).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawki: projekt obywatelski nie przepada z końcem kadencji — art. 4 ust. 3 UInic; próg ważności referendum odwołującego organ — 3/5 udziału, nie 3/5 głosów „za” (art. 55 ust. 2 URefLok); referendum zatwierdzające zmianę Konstytucji — wniosek podmiotów z art. 235 ust. 1, zarządza Marszałek Sejmu).
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -40,7 +45,7 @@ Partie polityczne (rejestracja, finanse, subwencja, sprawozdania, delegalizacja)
 | Element | Opis |
 |---|---|
 | Organ rejestrowy | Sąd Okręgowy w Warszawie (Wydział ds. Partii Politycznych) |
-| Minimum założycieli | Weryfikuj aktualny art. 11 ustawy o partiach w ISAP |
+| Minimum założycieli | wykaz co najmniej **1000** obywateli (18 lat, pełna zdolność) popierających zgłoszenie — art. 11 ust. 3 UPP |
 | Forma zgłoszenia | Weryfikuj aktualne wymogi formalne w ELI (RZĄD 1) |
 | Nabycie praw | Z chwilą wpisu do ewidencji partii politycznych |
 | Ewidencja | Prowadzi Sąd Okręgowy w Warszawie — jawna |
@@ -71,8 +76,9 @@ BEZWZGLĘDNY ZAKAZ:
 > ⚠️ Progi procentowe i kwoty subwencji — weryfikuj aktualne przepisy ustawy w ELI (RZĄD 1) oraz PKW przed każdą sprawą.
 
 ```
-Partia samodzielna: co do zasady wynik ≥ 3% głosów ważnych
-Koalicja:           co do zasady wynik ≥ 6% głosów ważnych
+Partia samodzielna: co najmniej 3% ważnie oddanych głosów na listy w skali kraju (art. 28 ust. 1 pkt 1 UPP)
+Koalicja:           co najmniej 6% (art. 28 ust. 1 pkt 2 UPP)
+(progi subwencji — nie mylić z progami wyborczymi Kodeksu wyborczego)
 ⚠️ Progi mogą być zmienione ustawą — ZAWSZE weryfikuj aktualne brzmienie w ELI (RZĄD 1).
 ```
 
@@ -110,22 +116,22 @@ Partie odwołujące się w swoich programach do totalitarnych metod i praktyk dz
 |---|---|---|
 | Na wniosek Sejmu | Sejm (uchwała bezwzgl. większością w obecności ≥ połowy ustawowej liczby posłów) | art. 125 ust. 2 Konstytucji |
 | Za zgodą Senatu — zarządza Prezydent | Prezydent + zgoda Senatu (bezwzgl. większością) | art. 125 ust. 2 Konstytucji |
-| W sprawie zmiany Konstytucji | Zgromadzenie Narodowe lub na wniosek (dot. rozdz. I, II, XII) | art. 235 ust. 6 Konstytucji |
+| Zatwierdzające zmianę Konstytucji (rozdz. I, II, XII) | na żądanie podmiotów z art. 235 ust. 1 (1/5 posłów, Senat, Prezydent) w 45 dni od uchwalenia przez Senat; zarządza Marszałek Sejmu w ciągu 60 dni | art. 235 ust. 6 Konstytucji |
 
 ### Wiążący charakter wyniku
 
 ```
 WARUNEK WIĄŻĄCOŚCI:
-  Frekwencja > 50% uprawnionych → wynik WIĄŻĄCY
+  Frekwencja > 50% uprawnionych → wynik WIĄŻĄCY (art. 125 ust. 3 Konstytucji, art. 66 ust. 1 URef)
   Frekwencja ≤ 50% → wynik NIEWIĄŻĄCY (charakter opinii)
 
 WYJĄTEK — referendum w sprawie zmiany Konstytucji (art. 235 ust. 6):
   → Wiążące bez progu frekwencyjnego
-  → Wymagana bezwzględna większość głosujących ZA
+  → Zmiana przyjęta, jeżeli opowiedziała się za nią większość głosujących
 
 SKUTEK WYNIKU WIĄŻĄCEGO:
   → Sejm zobowiązany do podjęcia działań wykonujących wolę referendalną
-  → Termin na uchwalenie ustawy / podjęcie działań: weryfikuj w ustawie
+  → organy podejmują czynności niezwłocznie, najpóźniej w 60 dni od ogłoszenia uchwały SN o ważności referendum (art. 67 URef)
 ```
 
 ---
@@ -142,8 +148,8 @@ Zarządzenie:
   → Rada gminy / powiatu / sejmik województwa (uchwała)
   → Mieszkańcy — inicjatywa obywatelska (próg podpisów: weryfikuj w ustawie)
 
-Wynik wiążący: udział > 30% uprawnionych do głosowania
-  Odwołanie organu: > 3/5 głosów ZA (weryfikuj aktualne przepisy w ELI (RZĄD 1))
+Ważność: udział co najmniej 30% uprawnionych (art. 55 ust. 1 URefLok)
+  Odwołanie organu z wyborów bezpośrednich: ważne przy udziale nie mniejszym niż 3/5 liczby biorących udział w wyborze odwoływanego organu (art. 55 ust. 2)
 
 ⚠️ Progi i warunki mogą ulec zmianie — weryfikuj aktualny t.j. w ELI (RZĄD 1).
 ```
@@ -157,7 +163,7 @@ Liczba podpisów: 100 000 obywateli uprawnionych do głosowania
 Procedura: Ustawa o wykonywaniu inicjatywy ustawodawczej przez obywateli
   → weryfikuj aktualny t.j. w ELI (RZĄD 1)
 Termin na zebranie podpisów: weryfikuj w ustawie
-Złożenie: Marszałek Sejmu → projekt traci moc po kadencji
+Złożenie: Marszałek Sejmu; projekt niezakończony w kadencji jest rozpatrywany przez Sejm następnej kadencji bez ponownego wniesienia (art. 4 ust. 3 UInic); pierwsze czytanie w 3 miesiące od wniesienia albo postanowienia SN o liczbie podpisów
   (zasada dyskontynuacji — wyjątek dla inicjatyw obywatelskich: weryfikuj)
 ```
 

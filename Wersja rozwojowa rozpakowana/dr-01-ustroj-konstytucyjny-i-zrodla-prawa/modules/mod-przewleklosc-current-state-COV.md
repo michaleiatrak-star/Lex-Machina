@@ -1,5 +1,8 @@
 # Skarga na przewlekłość postępowania — current-state COV
 
+**Akt:** UPrzew (ustawa o skardze na przewlekłość) — t.j. Dz.U. 2023 poz. 1725.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
 **Źródło kanoniczne:** ELI, Dz.U. 2023 poz. 1725.

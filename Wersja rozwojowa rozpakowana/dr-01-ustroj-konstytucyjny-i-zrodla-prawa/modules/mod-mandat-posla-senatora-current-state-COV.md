@@ -1,5 +1,8 @@
 # Wykonywanie mandatu posła i senatora — current-state COV
 
+**Akt:** UMPS (ustawa o wykonywaniu mandatu posła i senatora) — t.j. Dz.U. 2026 poz. 1282.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
 **Źródło kanoniczne:** ELI, Dz.U. 2026 poz. 1282 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI); poprzedni t.j. Dz.U. 2024 poz. 907 — wygaśnięcie aktu.

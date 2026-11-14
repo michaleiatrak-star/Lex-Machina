@@ -1,7 +1,11 @@
 # mod-ustawa-KRS-i-ustroj-wladzy
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o KRS — **Dz.U. 2024 poz. 1186 t.j.** (obwieszczenie Marszałka Sejmu z 1.08.2024 — ⚠️ poprzedni zapis modułu, 2011.714, to wyłącznie data pierwotnej publikacji, NIE t.j.; naprawione 2026-08-14 przy okazji F-15) | Ustawa o RM — Dz.U. 2022 poz. 2032 ze zm. | Ustawa o wykonywaniu mandatu posła i senatora — Dz.U. 2018 poz. 1799 ze zm.
+**Akt:** UKRS (ustawa o Krajowej Radzie Sądownictwa) — t.j. Dz.U. 2024 poz. 1186 (po t.j. bez zmian w ELI na 2026-11-14).
+**Akt:** URM (ustawa o Radzie Ministrów) — t.j. Dz.U. 2025 poz. 780 (zm. 2026/160 od 2026-02-27 — art. 8–8b, 9a–9b, 10c, 14b–14ca, 26, 35, 39).
+**Akt:** UMPS (ustawa o wykonywaniu mandatu posła i senatora) — t.j. Dz.U. 2026 poz. 1282.
+**Akt:** Konstytucja RP — Dz.U. 1997 nr 78 poz. 483 (art. 144–162, 173–187).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawki: art. 157 ust. 1 = odpowiedzialność solidarna, ust. 2 = indywidualna (były zamienione); art. 158–159 — większość ustawowej liczby posłów, wnioski 46 i 69 posłów, 7 dni; art. 160 — zwykła większość przy kworum, nie bezwzględna; t.j. ustawy o mandacie 2026/1282 zamiast 2018/1799).
 **Data weryfikacji online:** 2026-06-05
 
 ⚠️⚡⚡ FLAGA F-15 (otwarta 2026-08-07, istotna aktualizacja 2026-08-14) —
@@ -40,7 +44,7 @@ Konstytucyjny podział władzy, Krajowa Rada Sądownictwa (kompetencje, zaskarż
 | Konstytucja RP | Dz.U. 1997 nr 78 poz. 483 — rozdz. V (Prezydent), VI (RM), VIII (sądy i trybunały) |
 | Ustawa o Krajowej Radzie Sądownictwa | **Dz.U. 2024 poz. 1186 t.j.** (obw. 1.08.2024) — VER 2026-08-14 (F-15): isap.sejm.gov.pl (WDU20240001186), sejm.gov.pl (oficjalna strona KRS, obwieszczenie 9.02.2026 cytuje ten sam numer), sip.lex.pl. ⚠️ AKT INTENSYWNIE NOWELIZOWANY w 2026 r. (weto z 19.02.2026, uchwała Sejmu z 27.02.2026, wybór nowej KRS 15.05.2026) — mimo to ŻADNA z tych zmian NIE wygenerowała nowego t.j. (nowelizacja odrzucona wetem nie weszła w życie; wybór KRS z 15.05.2026 odbył się na PODSTAWIE tej wciąż obowiązującej ustawy z 2011 r., nie zmienił jej treści) — weryfikuj ponownie w ISAP przed każdym powołaniem, biorąc pod uwagę wysoką aktywność legislacyjną wokół tego aktu |
 | Ustawa o Radzie Ministrów | Dz.U. 2025 poz. 780 t.j. ze zm. — ✅ [VER] RZĄD 1 2026-09-16e (⛔ poprzedni zapis `2022 poz. 2032` to obwieszczenie MSWiA o rozporządzeniu — podmiana aktu) |
-| Ustawa o wykonywaniu mandatu posła i senatora | Dz.U. 2018 poz. 1799 ze zm. |
+| Ustawa o wykonywaniu mandatu posła i senatora | Dz.U. 2026 poz. 1282 t.j. |
 | KPC / PPSA | j.w. — zaskarżenie aktów/uchwał w trybie sądowym |
 
 ---
@@ -105,11 +109,11 @@ web_search: "uchwała KRS zaskarżenie tryb 2025 2026 orzecznictwo SN NSA"
 
 | Mechanizm | Opis | Podstawa Konstytucji |
 |---|---|---|
-| Wotum nieufności konstruktywne | Sejm odwołuje RM wskazując jednocześnie nowego Prezesa RM; wymaga bezwzgl. większości | art. 158 ust. 1 |
-| Wotum nieufności wobec ministra | Wniosek min. 69 posłów; bezwzgl. większość | art. 159 |
-| Wotum zaufania | Premier zwraca się do Sejmu; bezwzgl. większość przy kworum | art. 160 |
-| Odpowiedzialność solidarna | Cała RM odpowiada politycznie przed Sejmem | art. 157 ust. 2 |
-| Odpowiedzialność indywidualna | Każdy minister odpowiada za swój dział | art. 157 ust. 1 |
+| Wotum nieufności konstruktywne | wniosek co najmniej 46 posłów ze wskazaniem kandydata na Prezesa RM; większość ustawowej liczby posłów; głosowanie nie wcześniej niż po 7 dniach od zgłoszenia | art. 158 ust. 1–2 |
+| Wotum nieufności wobec ministra | wniosek co najmniej 69 posłów; większość ustawowej liczby posłów; 7 dni (art. 158 ust. 2 odpowiednio) | art. 159 |
+| Wotum zaufania | Prezes RM zwraca się do Sejmu; większość głosów (zwykła) w obecności co najmniej połowy ustawowej liczby posłów | art. 160 |
+| Odpowiedzialność solidarna | członkowie RM odpowiadają przed Sejmem solidarnie za działalność RM | art. 157 ust. 1 |
+| Odpowiedzialność indywidualna | za sprawy w kompetencji członka RM lub powierzone przez Prezesa RM | art. 157 ust. 2 |
 | Odpowiedzialność konstytucyjna | Przed Trybunałem Stanu; naruszenie Konstytucji lub ustaw | art. 156 |
 
 ### Rozporządzenia — kontrola zgodności

@@ -1,5 +1,8 @@
 # Prawo o ustroju sądów administracyjnych — current-state COV
 
+**Akt:** PUSA (Prawo o ustroju sądów administracyjnych) — t.j. Dz.U. 2024 poz. 1267.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
 **Źródło kanoniczne:** ELI, Dz.U. 2024 poz. 1267, stan prawny tekstu jednolitego 14.08.2024.

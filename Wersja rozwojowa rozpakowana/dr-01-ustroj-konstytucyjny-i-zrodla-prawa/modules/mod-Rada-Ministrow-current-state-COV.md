@@ -1,5 +1,8 @@
 # Ustawa o Radzie Ministrów — current-state COV
 
+**Akt:** URM (ustawa o Radzie Ministrów) — t.j. Dz.U. 2025 poz. 780 (zm. 2026/160 od 2026-02-27 — art. 8–8b, 9a–9b, 10c, 14b–14ca, 26, 35, 39).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
 **Źródło kanoniczne:** ELI, Dz.U. 2025 poz. 780, stan prawny tekstu jednolitego 27.05.2025, z późniejszymi zmianami.

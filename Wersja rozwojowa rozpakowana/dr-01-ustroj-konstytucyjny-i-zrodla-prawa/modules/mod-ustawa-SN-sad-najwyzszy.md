@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # Ustawa o Sądzie Najwyższym — current-state COV
 
+**Akt:** USN (ustawa o Sądzie Najwyższym) — t.j. Dz.U. 2024 poz. 622 (zm. 2026/26 [OD 2027-01-01: 2026/26] — art. 38, 51; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 51; urlopy i uprawnienia rodzicielskie sędziów).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## Źródło
 
 Ustawa z 8 grudnia 2017 r. o Sądzie Najwyższym.  

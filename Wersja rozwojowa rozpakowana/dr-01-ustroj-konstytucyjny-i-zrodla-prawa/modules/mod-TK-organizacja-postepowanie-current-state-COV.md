@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # Organizacja i tryb postępowania przed Trybunałem Konstytucyjnym — current-state COV
 
+**Akt:** UTK (ustawa o organizacji i trybie postępowania przed TK) — t.j. Dz.U. 2019 poz. 2393.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## Źródło kanoniczne
 
 Ustawa z 30 listopada 2016 r. o organizacji i trybie postępowania przed Trybunałem Konstytucyjnym.
