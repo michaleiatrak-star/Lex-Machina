@@ -1,35 +1,42 @@
 # mod-prawo-wekslowe-czekowe
 
-**Stan operacyjny:** 2026-08-28  
-**Źródła kanoniczne:** ELI — Prawo wekslowe, Dz.U. 2022 poz. 282 t.j.; Prawo czekowe, Dz.U. 2016 poz. 462 t.j. Oba akty mają status obowiązujący.
+**Hasła spraw:** weksel, weksel własny, weksel trasowany, weksel in blanco, deklaracja wekslowa, indos, aval, poręczenie wekslowe, protest, regres, przedawnienie wekslowe, czek, termin przedstawienia czeku
+
+**Akt:** pr. weksl. (Prawo wekslowe) — t.j. Dz.U. 2022 poz. 282 (po t.j. bez zmian; stan t.j. 2021-12-14).
+**Akt:** pr. czek. (Prawo czekowe) — t.j. Dz.U. 2016 poz. 462 (po t.j. bez zmian).
+**Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `https://api.sejm.gov.pl/eli/acts/DU/2022/282/text.html`, `https://api.sejm.gov.pl/eli/acts/DU/2016/462/text.html`; zmiany po t.j. — ELI, „Akty zmieniające” aktów DU/1936/282 i DU/1936/283.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14.
 
 ## 1. Rozdzielenie reżimów
 
 Weksel i czek są odrębnymi papierami wartościowymi regulowanymi odrębnymi ustawami. Nie przenoś automatycznie reguł jednego instrumentu na drugi.
 
-## 2. Prawo wekslowe — mapa aktualnego aktu
+## 2. Prawo wekslowe — wskazania
 
-| Zakres | Status |
+| Przepis | Kwalifikator |
 |---|---|
-| Tytuł I — weksel trasowany | 🟢 B+ / COV |
-| Dział I — wystawienie i forma | 🟢 |
-| Dział II — indos | 🟢 |
-| Dział III — przyjęcie | 🟢 |
-| Dział IV — poręczenie wekslowe | 🟢 |
-| Dział V — płatność | 🟢 |
-| Dział VI — zapłata | 🟢 |
-| Dział VII — zwrotne poszukiwanie z powodu nieprzyjęcia lub niezapłacenia | 🟢 |
-| Dział VIII — wyręczenie | 🟡 B+ |
-| Dział IX — wtóropisy i odpisy | 🟡 B+ |
-| Dział X — zmiany | 🟡 B+ |
-| Dział XI — przedawnienie | 🟢 |
-| Dział XII — przepisy ogólne | 🟡 B+ |
-| Dział XIII — niesłuszne zbogacenie | 🟢/🟡 B+ |
-| Dział XIV — kolizja ustaw | 🟡 B+ |
-| Dział XV — protest | 🟢 |
-| Dział XVI — weksle zaginione | 🟢/🟡 B+ |
-| Tytuł II — weksel własny | 🟢 |
-| Tytuł III — przepisy końcowe i przejściowe | kontrola temporalna |
+| art. 1–2 pr. weksl. | cechy weksla trasowanego (nazwa „weksel”, bezwarunkowe polecenie zapłaty, trasat, termin i miejsce płatności, remitent, data i miejsce wystawienia, podpis); brak cechy → nie jest wekslem, z wyjątkami z art. 2 (brak terminu → za okazaniem; miejsce obok trasata) |
+| art. 7 pr. weksl. | podpisy osób niezdolnych, fałszywe, nieistniejących — nie uchybiają ważności pozostałych podpisów (samodzielność zobowiązań) |
+| art. 10 pr. weksl. | **weksel in blanco**: uzupełnienie niezgodne z porozumieniem nie jest zarzutem wobec posiadacza, chyba że nabył w złej wierze albo z rażącym niedbalstwem |
+| art. 11 pr. weksl. | przeniesienie przez indos; „nie na zlecenie” → tylko forma i skutki zwykłego przelewu (zd. 1 w brzmieniu od 2021-09-24, 2021/1655) |
+| art. 11a pr. weksl. | (2021/1655) weksel wręczony przedsiębiorcy dla spełnienia lub zabezpieczenia wierzytelności z umowy z **konsumentem** powinien mieć klauzulę „nie na zlecenie”; jej brak i przeniesienie weksla → przedsiębiorca naprawia szkodę wystawcy przez zapłatę weksla |
+| art. 14 pr. weksl. | indos przenosi wszystkie prawa; indos in blanco — wypełnienie, dalszy indos, przeniesienie bez indosu |
+| art. 16 pr. weksl. | prawny posiadacz — nieprzerwany szereg indosów (także in blanco) |
+| art. 17 pr. weksl. | zarzuty osobiste wobec wystawcy lub poprzednich posiadaczy wyłączone wobec posiadacza, chyba że nabywając działał świadomie na szkodę dłużnika |
+| art. 28 pr. weksl. | akceptant zobowiązany do zapłaty w terminie; bezpośrednie roszczenie posiadacza (także wystawcy) o sumy z art. 48–49 |
+| art. 30, 32 pr. weksl. | poręczenie wekslowe (aval) za całość lub część; poręczyciel odpowiada jak ten, za kogo poręczył — ważne mimo nieważności zobowiązania głównego, z wyjątkiem wady formalnej |
+| art. 33 pr. weksl. | dopuszczalne terminy płatności (za okazaniem, w pewien czas po okazaniu, po dacie, w oznaczonym dniu); inne lub kolejne terminy → weksel nieważny |
+| art. 38 pr. weksl. | przedstawienie do zapłaty w dniu płatności albo w jednym z dwóch następnych dni powszednich |
+| art. 43 pr. weksl. | zwrotne poszukiwanie (regres) po terminie albo przed nim (odmowa przyjęcia, restrukturyzacja lub upadłość trasata i in.) |
+| art. 44–45 pr. weksl. | protest z powodu nieprzyjęcia lub niezapłacenia (akt publiczny) i jego terminy; zawiadomienie indosanta i wystawcy w 4 dni powszednie |
+| art. 47 pr. weksl. | wystawca, akceptant, indosanci i poręczyciele odpowiadają **solidarnie**; dowolna kolejność |
+| art. 53 pr. weksl. | upływ terminów do przedstawienia lub protestu → utrata praw wobec indosantów, wystawcy i in. (nie wobec akceptanta) |
+| art. 70 pr. weksl. | przedawnienie: przeciw akceptantowi **3 lata** od dnia płatności; posiadacz przeciw indosantom i wystawcy — **rok** od protestu (albo od płatności przy „bez kosztów”); dalsze terminy dla regresu między dłużnikami |
+| art. 71 pr. weksl. | przerwanie i zawieszenie wg prawa powszechnego; przerwanie działa tylko wobec dłużnika, którego dotyczy |
+| art. 75 pr. weksl. | podpis za niepiśmiennego — uwierzytelniony przez notariusza lub gminę |
+| art. 76 pr. weksl. | po wygaśnięciu zobowiązania (przedawnienie, zaniedbanie) — roszczenie z niesłusznego wzbogacenia przeciw wystawcy i akceptantowi; przedawnienie 3 lata |
+| art. 101–102 pr. weksl. | cechy **weksla własnego** i skutki ich braku |
+| art. 104 pr. weksl. | wystawca weksla własnego odpowiada jak akceptant weksla trasowanego |
 
 ### Twarde bramki wekslowe
 
@@ -41,9 +48,19 @@ Weksel i czek są odrębnymi papierami wartościowymi regulowanymi odrębnymi us
 6. **Przedawnienie:** terminy są różne zależnie od konfiguracji podmiotowej. Pobierz aktualny Dział XI zamiast stosować jeden ogólny termin.
 7. Przy wekslach wystawionych przed zmianami z 2021 r. sprawdź przepisy przejściowe.
 
-## 3. Prawo czekowe — mapa operacyjna
+## 3. Prawo czekowe — wskazania
 
-Prawo czekowe jest odrębnym aktem. Kluczowe bloki obejmują wystawienie i formę, przenoszenie praw, poręczenie, przedstawienie i zapłatę, zwrotne poszukiwanie, protest/stwierdzenia równoważne, wtóropisy, przedawnienie, kolizję ustaw oraz utratę dokumentu.
+| Przepis | Kwalifikator |
+|---|---|
+| art. 1–2 pr. czek. | cechy czeku (nazwa „czek”, bezwarunkowe polecenie zapłaty, trasat, miejsce płatności, data i miejsce wystawienia, podpis); brak cechy → nie jest czekiem, z wyjątkami z art. 2 |
+| art. 3 pr. czek. | czek na bankiera, który ma fundusze wystawcy na podstawie umowy; dokument wystawiony inaczej pozostaje ważny jako czek; dla czeków wystawionych i płatnych w Polsce — krąg trasatów wg zdania dalszego (pobierz brzmienie) |
+| art. 4 pr. czek. | czek nie podlega przyjęciu; wzmianka o przyjęciu — za nienapisaną |
+| art. 28 pr. czek. | płatny za okazaniem; wzmianka przeciwna — za nienapisaną; czek przedstawiony przed datą wystawienia płatny w dniu przedstawienia |
+| art. 29 pr. czek. | termin przedstawienia: **10 dni** (ten sam kraj); 20 albo 70 dni (inny kraj, wg położenia) |
+| art. 32 pr. czek. | odwołanie czeku skuteczne dopiero po upływie terminu przedstawienia (wyjątek dla czeku przesłanego bezpośrednio trasatowi) |
+| art. 40 pr. czek. | regres po nieopłaceniu czeku przedstawionego w terminie; odmowę stwierdza protest albo oświadczenie trasata lub izby rozrachunkowej |
+| art. 52 pr. czek. | przedawnienie regresu: **6 miesięcy** od końca terminu przedstawienia; między dłużnikami — od wykupu lub pozwania |
+| art. 62 pr. czek. | zdolność czekowa wg prawa ojczystego (kolizja ustaw) |
 
 ### Twarde bramki czekowe
 
