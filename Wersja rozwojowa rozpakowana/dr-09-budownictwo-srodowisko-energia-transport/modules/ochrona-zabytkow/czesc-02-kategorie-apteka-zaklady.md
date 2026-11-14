@@ -1,5 +1,10 @@
 # Ochrona zabytków / obiekty użyteczności publicznej — część 2: kategorie obiektów, apteka, zakłady produkcyjne
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** POS (Prawo ochrony środowiska) — t.j. Dz.U. 2026 poz. 1453.
+**Akt:** UOOS (ustawa o udostępnianiu informacji o środowisku, udziale społeczeństwa i ocenach oddziaływania na środowisko) — t.j. Dz.U. 2026 poz. 670 (zm. po t.j.: 2026/1097 od 2026-09-02 — art. 1, 2, 15, 17a, 17b, 20, 39b, 72; 2026/1157 od 2026-09-16 — art. 21; 2026/875 [OD 2027-01-01: 2026/875] — art. 21, 59a, 63, 72, 72a, 72b, 72c, 74).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > Część modułu `mod-ochrona-zabytkow-obiekty-uzytecznosci-publicznej.md`
 > (podział 2026-08-20, naprawa F-78 — plik źródłowy przekroczył 1000
 > linii). Pełny indeks i zasady użycia: zobacz plik nadrzędny w katalogu

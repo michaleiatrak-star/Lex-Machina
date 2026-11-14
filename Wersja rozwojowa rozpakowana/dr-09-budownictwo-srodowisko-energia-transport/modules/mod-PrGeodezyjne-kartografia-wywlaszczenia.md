@@ -1,5 +1,14 @@
 # mod-DY — Geodezja, kartografia, wywłaszczenia i gospodarka nieruchomościami
 
+**Akt:** PrEn (Prawo energetyczne) — t.j. Dz.U. 2026 poz. 43 (zm. po t.j.: 2026/516 od 2026-04-30 — art. 2, 3, 4, 4j, 5, 5ad, 5ga, 5gb, 6g, 6h, 6i, 7, 16, 31d, 49, 71, 72, 306i, 777; 2026/607 od 2026-05-21 — art. 23r, 35; 2026/900 od 2026-07-21 — art. 3, 3a, 4j, 5, 7, 7b, 11, 23, 32, 33, 43, 45, 46, 47, 54, 62c; 2026/1348 od 2026-10-17 — art. 3, 4k, 7, 9g, 9j, 9ja, 11, 11t, 11y, 11zc, 11zh, 11zha, 20d, 20e, 20f, 28, 32d, 43c, 56; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 3, 7, 7a, 9g, 16, 23, 56).
+**Akt:** PrGeod (Prawo geodezyjne i kartograficzne) — t.j. Dz.U. 2026 poz. 1389.
+**Akt:** UGN (ustawa o gospodarce nieruchomościami) — t.j. Dz.U. 2026 poz. 399 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 10; 2026/875 [OD 2027-01-01: 2026/875] — art. 93).
+**Akt:** UPZP (ustawa o planowaniu i zagospodarowaniu przestrzennym) — t.j. Dz.U. 2026 poz. 538 (zm. po t.j.: 2026/781 od 2026-07-01 — art. 1, 2, 8f, 8g, 8h, 14, 15, 17, 20, 37ea, 37eb, 37eba, 37ebb, 37ec, 37ed, 37ee, 37eea, 37ef, 37efa, 37g; 2026/912 od 2026-07-31 — art. 8e, 17, 38b; 2026/864 od 2026-10-01 — art. 53).
+**Akt:** ZRID (specustawa drogowa — ustawa o szczególnych zasadach przygotowania i realizacji inwestycji w zakresie dróg publicznych) — t.j. Dz.U. 2024 poz. 311.
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Status modułu
 
 Moduł prawa polskiego klasy eksperckiej. Stosować analogicznie do modułów prawa pracy i prawa karnego: intake → akty prawne → procedura → dowody → strategia → ryzyka → orzecznictwo → checklisty → workflow.

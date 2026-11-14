@@ -1,5 +1,19 @@
 # mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** PrEn (Prawo energetyczne) — t.j. Dz.U. 2026 poz. 43 (zm. po t.j.: 2026/516 od 2026-04-30 — art. 2, 3, 4, 4j, 5, 5ad, 5ga, 5gb, 6g, 6h, 6i, 7, 16, 31d, 49, 71, 72, 306i, 777; 2026/607 od 2026-05-21 — art. 23r, 35; 2026/900 od 2026-07-21 — art. 3, 3a, 4j, 5, 7, 7b, 11, 23, 32, 33, 43, 45, 46, 47, 54, 62c; 2026/1348 od 2026-10-17 — art. 3, 4k, 7, 9g, 9j, 9ja, 11, 11t, 11y, 11zc, 11zh, 11zha, 20d, 20e, 20f, 28, 32d, 43c, 56; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 3, 7, 7a, 9g, 16, 23, 56).
+**Akt:** PrGeod (Prawo geodezyjne i kartograficzne) — t.j. Dz.U. 2026 poz. 1389.
+**Akt:** UGN (ustawa o gospodarce nieruchomościami) — t.j. Dz.U. 2026 poz. 399 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 10; 2026/875 [OD 2027-01-01: 2026/875] — art. 93).
+**Akt:** UDP (ustawa o drogach publicznych) — t.j. Dz.U. 2025 poz. 889 (zm. po t.j.: 2026/982 od 2026-09-21 — art. 13, 13k, 13naa, 40a).
+**Akt:** ZRID (specustawa drogowa — ustawa o szczególnych zasadach przygotowania i realizacji inwestycji w zakresie dróg publicznych) — t.j. Dz.U. 2024 poz. 311.
+**Akt:** UTD (ustawa o transporcie drogowym) — t.j. Dz.U. 2025 poz. 1490 (zm. po t.j.: 2025/1843 od 2026-01-01 — art. 30a, 30b, 87, 89; 2025/1676 od 2026-03-03 — art. 4, 39a, 39aa, 39b, 39e, 39ha, 39hb, 39i, 103a; 2025/1795 od 2026-03-18 — art. 4; 2026/982 od 2026-08-06 — art. 1, 23, 24, 24a, 39aa, 39c; 2026/875 [OD 2027-01-01: 2026/875] — art. 18).
+**Akt:** UTK (ustawa o transporcie kolejowym) — t.j. Dz.U. 2026 poz. 1324.
+**Akt:** PrLot (Prawo lotnicze) — t.j. Dz.U. 2026 poz. 1407.
+**Akt:** KM (Kodeks morski) — t.j. Dz.U. 2023 poz. 1309 (zm. po t.j.: 2026/1004 od 2026-08-27 — art. 37, 37a).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Akt:** UEPA (ustawa o elektromobilności i paliwach alternatywnych) — t.j. Dz.U. 2026 poz. 1243.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:**
 - Transport drogowy: Dz.U. 2025 poz. 1490 t.j. ze zm. ✅ VER: 2026-06-05

@@ -1,5 +1,12 @@
 # mod-GDDKiA-specustawa-drogowa-ZRID
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** UGN (ustawa o gospodarce nieruchomościami) — t.j. Dz.U. 2026 poz. 399 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 10; 2026/875 [OD 2027-01-01: 2026/875] — art. 93).
+**Akt:** ZRID (specustawa drogowa — ustawa o szczególnych zasadach przygotowania i realizacji inwestycji w zakresie dróg publicznych) — t.j. Dz.U. 2024 poz. 311.
+**Akt:** PrLot (Prawo lotnicze) — t.j. Dz.U. 2026 poz. 1407.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-21
 **Rola w systemie:** odpowiedź na pytanie użytkownika o GDDKiA — dotąd
 CAŁKOWITA LUKA poza jedną linijką w tabeli zarządców dróg (mod-ustawa-

@@ -1,5 +1,18 @@
 # Moduł — Prawo Ochrony Środowiska: Szczegółowy Framework
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** POS (Prawo ochrony środowiska) — t.j. Dz.U. 2026 poz. 1453.
+**Akt:** UOOS (ustawa o udostępnianiu informacji o środowisku, udziale społeczeństwa i ocenach oddziaływania na środowisko) — t.j. Dz.U. 2026 poz. 670 (zm. po t.j.: 2026/1097 od 2026-09-02 — art. 1, 2, 15, 17a, 17b, 20, 39b, 72; 2026/1157 od 2026-09-16 — art. 21; 2026/875 [OD 2027-01-01: 2026/875] — art. 21, 59a, 63, 72, 72a, 72b, 72c, 74).
+**Akt:** UOP (ustawa o ochronie przyrody) — t.j. Dz.U. 2026 poz. 1315.
+**Akt:** UOdp (ustawa o odpadach) — t.j. Dz.U. 2026 poz. 1328.
+**Akt:** PrWod (Prawo wodne) — t.j. Dz.U. 2026 poz. 1335 (zm. po t.j.: 2026/1358 od 2026-11-03 — art. 16, 44, 45, 46, 46a, 47, 240, 344, 345, 346, 347).
+**Akt:** UPZP (ustawa o planowaniu i zagospodarowaniu przestrzennym) — t.j. Dz.U. 2026 poz. 538 (zm. po t.j.: 2026/781 od 2026-07-01 — art. 1, 2, 8f, 8g, 8h, 14, 15, 17, 20, 37ea, 37eb, 37eba, 37ebb, 37ec, 37ed, 37ee, 37eea, 37ef, 37efa, 37g; 2026/912 od 2026-07-31 — art. 8e, 17, 38b; 2026/864 od 2026-10-01 — art. 53).
+**Akt:** UIOS (ustawa o Inspekcji Ochrony Środowiska) — t.j. Dz.U. 2024 poz. 425 (zm. po t.j.: 2025/1863 od 2026-01-13 — art. 2; 2026/1157 od 2026-09-16 — art. 2, 4a, 18).
+**Akt:** UZSS (ustawa o zapobieganiu szkodom w środowisku i ich naprawie) — t.j. Dz.U. 2020 poz. 2187.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## ZAKRES MODUŁU — ROZGRANICZENIE (ustalony 2026-09-10g)
 
 ⛔ Ten moduł **nie jest drugą wersją** `mod-POS-prawo-ochrony-srodowiska.md`.

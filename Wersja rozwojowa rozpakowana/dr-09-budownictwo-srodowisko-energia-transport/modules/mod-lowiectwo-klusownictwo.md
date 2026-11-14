@@ -1,5 +1,11 @@
 # mod-lowiectwo-klusownictwo
 
+**Akt:** UOP (ustawa o ochronie przyrody) — t.j. Dz.U. 2026 poz. 1315.
+**Akt:** PrLow (Prawo łowieckie) — t.j. Dz.U. 2025 poz. 539.
+**Akt:** UZZw (ustawa o zdrowiu zwierząt) — akt pierwotny, bez t.j.: Dz.U. 2025 poz. 1795.
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 2.0 | **Dodano:** 2026-07-18 | **Korekta źródłowa:** 2026-08-16
 **Akt:** Prawo łowieckie z 13.10.1995 — **t.j. Dz.U. 2025 poz. 539**
 (obwieszczenie 24.03.2025, ogł. 24.04.2025)

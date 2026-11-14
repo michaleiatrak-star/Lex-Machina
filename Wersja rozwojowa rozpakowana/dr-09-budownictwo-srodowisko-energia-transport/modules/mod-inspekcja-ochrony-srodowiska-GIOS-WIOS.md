@@ -1,5 +1,13 @@
 # mod-inspekcja-ochrony-srodowiska-GIOS-WIOS
 
+**Akt:** POS (Prawo ochrony środowiska) — t.j. Dz.U. 2026 poz. 1453.
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Akt:** UIOS (ustawa o Inspekcji Ochrony Środowiska) — t.j. Dz.U. 2024 poz. 425 (zm. po t.j.: 2025/1863 od 2026-01-13 — art. 2; 2026/1157 od 2026-09-16 — art. 2, 4a, 18).
+**Akt:** UZSS (ustawa o zapobieganiu szkodom w środowisku i ich naprawie) — t.j. Dz.U. 2020 poz. 2187.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-21
 **Rola w systemie:** odpowiedź na pytanie użytkownika o GIOŚ/WIOŚ —
 dotąd wymieniane WYŁĄCZNIE jako kroki w diagramie proceduralnym

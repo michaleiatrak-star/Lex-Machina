@@ -1,5 +1,13 @@
 # Ustawa o Krajowym Zasobie Nieruchomości (KZN) v1.0.0 (dodany 2026-10-20)
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** UL (ustawa o lasach) — t.j. Dz.U. 2026 poz. 663.
+**Akt:** UGN (ustawa o gospodarce nieruchomościami) — t.j. Dz.U. 2026 poz. 399 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 10; 2026/875 [OD 2027-01-01: 2026/875] — art. 93).
+**Akt:** UPZP (ustawa o planowaniu i zagospodarowaniu przestrzennym) — t.j. Dz.U. 2026 poz. 538 (zm. po t.j.: 2026/781 od 2026-07-01 — art. 1, 2, 8f, 8g, 8h, 14, 15, 17, 20, 37ea, 37eb, 37eba, 37ebb, 37ec, 37ed, 37ee, 37eea, 37ef, 37efa, 37g; 2026/912 od 2026-07-31 — art. 8e, 17, 38b; 2026/864 od 2026-10-01 — art. 53).
+**Akt:** UKZN (ustawa o Krajowym Zasobie Nieruchomości) — t.j. Dz.U. 2026 poz. 1299.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > ⛔ Moduł dotyczy wyłącznie ustawy z 20.07.2017 o KZN. **Nie** zastępuje ugn
 > (`dr-09/mod-UGN-gospodarka-nieruchomosciami.md`) — ugn stosuje się tylko tam, gdzie ustawa o KZN
 > wprost odsyła (art. 62 ust. 4, art. 65 ust. 2, art. 66 pkt 2). Rozdziały 6, 7 i 9 ustawy są

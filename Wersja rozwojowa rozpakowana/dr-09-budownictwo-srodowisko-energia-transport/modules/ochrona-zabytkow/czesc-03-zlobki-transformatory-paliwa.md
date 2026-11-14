@@ -1,5 +1,8 @@
 # Ochrona zabytków / obiekty użyteczności publicznej — część 3: żłobki/przedszkola, stacje transformatorowe, stacje paliw
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > Część modułu `mod-ochrona-zabytkow-obiekty-uzytecznosci-publicznej.md`
 > (podział 2026-08-20, naprawa F-78 — plik źródłowy przekroczył 1000
 > linii). Pełny indeks i zasady użycia: zobacz plik nadrzędny w katalogu

@@ -8,6 +8,12 @@ source_policy: "RZĄD 1 only"
 
 # Prawo budowlane — uzupełnienie pozostałego pokrycia
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/646 od 2026-05-29 — art. 33; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** PrGeod (Prawo geodezyjne i kartograficzne) — t.j. Dz.U. 2026 poz. 1389.
+**Akt:** USZAI (ustawa o samorządach zawodowych architektów oraz inżynierów budownictwa) — t.j. Dz.U. 2025 poz. 1783.
+**Akt:** UDost (ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami) — t.j. Dz.U. 2024 poz. 1411.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## 1. Źródło
 
 Prawo budowlane — aktualny tekst jednolity **Dz.U. 2026 poz. 524**,

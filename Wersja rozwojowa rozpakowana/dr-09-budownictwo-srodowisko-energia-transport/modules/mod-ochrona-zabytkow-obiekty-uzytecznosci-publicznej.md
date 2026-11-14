@@ -1,4 +1,9 @@
 # Ochrona zabytków, obiekty użyteczności publicznej, kategorie budowlane — INDEKS (podzielony 2026-08-20, naprawa F-78)
+
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** UDost (ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami) — t.j. Dz.U. 2024 poz. 1411.
+**Akt:** UOZ (ustawa o ochronie zabytków i opiece nad zabytkami) — t.j. Dz.U. 2024 poz. 1292 (zm. po t.j.: 2025/1168 od 2026-02-26 — art. 45, 47, 93, 93a; 2026/483 od 2026-04-16 — art. 1, 59, 108a, 108b, 109; 2025/1673 od 2026-06-03 — art. 1, 36, 36a, 36aa, 37, 43, 44, 45, 47, 107d, 107da; 2024/1907 [OD 2027-01-01: 2024/1907] — art. 88; 2026/875 [OD 2027-01-01: 2026/875] — art. 10).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
 v2.0.0 — struktura indeksatora, treść bez zmian merytorycznych
 
 > ⛔ **STAN WT OD 20.09.2026 (dodano 2026-10-04, RZĄD 1 ELI):** rozp. MI

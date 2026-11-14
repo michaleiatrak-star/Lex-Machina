@@ -1,5 +1,10 @@
 # Ochrona zabytków / obiekty użyteczności publicznej — część 6: miejsca parkingowe, przekształcenie mieszkania, cross-referencje
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** PRD (Prawo o ruchu drogowym) — t.j. Dz.U. 2024 poz. 1251 (zm. po t.j.: 2025/820 od 2025-07-25 — art. 80c, 100ah; 2025/1006 od 2025-08-09 — art. 80c, 100ah; 2025/1872 od 2026-01-29 — art. 60, 65j, 65ja, 135, 135a; 2025/1676 od 2026-03-03 — art. 6, 13, 14, 17, 20, 32, 33, 33d, 53, 53a, 100aa, 100ac, 129, 129ja, 135, 135a, 137, 140d, 148a; 2026/180 od 2026-05-18 — art. 1, 2, 4, 6, 9, 12, 16, 51, 53, 66, 91, 93a, 93b, 94, 104a; 2025/1734 od 2026-06-10 — art. 1, 2, 20a, 71, 72, 72a, 73, 73aa, 73c, 74, 80a, 80b, 80ba, 80c, 80ca, 80caa, 80d, 80ra, 80rb, 100ah; 2025/1843 od 2026-06-24 — art. 2, 3, 4, 4a, 65k, 65l, 65n, 66, 67, 79a, 80c, 80s, 80t, 80w, 140mb, 140mc, 148a, 233, 436; 2026/982 od 2026-09-21 — art. 1, 16, 16a, 40a, 100aa, 100ac; 2026/1466 [OD 2026-11-21: 2026/1466] — art. 135, 135a; 2026/875 [OD 2027-01-01: 2026/875] — art. 53; 2026/1073 [OD 2027-05-11: 2026/1073] — art. 80b, 80ba).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > Część modułu `mod-ochrona-zabytkow-obiekty-uzytecznosci-publicznej.md`
 > (podział 2026-08-20, naprawa F-78 — plik źródłowy przekroczył 1000
 > linii). Pełny indeks i zasady użycia: zobacz plik nadrzędny w katalogu

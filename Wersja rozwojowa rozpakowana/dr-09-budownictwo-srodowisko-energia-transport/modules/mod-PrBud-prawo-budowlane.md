@@ -1,5 +1,15 @@
 # Moduł [W] — Prawo Budowlane
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** PrEn (Prawo energetyczne) — t.j. Dz.U. 2026 poz. 43 (zm. po t.j.: 2026/516 od 2026-04-30 — art. 2, 3, 4, 4j, 5, 5ad, 5ga, 5gb, 6g, 6h, 6i, 7, 16, 31d, 49, 71, 72, 306i, 777; 2026/607 od 2026-05-21 — art. 23r, 35; 2026/900 od 2026-07-21 — art. 3, 3a, 4j, 5, 7, 7b, 11, 23, 32, 33, 43, 45, 46, 47, 54, 62c; 2026/1348 od 2026-10-17 — art. 3, 4k, 7, 9g, 9j, 9ja, 11, 11t, 11y, 11zc, 11zh, 11zha, 20d, 20e, 20f, 28, 32d, 43c, 56; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 3, 7, 7a, 9g, 16, 23, 56).
+**Akt:** UOZE (ustawa o odnawialnych źródłach energii) — t.j. Dz.U. 2026 poz. 68 (zm. po t.j.: 2026/516 od 2026-04-30 — art. 9, 38ac, 38ad, 69b, 69c, 70b, 81, 120; 2026/900 od 2026-07-21 — art. 47, 116, 135, 152; 2026/912 od 2026-07-31 — art. 2, 133; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 2, 2a, 4, 7, 8, 8a, 9, 11, 12, 19, 23, 25, 28, 30, 31, 31a, 31b, 33, 38c, 38da).
+**Akt:** PrGeod (Prawo geodezyjne i kartograficzne) — t.j. Dz.U. 2026 poz. 1389.
+**Akt:** UPZP (ustawa o planowaniu i zagospodarowaniu przestrzennym) — t.j. Dz.U. 2026 poz. 538 (zm. po t.j.: 2026/781 od 2026-07-01 — art. 1, 2, 8f, 8g, 8h, 14, 15, 17, 20, 37ea, 37eb, 37eba, 37ebb, 37ec, 37ed, 37ee, 37eea, 37ef, 37efa, 37g; 2026/912 od 2026-07-31 — art. 8e, 17, 38b; 2026/864 od 2026-10-01 — art. 53).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Akt:** UDost (ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami) — t.j. Dz.U. 2024 poz. 1411.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Zakres:** Pozwolenie na budowę; zgłoszenie robót budowlanych; samowola budowlana
 (legalizacja, nakaz rozbiórki); warunki zabudowy i zagospodarowania terenu (WZ/MPZP);
 pozwolenie na użytkowanie; nadzór budowlany (PINB, WINB); odpowiedzialność inwestora,
@@ -224,11 +234,18 @@ ZASADA OGÓLNA: w przestrzeni PRYWATNEJ zasadniczo BEZ pozwolenia i
   tę zasadę:
   □ OGRODZENIE: do 2,20 m od poziomu gruntu — BEZ formalności;
     powyżej — WYMAGANE zgłoszenie
-  □ ALTANA wolnostojąca: do 35 m² (max 2 takie obiekty na każde
-    500 m² działki) — BEZ formalności; 35-70 m² — zgłoszenie;
-    powyżej 70 m² — pozwolenie na budowę
-  □ OCZKO WODNE / BASEN: do 50 m² — zgłoszenie WYMAGANE, 30 dni przed
-    rozpoczęciem prac; powyżej 50 m² — pozwolenie na budowę
+  □ ALTANA wolnostojąca: do 35 m² (max 2 na każde 500 m² działki) — BEZ
+    pozwolenia i zgłoszenia (art. 29 ust. 2 pkt 3); powyżej 35 m² — brak
+    zwolnienia w art. 29 → pozwolenie (art. 28 ust. 1)
+    ⛔ „35–70 m² — zgłoszenie” to reżim BUDYNKÓW REKREACJI INDYWIDUALNEJ
+    (art. 29 ust. 1 pkt 16 lit. a–b: do 35 m² oraz 35–70 m² przy rozpiętości
+    do 6 m i wysięgu wsporników do 2 m; 1 budynek na 500 m²), nie altan
+  □ BASEN / OCZKO WODNE: do 50 m² przy budynku mieszkalnym jednorodzinnym
+    lub rekreacji indywidualnej — BEZ pozwolenia i BEZ zgłoszenia
+    (art. 29 ust. 2 pkt 13); na ROD: basen do 15 m², oczko do 10 m² i 1 m
+    głębokości (ust. 2 pkt 35); powyżej — brak zwolnienia → pozwolenie
+    ✅ [VER: ELI DU/2026/524 art. 29, RZĄD 1, 2026-11-14] (poprzednio błędnie:
+    altana 35–70 m² na zgłoszenie; basen do 50 m² „zgłoszenie 30 dni przed”)
   ⚠️ Progi metrażowe pochodzą z art. 29 PrBud — zawsze zweryfikuj
   aktualne brzmienie, bo katalog zwolnień bywa nowelizowany (ostatnia
   istotna zmiana altan: od 1.01.2017)

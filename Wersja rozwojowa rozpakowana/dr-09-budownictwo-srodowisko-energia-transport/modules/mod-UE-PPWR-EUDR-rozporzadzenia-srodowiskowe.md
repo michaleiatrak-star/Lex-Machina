@@ -1,5 +1,11 @@
 # MOD — PPWR i EUDR: rozporządzenia UE bezpośrednio stosowane w prawie środowiskowym
 
+**Akt:** UL (ustawa o lasach) — t.j. Dz.U. 2026 poz. 663.
+**Akt:** PrLow (Prawo łowieckie) — t.j. Dz.U. 2025 poz. 539 (zm. po t.j.: 2025/1795 od 2026-03-18 — art. 8, 8a, 8c, 11, 22, 42aa).
+**Akt:** UOpak (ustawa o gospodarce opakowaniami i odpadami opakowaniowymi) — t.j. Dz.U. 2026 poz. 619.
+**Akt:** UIOS (ustawa o Inspekcji Ochrony Środowiska) — t.j. Dz.U. 2024 poz. 425 (zm. po t.j.: 2025/1863 od 2026-01-13 — art. 2; 2026/1157 od 2026-09-16 — art. 2, 4a, 18).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > **Moduł dziedzinowy DR-09.** Obejmuje dwa rozporządzenia UE, które **stosuje
 > się bezpośrednio** i których **nie trzeba implementować ustawą**, żeby wiązały
 > polskiego przedsiębiorcę.

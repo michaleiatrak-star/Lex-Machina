@@ -1,5 +1,11 @@
 # mod-umowa-przewozu-CMR-konwencje-przewozowe
 
+**Akt:** PrLot (Prawo lotnicze) — t.j. Dz.U. 2026 poz. 1407.
+**Akt:** KM (Kodeks morski) — t.j. Dz.U. 2023 poz. 1309 (zm. po t.j.: 2026/1004 od 2026-08-27 — art. 37, 37a).
+**Akt:** PrPrzew (Prawo przewozowe) — t.j. Dz.U. 2024 poz. 1262 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 15, 16, 34a).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł kancelaryjny DR-09 (prawo przewozowe — umowa przewozu, odpowiedzialność przewoźnika)
 **Utworzony:** 2026-11-09. Metryki i treść poniżej odczytane z ELI (api.sejm.gov.pl, RZĄD 1) i z tekstu
 autentycznego w UN Treaty Series; każda pozycja ma adres źródła. Brzmienie przed powołaniem w piśmie —

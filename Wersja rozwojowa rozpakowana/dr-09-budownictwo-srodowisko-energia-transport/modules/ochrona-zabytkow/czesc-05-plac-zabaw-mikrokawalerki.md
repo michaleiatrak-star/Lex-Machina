@@ -1,5 +1,10 @@
 # Ochrona zabytków / obiekty użyteczności publicznej — część 5: plac zabaw/siłownia, mikrokawalerki
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** UDP (ustawa o drogach publicznych) — t.j. Dz.U. 2025 poz. 889 (zm. po t.j.: 2026/815 od 2026-07-04 — art. 20h, 20i; 2026/982 od 2026-09-21 — art. 13, 13k, 13naa, 40a).
+**Akt:** UDost (ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami) — t.j. Dz.U. 2024 poz. 1411.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > Część modułu `mod-ochrona-zabytkow-obiekty-uzytecznosci-publicznej.md`
 > (podział 2026-08-20, naprawa F-78 — plik źródłowy przekroczył 1000
 > linii). Pełny indeks i zasady użycia: zobacz plik nadrzędny w katalogu

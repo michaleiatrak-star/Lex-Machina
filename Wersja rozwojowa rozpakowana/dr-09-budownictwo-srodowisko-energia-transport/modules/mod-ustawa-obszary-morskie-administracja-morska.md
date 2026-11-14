@@ -1,5 +1,24 @@
 # Ustawa o obszarach morskich RP i administracji morskiej v1.0.0 (dodany 2026-10-20)
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** POS (Prawo ochrony środowiska) — t.j. Dz.U. 2026 poz. 1453.
+**Akt:** UOOS (ustawa o udostępnianiu informacji o środowisku, udziale społeczeństwa i ocenach oddziaływania na środowisko) — t.j. Dz.U. 2026 poz. 670 (zm. po t.j.: 2026/1097 od 2026-09-02 — art. 1, 2, 15, 17a, 17b, 20, 39b, 72; 2026/1157 od 2026-09-16 — art. 21; 2026/875 [OD 2027-01-01: 2026/875] — art. 21, 59a, 63, 72, 72a, 72b, 72c, 74).
+**Akt:** UOP (ustawa o ochronie przyrody) — t.j. Dz.U. 2026 poz. 1315.
+**Akt:** PrWod (Prawo wodne) — t.j. Dz.U. 2026 poz. 1335 (zm. po t.j.: 2026/1358 od 2026-11-03 — art. 16, 44, 45, 46, 46a, 47, 240, 344, 345, 346, 347).
+**Akt:** PrEn (Prawo energetyczne) — t.j. Dz.U. 2026 poz. 43 (zm. po t.j.: 2026/516 od 2026-04-30 — art. 2, 3, 4, 4j, 5, 5ad, 5ga, 5gb, 6g, 6h, 6i, 7, 16, 31d, 49, 71, 72, 306i, 777; 2026/607 od 2026-05-21 — art. 23r, 35; 2026/900 od 2026-07-21 — art. 3, 3a, 4j, 5, 7, 7b, 11, 23, 32, 33, 43, 45, 46, 47, 54, 62c; 2026/1348 od 2026-10-17 — art. 3, 4k, 7, 9g, 9j, 9ja, 11, 11t, 11y, 11zc, 11zh, 11zha, 20d, 20e, 20f, 28, 32d, 43c, 56; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 3, 7, 7a, 9g, 16, 23, 56).
+**Akt:** UOZE (ustawa o odnawialnych źródłach energii) — t.j. Dz.U. 2026 poz. 68 (zm. po t.j.: 2026/516 od 2026-04-30 — art. 9, 38ac, 38ad, 69b, 69c, 70b, 81, 120; 2026/900 od 2026-07-21 — art. 47, 116, 135, 152; 2026/912 od 2026-07-31 — art. 2, 133; 2026/1347 [OD 2026-12-01: 2026/1347] — art. 2, 2a, 4, 7, 8, 8a, 9, 11, 12, 19, 23, 25, 28, 30, 31, 31a, 31b, 33, 38c, 38da).
+**Akt:** PrGG (Prawo geologiczne i górnicze) — t.j. Dz.U. 2026 poz. 69.
+**Akt:** PrGeod (Prawo geodezyjne i kartograficzne) — t.j. Dz.U. 2026 poz. 1389.
+**Akt:** UPZP (ustawa o planowaniu i zagospodarowaniu przestrzennym) — t.j. Dz.U. 2026 poz. 538 (zm. po t.j.: 2026/781 od 2026-07-01 — art. 1, 2, 8f, 8g, 8h, 14, 15, 17, 20, 37ea, 37eb, 37eba, 37ebb, 37ec, 37ed, 37ee, 37eea, 37ef, 37efa, 37g; 2026/912 od 2026-07-31 — art. 8e, 17, 38b; 2026/864 od 2026-10-01 — art. 53).
+**Akt:** PrLot (Prawo lotnicze) — t.j. Dz.U. 2026 poz. 1407.
+**Akt:** KM (Kodeks morski) — t.j. Dz.U. 2023 poz. 1309 (zm. po t.j.: 2026/1004 od 2026-08-27 — art. 37, 37a).
+**Akt:** UOM (ustawa o obszarach morskich RP i administracji morskiej) — t.j. Dz.U. 2026 poz. 1305.
+**Akt:** UMFW (ustawa o promowaniu wytwarzania energii elektrycznej w morskich farmach wiatrowych) — t.j. Dz.U. 2025 poz. 498 (zm. po t.j.: 2025/1535 od 2025-11-27 — art. 3, 3a, 4, 5, 6, 6a, 9, 10, 11, 15, 18, 20, 24, 26, 27, 29, 30, 31, 31a, 32; 2026/516 od 2026-04-30 — art. 6a, 52, 107).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > ⛔ Moduł obejmuje **ustawę z 21.03.1991** (UOM) — status prawny obszarów morskich, pozwolenia lokalizacyjne
 > (sztuczne wyspy, konstrukcje, MFW, kable/rurociągi), badania, morskie planowanie przestrzenne, organy
 > administracji morskiej i sankcje. **Nie** obejmuje: ustawy o promowaniu wytwarzania energii elektrycznej

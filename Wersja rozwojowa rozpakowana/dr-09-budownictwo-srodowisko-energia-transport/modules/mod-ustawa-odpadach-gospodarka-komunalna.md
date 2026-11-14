@@ -1,5 +1,12 @@
 # mod-CU-odpady-gospodarka-komunalna.md — Odpady, gospodarka komunalna i odpowiedzialność środowiskowa
 
+**Akt:** POS (Prawo ochrony środowiska) — t.j. Dz.U. 2026 poz. 1453.
+**Akt:** UOdp (ustawa o odpadach) — t.j. Dz.U. 2026 poz. 1328.
+**Akt:** UCPG (ustawa o utrzymaniu czystości i porządku w gminach) — t.j. Dz.U. 2025 poz. 733 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 3, 4c, 4ca).
+**Akt:** UIOS (ustawa o Inspekcji Ochrony Środowiska) — t.j. Dz.U. 2024 poz. 425 (zm. po t.j.: 2025/1863 od 2026-01-13 — art. 2; 2026/1157 od 2026-09-16 — art. 2, 4a, 18).
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji

@@ -1,5 +1,11 @@
 # mod-lowieckie-dzialalnosc-gospodarcza-turystyka-obrot
 
+**Akt:** UOP (ustawa o ochronie przyrody) — t.j. Dz.U. 2026 poz. 1315.
+**Akt:** PrLow (Prawo łowieckie) — t.j. Dz.U. 2025 poz. 539 (zm. po t.j.: 2025/1795 od 2026-03-18 — art. 8, 8a, 8c, 11, 22, 42aa).
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Zakres:** Prawo łowieckie (ustawa z 13.10.1995 r., t.j. Dz.U. 2025 poz. 539),
 Rozdział 4 — Działalność gospodarcza w zakresie łowiectwa, art. 17
 (uchylony), 18, 19 (uchylony), 20 (uchylony), 21, 21a, 22, 22a, 22b.

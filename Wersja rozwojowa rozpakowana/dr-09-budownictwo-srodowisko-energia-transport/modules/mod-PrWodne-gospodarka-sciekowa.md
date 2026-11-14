@@ -1,5 +1,13 @@
 # mod-CQ-wodne-gospodarka-sciekowa.md — Prawo wodne, Wody Polskie i gospodarka ściekowa
 
+**Akt:** PrBud (Prawo budowlane) — t.j. Dz.U. 2026 poz. 524 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 64; 2026/646 od 2026-05-29 — art. 33; 2026/1161 od 2026-10-02 — art. 1, 2, 12, 96, 99; 2026/1347 od 2026-10-17 — art. 9, 9a).
+**Akt:** UCPG (ustawa o utrzymaniu czystości i porządku w gminach) — t.j. Dz.U. 2025 poz. 733 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 3, 4c, 4ca).
+**Akt:** PrWod (Prawo wodne) — t.j. Dz.U. 2026 poz. 1335 (zm. po t.j.: 2026/1358 od 2026-11-03 — art. 16, 44, 45, 46, 46a, 47, 240, 344, 345, 346, 347).
+**Akt:** UIOS (ustawa o Inspekcji Ochrony Środowiska) — t.j. Dz.U. 2024 poz. 425 (zm. po t.j.: 2025/1863 od 2026-01-13 — art. 2; 2026/1157 od 2026-09-16 — art. 2, 4a, 18).
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji

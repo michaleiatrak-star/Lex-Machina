@@ -1,5 +1,10 @@
 # mod-system-kaucyjny-opakowania
 
+**Akt:** UOP (ustawa o ochronie przyrody) — t.j. Dz.U. 2026 poz. 1315.
+**Akt:** UOdp (ustawa o odpadach) — t.j. Dz.U. 2026 poz. 1328.
+**Akt:** UOpak (ustawa o gospodarce opakowaniami i odpadami opakowaniowymi) — t.j. Dz.U. 2026 poz. 619.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-19
 **Rola w systemie:** odpowiedź na pytanie użytkownika o "kaucję" —
 CAŁKOWITA LUKA mimo że to jedna z NAJWIĘKSZYCH zmian w gospodarce

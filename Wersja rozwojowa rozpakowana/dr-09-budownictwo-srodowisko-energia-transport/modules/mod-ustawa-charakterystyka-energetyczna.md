@@ -1,5 +1,8 @@
 # Moduł — Charakterystyka energetyczna budynków i certyfikaty energetyczne
 
+**Akt:** UCEB (ustawa o charakterystyce energetycznej budynków) — t.j. Dz.U. 2024 poz. 101.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Ustawa o charakterystyce energetycznej budynków — t.j. **Dz.U. 2024 poz. 101** ze zm. — ✅ [VER] RZĄD 1 2026-09-16d
   (⛔ poprzedni zapis `2024 poz. 544` to rozporządzenie MON — podmiana aktu)

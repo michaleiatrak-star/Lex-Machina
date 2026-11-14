@@ -1,5 +1,18 @@
 # mod-srodowisko-wycinka-odpady-niebezpieczne-rekultywacja
 
+**Akt:** POS (Prawo ochrony środowiska) — t.j. Dz.U. 2026 poz. 1453.
+**Akt:** UOOS (ustawa o udostępnianiu informacji o środowisku, udziale społeczeństwa i ocenach oddziaływania na środowisko) — t.j. Dz.U. 2026 poz. 670 (zm. po t.j.: 2026/1097 od 2026-09-02 — art. 1, 2, 15, 17a, 17b, 20, 39b, 72; 2026/1157 od 2026-09-16 — art. 21; 2026/875 [OD 2027-01-01: 2026/875] — art. 21, 59a, 63, 72, 72a, 72b, 72c, 74).
+**Akt:** UOP (ustawa o ochronie przyrody) — t.j. Dz.U. 2026 poz. 1315.
+**Akt:** PrLow (Prawo łowieckie) — t.j. Dz.U. 2025 poz. 539 (zm. po t.j.: 2025/1795 od 2026-03-18 — art. 8, 8a, 8c, 11, 22, 42aa).
+**Akt:** UOdp (ustawa o odpadach) — t.j. Dz.U. 2026 poz. 1328.
+**Akt:** UCPG (ustawa o utrzymaniu czystości i porządku w gminach) — t.j. Dz.U. 2025 poz. 733 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 3, 4c, 4ca).
+**Akt:** UTK (ustawa o transporcie kolejowym) — t.j. Dz.U. 2026 poz. 1324.
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Akt:** UZSS (ustawa o zapobieganiu szkodom w środowisku i ich naprawie) — t.j. Dz.U. 2020 poz. 2187.
+**Akt:** UOZ (ustawa o ochronie zabytków i opiece nad zabytkami) — t.j. Dz.U. 2024 poz. 1292 (zm. po t.j.: 2025/1168 od 2026-02-26 — art. 45, 47, 93, 93a; 2026/483 od 2026-04-16 — art. 1, 59, 108a, 108b, 109; 2025/1673 od 2026-06-03 — art. 1, 36, 36a, 36aa, 37, 43, 44, 45, 47, 107d, 107da; 2024/1907 [OD 2027-01-01: 2024/1907] — art. 88; 2026/875 [OD 2027-01-01: 2026/875] — art. 10).
+**Akt:** KK (Kodeks karny) — t.j. Dz.U. 2026 poz. 1342 (zm. po t.j.: 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.1 | **Dodano:** 2026-07-18 | **Zaktualizowano:** 2026-07-18 (dokończono Część C i D)
 **Rola w systemie:** odpowiedź na klaster pytań użytkownika: nielegalna
 i legalna wycinka drzew, wysypiska śmieci i odpady niebezpieczne/
@@ -32,18 +45,23 @@ WYJĄTEK od wymogu zgody właściciela: wniosek złożony przez WSPÓLNOTĘ
 ### 2. ⭐ ZWOLNIENIA Z OBOWIĄZKU ZEZWOLENIA (art. 83f) — progi obwodu pnia
 
 ```
-Osoba fizyczna USUWAJĄCA drzewo NA CELE NIEZWIĄZANE z działalnością
-gospodarczą — BEZ zezwolenia I BEZ zgłoszenia, jeśli obwód pnia
-(mierzony na wysokości 5 cm od gruntu) NIE PRZEKRACZA:
+KAŻDY (bez względu na podmiot) — BEZ zezwolenia (art. 83f ust. 1 pkt 3),
+jeśli obwód pnia (mierzony na wysokości 5 cm) NIE PRZEKRACZA:
   □ 80 cm — topola, wierzba, klon jesionolistny, klon srebrzysty
   □ 65 cm — kasztanowiec zwyczajny, robinia akacjowa, platan klonolistny
   □ 50 cm — pozostałe gatunki drzew
-  □ KRZEWY (pojedyncze lub w skupisku) — jeśli zajmują POWIERZCHNIĘ
-    MNIEJSZĄ niż 25 m²
-  □ DRZEWA OWOCOWE — bez zezwolenia (art. 83f ust. 1 pkt 8), NIEZALEŻNIE
-    od obwodu pnia — WYJĄTEK: nie dotyczy drzew owocowych na terenie
-    wpisanym do REJESTRU ZABYTKÓW ani na TERENACH ZIELENI (tam limity
-    obwodu WRACAJĄ do zastosowania)
+OSOBA FIZYCZNA na własnej nieruchomości, cel NIEZWIĄZANY z działalnością
+gospodarczą — BEZ zezwolenia bez względu na obwód (art. 83f ust. 1 pkt 3a),
+ALE powyżej progów 80/65/50 cm — ZGŁOSZENIE zamiaru usunięcia (art. 83f
+ust. 4–5); organ: oględziny w 21 dni od doręczenia zgłoszenia (ust. 6),
+sprzeciw decyzją w 14 dni od oględzin (ust. 8); braki — uzupełnienie w 7 dni
+(ust. 9). Usunięcie dopiero po upływie terminu na sprzeciw.
+  □ KRZEWY (pojedyncze lub w skupisku) — do 25 m² (art. 83f ust. 1 pkt 1)
+  □ DRZEWA i KRZEWY OWOCOWE — bez zezwolenia (art. 83f ust. 1 pkt 5),
+    z wyłączeniem rosnących na nieruchomości wpisanej do rejestru zabytków
+    lub na terenach zieleni
+✅ [VER: ELI DU/2026/1315 art. 83f, RZĄD 1, 2026-11-14] (poprzednio: progi
+   przypisane tylko osobie fizycznej, brak obowiązku zgłoszenia, pkt 8 zamiast 5)
   □ ROLNICY — usuwanie drzew/krzewów w celu PRZYWRÓCENIA gruntów
     NIEUŻYTKOWANYCH do użytkowania ROLNICZEGO (art. 83f ust. 1 pkt 3b,
     dodane nowelizacją z 16.12.2016) — dotyczy gruntów zarośniętych,
