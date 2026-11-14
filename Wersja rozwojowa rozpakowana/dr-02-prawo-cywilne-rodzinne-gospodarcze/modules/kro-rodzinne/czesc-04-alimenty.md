@@ -1,5 +1,8 @@
 # KRO — część 4: alimenty (wszystkie kategorie)
 
+**Akt:** KRO — t.j. Dz.U. 2026 poz. 236 (po t.j. bez zmian).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (terminy i progi: W-1).
+
 > Część modułu `mod-KRO-rodzinne.md` (podział 2026-08-20, naprawa F-78 —
 > plik źródłowy przekroczył 1600 linii). Pełny indeks i zasady użycia:
 > zobacz plik nadrzędny w katalogu `modules/`. To NIE jest samodzielny
