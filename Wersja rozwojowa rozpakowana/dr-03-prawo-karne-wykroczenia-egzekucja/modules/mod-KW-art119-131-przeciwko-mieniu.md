@@ -1,5 +1,10 @@
 # mod-KW-art119-131-przeciwko-mieniu
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** KPW — t.j. Dz.U. 2026 poz. 1336 (zm. 2020/2320 [OD 2029-10-01: 2020/2320] — art. 38 (doręczenia elektroniczne)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Wersja:** 1.1 | **Dodano:** 2026-07-17 | **Zaktualizowano:** 2026-07-17 (druga weryfikacja art. 120/123/126/127)
 **Rola w systemie:** wypełnia najpilniejszą lukę zidentyfikowaną w audycie
 pokrycia Kodeksu wykroczeń — dotąd oba istniejące moduły KW
@@ -22,7 +27,7 @@ przepisem z tego modułu.
 | Artykuł | Czyn | Próg wartości |
 |---|---|---|
 | 119 | Kradzież/przywłaszczenie cudzej rzeczy ruchomej | ≤800 zł |
-| 120 | Wyrąb drzewa w lesie w celu przywłaszczenia / kradzież drzewa wyrąbanego lub powalonego | ✅ **≤800 zł — ZRÓWNANY z progiem ogólnym** (starsze źródła podają 75 zł/"1/4 minimalnego wynagrodzenia" — to brzmienie SPRZED nowelizacji, obecnie ISAP/lexlege potwierdzają jednolity próg 800 zł, Dz.U. 2025 poz. 734 t.j.). Obligatoryjna nawiązka w wysokości PODWÓJNEJ wartości drzewa (§3) |
+| 120 | Wyrąb drzewa w lesie w celu przywłaszczenia / kradzież drzewa wyrąbanego lub powalonego | ✅ **≤800 zł — ZRÓWNANY z progiem ogólnym** (starsze źródła podają 75 zł/"1/4 minimalnego wynagrodzenia" — to brzmienie SPRZED nowelizacji, obecnie ISAP/lexlege potwierdzają jednolity próg 800 zł, Dz.U. 2026 poz. 1372 t.j.). Obligatoryjna nawiązka w wysokości PODWÓJNEJ wartości drzewa (§3) |
 | 121 | Jazda bez biletu / bez opłaty za przejazd — KWALIFIKOWANA postać: trzecie w ciągu roku wyłudzenie przejazdu mimo dwukrotnie nałożonej kary pieniężnej z taryfy, bez zamiaru zapłaty | — |
 | 122 | Paserstwo (umyślne §1, nieumyślne §2 — łagodniejsze) | ≤800 zł (odpowiednio do progu z art. 119/120) |
 | 123 | ✅ Zabieranie w celu przywłaszczenia cudzych owoców/warzyw/kwiatów Z OGRODU, W NIEZNACZNEJ ILOŚCI — grzywna do 250 zł albo nagana. Ściganie NA WNIOSEK pokrzywdzonego (§2) |

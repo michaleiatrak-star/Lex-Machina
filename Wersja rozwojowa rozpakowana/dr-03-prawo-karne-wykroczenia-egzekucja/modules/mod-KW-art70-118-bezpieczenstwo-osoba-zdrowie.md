@@ -1,5 +1,10 @@
 # mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** KPW — t.j. Dz.U. 2026 poz. 1336 (zm. 2020/2320 [OD 2029-10-01: 2020/2320] — art. 38 (doręczenia elektroniczne)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Wersja:** 1.1 | **Dodano:** 2026-07-17 | **Aktualizacja:** 2026-08-27 (art. 82)
 **Rola w systemie:** kontynuacja uzupełniania pokrycia Kodeksu wykroczeń
 — trzy rozdziały o wysokiej częstości praktycznej, dotąd CAŁKOWICIE

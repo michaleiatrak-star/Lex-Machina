@@ -1,5 +1,8 @@
 # Przestępstwa przeciwko życiu i zdrowiu — ujęcie systemowe (art. 148-162 KK) v1.0.0 (dodany 2026-07-16)
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Hasła spraw:** pobicie, pobił, bójka, uszczerbek na zdrowiu, złamanie, złamany nos, obrażenia ciała, uszkodzenie ciała, narażenie na niebezpieczeństwo, nieudzielenie pomocy, zabójstwo, nieumyślne spowodowanie śmierci
 
 > ⛔ Do 2026-07-16 przepisy tego rozdziału pojawiały się fragmentarycznie

@@ -1,5 +1,8 @@
 # mod-KK-slupy-fikcyjna-reprezentacja-spolki
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-17
 **Rola w systemie:** odpowiedź na pytanie użytkownika o dwa zjawiska
 korporacyjno-karne dotąd nieobecne w systemie: (1) "słupy" jako

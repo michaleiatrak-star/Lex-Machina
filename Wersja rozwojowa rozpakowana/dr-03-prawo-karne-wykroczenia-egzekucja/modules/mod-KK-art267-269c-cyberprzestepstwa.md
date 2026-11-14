@@ -1,5 +1,9 @@
 # Moduł [T] — Cyberprzestępczość
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Hasła spraw:** przejęcie konta, włamanie na konto, konto na Facebooku, hasło, BLIK, phishing, fałszywy profil, podszywanie się, hakowanie, ransomware.
 
 **Zakres:** Art. 267–269c KK (hacking, DDoS, sabotaż), art. 287 KK (oszustwo komputerowe,

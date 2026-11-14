@@ -1,5 +1,9 @@
 # mod-KW-art132-166-pozostale-rozdzialy
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Wersja:** 1.1 | **Dodano:** 2026-07-17 | **Zaktualizowano:** 2026-08-14
 (F-67, część 2 — Rozdz. XIX art. 151-166 w pełni zweryfikowany, domykając
 NAJWIĘKSZĄ ilościową lukę w części szczególnej KW)

@@ -1,11 +1,16 @@
 # Cyberprzestępczość — Szczegółowy Framework
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 ## TERMINY — SPRAWDŹ JAKO PIERWSZE
 ```
 Przedawnienie karalności (art. 101 KK) — zależne od zagrożenia:
-  Do 3 lat (np. naruszenie tajemnicy korespondencji art. 267 §1): 5 lat
-  Do 5 lat: 10 lat
-  Powyżej 5 lat (art. 269a — sabotaż systemów): 15 lat
+  Zagrożenie do 3 lat (np. art. 267 §1 — do 2 lat): 5 lat (art. 101 §1 pkt 4)
+  Powyżej 3 do 5 lat (np. art. 269a, 269b §1 — 3 mies.–5 lat): 10 lat (pkt 3)
+  Powyżej 5 lat: 15 lat (pkt 2a); zbrodnia: 20 lat (pkt 2)
+  Po wszczęciu postępowania: +10 lat (art. 101 §1) albo +5 lat (art. 102 §1)
 Zawiadomienie o przestępstwie:    brak terminu zawitego (ale jak najszybciej)
 Zabezpieczenie dowodów cyfrowych: NATYCHMIAST — dane mogą być usunięte w godzinach
 Pozew cywilny (dobra osobiste):   art. 4421 KC — 3 lata od dowiedzenia się o szkodzie (delikt); art. 118 KC — 6 lat (ogólny termin; ⛔ art. 117 § 1 mówi tylko, ŻE roszczenia majątkowe się przedawniają — korekta 2026-09-16f)

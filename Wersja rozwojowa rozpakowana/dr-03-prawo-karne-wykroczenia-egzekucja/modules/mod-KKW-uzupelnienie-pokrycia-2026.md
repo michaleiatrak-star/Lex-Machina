@@ -8,6 +8,11 @@ source_policy: "RZĄD 1 only"
 
 # KKW — uzupełnienie pozostałego pokrycia
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87).
+**Akt:** KKW — t.j. Dz.U. 2026 poz. 1307 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 ## 1. Źródło
 
 Kodeks karny wykonawczy — **Dz.U. 2026 poz. 1307 t.j.** (poprzedni t.j. 2025/911), stan prawny t.j.

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.77 (2026-11-14): DR-03 komplet: 71 modułów + 8 części kwalifikatora w formacie wskazań; poprawki zagrożeń art. 234-244b KK, przedawnienie cyber, art. 244 przy nakazie Policji, tabela kar frameworku
 - 3.76 (2026-11-13): mod-KKW: art. 144 § 5 KKW uchylony — kontrola decyzji dyscyplinarnej: skarga z art. 7 KKW (ELI 2026-11-13, check_uchylone.py)
 - 3.75 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.74 (2026-10-31, BENCHMARK-02): KW — aktualny t.j. Dz.U. 2026 poz. 1372 (benchmark 02 P01): re-ver art. 19, 24 § 1a, 87 § 1, 119, 120, 122 (800 zł) dopisane obok historycznych wpisów 2025 poz. 734.

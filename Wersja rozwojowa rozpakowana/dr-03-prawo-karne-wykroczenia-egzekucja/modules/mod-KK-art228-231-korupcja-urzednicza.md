@@ -1,5 +1,8 @@
 # Korupcja urzędnicza — łapownictwo bierne/czynne, płatna protekcja, nadużycie funkcji publicznej (art. 228-231 KK) v1.0.0 (dodany 2026-07-16)
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 > ⛔ Do 2026-07-16 art. 228-231 KK figurowały wyłącznie jako pozycja na
 > liście źródeł w module compliance ISO 37001 (dr-15) — bez żadnego
 > drzewa decyzyjnego prawnokarnego w dr-03. Ten moduł naprawia lukę.

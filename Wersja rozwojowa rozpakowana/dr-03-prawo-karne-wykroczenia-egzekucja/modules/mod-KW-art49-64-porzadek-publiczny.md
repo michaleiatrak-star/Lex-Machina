@@ -1,5 +1,10 @@
 # mod-KW-art49-64-porzadek-publiczny
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** KPW — t.j. Dz.U. 2026 poz. 1336 (zm. 2020/2320 [OD 2029-10-01: 2020/2320] — art. 38 (doręczenia elektroniczne)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Wersja:** 1.1 | **Dodano:** 2026-07-17 | **Zaktualizowano:** 2026-07-17 (druga weryfikacja art. 50a/52a/52b/53/54/63a/64)
 **Rola w systemie:** wypełnia drugi priorytet z audytu pokrycia Kodeksu
 wykroczeń — Rozdział VIII zawiera **art. 51, jeden z najczęściej

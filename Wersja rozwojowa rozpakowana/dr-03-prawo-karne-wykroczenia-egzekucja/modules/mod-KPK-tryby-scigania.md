@@ -1,5 +1,9 @@
 # Moduł REFERENCYJNY — Tryby Ścigania Przestępstw
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Źródło weryfikacji:** KK Dz.U. 2025 poz. 383 t.j. (obecny t.j. Dz.U. 2026 poz. 1342) (wersja od 29.01.2026) | KPK Dz.U. 2026 poz. 490 t.j.
 **Data weryfikacji online:** 21.05.2026 (pełna re-weryfikacja wszystkich przepisów)
 **ZASADA:** Każdy artykuł przed powołaniem → isap.sejm.gov.pl

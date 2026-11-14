@@ -1,5 +1,8 @@
 # Kodeks karny — current-state COV
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
 **Źródło kanoniczne:** ELI, t.j. Dz.U. 2026 poz. 1342 (obwieszczenie Marszałka Sejmu z 2.10.2026, ogł. 16.10.2026; ELI: „obowiązujący”, brak nowelizacji po t.j.; 2026/902 i 988 — „akt objęty tekstem jednolitym”; 2025/1818 i 1872 weszły w życie przed obwieszczeniem i są w treści t.j.). Tekst t.j. udostępniony w ELI 2026-10-20 (text.pdf) — brzmienie czytaj z DU/2026/1342. ✅ [VER] RZĄD 1 2026-10-20 (ELI DU/2026/1342 text.pdf odczytany; porównanie artykułów z DU/2025/383: zmienione wyłącznie przepisy objęte 2025/1818, 1872, 2026/902, 988, m.in. art. 42, 43a, 44b, 69, 115 § 26, 177 § 2a, 178–178d, 217a, 222, 223, 231b, 255b, 269b; art. 278–295 bez zmian).

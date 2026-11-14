@@ -1,5 +1,9 @@
 # Przestępstwa przeciwko wymiarowi sprawiedliwości — fałszywe zeznania, fałszywe oskarżenie, poplecznictwo/ukrywanie przestępcy (art. 233-244b KK) v1.0.0 (dodany 2026-07-16)
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 > ⛔ Do 2026-07-16 brak dedykowanego modułu (0 wystąpień "art. 233" w
 > całym dr-03). Ten moduł naprawia lukę, ze szczególnym uwzględnieniem
 > POPLECZNICTWA (art. 239) — potocznie "ukrywanie przestępcy" — na
@@ -79,15 +83,11 @@ sprawcy przestępstwa uniknąć odpowiedzialności?
 │
 ├─ Zagrożenie podstawowe (art. 239 §1) → 3 m-ce – 5 lat
 │
-├─ Typ kwalifikowany — sprawca działa w celu osiągnięcia KORZYŚCI
-│  MAJĄTKOWEJ (art. 239 §2) → 6 m-cy – 8 lat
-│
-└─ ⛔ KONTRATYP PODMIOTOWY — art. 239 §3 KK: NIE PODLEGA KARZE ten, kto
-   udziela pomocy OSOBIE NAJBLIŻSZEJ (małżonek, wstępny, zstępny,
-   rodzeństwo, powinowaty w tej samej linii/stopniu, osoba pozostająca
-   w faktycznym pożyciu — art. 115 §11 KK definiuje "osobę najbliższą").
-   To NAJCZĘSTSZY punkt sporny w praktyce — sprawdzaj zawsze relację
-   sprawcy z ukrywanym.
+└─ ⛔ NIEKARALNOŚĆ — art. 239 §2 KK: nie podlega karze sprawca, który
+   UKRYWA osobę najbliższą (art. 115 §11 KK). Przy innej pomocy osobie
+   najbliższej albo działaniu z obawy przed własną odpowiedzialnością —
+   art. 239 §3: sąd MOŻE nadzwyczajnie złagodzić karę lub odstąpić od jej
+   wymierzenia. Ustal relację sprawcy z ukrywanym i rodzaj pomocy.
 ```
 
 ⚠️ **ODNOTOWANA ROZBIEŻNOŚĆ NUMERACJI PARAGRAFÓW (dodane 2026-07-21):**
@@ -193,17 +193,17 @@ NIE forma współudziału w czynie bazowym.
 
 | Czyn | Przepis | Zagrożenie |
 |---|---|---|
-| Fałszywe oskarżenie | art. 234 KK | do 2 lat |
-| Tworzenie/podrzucanie fałszywych dowodów | art. 235 KK | do 3 lat |
-| Zatajenie dowodu niewinności | art. 236 §1 KK | do 3 lat |
-| Nadużycie prawa do obrony (fałszywe oskarżenie obrońcy) | art. 236 §2 KK | do 3 lat |
-| Ujawnienie tożsamości świadka incognito | art. 241 §2/§3 KK | do 3 lat / do 5 lat |
-| Rozpowszechnianie wiadomości z rozprawy przy wyłączeniu jawności | art. 241 §1 KK | grzywna/ogr. wolności |
-| Bezprawne uwolnienie się (przez osobę pozbawioną wolności) | art. 242 KK | do 2 lat |
+| Fałszywe oskarżenie | art. 234 KK | 3 mies.–5 lat |
+| Tworzenie/podrzucanie fałszywych dowodów | art. 235 KK | 3 mies.–5 lat |
+| Zatajenie dowodu niewinności | art. 236 §1 KK | grzywna, ogr. wolności albo do 2 lat |
+| Niekaralność zatajenia z obawy przed odpowiedzialnością własną lub najbliższych | art. 236 §2 KK | nie podlega karze |
+| Rozpowszechnianie wiadomości z rozprawy z wyłączeniem jawności / z postępowania w sprawach nieletnich | art. 241 §2/§3 KK | grzywna, ogr. wolności albo do 2 lat |
+| Rozpowszechnianie bez zezwolenia wiadomości z postępowania przygotowawczego przed ujawnieniem w sądzie | art. 241 §1 KK | grzywna, ogr. wolności albo do 2 lat |
+| Bezprawne uwolnienie się (przez osobę pozbawioną wolności) | art. 242 §1 KK | grzywna, ogr. wolności albo do 2 lat |
 | Uwolnienie lub ułatwienie ucieczki osoby pozbawionej wolności | art. 243 KK | do 3 lat |
-| Niestosowanie się do orzeczonych środków karnych (zakaz zawodu, prowadzenia pojazdów, zbliżania się itd.) | art. 244 KK | do 3 lat |
-| Niestosowanie się do zakazu wstępu na imprezę masową | art. 244a KK | do 3 lat |
-| Niestosowanie się do obowiązków środka zabezpieczającego (w tym udaremnienie elektronicznej kontroli miejsca pobytu) | art. 244b KK | do 2 lat |
+| Niestosowanie się do orzeczonych środków karnych (zakaz zawodu, prowadzenia pojazdów, zbliżania się itd.) | art. 244 KK | 3 mies.–5 lat |
+| Niestosowanie się do obowiązków związanych z zakazem wstępu na imprezę masową | art. 244a KK | grzywna, ogr. wolności albo do 2 lat |
+| Niestosowanie się do obowiązków środka zabezpieczającego (w tym udaremnienie elektronicznej kontroli miejsca pobytu) | art. 244b KK | grzywna, ogr. wolności albo do 2 lat |
 | Niedopełnienie obowiązku zawiadomienia o przestępstwie (funkcjonariusz) | art. 231 §1 KK (nadużycie funkcji, szerszy zakres) | do 3 lat |
 
 > ⚠️ Art. 242-244b dodane 2026-07-26 (audyt pełnego systemu T8 — tytuł

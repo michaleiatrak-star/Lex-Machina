@@ -1,5 +1,11 @@
 # mod-grzywny-mandaty-szczegolowe
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87).
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** KPW — t.j. Dz.U. 2026 poz. 1336 (zm. 2020/2320 [OD 2029-10-01: 2020/2320] — art. 38 (doręczenia elektroniczne)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Status:** nowy moduł 2026-06-09
 **Zakres:** Grzywny sądowe (KW), mandaty karne, grzywny administracyjne (KPA/UPEA),
 kary pieniężne administracyjne (KPA Dział IVa), przedawnienie, egzekucja

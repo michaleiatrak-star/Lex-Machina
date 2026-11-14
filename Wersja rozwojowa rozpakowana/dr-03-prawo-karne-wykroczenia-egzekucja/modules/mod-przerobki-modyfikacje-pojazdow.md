@@ -1,4 +1,8 @@
 # Przeróbki i modyfikacje pojazdów — dopuszczalne zmiany, homologacja,
+
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** KPW — t.j. Dz.U. 2026 poz. 1336 (zm. 2020/2320 [OD 2029-10-01: 2020/2320] — art. 38 (doręczenia elektroniczne)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
 v1.1.0 (dodany 2026-08-04, rozbudowany o motocykle i tachografy tego samego dnia — na żądanie użytkownika)
 v1.0.0 (dodany 2026-08-04, na żądanie użytkownika)
 

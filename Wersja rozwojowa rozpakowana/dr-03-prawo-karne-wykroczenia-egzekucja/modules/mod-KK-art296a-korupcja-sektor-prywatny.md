@@ -1,5 +1,8 @@
 # Korupcja w sektorze prywatnym (art. 296a KK) v1.0.0 (dodany 2026-07-16)
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 > ⛔ Do 2026-07-16 — ZERO wystąpień w całym systemie skilli. Ten moduł
 > tworzy pokrycie od podstaw.
 > ⚠️ Zweryfikowane 2026-07-16 — do potwierdzenia na isap.sejm.gov.pl.

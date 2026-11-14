@@ -8,6 +8,10 @@ source_policy: "RZĄD 1 ELI / tekst ujednolicony"
 
 # Kodeks wykroczeń — indeks current-state COV
 
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** KPW — t.j. Dz.U. 2026 poz. 1336 (zm. 2020/2320 [OD 2029-10-01: 2020/2320] — art. 38 (doręczenia elektroniczne)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 ## 1. Baza
 
 **Kodeks wykroczeń:** t.j. Dz.U. 2026 poz. 1372 (obwieszczenie 2.10.2026, ogł. 21.10.2026, stan 23.09.2026; ujmuje 2025 poz. 1676, 1814, 1818, 1872; po t.j. brak aktów zmieniających wg ELI 2026-10-22)

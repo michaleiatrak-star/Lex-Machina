@@ -1,5 +1,9 @@
 # mod-KK-art255b-patostreaming
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Wersja:** 2.0 | **Dodano:** 2026-07-18 | **Zaktualizowano:** 2026-08-25
 **Stan prawny modułu:** art. 255b KK obowiązuje od **23.08.2026 r.**
 **Źródło urzędowe:** ustawa z 11.06.2026 r. o zmianie ustawy – Kodeks

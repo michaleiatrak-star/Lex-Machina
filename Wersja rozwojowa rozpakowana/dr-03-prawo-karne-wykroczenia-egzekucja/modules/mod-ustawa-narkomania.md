@@ -1,5 +1,10 @@
 # Moduł — Ustawa o przeciwdziałaniu narkomanii
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87).
+**Akt:** UPN (ustawa o przeciwdziałaniu narkomanii) — t.j. Dz.U. 2023 poz. 1939 (zm. 2026/1004 od 2026-08-27 — m.in. art. 1–4, 17, 24–24b, 28–28g, 37, 40a, 42–45, 47c, 47f, 52b, 57, 65, 70a).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 29.07.2005 r. o przeciwdziałaniu narkomanii**
 - Tekst jednolity: **Dz.U. 2023 poz. 1939** (ze zm.)
@@ -146,9 +151,8 @@ Tytuł formalny: ustawa z dnia **3 lipca 2026 r.** o zmianie ustawy
   o przeciwdziałaniu narkomanii oraz niektórych innych ustaw
 Ogłoszenie: **27.07.2026** (Dz.U. 2026, poz. 1001-1007 z tego dnia)
 Wejście w życie: **27.08.2026** — art. 11 aktu: „po upływie 30 dni od
-  dnia ogłoszenia". ⚠️ DATA WYLICZONA z daty ogłoszenia, NIE odczytana
-  wprost ze źródła — przed powołaniem terminu w piśmie potwierdź
-  w ISAP/eli.gov.pl
+  dnia ogłoszenia"; data potwierdzona w metadanych ELI (entryIntoForce)
+  2026-11-14
 Druk sejmowy: 2499
 Podpisana przez Prezydenta: 24.07.2026 (w pakiecie 5 ustaw — obok
   ustawy o systemach sztucznej inteligencji, Dz.U. 2026 poz. 1003,

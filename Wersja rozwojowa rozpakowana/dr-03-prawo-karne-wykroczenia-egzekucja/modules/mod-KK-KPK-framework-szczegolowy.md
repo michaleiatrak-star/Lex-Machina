@@ -1,5 +1,11 @@
 # Prawo Karne — Szczegółowy Framework
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87).
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** KKW — t.j. Dz.U. 2026 poz. 1307 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 ## PRAWA ZATRZYMANEGO — ABSOLUTNY PRIORYTET
 ```
 OD CHWILI ZATRZYMANIA — ŻĄDAJ NATYCHMIAST:
@@ -93,14 +99,14 @@ Przedłużenie po wszczęciu (art. 102 KK): +10 lat dla przestępstw z §1 / +5 
 | Art. KK | Czyn | Zagrożenie |
 |---|---|---|
 | art. 156 | Ciężki uszczerbek na zdrowiu | 3–20 lat |
-| art. 157 §1 | Średni uszczerbek | do 5 lat |
+| art. 157 §1 | Średni uszczerbek | 3 mies.–5 lat |
 | art. 178a §1 | Jazda po alkoholu (>0,5‰) — §1 (pierwszy raz) | **pozbawienie wolności do lat 3** — sankcja JEDNORODNA, bez grzywny i ograniczenia wolności jako kar samoistnych (od 1.10.2023) ✅ [VER 2026-08-25] |
 | art. 178a §4 | Jazda po alkoholu — RECYDYWA (skazany uprzednio) | 3 m-ce – 5 lat PW ⚠️ |
 | art. 190a | Stalking (§1) | 6 m-cy – 8 lat |
 | art. 207 | Znęcanie się | 3 m-ce – 5 lat |
-| art. 278 | Kradzież (>800 zł) | do 5 lat |
-| art. 286 | Oszustwo | do 8 lat |
-| art. 288 | Zniszczenie mienia | do 5 lat |
+| art. 278 §1 | Kradzież (powyżej progu z art. 119 KW) | 3 mies.–5 lat |
+| art. 286 §1 | Oszustwo | 6 mies.–8 lat |
+| art. 288 §1 | Zniszczenie mienia | 3 mies.–5 lat |
 | art. 190 §1 | Groźba karalna | do 3 lat PW ⚠️ |
 
 ## ART. 178a KK — JAZDA PO ALKOHOLU / NARKOTYKACH — SZCZEGÓŁY (nowelizacja 14.03.2024)

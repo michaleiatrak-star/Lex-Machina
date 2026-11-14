@@ -1,5 +1,10 @@
 # mod-KPK-podstawy-odwolawcze-przeslanki-zarzuty-biegli
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. po t.j., w mocy: 2026/421 od 2026-04-14 i 2026/760 od 2026-06-12 — art. 21h, 74, 213, 332, 336; 2026/638 od 2026-05-28 — art. 25; 2026/882 od 2026-07-16 — art. 607k–607zb; 2026/901 od 2026-07-21 — art. 87).
+**Akt:** KKS — t.j. Dz.U. 2025 poz. 633 (zm. po t.j., w mocy: 2026/347 od 2026-03-18 — art. 80cb–80cc; 2026/421 od 2026-04-14 — art. 113; 2026/901 od 2026-07-21 — art. 1, 87, 122; 2026/846 od 2026-10-01 — art. 16b, 80f, 133, 137, 138, 140).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Status:** ✅ NOWY 2026-08-15, naprawa F-66 (audyt zewnętrzny + raport pokrycia KPK) — priorytet 1 z 3 wskazanych w F-66 (podstawy odwoławcze, przesłanki procesowe, biegli). Priorytet 2 (przedstawienie zarzutów, art. 313) dołączony jako czwarty blok tego samego modułu.
 ✅ ROZSZERZONE 2026-08-15 (druga sesja tego samego dnia): dodano pełny katalog art. 439 §1 pkt 3-11 + §2-3, art. 439a, oraz dokładne (verbatim) brzmienie art. 440 — poprzednio częściowo opracowane/oznaczone jako niezweryfikowane.
 ✅ ROZSZERZONE 2026-08-15 (trzecia sesja tego samego dnia): dodano sekcję 5 — Dział X, Rozdział 52, art. 485-499 (postępowanie w sprawach z oskarżenia prywatnego), pierwotnie wskazane jako NAJWYŻSZY priorytet z pozostałych otwartych punktów F-66. UWAGA: nazwa pliku NIE została zmieniona mimo rozszerzenia zakresu poza pierwotny tytuł — zawartość modułu jest szersza niż sugeruje nazwa; patrz spis treści (sekcje 1-5) dla pełnego zakresu.

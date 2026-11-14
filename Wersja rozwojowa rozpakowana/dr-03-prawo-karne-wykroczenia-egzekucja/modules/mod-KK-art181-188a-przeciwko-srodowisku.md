@@ -1,5 +1,8 @@
 # mod-KK-art181-188a-przeciwko-srodowisku
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-17
 **Rola w systemie:** wypełnia lukę zidentyfikowaną w pierwotnym audycie —
 środowisko jako "jeden z powszechniejszych tematów" (wskazanie

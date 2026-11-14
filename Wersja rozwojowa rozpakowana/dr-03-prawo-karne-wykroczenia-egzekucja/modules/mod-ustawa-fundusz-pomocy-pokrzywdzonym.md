@@ -1,5 +1,9 @@
 # Moduł — Fundusz Sprawiedliwości / pomoc pokrzywdzonym
 
+**Akt:** UKomp (ustawa o państwowej kompensacie przysługującej ofiarom niektórych przestępstw) — t.j. Dz.U. 2016 poz. 325 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** RozpFS (rozporządzenie MS w sprawie Funduszu Pomocy Pokrzywdzonym oraz Pomocy Postpenitencjarnej) — t.j. Dz.U. 2025 poz. 1298.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 07.07.2005 r. o państwowej kompensacie przysługującej ofiarom niektórych przestępstw**
 - Dz.U. 2016 poz. 325 (t.j.)

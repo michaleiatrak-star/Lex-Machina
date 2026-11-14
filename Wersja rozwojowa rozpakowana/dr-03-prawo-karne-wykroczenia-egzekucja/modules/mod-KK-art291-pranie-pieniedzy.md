@@ -1,5 +1,9 @@
 # Moduł — KK art. 291–293 (paserstwo) i art. 299 (pranie pieniędzy)
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KKS — t.j. Dz.U. 2025 poz. 633 (zm. po t.j., w mocy: 2026/347 od 2026-03-18 — art. 80cb–80cc; 2026/421 od 2026-04-14 — art. 113; 2026/901 od 2026-07-21 — art. 1, 87, 122; 2026/846 od 2026-10-01 — art. 16b, 80f, 133, 137, 138, 140).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 ## Akt prawny
 **Kodeks karny — art. 291–293 należą do rozdziału XXXV (art. 278–295, przestępstwa przeciwko mieniu); art. 299 — do rozdziału XXXVI (art. 296–309, przestępstwa przeciwko obrotowi gospodarczemu i interesom majątkowym w obrocie cywilnoprawnym)**
 - Tekst jednolity KK: **Dz.U. 2026 poz. 1342**

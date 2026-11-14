@@ -1,5 +1,8 @@
 # Kwalifikator karnomaterialny — część 4: narkotyki, przestępstwa drogowe
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 > Część modułu `mod-KK-kwalifikator-karnomaterialny.md` (podział 2026-08-20,
 > naprawa F-78 — plik źródłowy przekroczył 2000 linii). Pełny indeks i
 > zasady użycia: zobacz plik nadrzędny w katalogu `modules/`. To NIE jest

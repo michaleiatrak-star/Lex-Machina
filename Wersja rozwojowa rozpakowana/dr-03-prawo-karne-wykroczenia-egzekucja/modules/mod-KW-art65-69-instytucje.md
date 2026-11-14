@@ -8,6 +8,12 @@ source_policy: "RZĄD 1 ELI / tekst ujednolicony"
 
 # Kodeks wykroczeń — art. 65–69 — instytucje państwowe, samorządowe i społeczne
 
+**Akt:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 [OD 2026-11-21: 2026/1466] — art. 42, 84).
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (po t.j. bez zmian, ELI 2026-11-14).
+**Akt:** KKS — t.j. Dz.U. 2025 poz. 633 (zm. po t.j., w mocy: 2026/347 od 2026-03-18 — art. 80cb–80cc; 2026/421 od 2026-04-14 — art. 113; 2026/901 od 2026-07-21 — art. 1, 87, 122; 2026/846 od 2026-10-01 — art. 16b, 80f, 133, 137, 138, 140).
+**Akt:** KKW — t.j. Dz.U. 2026 poz. 1307 (po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: zagrożenia karą i terminy porównane z t.j.).
+
 ## 1. Źródło i zakres
 
 **Baza:** Kodeks wykroczeń, t.j. Dz.U. 2026 poz. 1372 (stan 23.09.2026; poprzednio 2025/734).
