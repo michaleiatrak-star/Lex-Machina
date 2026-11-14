@@ -1,5 +1,6 @@
 # CHANGELOG — dr-12-sadownictwo-prokuratura-zawody-prawnicze
 
+- 4.34 (2026-11-14): METODYKA W-1…W-7: mod-ustawa-KRS-rejestr-sadowy (t.j. 2025/869 + 7 nowelizacji, pułapka MSiG od 2025-11-29) i mod-KSH-wrogie-przejecie (KSH + uoof t.j. 2025/592, art. 80a–80b); DR-12: OIRP Katowice i Rzeszów; rejestr zmian w czasie
 - 4.33 (2026-11-14): Tabela OIRP: aktualne adresy archiwów orzeczeń OSD Lublin (oirp.lu) i Warszawa (oirpwarszawa.pl/temidium), zweryfikowane 2026-11-14
 - 4.32 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 4.31 (2026-11-04, AUDYT-2026-11-04): MAPA-AKTOW: Prawo o prokuraturze — art. 11 § 1 (roczna informacja PG o kontroli operacyjnej) zm. Dz.U. 2026 poz. 1281 art. 8, w mocy 31.10.2026.

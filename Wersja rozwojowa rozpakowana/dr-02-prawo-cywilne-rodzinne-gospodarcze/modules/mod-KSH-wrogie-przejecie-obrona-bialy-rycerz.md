@@ -1,13 +1,13 @@
 # mod-KSH-wrogie-przejecie-obrona-bialy-rycerz
 
-**Wersja:** 1.0 | **Dodano:** 2026-07-18
-**Rola w systemie:** odpowiedź na wyraźne pytanie użytkownika o "wrogie
-przejęcie i białego rycerza" — dotąd temat całkowicie nieobecny w
-systemie mimo praktycznego znaczenia dla spółek publicznych i dużych
-prywatnych.
+**Hasła spraw:** wrogie przejęcie, biały rycerz, wezwanie, wezwanie obowiązkowe, wezwanie dobrowolne, stanowisko zarządu, akcje uprzywilejowane, akcje nieme, ograniczenie zbywalności akcji, akcje własne, przymusowy wykup, przymusowy odkup, squeeze-out, sell-out
 
-> ⛔ HARDGATE — zweryfikuj aktualny t.j. KSH i ustawy o ofercie publicznej
-> na ISAP przed użyciem.
+**Akt:** KSH — t.j. Dz.U. 2024 poz. 18 (zm. 2024/96; 2026/176 [OD 2027-02-18: 2026/176] — art. 337, 351, 352, 361; 2026/187 [OD 2028-05-19: 2026/187] — art. 88; 2026/644 [OD 2030-01-10: 2026/644] — art. 402⁷, 421¹; 2026/1440 [OD 2026-12-03: 2026/1440] — art. 238, 243, 300⁹⁵).
+**Akt:** uoof (ustawa o ofercie publicznej) — t.j. Dz.U. 2025 poz. 592 (zm. 2026/644 — art. 4; 2026/1034 — art. 68, rozdz. 4aa, art. 96e; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 6a; 2026/1074 [OD 2027-02-11: 2026/1074] — art. 93–93c; 2026/176 [OD 2027-02-18: 2026/176] — art. 91).
+**Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): KSH `https://api.sejm.gov.pl/eli/acts/DU/2024/18/text.html`; uoof `https://api.sejm.gov.pl/eli/acts/DU/2025/592/text.pdf` (t.j. tylko w PDF); zmiany po t.j. — ELI, „Akty zmieniające” aktów DU/2000/1037 i DU/2005/1539.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14. Część strategiczna (sekcje 2–3, 5) to praktyka i doktryna, nie normy — nie powołuj jej jako przepisu.
+
+**Pułapka czasu (2026/176, od 2027-02-18):** art. 337 § 2 i art. 351 § 1 KSH tracą odniesienie do akcji **imiennych** (po zmianie: ograniczenie rozporządzania dotyczy akcji oznaczonych w statucie liczbą i odrębnym oznaczeniem z art. 55 u.o.i.f.; nie dotyczy akcji na rynku regulowanym ani w ASO); art. 352 zd. 2 — uprzywilejowanie wygasa tylko przy zbyciu wbrew zastrzeżonym warunkom. Do 2027-02-17 — brzmienie z t.j.
 
 ---
 
@@ -131,35 +131,47 @@ strategiczna, nie czysto prawna decyzja.
 
 ---
 
-## 4. INSTRUMENTY PRAWNE LEŻĄCE U PODSTAW (KSH + ustawa o ofercie publicznej)
+## 4. WSKAZANIA PRZEPISÓW (KSH + ustawa o ofercie publicznej)
 
-⚠️ Ten moduł dostarcza WYŁĄCZNIE warstwę STRATEGICZNĄ/PRAKTYCZNĄ (jak
-się broni, jakie są techniki) — SZCZEGÓŁOWA analiza samych przepisów
-proceduralnych KSH (np. dokładne progi wezwań obowiązkowych z ustawy o
-ofercie publicznej, art. 72 i n., procedura squeeze-out/sell-out) NIE
-została w tej sesji zbadana ze szczegółowością — sprawdź `mod-KSH-
-spolki-handlowe.md` (istniejący moduł DR-02) oraz ustawę o ofercie
-publicznej przy konkretnej transakcji, zwłaszcza co do:
-```
-□ Progi obowiązkowego wezwania (przy przekroczeniu określonego % głosów)
-□ Squeeze-out (przymusowy wykup akcji mniejszościowych przez większościowego
-  akcjonariusza po przekroczeniu progu — ⚠️ POPRAWKA 2026-07-27
-  (FAZA 3E/ZASADA 14): OBA progi są prawdziwe, ale dla RÓŻNYCH
-  mechanizmów, nie alternatywa do wyboru:
-    • 95% głosów oddanych — KLASYCZNY squeeze-out (art. 418 KSH),
-      max 5 akcjonariuszy wykupujących, każdy z min. 5% kapitału,
-      wykup dotyczy akcjonariuszy z <5% kapitału każdy
-    • 90% kapitału zakładowego — squeeze-out W RAMACH GRUPY SPÓŁEK
-      (art. 21(11) KSH, mechanizm od reformy 2022 r.) — spółka
-      DOMINUJĄCA posiadająca bezpośrednio min. 90% może wykupić
-      wspólników/akcjonariuszy reprezentujących max 10% kapitału
-      spółki ZALEŻNEJ uczestniczącej w grupie; umowa/statut może
-      obniżyć ten próg do min. 75%
-    Potwierdzone w 5+ zgodnych źródłach (dgtl.law, asiw.pl,
-    conselion.pl, ggk-kancelaria.pl, rzeczoznawcy.net.pl))
-□ Sell-out (prawo akcjonariusza mniejszościowego żądania odkupu jego akcji)
-□ Rola KNF w nadzorze nad wezwaniami dot. spółek publicznych
-```
+Brak definicji ustawowej „wrogiego przejęcia” (sekcja 1) nie zmienia tego, że każde przejęcie i każda obrona przechodzi przez te same normy.
+
+### Obrona statutowa i kapitałowa (KSH)
+
+| Przepis | Kwalifikator |
+|---|---|
+| art. 337 § 1–2 KSH | akcje zbywalne; statut może uzależnić rozporządzenie akcjami **imiennymi** od zgody spółki albo inaczej je ograniczyć; [OD 2027-02-18: 2026/176] — ograniczenie dla akcji oznaczonych w statucie (liczba, odrębne oznaczenie), nie dla akcji na rynku regulowanym ani w ASO (§ 2, § 2¹) |
+| art. 337 § 3–4 KSH | zgoda na przeniesienie — zarząd, pisemnie pod rygorem nieważności (chyba że statut inaczej); odmowa zgody → spółka wskazuje innego nabywcę na warunkach ze statutu; bez nich akcja zbywalna bez ograniczeń |
+| art. 351 § 1–2 KSH | akcje uprzywilejowane (głos, dywidenda, majątek likwidacyjny); uprzywilejowanie co do głosu **nie dotyczy spółki publicznej**; [OD 2027-02-18: 2026/176] — oznaczenie w statucie liczbą i odrębnym oznaczeniem; § 5 — zamiana na nieuprzywilejowane na żądanie akcjonariusza |
+| art. 352 KSH | najwyżej **dwa głosy** na akcję; uprzywilejowanie wygasa przy zamianie na okaziciela albo zbyciu wbrew warunkom; [OD 2027-02-18: 2026/176] — tylko przy zbyciu wbrew warunkom |
+| art. 353 § 3 KSH | akcje **nieme**: wobec akcji uprzywilejowanej co do dywidendy można wyłączyć prawo głosu (dywidenda wyższa najwyżej o połowę — § 1) |
+| art. 362 § 1 pkt 1, 8, § 2 KSH | zakaz nabywania akcji własnych z wyjątkami: zapobieżenie bezpośrednio zagrażającej poważnej szkodzie (pkt 1), upoważnienie walnego do 5 lat z limitem liczby i ceny (pkt 8); dla pkt 1, 2, 8 — akcje w pełni pokryte, łącznie do 20% kapitału i dalsze warunki z § 2 |
+| art. 483 § 1 KSH | odpowiedzialność członka zarządu i rady wobec spółki za szkodę z działania sprzecznego z prawem lub statutem (wina) — granica obrony „dla utrzymania stanowisk” (sekcja 5) |
+
+### Przejęcie spółki publicznej (uoof)
+
+| Przepis | Kwalifikator |
+|---|---|
+| art. 69 uoof | zawiadomienie KNF i spółki o osiągnięciu/przekroczeniu albo zejściu poniżej progów 5, 10, 15, 20, 25, 33, 33⅓, 50, 75, 90% głosów — w 4 dni robocze |
+| art. 72a uoof | **wezwanie dobrowolne** na wszystkie pozostałe akcje (spółka na rynku regulowanym), z możliwymi zastrzeżeniami (ust. 2) |
+| art. 73 uoof | przekroczenie **50%** głosów → **wezwanie obowiązkowe** na wszystkie pozostałe akcje w 3 miesiące; zwolnienie, gdy udział spadnie do 50% w tym terminie (podwyższenie kapitału, zmiana statutu, wygaśnięcie uprzywilejowania — ust. 2); art. 74 uchylony |
+| art. 77 uoof | ogłoszenie wezwania po zabezpieczeniu 100% wartości akcji; przez podmiot pośredniczący |
+| art. 79, 79a uoof | cena minimalna w wezwaniu (średnie kursy 3 i 6 miesięcy, najwyższa cena zapłacona przez wzywającego; nabycie pośrednie w 12 miesiącach) |
+| art. 80 uoof | **stanowisko zarządu** w 14 dni od ogłoszenia wezwania: wpływ na interes spółki i zatrudnienie, plany wzywającego — przekazywane KNF, publicznie i pracownikom; podstawa dla zarządu wspierającego białego rycerza |
+| art. 80a uoof | statut może wymagać **uprzedniej zgody walnego** na czynności zarządu i rady mające udaremnić ogłoszone wezwanie — ogranicza obronę reaktywną (sekcja 2B) |
+| art. 80b uoof | statut może wyłączyć w odpowiedzi na wezwanie statutowe i umowne **ograniczenia zbywalności** akcji (art. 80a ust. 3 pkt 1) — neutralizuje obronę prewencyjną (sekcja 2A) |
+| art. 82 uoof | przymusowy wykup (squeeze-out) w spółce publicznej: **95% głosów** (z dominującymi, zależnymi i stronami porozumienia), w 3 miesiące; cena wg art. 79 |
+| art. 83 uoof | przymusowy odkup (sell-out): akcjonariusz żąda wykupu od posiadacza **95% głosów**, na piśmie w 3 miesiące |
+| art. 87 ust. 1 uoof | obowiązki z rozdziału o znacznych pakietach także na stronach porozumienia i podmiotach powiązanych (działanie w porozumieniu — także „biały rycerz” z zarządem) |
+
+### Przymusowy wykup i odkup poza spółką publiczną (KSH)
+
+| Przepis | Kwalifikator |
+|---|---|
+| art. 418 § 1 KSH | uchwała walnego o przymusowym wykupie akcjonariuszy mniejszościowych (≤ 5% kapitału) przez najwyżej pięciu akcjonariuszy z łącznie ≥ 95% kapitału, każdy ≥ 5%; większość 95% głosów oddanych |
+| art. 418¹ KSH | przymusowy odkup na żądanie akcjonariuszy z ≤ 5% kapitału przez akcjonariuszy większościowych (≥ 95%, każdy ≥ 5%) |
+| art. 21¹¹ § 1–2 KSH | wykup w **grupie spółek**: spółka dominująca z bezpośrednio ≥ 90% kapitału spółki zależnej uczestniczącej w grupie wykupuje wspólników z ≤ 10%; umowa lub statut może obniżyć próg do 75% (bezpośrednio lub pośrednio) |
+
+Kontrola koncentracji (UOKiK) — `mod-ustawa-UOKIK-antymonopolowe.md`; kontrola inwestycji zagranicznych — `mod-inwestycje-transgraniczne-FDI-BIT.md` (DR-14).
 
 ---
 
