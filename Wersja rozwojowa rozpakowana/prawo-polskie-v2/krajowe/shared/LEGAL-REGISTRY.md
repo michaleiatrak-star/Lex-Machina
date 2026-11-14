@@ -58,3 +58,11 @@ Dodano do rejestru obszary obowiązkowe:
 | sądownictwo | `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-USP-ustroj-sadow-powszechnych.md` | wymagaj kontroli ISAP i regulaminów |
 | ORA/OIRP/zawody zaufania | `dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-adwokatura.md` + `dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-radcowie-prawni.md` + właściwy moduł zawodu | ISAP + źródła samorządowe |
 | dyscyplinarki | `dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md` | ISAP + regulaminy/etyka właściwego zawodu |
+
+<!-- mapy_tj:start -->
+
+## Katalog tekstów jednolitych
+
+Pełna lista obowiązujących t.j. w konwencji modułów: `KATALOG-TJ.md` (ten katalog) i `dr-XX/KATALOG-TJ.md`.
+
+<!-- mapy_tj:koniec -->

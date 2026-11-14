@@ -1,5 +1,7 @@
 # CHANGELOG — dr-10-zdrowie-farmacja-zywnosc-rolnictwo
 
+- 3.62 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+- 3.61 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
 - 3.60 (2026-11-14): DR-10: wskazania z kwalifikatorem (PrFarm, URef, UDL, UPP, UOZP, SIOZ 2026/1304, weterynaria, żywność); PrFarm art. 99 ust. 3–3d (1%, 4 apteki, 3000 mieszk. i 500 m); medycyna laboratoryjna
 - 3.59 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.58 (2026-10-31, AUDYT-2026-10-31): Bezpieczeństwo żywności i żywienia — nowy t.j. Dz.U. 2026 poz. 1399 (ELI RZĄD 1; obejmuje 2025/1424 — art. 64 ust. 1a–1b, i 2026/1123 — ⏳ art. 103 ust. 1 pkt 11 od 1.01.2028): mod-ustawa-bezpieczenstwo-zywnosci, mod-ustawa-rolne-zywnosc-weterynaria, MAPA-AKTOW, SKILL.md.

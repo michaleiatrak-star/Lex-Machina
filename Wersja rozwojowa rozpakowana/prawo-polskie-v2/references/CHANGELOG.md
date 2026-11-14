@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.115 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+- 6.114 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
 - 6.113 (2026-11-14): DR-15: wskazania z kwalifikatorem (AML, UNRF, KSC, UODO, podmioty zbiorowe, sygnaliści, ustawa antykorupcyjna, KN 2026/515)
 - 6.112 (2026-11-14): DR-13: wskazania z kwalifikatorem (UPol, ABW/AW, CBA, SKW, SG, ŻW, UOIN, UOO, PSP 2026/1473); UOIN art. 21–23, 29, 35–38 tryby; usunięty nieistniejący akt Dz.U. 2020/2001
 - 6.111 (2026-11-14): DR-12: wskazania z kwalifikatorem (USP, PrProk 2026/810, PrAdw, URP, PrNot, komornicy 2026/881, UKSC, kuratorzy 2026/200, regulatorzy)

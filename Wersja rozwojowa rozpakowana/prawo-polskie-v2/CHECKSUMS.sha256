@@ -1,7 +1,7 @@
 0053d557b3770071af8e0a415eaae342e885a09269f638ea5f38bd38e4bf087b  ./JURYSDYKCJA.md
 f1cdf3365cc65a0884824ee41adb40058b6541d2073a03b2d7b6978e1d62d5f9  ./PORTABILITY-MANIFEST.md
 ea2960603a4a6317ac3c81028cefb0dd84910a0e82f6e42eb34c9936b43518bf  ./ROUTING-MAP.md
-04161d4e65723098f26083b78e3727c1cf5f24ea63d0d3667d8f6cbee2092357  ./SKILL.md
+ce73db3d30f3ca061b99b9f0db138dbacf1cdf7990a61cb8f950ae8af2e9f9f4  ./SKILL.md
 9534a6fc6d1ced5da09bf3de3cd8763e08a0cbe70a3b41813ce56de9f74c9015  ./agents/openai.yaml
 51a6923974188748638a424aa59b42b6afad2d910f910a1d43bb13ee10f3ce26  ./assets/icon.svg
 c07fe8367fe79ca5c5e2b5338523373f221a16a7a6f88eea95cda4bd7a825653  ./krajowe/analiza-sadowa-v6/references/koszty-terminy.md
@@ -47,7 +47,7 @@ dd6c027949d9c5cac13694bb7e7860ebdf844fcc3d25265fd907237e0e906855  ./krajowe/shar
 aaaa96d66b0d54c0287fd899c482f3930167a5a0dfe4d7f863947b9e8148843a  ./krajowe/shared/INTERPRETACJE-URZEDOWE.md
 7eec811d2276b04d611b89f74f5bcc43a431fb185d321ee71f379c815e3c4f91  ./krajowe/shared/ISAP-METRYKI-AKTOW.md
 df82047619819ad2c7a552f4206ee63d4d75f536b9feabdf47ffe695f9dcaaae  ./krajowe/shared/KONFLIKT-DZIEDZIN.md
-de6e004421111bf6cf3b327cddf951fde1299a884baab07ea5aee2b6494cdc66  ./krajowe/shared/LEGAL-REGISTRY.md
+6c05b134f7c72f0ab50e28c55b5f4ef5cb8abf69a088ca575efbbebe2829cb35  ./krajowe/shared/LEGAL-REGISTRY.md
 31af9a7506e9edd134a3d6e1697b8a07a14deae4171afe36596d079b4949d506  ./krajowe/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
 b111ffe1f6b2a8ad7b1fa87415b9f80435e9a76a5dbe10c184c5c93b5fe7377e  ./krajowe/shared/MODULE-STANDARD-POLISH-LAW.md
 48d77a8d93d171cbea375ef1ee947757fb16498d3141046f72a497ecb920b898  ./krajowe/shared/NAZEWNICTWO-STRON.md
@@ -190,5 +190,5 @@ f7fae1f207120d39495399a975f2efe8c88850c28f895abc4a34f0a24f83a86d  ./mcp-servers/
 37db3fcf1fd27379de4b60519712293c7456b62dadf3a55deffb25cc45b44921  ./mcp-servers/wspolne/sesja-przegladarki.mjs
 dd57ad59b047ce6e68151a423de62c7f51a995ef146374808a2db819e709ce5a  ./mcp-servers/wspolne/test_siec.mjs
 bb692d5e777e49ac05c434e1fa7b570e08191f5a166b39ccf68d97c49f0db24e  ./mcp-servers/zbuduj_pakiet.py
-aff48d51771930de9ce13b9a1a39e1fe5e724eaed611d3c1fa2a8abb45c0cbe4  ./references/CHANGELOG.md
+75150d17b3eb7f396fc91bdd7fb0e50a7e6b8f08763f0f299e09e24d66b8a5fd  ./references/CHANGELOG.md
 68b8052c1361e3a07733ee1fd2ad97e9169620b287e603c50b217ba4ffb57c48  ./references/HISTORIA-ZMIAN-PLIKOW.md

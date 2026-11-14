@@ -1,7 +1,7 @@
-be031cd1ae620f79bde311994027d1ca50e8b9c3178da7c65be0a5c9949bbc09  ./MAPA-AKTOW.md
+220a546570ce9fa383f541a0fe9b80e994e246949fa79708989fcf966815d842  ./MAPA-AKTOW.md
 27cee899b2a86f257784d131552adcd92631ed510be591329e3fbd1c023f6ad5  ./MAPA-POKRYCIA.md
 7114bc8b687168e76fb874a553183db97691e69a7864d60a31f348a6e408dc3f  ./PORTABILITY-MANIFEST.md
-f243597c88c6797e6869c37d6ee1629ccc4bf48008d14964b49d6d69aaf18949  ./SKILL.md
+6e26ca66e14b8a675d4ced22b16ef28f0f6d472ccf2ec8548320de6be1667048  ./SKILL.md
 d015e63761fe4291d6a7faa309515a05d52d9d0e65242b36d2693f056fef03b1  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 50389d1179587bb53ba2fa56b1bb8d08384f39f5b4fe27b322278de787aae482  ./modules/kwalifikator-karnomaterialny/part-01-ogolny-mienie-rozboj.md
@@ -83,5 +83,5 @@ eb63e5b2881f64cd56dd506960565ba38e6dbe3d7a63b7d12e7b99fd15f458bc  ./modules/mod-
 068db51e5c3512aa612da2e6757413a88d4540bb3f4ca0f713f4f93342e6aa96  ./modules/mod-ustawa-narkomania.md
 705b0baed21c4dff01fef5f995986c6df385959e378eeadb23448bdf8a2a9d09  ./modules/mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych.md
 cb28316906611c5d1b6f96fc11fc5c28afc1ff2c7e298bdaab9d55e9c0c5430e  ./modules/mod-ustawa-oplaty-w-sprawach-karnych.md
-5cefdac87681c3e84796dbdc3024795a3d4c5415e5fc30724d6effbe37c8286e  ./references/CHANGELOG.md
+e0bbf7d878192986ecc74b4cbe7f0b316b3813cbe76407e0ffcc5672af2c2b73  ./references/CHANGELOG.md
 c537bcd52ab8b224148b204932e65753214dbef21468654ff293799339ba752d  ./references/HISTORIA-ZMIAN-PLIKOW.md

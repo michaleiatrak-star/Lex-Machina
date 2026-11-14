@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.113"
+version: "6.115"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,9 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.113 (2026-11-14): DR-15: wskazania z kwalifikatorem (AML, UNRF, KSC, UODO, podmioty zbiorowe, sygnaliści, ustawa antykorupcyjna, KN 2026/515)
+  Wersja bieżąca: 6.115 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+  6.114 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
+  6.113 (2026-11-14): DR-15: wskazania z kwalifikatorem (AML, UNRF, KSC, UODO, podmioty zbiorowe, sygnaliści, ustawa antykorupcyjna, KN 2026/515)
   6.112 (2026-11-14): DR-13: wskazania z kwalifikatorem (UPol, ABW/AW, CBA, SKW, SG, ŻW, UOIN, UOO, PSP 2026/1473); UOIN art. 21–23, 29, 35–38 tryby; usunięty nieistniejący akt Dz.U. 2020/2001
   6.111 (2026-11-14): DR-12: wskazania z kwalifikatorem (USP, PrProk 2026/810, PrAdw, URP, PrNot, komornicy 2026/881, UKSC, kuratorzy 2026/200, regulatorzy)
   6.110 (2026-11-14): DR-11: wskazania z kwalifikatorem (UODO, KSC 2026/20, PKE 2024/1221, PrAut, PWP, UZNK 2026/85); MiCA — brak krajowej ustawy wykonawczej w ELI, organ oznaczony jako niezweryfikowany
@@ -22,8 +24,6 @@ changelog: |
   6.104 (2026-11-14): DR-03 komplet: 71 modułów + 8 części kwalifikatora w formacie wskazań; poprawki zagrożeń art. 234-244b KK, przedawnienie cyber, art. 244 przy nakazie Policji, tabela kar frameworku
   6.103 (2026-11-14): DR-02 komplet: ostatnie 10 modułów (ubezpieczenia obowiązkowe, cudzoziemcy, parabanki, piecza, fundacja rodzinna, pomoc publiczna, frankowa 2026/985, doradca restr., reklama, KSH-uzupełnienie, weksle/kontrola)
   6.102 (2026-11-14): DR-02: mobbing wg art. 94³ KP od 2026-11-05 (2026/1046), skład sądu, timeshare/zastaw, transakcje handlowe, przedsiębiorcy zagraniczni
-  6.101 (2026-11-14): DR-02: spółdzielnie, własność lokali, UOKiK, KW, prawa konsumenta, ochrona lokatorów, prawo spółdzielcze, fundacje/stowarzyszenia, deweloperska, UZNK w formacie wskazań
-  6.100 (2026-11-14): DR-01: wszystkie 15 modułów w formacie wskazań z kwalifikatorem (poprawki: art. 157-160 Konstytucji, referendum lokalne, inicjatywa obywatelska, referendum zatwierdzające)
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.39 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+- 3.38 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
 - 3.37 (2026-11-14): DR-11: wskazania z kwalifikatorem (UODO, KSC 2026/20, PKE 2024/1221, PrAut, PWP, UZNK 2026/85); MiCA — brak krajowej ustawy wykonawczej w ELI, organ oznaczony jako niezweryfikowany
 - 3.36 (2026-11-13): mod-ustawa-uslugi-elektroniczne: zakaz niezamówionej informacji handlowej — art. 398 Prawa komunikacji elektronicznej (Dz.U. 2024 poz. 1221); art. 10 UŚUDE uchylony (ELI 2026-11-13)
 - 3.35 (2026-11-11, ELI 2026-11-11): MAPA-AKTOW: prawo autorskie — zmiana po t.j. 2026/1477 (art. 35¹ ust. 7 wynagrodzenie za użyczanie, nowy art. 127², od 10.11.2026); moduły bez zmian (przepisy nieomawiane).

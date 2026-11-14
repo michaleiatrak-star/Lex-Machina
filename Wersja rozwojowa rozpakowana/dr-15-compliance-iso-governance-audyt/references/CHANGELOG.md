@@ -1,5 +1,7 @@
 # CHANGELOG — dr-15-compliance-iso-governance-audyt
 
+- 3.24 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+- 3.23 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
 - 3.22 (2026-11-14): DR-15: wskazania z kwalifikatorem (AML, UNRF, KSC, UODO, podmioty zbiorowe, sygnaliści, ustawa antykorupcyjna, KN 2026/515)
 - 3.21 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.20 (2026-10-22, AUDYT-2026-10-22): PSWiN: t.j. Dz.U. 2026 poz. 1362 (było 2024/1571) w SKILL.md i MAPA-AKTOW.

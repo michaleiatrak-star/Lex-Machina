@@ -1,5 +1,7 @@
 # CHANGELOG — dr-12-sadownictwo-prokuratura-zawody-prawnicze
 
+- 4.37 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+- 4.36 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
 - 4.35 (2026-11-14): DR-12: wskazania z kwalifikatorem (USP, PrProk 2026/810, PrAdw, URP, PrNot, komornicy 2026/881, UKSC, kuratorzy 2026/200, regulatorzy)
 - 4.34 (2026-11-14): METODYKA W-1…W-7: mod-ustawa-KRS-rejestr-sadowy (t.j. 2025/869 + 7 nowelizacji, pułapka MSiG od 2025-11-29) i mod-KSH-wrogie-przejecie (KSH + uoof t.j. 2025/592, art. 80a–80b); DR-12: OIRP Katowice i Rzeszów; rejestr zmian w czasie
 - 4.33 (2026-11-14): Tabela OIRP: aktualne adresy archiwów orzeczeń OSD Lublin (oirp.lu) i Warszawa (oirpwarszawa.pl/temidium), zweryfikowane 2026-11-14

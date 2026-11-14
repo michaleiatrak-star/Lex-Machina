@@ -1,5 +1,7 @@
 # CHANGELOG — dr-07-zamowienia-publiczne-fundusze-ue
 
+- 3.24 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+- 3.23 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
 - 3.22 (2026-11-14): DR-07: wskazania z kwalifikatorem (PZP 2026/793, PrNot, NIK, RIO, UNDFP, UZRFE, pomoc publiczna); UNDFP art. 31 ust. 4 zamiast art. 34; W-4 2026/1099
 - 3.21 (2026-11-11, ELI 2026-11-11): MAPA-AKTOW: ustawa wdrożeniowa 2021–2027 — zmiany po t.j. 2025/1733: 2025/1844, 2026/912 art. 86.
 - 3.20 (2026-11-11, ELI 2026-11-11): Ustawa o zasadach prowadzenia polityki rozwoju — t.j. Dz.U. 2026 poz. 1366 (zastępuje 2025/198; obejmuje 2025/1846: art. 5 pkt 7ac, art. 14ll–14lr, rozdz. 2ac; hierarchia dokumentów bez zmian); MAPA-AKTOW.

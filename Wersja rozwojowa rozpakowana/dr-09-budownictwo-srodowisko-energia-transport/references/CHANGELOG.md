@@ -1,5 +1,7 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.66 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+- 3.65 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
 - 3.64 (2026-11-14): DR-09: wskazania z kwalifikatorem (PrBud, POŚ 2026/1453, UOP, PrLow, PrWod, PrEn, OZE, transport); PrBud art. 29 altana/basen; UOP art. 83f progi i zgłoszenie
 - 3.63 (2026-11-14): 2026/912 w modułach DR-08/DR-09; poprawki: skarga na uchwałę RIO do WSA (art. 98 USG), decyzja WZ wygasa po 5 latach (art. 64c UPZP)
 - 3.62 (2026-11-13): Prawo przedsiębiorców — t.j. Dz.U. 2026 poz. 1484 (ELI 2026-11-13) w odesłaniach Prawa łowieckiego (SKILL, mod-lowieckie-dzialalnosc-gospodarcza)

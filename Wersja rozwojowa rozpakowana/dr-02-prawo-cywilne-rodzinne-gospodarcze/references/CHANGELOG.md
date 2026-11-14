@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.127 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+- 3.126 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
 - 3.125 (2026-11-14): DR-02: nagłówek wskazania+kwalifikator w 16 częściach modułów KC-zobowiązania i KRO
 - 3.124 (2026-11-14): DR-02 komplet: ostatnie 10 modułów (ubezpieczenia obowiązkowe, cudzoziemcy, parabanki, piecza, fundacja rodzinna, pomoc publiczna, frankowa 2026/985, doradca restr., reklama, KSH-uzupełnienie, weksle/kontrola)
 - 3.123 (2026-11-14): DR-02: mobbing wg art. 94³ KP od 2026-11-05 (2026/1046), skład sądu, timeshare/zastaw, transakcje handlowe, przedsiębiorcy zagraniczni

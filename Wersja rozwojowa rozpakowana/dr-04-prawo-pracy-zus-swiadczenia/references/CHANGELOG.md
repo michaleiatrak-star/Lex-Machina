@@ -1,5 +1,7 @@
 # CHANGELOG — dr-04-prawo-pracy-zus-swiadczenia
 
+- 3.61 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
+- 3.60 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
 - 3.59 (2026-11-14): DR-04 komplet: 44 moduły w formacie wskazań; poprawki: przywrócenie terminu 21 dni (art. 265 KP), reprezentatywność ZZ (art. 25³ UZZ), termin protokołu powypadkowego
 - 3.58 (2026-11-13): urlop rodzicielski: art. 182¹ᵃ i n. KP (art. 182¹ uchylony) — SKILL i mod-KP-dzial-VIII (ELI 2026-11-13, check_uchylone.py)
 - 3.57 (2026-11-11, ELI 2026-11-11): SUS — t.j. Dz.U. 2026 poz. 1474 (zastępuje 2026/199); mod-SUS-current-state-COV §1: zmiany z 2026/473 (decyzja PIP o stosunku pracy: art. 18 ust. 1b, 24 ust. 5h, 36 ust. 4e, 38b, od 8.07.2026), 2026/252, 426, 734 (⏳ art. 36 ust. 13a–13b od 6.12.2026), 507 (⏳ 1.11.2028), ⏳ 2025/1413 od 1.11.2026 (art. 45 ust. 1 pkt 4, art. 50 ust. 28–31), ⏳ 2026/26 od 1.01.2027; moduły SUS, MAPA-AKTOW, MAPA-POKRYCIA.

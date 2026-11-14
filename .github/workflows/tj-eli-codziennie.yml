@@ -50,6 +50,12 @@ jobs:
           set -euo pipefail
           python3 scripts/aktualizuj_tj.py --raport "$RUNNER_TEMP/raport.md"
 
+      - name: Mapy aktów w konwencji t.j. (MAPA-AKTOW, LEGAL-REGISTRY)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/mapy_tj.py --zapisz | tee -a "$RUNNER_TEMP/raport.md"
+
       # Monitoring modułów DR (METODYKA-MODULY-DR W-2, W-5, W-6): nowelizacje po t.j.
       # nieodnotowane w module, zmiany z datą przyszłą i te, które właśnie weszły w życie.
       # Wynik w jednym zgłoszeniu aktualizowanym codziennie; nie blokuje aktualizacji t.j.

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-05-prawo-administracyjne-sadowoadministracyjne
 
+- 3.42 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
 - 3.41 (2026-11-14): DR-05 komplet: 23 moduły (+8 części trybów nadzwyczajnych) w formacie wskazań; UPEA t.j. 2026/1311; poprawka pobytu stałego (art. 195 u.c.)
 - 3.40 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.39 (2026-10-31, BENCHMARK-02-LIVE): Konkluzja przy decyzji zaskarżalnej do WSA — prawomocność (art. 16 § 3 KPA), ostateczność jako etap wcześniejszy (benchmark 02 P04 na żywo); SKILL.md: sekcja Pułapki.
