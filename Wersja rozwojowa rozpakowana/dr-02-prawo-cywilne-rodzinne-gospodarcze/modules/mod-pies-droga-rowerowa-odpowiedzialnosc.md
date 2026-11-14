@@ -2,6 +2,10 @@
 pieszo-rowerowe, smycz i dystans
 v1.0.0 (dodany 2026-08-04, na żądanie użytkownika)
 
+**Akt:** KC — t.j. Dz.U. 2026 poz. 795 (zm. 2026/507 [OD 2028-11-01: 2026/507] — art. 860 § 3–4, umowa spółki cywilnej przez CEIDG; nie dotyczy przepisów modułu).
+**Akt:** KW — t.j. Dz.U. 2026 poz. 1372 (art. 77 — niezachowanie ostrożności przy trzymaniu zwierzęcia).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (terminy i progi: W-1).
+
 Zweryfikowano 2026-08-04 (ZASADA 14): Rząd 2B — liczne portale
 prawnicze i motoryzacyjne/rowerowe, w tym realny, udokumentowany
 przypadek ugody (wypadekrowerowy.pl), portale policyjne pośrednio

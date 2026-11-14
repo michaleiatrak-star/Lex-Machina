@@ -1,5 +1,10 @@
 # mod-ubezwlasnowolnienie-opieka-kuratela
 
+**Akt:** KC — t.j. Dz.U. 2026 poz. 795 (zm. 2026/507 [OD 2028-11-01: 2026/507] — art. 860 § 3–4, umowa spółki cywilnej przez CEIDG; nie dotyczy przepisów modułu).
+**Akt:** KRO — t.j. Dz.U. 2026 poz. 236 (po t.j. bez zmian).
+**Akt:** KPC — t.j. Dz.U. 2026 poz. 468 (zm. po t.j., wszystkie w mocy: 2026/473, 2026/830 od 2026-07-08; 2026/1003 od 2026-10-28; 2026/1046 od 2026-11-05; 2026/1296 od 2026-11-06 — zakres: nagłówek mod-KPC-art162-zastrzezenie-protokol; z przepisów powołanych w module zmieniony tylko art. 17 — dodany pkt 4⁶).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (terminy i progi: W-1).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-19
 **Rola w systemie:** odpowiedź na pytanie użytkownika o ubezwłasnowolnienie
 — dotąd CAŁKOWITA LUKA jako samodzielny temat (był tylko wymieniany jako

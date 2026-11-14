@@ -1,6 +1,9 @@
 # mod-KC-kredyty-frankowe.md
 ## DR-02 · Prawo Cywilne · Kredyty frankowe — abuzywność klauzul (art. 385¹ KC)
 
+**Akt:** KC — t.j. Dz.U. 2026 poz. 795 (zm. 2026/507 [OD 2028-11-01: 2026/507] — art. 860 § 3–4, umowa spółki cywilnej przez CEIDG; nie dotyczy przepisów modułu).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (terminy i progi: W-1).
+
 > Wydzielony 2026-06-14 z mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md
 > (ANEKS F), w ramach realizacji NOTA-4 (audyt-systemu-v4/references/CHECKLIST-DEDUP.md
 > — moduł >400 linii). Temat masowy, samodzielny — wydzielenie umożliwia

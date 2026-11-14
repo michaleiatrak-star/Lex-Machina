@@ -16,12 +16,12 @@
 |---|---|---|---|
 | Ogólny | 6 lat | art. 118 | Koniec: ostatni dzień roku kalendarzowego |
 | Z działalności gospodarczej | 3 lata | art. 118 | Między przedsiębiorcami |
-| Delikt — od wiedzy | 3 lata | art. 4421 §1 | Od dowiedzenia się o szkodzie i sprawcy |
-| Delikt — max | 10 lat | art. 4421 §1 | Od zdarzenia |
-| Delikt — zbrodnia/występek | 20 lat | art. 4421 §2 | Od popełnienia |
-| Sprzedaż | 2 lata | art. 554 | |
+| Delikt — od wiedzy | 3 lata | art. 442¹ § 1 | Od dowiedzenia się o szkodzie i sprawcy |
+| Delikt — max | 10 lat | art. 442¹ § 1 | Od zdarzenia |
+| Delikt — zbrodnia/występek | 20 lat | art. 442¹ § 2 | Od popełnienia |
+| Sprzedaż w zakresie działalności przedsiębiorstwa sprzedawcy (także rzemieślnik, płody rolne) | 2 lata | art. 554 | Inna sprzedaż — art. 118 |
 | Dzieło | 2 lata | art. 646 | Od oddania dzieła |
-| Zachowek | 5 lat | art. 1007 | Od ogłoszenia testamentu |
+| Zachowek | 5 lat | art. 1007 | § 1: od ogłoszenia testamentu; § 2–4 (uzupełnienie od obdarowanego, zapisobiercy windykacyjnego, fundacji rodzinnej): od otwarcia spadku |
 | Wyrok / ugoda sądowa | 6 lat | art. 125 | Od uprawomocnienia |
 | Skarga pauliańska | 5 lat | art. 534 | Od daty pokrzywdzającej czynności |
 
@@ -62,10 +62,10 @@ Skutek miarkowania: zmniejszenie kary, nie jej uchylenie
 |---|---|---|---|
 | Brak świadomości lub swobody | art. 82 | Bezwzględna nieważność | Brak — nieważne z mocy prawa |
 | Pozorność | art. 83 | Bezwzględna nieważność | Brak — nieważne z mocy prawa |
-| Błąd co do treści | art. 84 | Wzruszalność | 1 rok od wykrycia |
-| Podstęp | art. 86 | Wzruszalność | 1 rok od wykrycia |
-| Groźba | art. 87 | Wzruszalność | 1 rok od ustania obawy |
-| Wyzysk | art. 388 | Zmiana lub unieważnienie | 3 lata (6 lat — konsument) |
+| Błąd co do treści | art. 84 | Wzruszalność | 1 rok od wykrycia (art. 88 § 2) |
+| Podstęp | art. 86 | Wzruszalność | 1 rok od wykrycia błędu (art. 88 § 2) |
+| Groźba | art. 87 | Wzruszalność | 1 rok od ustania obawy (art. 88 § 2); oświadczenie na piśmie (art. 88 § 1) |
+| Wyzysk | art. 388 | Zmiana lub unieważnienie | 3 lata od zawarcia umowy (6 lat — konsument), art. 388 § 2 |
 
 **Art. 388 §1¹ KC (domniemanie wyzysku):** jeżeli wartość świadczenia jednej strony przewyższa co najmniej dwukrotnie wartość świadczenia wzajemnej — domniemywa się rażącą dysproporcję.
 

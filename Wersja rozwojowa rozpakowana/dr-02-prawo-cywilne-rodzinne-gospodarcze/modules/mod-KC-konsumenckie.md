@@ -1,5 +1,11 @@
 # mod-KC-konsumenckie
 
+**Akt:** KC — t.j. Dz.U. 2026 poz. 795 (zm. 2026/507 [OD 2028-11-01: 2026/507] — art. 860 § 3–4, umowa spółki cywilnej przez CEIDG; nie dotyczy przepisów modułu).
+**Akt:** PrKons (ustawa o prawach konsumenta) — t.j. Dz.U. 2026 poz. 1244 (zm. 2026/1353 [OD 2027-09-27: 2026/1353] — art. 2 pkt 5ga, 10–14, art. 7ac, 8, 12, 17: definicje i obowiązki informacyjne (gwarancja trwałości, naprawa); nie dotyczy art. 27 i n., 43a–43g).
+**Akt:** KredKons (ustawa o kredycie konsumenckim) — t.j. Dz.U. 2025 poz. 1362 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — art. 5 pkt 2a lit. a, definicja kredytodawcy (oddział z państwa trzeciego)).
+**Akt:** PrLot (Prawo lotnicze) — t.j. Dz.U. 2026 poz. 1407.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (terminy i progi: W-1).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
 **Źródło weryfikacji:** KC — Dz.U. 2026 poz. 795 t.j. | Ustawa o prawach konsumenta — Dz.U. 2026 poz. 1244 t.j. ze zm. | Ustawa o kredycie konsumenckim — Dz.U. 2025 poz. 1362 t.j.

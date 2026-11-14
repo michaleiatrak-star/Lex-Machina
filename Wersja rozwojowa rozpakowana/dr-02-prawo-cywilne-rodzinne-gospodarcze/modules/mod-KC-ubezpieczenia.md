@@ -1,5 +1,9 @@
 # mod-KC-ubezpieczenia
 
+**Akt:** KC — t.j. Dz.U. 2026 poz. 795 (zm. 2026/507 [OD 2028-11-01: 2026/507] — art. 860 § 3–4, umowa spółki cywilnej przez CEIDG; nie dotyczy przepisów modułu).
+**Akt:** UbezpObow (ustawa o ubezpieczeniach obowiązkowych) — t.j. Dz.U. 2026 poz. 783.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (terminy i progi: W-1).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
 **Źródło weryfikacji:** KC art. 805–834 — Dz.U. 2026 poz. 795 t.j. | Ustawa o ubezpieczeniach obowiązkowych — Dz.U. 2026 poz. 783 t.j.

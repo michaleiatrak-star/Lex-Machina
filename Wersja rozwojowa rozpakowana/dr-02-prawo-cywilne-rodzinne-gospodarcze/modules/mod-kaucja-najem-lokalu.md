@@ -1,5 +1,9 @@
 # mod-kaucja-najem-lokalu
 
+**Akt:** KC — t.j. Dz.U. 2026 poz. 795 (zm. 2026/507 [OD 2028-11-01: 2026/507] — art. 860 § 3–4, umowa spółki cywilnej przez CEIDG; nie dotyczy przepisów modułu).
+**Akt:** OchrLok (ustawa o ochronie praw lokatorów) — t.j. Dz.U. 2023 poz. 725.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (terminy i progi: W-1).
+
 **Wersja:** 1.0 | **Dodano:** 2026-07-19
 **Rola w systemie:** odpowiedź na pytanie użytkownika o "kaucję" —
 znaczenie cywilnoprawne (zabezpieczenie przy najmie lokalu), dotąd

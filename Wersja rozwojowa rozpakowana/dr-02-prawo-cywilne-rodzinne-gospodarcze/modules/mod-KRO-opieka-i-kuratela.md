@@ -1,5 +1,8 @@
 # Moduł — Opieka i kuratela (Tytuł III KRO, art. 145-184)
 
+**Akt:** KRO — t.j. Dz.U. 2026 poz. 236 (po t.j. bez zmian).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (terminy i progi: W-1).
+
 v1.0.0 (dodany 2026-08-12, na żądanie użytkownika — kontynuacja
 badania kompletności pokrycia prawa rozwodowego/rodzinnego, dotąd
 CAŁKOWICIE nieobecny dział Kodeksu — ⚠️ NIE MYLIĆ z pieczą zastępczą
