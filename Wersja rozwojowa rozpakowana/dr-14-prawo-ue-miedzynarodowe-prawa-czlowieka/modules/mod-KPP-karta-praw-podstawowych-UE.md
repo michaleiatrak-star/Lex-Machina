@@ -1,5 +1,8 @@
 # Moduł — Karta Praw Podstawowych Unii Europejskiej
 
+**Akt:** Konst (Konstytucja RP) — akt pierwotny, bez t.j.: Dz.U. 1997 poz. 483.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Karta Praw Podstawowych Unii Europejskiej
   Dz.Urz. UE C 326 z 26.10.2012, s. 391 (wersja skonsolidowana)

@@ -1,5 +1,8 @@
 # Moduł — Rejestr źródeł prawa i zarządzanie lifecycle (narzędzie metodyczne)
 
+**Akt:** UOAN (ustawa o ogłaszaniu aktów normatywnych — ogłoszenie, wejście w życie, teksty jednolite: art. 4, 16) — t.j. Dz.U. 2019 poz. 1461 (zm. po t.j.: 2026/912 od 2026-07-31 — art. 13).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 
 ## Kiedy używać
 

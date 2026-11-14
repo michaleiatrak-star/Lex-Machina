@@ -1,5 +1,9 @@
 # Moduł — Pakty ONZ dotyczące praw człowieka
 
+**Akt:** Konst (Konstytucja RP) — akt pierwotny, bez t.j.: Dz.U. 1997 poz. 483.
+**Akt:** UUM (ustawa o umowach międzynarodowych) — t.j. Dz.U. 2020 poz. 127.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Międzynarodowy Pakt Praw Obywatelskich i Politycznych (MPPOiP)
   Dz.U. 1977 nr 38 poz. 167; ratyfikowany przez Polskę

@@ -1,5 +1,10 @@
 # mod-konwencja-genewska-uchodzcy-1951-protokol-1967
 
+**Akt:** Konst (Konstytucja RP) — akt pierwotny, bez t.j.: Dz.U. 1997 poz. 483.
+**Akt:** UCudz (ustawa o cudzoziemcach) — t.j. Dz.U. 2025 poz. 1079 (zm. po t.j.: 2025/1794 od 2026-01-01 — art. 2, 3, 7, 13, 24, 58, 58a, 58b, 64a, 99, 104, 105, 144, 144a; 2026/203 od 2026-03-05 — art. 25, 25a, 60, 77c, 77d, 87, 87a, 113b, 113c, 120b, 120c, 207a, 207b, 223, 223a, 299, 334, 449, 450, 451).
+**Akt:** UOchr (ustawa o udzielaniu cudzoziemcom ochrony na terytorium RP) — t.j. Dz.U. 2026 poz. 862.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Wersja:** 1.0.0 | **Dodano:** 2026-08-20 (NAPRAWA — F-61: Konwencja
 genewska o statusie uchodźców [1951] i Protokół nowojorski [1967] miały
 ZERO wzmianek NA POZIOMIE TRAKTATOWYM w systemie — dr-05 [`mod-ustawa-

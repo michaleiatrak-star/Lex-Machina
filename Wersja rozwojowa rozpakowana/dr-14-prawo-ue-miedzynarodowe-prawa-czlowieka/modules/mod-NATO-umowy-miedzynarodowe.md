@@ -1,5 +1,9 @@
 # Moduł — NATO, umowy obronne i sojusznicze
 
+**Akt:** Konst (Konstytucja RP) — akt pierwotny, bez t.j.: Dz.U. 1997 poz. 483.
+**Akt:** UWO (ustawa o zasadach pobytu wojsk obcych na terytorium RP) — t.j. Dz.U. 2024 poz. 1770.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Traktat Północnoatlantycki (Traktat Waszyngtoński) — 4.04.1949
   Tekst w Dz.U.: Dz.U. 2000 poz. 970 ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane)

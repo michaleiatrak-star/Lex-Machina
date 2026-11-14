@@ -1,5 +1,10 @@
 # Moduł — Europejska Konwencja Praw Człowieka i Trybunał w Strasburgu (EKPC / ETPC)
 
+**Akt:** Konst (Konstytucja RP) — akt pierwotny, bez t.j.: Dz.U. 1997 poz. 483.
+**Akt:** UUM (ustawa o umowach międzynarodowych) — t.j. Dz.U. 2020 poz. 127.
+**Akt:** KPC (Kodeks postępowania cywilnego) — t.j. Dz.U. 2026 poz. 468 (zm. po t.j.: 2026/473 od 2026-07-08 — art. 460, 461, 465, 476, 631, 632, 3982, 4771b, 4771c, 4771d, 4777a, 7555, 7556; 2026/830 od 2026-07-08 — art. 4; 2026/1003 od 2026-10-28 — zakres: tekst nowelizacji w ELI; 2026/1046 od 2026-11-05 — art. 1, 2, 47, 94, 461, 477; 2026/1296 od 2026-11-06 — art. 17).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 
 ## 1. CORE
 

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
 
+- 3.19 (2026-11-14): DR-14: wskazania z kwalifikatorem (Konstytucja, UUM 2020/127, PPM 2023/503, KPC, kontrola inwestycji 2026/47, cudzoziemcy, ochrona, UOAN)
 - 3.18 (2026-11-11, LEGAL GAUNTLET v3 E4): mod-EKPC-ETPC §11 — bramki skargi do ETPC E-1–E-7: wyczerpanie każdego zarzutu, termin od właściwej ostatecznej decyzji (scenariusze przy niepewnej dacie), czwarta instancja, zakres artykułu, status ofiary i istotna niekorzyść, formularz z reguły 47 (zarzut tylko w załączniku, limity z aktualnej Practice Direction), kompletowanie bez nowych zarzutów; parametry wyłącznie z echr.coe.int w dniu składania.
 - 3.17 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.16 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
