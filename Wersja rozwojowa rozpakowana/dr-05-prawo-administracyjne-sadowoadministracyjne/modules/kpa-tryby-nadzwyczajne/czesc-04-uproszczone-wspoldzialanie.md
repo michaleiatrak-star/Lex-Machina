@@ -1,5 +1,8 @@
 # KPA — część 4: postępowanie uproszczone, współdziałanie organów
 
+**Akt:** KPA — t.j. Dz.U. 2025 poz. 1691 (stan 2025-11-03).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy i progi porównane z t.j.).
+
 > Część modułu `mod-KPA-tryby-nadzwyczajne-i-strategia.md` (podział
 > 2026-08-20, naprawa F-78 — plik źródłowy przekroczył 1300 linii).
 > Pełny indeks i zasady użycia: zobacz plik nadrzędny w katalogu

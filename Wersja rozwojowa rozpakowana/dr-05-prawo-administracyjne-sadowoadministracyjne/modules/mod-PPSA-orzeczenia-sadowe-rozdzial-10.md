@@ -8,6 +8,10 @@ data: 2026-08-22
 
 # PPSA — ORZECZENIA SĄDOWE (Dział III, Rozdział 10, art. 132-167a)
 
+**Akt:** KPA — t.j. Dz.U. 2025 poz. 1691 (stan 2025-11-03).
+**Akt:** PPSA — t.j. Dz.U. 2026 poz. 143 (zm. 2025/1882 od 2026-03-01 — art. 1, 2, 175; 2026/846 od 2026-06-26 — art. 53 § 1, 264 § 2; 2023/1860 [OD 2029-10-01: 2023/1860] — art. 66 (doręczenia)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy i progi porównane z t.j.).
+
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 Treść zweryfikowana RZĄD 1: arslege.pl i lexlege.pl (oba wskazują metrykę

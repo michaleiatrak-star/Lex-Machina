@@ -1,5 +1,10 @@
 # mod-ustawa-dostepnosc-niepelnosprawni
 
+**Akt:** PPSA — t.j. Dz.U. 2026 poz. 143 (zm. 2025/1882 od 2026-03-01 — art. 1, 2, 175; 2026/846 od 2026-06-26 — art. 53 § 1, 264 § 2; 2023/1860 [OD 2029-10-01: 2023/1860] — art. 66 (doręczenia)).
+**Akt:** UPEA (ustawa o postępowaniu egzekucyjnym w administracji) — t.j. Dz.U. 2026 poz. 1311 (stan 2026-08-31; zm. 2026/1003 od 2026-10-28 — art. 17).
+**Akt:** UDost (ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami) — t.j. Dz.U. 2024 poz. 1411 (zm. 2024/731 od 2025-06-28 — art. 13, 36).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy i progi porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o zapewnieniu dostępności — Dz.U. 2024 poz. 1411 t.j.
 **Data weryfikacji online:** 2026-08-21 (F-89-class: mapa lokalna miała już
@@ -13,7 +18,7 @@ o synchronizacji map, naprawiony teraz)
 
 Zakres: dostępność architektoniczna, cyfrowa i informacyjno-komunikacyjna obiektów i usług podmiotów publicznych; obowiązki podmiotów publicznych; wniosek o zapewnienie dostępności; skarga do Prezesa PFRON; skarga do WSA; raport o stanie dostępności; PFRON — dofinansowanie.
 
-**Akt:** Ustawa z 19.07.2019 r. o zapewnianiu dostępności osobom ze szczególnymi potrzebami — Dz.U. 2024 poz. 1411 t.j. (⚡ SKORYGOWANE 2026-08-21 — poprzednia wersja tego modułu błędnie cytowała Dz.U. 2022 poz. 2240, mimo że lokalna mapa dr-05/MAPA-AKTOW.md już od 2026-08-14 miała poprawny numer 2024.1411, zweryfikowany krzyżowo z dr-10).
+**Akt:** Ustawa z 19.07.2019 r. o zapewnianiu dostępności osobom ze szczególnymi potrzebami — Dz.U. 2024 poz. 1411 t.j. (⚡ SKORYGOWANE 2026-08-21 — poprzednia wersja tego modułu błędnie cytowała dawny tekst jednolity z 2022 r., mimo że lokalna mapa dr-05/MAPA-AKTOW.md już od 2026-08-14 miała poprawny numer 2024.1411, zweryfikowany krzyżowo z dr-10).
 
 ⭐ **PODZIAŁ ZAKRESU Z dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-edukacja-specjalna-dostepnosc.md**
 (uzupełniony 2026-08-21, F-45): TEN moduł (dr-05) — kątem administracyjno-

@@ -1,5 +1,8 @@
 # mod-ustawa-sygnalisci — Ochrona Sygnalistów [PERSPEKTYWA PROCESOWA]
 
+**Akt:** USygn (ustawa o ochronie sygnalistów) — Dz.U. 2024 poz. 928 (akt pierwotny, bez t.j.; bez zmian w ELI na 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy i progi porównane z t.j.).
+
 **Zakres modułu:** SYGNALISTA jako podmiot chroniący swoje prawa — zgłoszenie, kanały, ochrona przed odwetem, roszczenia, pisma procesowe.
 **Wersja kanoniczna dla compliance pracodawcy / CMS / ISO 37301:** `dr-15` → `mod-ustawa-sygnalisci.md`
 **Świadome utrzymanie dwóch wersji:** TAK — zakresy się nie pokrywają; tu perspektywa procesowo-pracownicza, w DR-15 perspektywa compliance pracodawcy.

@@ -1,5 +1,8 @@
 # mod-ustawa-cudzoziemcy-zatrudnianie [PERSPEKTYWA ADMINISTRACYJNA]
 
+**Akt:** UPPC (ustawa o warunkach dopuszczalności powierzania pracy cudzoziemcom) — Dz.U. 2025 poz. 621 (akt pierwotny, bez t.j.; zm. 2026/203 od 2026-03-05 — art. 5, 5a, 84; 2025/1794 (data wejścia wg ELI 2026-04-27) — m.in. art. 1–6, 8, 10–14, 18, 42–43, 60, 131, 144, 148a; 2026/734 od 2026-06-20 — art. 17, 68; 2026/473 od 2026-07-08 — m.in. art. 1–3, 10–11, 18, 22, 33, 69, 281). ⚠️ art. 3 (powołany niżej) zmieniony przez 2025/1794 i 2026/473 — odczytaj brzmienie aktualne.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy i progi porównane z t.j.).
+
 **Status:** moduł uzupełniający do `mod-ustawa-cudzoziemcy.md` (DR-05, moduł kanoniczny)
 **Wydzielony:** 2026-06-14 (audyt — moduł nadrzędny >400 linii, podział tematyczny)
 **Źródło weryfikacji:** Ustawa o warunkach dopuszczalności powierzania pracy

@@ -1,5 +1,9 @@
 # mod-PPSA-posiedzenia-sadowe-rozdzial-7.md — PPSA, Dział III Rozdz. 7
 
+**Akt:** KPA — t.j. Dz.U. 2025 poz. 1691 (stan 2025-11-03).
+**Akt:** PPSA — t.j. Dz.U. 2026 poz. 143 (zm. 2025/1882 od 2026-03-01 — art. 1, 2, 175; 2026/846 od 2026-06-26 — art. 53 § 1, 264 § 2; 2023/1860 [OD 2029-10-01: 2023/1860] — art. 66 (doręczenia)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy i progi porównane z t.j.).
+
 **Wersja:** 1.0.0 | **Dodano:** 2026-08-22 (F-83, priorytet **#6** mapy
 pokrycia dr-05 — „Dział III, Rozdz. 7 — posiedzenia sądowe (art. 90–114)
 — następny w kolejności, wciąż 🔴")

@@ -1,5 +1,9 @@
 # mod-ustawa-cudzoziemcy [PERSPEKTYWA ADMINISTRACYJNA — MODUŁ KANONICZNY]
 
+**Akt:** KPA — t.j. Dz.U. 2025 poz. 1691 (stan 2025-11-03).
+**Akt:** PPSA — t.j. Dz.U. 2026 poz. 143 (zm. 2025/1882 od 2026-03-01 — art. 1, 2, 175; 2026/846 od 2026-06-26 — art. 53 § 1, 264 § 2; 2023/1860 [OD 2029-10-01: 2023/1860] — art. 66 (doręczenia)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy i progi porównane z t.j.).
+
 **Hasła spraw:** karta pobytu, zezwolenie na pobyt czasowy, pobyt stały, wiza, cudzoziemiec, legalizacja pobytu, zobowiązanie do powrotu, deportacja
 
 **Zakres modułu (DR-05):** Pełny moduł administracyjno-proceduralny: tytuły pobytowe (pełna taksonomia), zezwolenia na pracę (wszystkie typy A/B/C/D/S), wydalenie/zobowiązanie do powrotu, ochrona międzynarodowa (uchodźcy), ścieżka odwoławcza UW → SZUSC → WSA → NSA, detencja, matryca dokument → uprawnienie do pracy.
@@ -256,7 +260,7 @@ WAŻNE: wizy wydane w celach 01, 02, 11, 14, 20, 23 oraz tranzytowe (od 01.06.20
 | Pobyt czasowy — Niebieska Karta UE | art. 127 u.c. | do 3 lat | TAK (pełny dostęp rynku pracy od 01.06.2025) | studia wyższe LUB 5 lat dośw.; wynagrodzenie ≥ 150% przeciętnego (≈ 12 272 zł brutto/mies. dla wniosków z 2025 r.) |
 | Pobyt czasowy — ICT (przeniesienie wewnątrz przedsiębiorstwa) | art. 139a u.c. | do 3 lat | TAK (jednostka przyjmująca) | pracodawca macierzysty poza UE; kadra kierownicza / specjalista / stażysta; powiązanie kapitałowe |
 | Pobyt czasowy — łączenie rodzin | art. 159 u.c. | do 3 lat | TAK (po udzieleniu) | sponsor z tytułem pobytowym; dochód; ubezpieczenie |
-| Pobyt stały | art. 195 u.c. | bezterminowy | TAK (pełny dostęp) | 5 lat pobyt ciągły LUB małżonek PL ≥ 3 lata LUB dziecko PL LUB Karta Polaka LUB uchodźca — weryfikuj przesłanki w ELI (RZĄD 1) |
+| Pobyt stały | art. 195 u.c. | bezterminowy | TAK (pełny dostęp) | art. 195 ust. 1: m.in. dziecko obywatela PL; polskie pochodzenie; małżonek obywatela PL — ≥ 3 lata małżeństwa i ≥ 2 lata nieprzerwanego pobytu na zezwoleniu z tego tytułu; 5 lat ze statusem uchodźcy/ochroną uzupełniającą/zgodą humanitarną; Karta Polaka. Brak ogólnej ścieżki „5 lat pobytu” — to rezydent UE (art. 211) |
 | Rezydent długoterminowy UE | art. 211 u.c. | bezterminowy | TAK (pełny dostęp; mobilność UE) | 5 lat nieprzerw. pobytu; stabilny dochód; ubezpieczenie; znajomość j. polskiego |
 | Status uchodźcy | ustawa o ochronie cudzoziemców | bezterminowy | TAK bez zezwoleń | prześladowanie Konwencja Genewska 1951 |
 | Ochrona uzupełniająca | j.w. | do 2 lat (przedłużalne) | TAK bez zezwoleń | ryzyko poważnej krzywdy |

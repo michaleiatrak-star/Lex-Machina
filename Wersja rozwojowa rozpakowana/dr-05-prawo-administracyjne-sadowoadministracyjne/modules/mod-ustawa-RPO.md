@@ -1,5 +1,8 @@
 # Ustawa o Rzeczniku Praw Obywatelskich — RPO
 
+**Akt:** KPA — t.j. Dz.U. 2025 poz. 1691 (stan 2025-11-03).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy i progi porównane z t.j.).
+
 **Stan weryfikacji:** 2026-08-28  
 **Tekst jednolity:** Dz.U. 2024 poz. 1264  
 **Źródło kanoniczne:** ELI/ISAP  

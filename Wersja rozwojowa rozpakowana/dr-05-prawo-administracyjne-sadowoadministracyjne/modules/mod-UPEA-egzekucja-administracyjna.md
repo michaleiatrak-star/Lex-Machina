@@ -1,5 +1,10 @@
 # mod-UPEA-egzekucja-administracyjna
 
+**Akt:** KPA — t.j. Dz.U. 2025 poz. 1691 (stan 2025-11-03).
+**Akt:** PPSA — t.j. Dz.U. 2026 poz. 143 (zm. 2025/1882 od 2026-03-01 — art. 1, 2, 175; 2026/846 od 2026-06-26 — art. 53 § 1, 264 § 2; 2023/1860 [OD 2029-10-01: 2023/1860] — art. 66 (doręczenia)).
+**Akt:** UPEA (ustawa o postępowaniu egzekucyjnym w administracji) — t.j. Dz.U. 2026 poz. 1311 (stan 2026-08-31; zm. 2026/1003 od 2026-10-28 — art. 17).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy i progi porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** UPEA — Dz.U. 2026 poz. 1311 t.j. (ogł. 9.10.2026; obejmuje zm. 2026/516, 739 i 1003; art. 17 § 1a w dwóch brzmieniach — dotychczasowym do 27.10.2026 i nadanym art. 116 ustawy 2026/1003 od 28.10.2026 (odnośniki 13–14 t.j.); brak zmian po t.j. (ELI 2026-10-12, obwieszczenie odczytane)) | KPA — Dz.U. 2025 poz. 1691 | PPSA — Dz.U. 2026 poz. 143
 **Data weryfikacji online:** 2026-06-05
