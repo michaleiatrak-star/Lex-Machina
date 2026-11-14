@@ -1,9 +1,10 @@
 # mod-KAS-kontrola-celno-skarbowa
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o KAS — Dz.U. 2026 poz. 1492 t.j. | Op — **Dz.U. 2026 poz. 622 t.j.** ✅ [VER] RZĄD 1 2026-09-10l (⛔ poprzedni zapis `2025 poz. 111` — wygaśnięcie aktu) | PPSA — Dz.U. 2026 poz. 143
-**Data weryfikacji online:** 2026-06-05
-**Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
+**Akt:** UKAS (ustawa o Krajowej Administracji Skarbowej) — t.j. Dz.U. 2026 poz. 1492 (obejmuje 2026/1281; zm. 2026/1098 [OD 2027-01-01: 2026/1098] — art. 35b ust. 6 pkt 6–8, art. 35ca–35cc (osobiste konta inwestycyjne); nie dotyczy kontroli celno-skarbowej).
+**Akt:** OP — t.j. Dz.U. 2026 poz. 622 (zm. po t.j.: 2025/1235 od 2026-07-12 — art. 306h; 2026/1154 od 2026-09-16 — art. 299; 2026/825 od 2026-09-24 — art. 14i–14j; 2026/846 od 2026-10-01 — m.in. art. 81b § 2a, 86a–86o, 293–299k (tajemnica skarbowa); 2026/875 [OD 2027-01-01: 2026/875] — art. 67a; 2026/1098 [OD 2027-01-01: 2026/1098] — art. 3b, 297–299c, 306; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 119zg; z przepisów powołanych w module zmieniony tylko art. 81b — § 2a, nie § 1).
+**Akt:** PPSA — t.j. Dz.U. 2026 poz. 143 (zm. 2026/846 od 2026-06-26 — art. 53 § 1 (odesłanie do art. 3 § 2 pkt 4b), art. 264 § 2; termin skargi 30 dni bez zmian).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1; poprawki: art. 63 ust. 2 — zawiadomienie pisemne, nie postanowienie; art. 77 — zgoda i zatwierdzenie prokuratora, nie sądu; art. 82 ust. 3 i art. 83 — skutki korekty; Op art. 291 § 1 i art. 81b — zastrzeżenia, nie korekta).
 
 ---
 
@@ -58,8 +59,8 @@ Kontrola podatkowa (US) i kontrola celno-skarbowa (UCS/KAS), uprawnienia funkcjo
 | Podstawa | Op dział VI (art. 281–292a) | Ustawa o KAS |
 | Wszczęcie | Zawiadomienie (co do zasady) | Upoważnienie (bez obowiązku wcześniejszego zawiadomienia) |
 | Wynik | Protokół kontroli | Wynik kontroli celno-skarbowej |
-| Korekta po kontroli | 14 dni od doręczenia protokołu | 14 dni od doręczenia wyniku |
-| Skutek braku korekty | Postępowanie podatkowe | Decyzja naczelnika UCS |
+| Po doręczeniu | zastrzeżenia do protokołu w 14 dni (art. 291 § 1 Op); korekta deklaracji po zakończeniu kontroli dopuszczalna (art. 81b § 1 pkt 2 lit. a Op) | korekta w 14 dni od doręczenia wyniku (art. 82 ust. 3 UKAS); złożona później, przed postanowieniem o przekształceniu — bez skutków prawnych (art. 82 ust. 3 zd. 2); korekta cofająca ustalenia kontroli — bezskuteczna (art. 83 ust. 1c) |
+| Skutek braku korekty | Postępowanie podatkowe (wszczęcie) | Przekształcenie kontroli w postępowanie podatkowe postanowieniem bez zażalenia (art. 83 ust. 1 i 3 UKAS), dalej decyzja naczelnika UCS (art. 83 ust. 4) |
 | Odwołanie | Do DIAS w 14 dniach | Do DIAS w 14 dniach |
 
 ### Schemat kontroli celno-skarbowej
@@ -71,8 +72,8 @@ Czynności kontrolne (badanie JPK, dokumentów, rachunków, towarów)
   ↓ [doręczenie]
 Wynik kontroli celno-skarbowej
   ↓ [14 dni] KOREKTA DEKLARACJI
-    Korekt złożona → umorzenie postępowania z urzędu
-    Korekta niezłożona →
+    Korekta uwzględniona w całości → zawiadomienie o uwzględnieniu (art. 83 ust. 2)
+    Brak korekty / nieuwzględniona / zgoda w części → postanowienie o przekształceniu w postępowanie podatkowe (art. 83 ust. 1, 3)
   ↓
 DECYZJA naczelnika UCS (I instancja)
   ↓ [14 dni] ODWOŁANIE DO DIAS
@@ -92,9 +93,13 @@ nieobecny, kluczowy element proceduralny)
   zwłoki, NIE PÓŹNIEJ niż W CIĄGU **3 MIESIĘCY** OD dnia jej
   WSZCZĘCIA (= od DNIA doręczenia kontrolowanemu upoważnienia do
   jej przeprowadzenia)
-  → MOŻLIWE przedłużenie — ALE WYMAGA zawiadomienia W FORMIE
-    POSTANOWIENIA, Z WSKAZANIEM przyczyn I NOWEGO terminu — NA TO
-    postanowienie NIE SŁUŻY zażalenie
+  (art. 63 ust. 1 UKAS; data wszczęcia = doręczenie upoważnienia, art. 62 ust. 2)
+  → niezakończenie w terminie: PISEMNE zawiadomienie kontrolowanego z
+    przyczynami i nowym terminem (art. 63 ust. 2) — ustawa nie przewiduje
+    tu postanowienia
+  → dokumenty zgromadzone po upływie terminu (bez wskazania nowego terminu)
+    nie stanowią dowodu, z wyjątkiem tych, o które wystąpiono wcześniej
+    (art. 63 ust. 4)
   → obowiązek DOTRZYMANIA terminu JEST NIEZALEŻNY od tego, CZY
     opóźnienie WYNIKA z przyczyn LEŻĄCYCH po stronie ORGANU, CZY
     przyczyn OBIEKTYWNYCH (potwierdzone wyrokiem NSA I FSK 1087/20)
@@ -108,12 +113,10 @@ nieobecny, kluczowy element proceduralny)
   3) JEŚLI korekta NIE ZOSTANIE złożona (LUB organ jej NIE
      uwzględni W CAŁOŚCI) — zakończona kontrola PRZEKSZTAŁCA SIĘ
      W POSTĘPOWANIE podatkowe
-  4) ⭐⭐⭐ TERMIN przekształcenia: NIE PÓŹNIEJ niż **6 MIESIĘCY** OD
-     zakończenia kontroli — POTWIERDZONE bezpośrednio orzecznictwem
-     NSA (wyrok I FSK 1264/21, 3.03.2022) — DOTYCZY WYŁĄCZNIE
-     samego PRZEKSZTAŁCENIA, NIE wpływa NA możliwość WSZCZĘCIA
-     nowej kontroli celno-skarbowej PO upływie 6 miesięcy od
-     WCZEŚNIEJSZEJ kontroli PODATKOWEJ (TO ODRĘBNA kwestia)
+  4) TERMIN przekształcenia: art. 83 UKAS (t.j. 2026/1492) NIE
+     zawiera terminu 6 miesięcy. Teza o takim terminie z wyroku NSA
+     I FSK 1264/21 ⚠️ [NIEWERYFIKOWANE] — przed powołaniem sprawdź w
+     CBOSA; nie stosuj jako reguły ustawowej
   5) PRZEKSZTAŁCENIE NASTĘPUJE Z DNIEM doręczenia POSTANOWIENIA o
      przekształceniu — NA TO postanowienie RÓWNIEŻ NIE SŁUŻY
      zażalenie
@@ -138,8 +141,8 @@ nieobecny, kluczowy element proceduralny)
   SKARGA na bezczynność/PRZEWLEKŁOŚĆ postępowania DO WSA
 
 Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
-tekst art. 83 ustawy o KAS (OpenLEX, Dz.U. 2025 poz. 1131 t.j., wersja od
-16.04.2026) oraz orzecznictwo NSA (I FSK 1264/21, I FSK 1087/20),
+tekst art. 83 ustawy o KAS (stan sprzed t.j. 2026/1492; aktualne brzmienie
+— ELI DU/2026/1492) oraz orzecznictwo NSA (I FSK 1264/21, I FSK 1087/20),
 Grant Thornton [×2], ordynacjapodatkowa.pl [×2], rachunkowosc.com.pl,
 asiw.pl [luty 2026], pragmatiq.pl.
 ```
@@ -151,12 +154,17 @@ Prawo wstępu do pomieszczeń i obiektów kontrolowanego
 Żądanie okazania dokumentów, ksiąg i ewidencji
 Dostęp do JPK (struktur plików kontrolnych) w formacie elektronicznym
 Przesłuchanie stron, świadków, biegłych
-PRZESZUKANIE (wymaga postanowienia sądu lub pilnej zgody):
-  → Prokuratura lub sąd rejonowy właściwy wg siedziby kontrolowanego
-  → Pilna sytuacja: naczelnik UCS + potwierdzenie sądu w 5 dni
+PRZESZUKANIE LOKALI (art. 77 UKAS):
+  → po zgodzie właściwego prokuratora rejonowego (postanowienie okazuje się
+    kontrolowanemu); KPK o przeszukaniu (Policja) stosuje się odpowiednio
+  → w przypadkach niecierpiących zwłoki — bez uprzedniej zgody, z następczym
+    zatwierdzeniem przez prokuratora rejonowego (ust. 2–3); odmowa
+    zatwierdzenia → zebrane materiały nie są dowodem (ust. 5)
 BLOKADA RACHUNKU (STIR — art. 119zv–119zb Op):
-  → Do 72 godzin przy podejrzeniu wyłudzenia VAT
-  → Przedłużenie przez Szefa KAS do 3 miesięcy
+  → żądanie Szefa KAS do 72 godzin (art. 119zv § 1 Op) — przy ryzyku
+    wykorzystania rachunku do wyłudzeń skarbowych (nie tylko VAT)
+  → przedłużenie postanowieniem Szefa KAS do 3 miesięcy (art. 119zw § 1),
+    m.in. przy obawie niewykonania zobowiązania > 10 000 euro
   → Zaskarżenie do sądu administracyjnego
 ```
 
@@ -243,4 +251,4 @@ PO WYNIKU KONTROLI:
 
 ---
 
-**Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20251131
+**Brzmienie:** ELI `https://api.sejm.gov.pl/eli/acts/DU/2026/1492/text.pdf` (UKAS), `.../DU/2026/622/...` (Op).

@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.33"
+version: "2.34"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -364,6 +364,10 @@ stosuj aktualny pomiar z `shared/DOSTEP-MASZYNOWY-API.md` oraz poniższe reguły
 - `trybunal.gov.pl` / `ipo` oraz `orzeczenia.uzp.gov.pl` — stosuj ich aktualny
   kontrakt z `shared/DOSTEP-MASZYNOWY-API.md`; brak deterministycznego filtra
   po sygnaturze nie uprawnia do zgadywania.
+- decyzje i stanowiska organów (KNF, UKE, RIO, KRRiT, URE, UODO, RPO, Rzecznik
+  Finansowy, ZUS) oraz sądy dyscyplinarne (OIRP, ORA, WSD, NIL) —
+  `view references/BAZY-URZEDOW-I-DYSCYPLINARNE.md` (adresy, kanał bez sesji
+  użytkownika, postępowanie przy blokadzie).
 
 Orzeczenia TSUE i ETPC mają status równoważny z Tier 1 dla materii objętej prawem UE
 lub Konwencją. Kategoria 5 (UE/TSUE) obejmuje teraz również orzeczenia ETPC.

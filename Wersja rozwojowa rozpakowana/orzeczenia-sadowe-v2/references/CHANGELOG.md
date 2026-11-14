@@ -1,5 +1,6 @@
 # CHANGELOG — orzeczenia-sadowe-v2
 
+- 2.34 (2026-11-14): Bazy urzędów i sądów dyscyplinarnych w orzeczenia-sadowe-v2; KAS na t.j. 2026/1492 (poprawki art. 63, 77, 82-83 UKAS); DR-02: Prawo przedsiębiorców, zastaw rejestrowy (2025/1792 i 2026/1073 jeszcze nie obowiązują)
 - 2.33 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
 - 2.32 (2026-10-13e, AUDYT-2026-10-13e): Faza 1-Z pkt 7–8 — teza tylko ze stanowiska właściwego organu (nie zarzut, wniosek, stanowisko wnioskodawcy, zdanie odrębne); określenie sprawy z metryki porównywane z pytaniem przed lekturą tekstu, przy liście kandydatów odsiew po przedmiocie. Opis kontroli aplikacji: role fragmentów, przypięte określenie sprawy, korekta tylko przy NO_MATCH lub twierdzeniu nie w pełni wspartym, CASE_COURT_ATTRIBUTION. Kalibracja 1000 przypadków: trafność decyzji o korekcie 0,993, pominięte korekty 0.
 

@@ -66,7 +66,7 @@ z shared w 3.19; priorytety kontroli — `prawo-polskie-v2/krajowe/shared/ISAP-M
 | Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. | ✅ ZGODNE (obwieszczenie 17.04.2026) — ⚠️ brakowało: Dz.U. 2026 poz. 779 (15.06.2026, ustawa zmieniająca jednocześnie PIT/CIT/ryczałt), **Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)** | ✅ t.j. aktualny / dodano nowelizacje |
 | Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. | ✅ ZGODNE (obwieszczenie 27.03.2026) — ⚠️ brakowało: Dz.U. 2026 poz. 779, **Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)** | ✅ t.j. aktualny / dodano nowelizacje |
 | Ordynacja podatkowa | Dz.U. 2026 poz. 622 t.j. | ✅ ZGODNE (obwieszczenie 22.04.2026, publ. 11.05.2026) — ⚠️ brakowało: **Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)** (29.05.2026 — ustawa MACIERZYSTA tej nowelizacji, zmienia OP i "niektóre inne ustawy" — stąd pojawia się we wszystkich powyższych wierszach) | ✅ t.j. aktualny / dodano nowelizację |
-| Ustawa o KAS | Dz.U. 2025 poz. 1131 t.j. | ✅ ZGODNE (obwieszczenie 05.08.2025) — ⛔ ROZBIEŻNOŚĆ: MAPA-AKTOW/ROUTING-MAP podawały nowelizacje "Dz.U. 2026 poz. 395, 483"; dwa niezależne źródła (gofin.pl, inforlex.pl) wskazują **poz. 415**, nie 395, jako numer tej nowelizacji — poprawiono na poz. 415. Dodano też **Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)** | ⛔ POPRAWIONO numer (395→415) + dodano poz. 846 |
+| Ustawa o KAS | Dz.U. 2026 poz. 1492 t.j. | ✅ ZGODNE (obwieszczenie 22.10.2026, ELI 2026-11-14; zastępuje 2025/1131, obejmuje zmiany 2026/415, 483, 846, 1281) | po t.j.: 2026/1098 od 2027-01-01 |
 
 ⚠️ **Wspólny mianownik:** ustawa z 29 maja 2026 r. o zmianie ustawy —
 Ordynacja podatkowa oraz niektórych innych ustaw (Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować))
@@ -100,7 +100,7 @@ kontroli, co odpowiada temu, że to właśnie tu znaleziono rozbieżność).
 | Ustawa z dnia 26 lipca 1991 r. o podatku dochodowym od osób fizycznych (PIT) | ✅ Dz.U. 2026 poz. 592 t.j. | + nowelizacje poz. 779/2026, 846/2026 |
 | Ustawa z dnia 15 lutego 1992 r. o podatku dochodowym od osób prawnych (CIT) | ✅ Dz.U. 2026 poz. 554 t.j. | + nowelizacje poz. 779/2026, 846/2026 |
 | Ustawa z dnia 29 sierpnia 1997 r. — Ordynacja podatkowa | ✅ Dz.U. 2026 poz. 622 t.j. | + nowelizacja poz. 846/2026 (macierzysta) |
-| Ustawa z dnia 16 listopada 2016 r. o Krajowej Administracji Skarbowej (KAS) | ✅ Dz.U. 2025 poz. 1131 t.j. | + nowelizacje poz. 415/2026 (NIE 395), 483/2026, 846/2026 |
+| Ustawa z dnia 16 listopada 2016 r. o Krajowej Administracji Skarbowej (KAS) | ✅ Dz.U. 2026 poz. 1492 t.j. (obwieszczenie 22.10.2026; zastępuje 2025/1131) | po t.j.: 2026/1098 od 2027-01-01 (art. 35b, 35ca–35cc) |
 | Ustawa z dnia 20 listopada 1998 r. o zryczałtowanym podatku dochodowym (ryczałt) | Dz.U. 2025 poz. 843 t.j. (zgodne z MAPA-AKTOW, niezweryfikowane ponownie w tej sesji poza potwierdzeniem z podatki.gov.pl przy okazji sprawdzania PIT) | + nowelizacja poz. 779/2026 |
 
 ## 2. Powiązania krzyżowe z modułami DR-06

@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.97"
+version: "6.98"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.97 (2026-11-14): DR-02: konwersja modułów KC i KRO na wskazania z kwalifikatorem (W-1; poprawki: art. 442¹, 88 § 2, 388 § 2, 554, 1007 § 2–4)
+  Wersja bieżąca: 6.98 (2026-11-14): Bazy urzędów i sądów dyscyplinarnych w orzeczenia-sadowe-v2; KAS na t.j. 2026/1492 (poprawki art. 63, 77, 82-83 UKAS); DR-02: Prawo przedsiębiorców, zastaw rejestrowy (2025/1792 i 2026/1073 jeszcze nie obowiązują)
+  6.97 (2026-11-14): DR-02: konwersja modułów KC i KRO na wskazania z kwalifikatorem (W-1; poprawki: art. 442¹, 88 § 2, 388 § 2, 554, 1007 § 2–4)
   6.96 (2026-11-14): METODYKA W-1: 26 modułów PrRestr (t.j. 2026/533) i PrUp (t.j. 2026/913) — wartości i terminy zgodne z t.j.; nagłówki z kontraktem wskazań i znacznikami [OD] (2026/1206, 2026/176, 2026/1466)
   6.95 (2026-11-14): Moduł wrogiego przejęcia: skrót OfPubl (monitoring ustawy o ofercie publicznej); rejestr: W-4 dla 2026/1074 i 2026/1206
   6.94 (2026-11-14): METODYKA W-1…W-7: mod-ustawa-KRS-rejestr-sadowy (t.j. 2025/869 + 7 nowelizacji, pułapka MSiG od 2025-11-29) i mod-KSH-wrogie-przejecie (KSH + uoof t.j. 2025/592, art. 80a–80b); DR-12: OIRP Katowice i Rzeszów; rejestr zmian w czasie
@@ -23,7 +24,6 @@ changelog: |
   6.87 (2026-11-12): HIERARCHIA-ZRODEL i PRAWO-HARDGATE-ORZECZENIA: orzeczenia odczytane na portalu samego sądu dyscyplinarnego (wsd.adwokatura.pl, wsd.kirp.pl, nil.org.pl/orzeczenia) = RZĄD 2A, jak orzeczenia sądów z ich portali.
   6.86 (2026-11-11, ELI 2026-11-11): ROUTING-MAP: związki metropolitalne (pomorski 2026/912, śląski 2025/186) → dr-08 mod-zwiazki-metropolitalne; zmiany po t.j. z ELI: deweloperska 2026/1077, prawo autorskie 2026/1477, CIT, USG, USP, ogłaszanie aktów, czystość, rewitalizacja, MPZP, UGN, wdrożeniowa (2026/912); słowa kluczowe DR-08: związek metropolitalny.
   6.85 (2026-11-11): konektory MCP — strona ochrony antybotowej kończy się LAW_SOURCE_VERIFICATION_REQUIRED:<host> (okno weryfikacji aplikacji, nie brak danych); sesja z okna dokładana do zapytań (wspolne/sesja-przegladarki.mjs).
-  6.84 (2026-11-11): ROUTING-MAP, ISAP-METRYKI-AKTOW, leksykon ORKA-BAS, kotwice opłat: nowe t.j. UFP 2026/1447, polityka rozwoju 2026/1366, POŚ 2026/1453, Prawo geodezyjne 2026/1389, SUS 2026/1474 (powołane artykuły porównane w ELI).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

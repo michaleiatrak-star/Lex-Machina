@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # Prawo przedsiębiorców — rdzeń operacyjny F-108/51
 
+**Akt:** PrPrzeds (Prawo przedsiębiorców) — t.j. Dz.U. 2026 poz. 1484 (stan 2026-10-28; obejmuje 2025/1795, 2025/1826 i 2026/507 — art. 5 ust. 2, art. 17 ust. 1 w brzmieniu od 2026-10-14; po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## 1. Źródło i stan temporalny
 
 **Akt:** ustawa z 6 marca 2018 r. — Prawo przedsiębiorców.
@@ -48,10 +51,12 @@ do każdego artykułu.
   działalności gospodarczej na równych prawach;
 - art. 3 definiuje działalność gospodarczą jako działalność zorganizowaną,
   zarobkową, wykonywaną we własnym imieniu i w sposób ciągły;
-- art. 5 reguluje działalność osoby fizycznej niewpisywaną do CEIDG przy
-  spełnieniu ustawowych warunków. Od 1.01.2026 próg jest liczony kwartalnie
-  jako 225% minimalnego wynagrodzenia i działa wraz z pozostałymi warunkami
-  ustawowymi, w tym historią niewykonywania działalności.
+- art. 5 ust. 1 — działalność osoby fizycznej nie jest działalnością
+  gospodarczą, gdy przychód należny nie przekracza w żadnym kwartale 225%
+  minimalnego wynagrodzenia **i** osoba nie wykonywała działalności
+  gospodarczej w ostatnich 60 miesiącach; ust. 2 — dobrowolny wniosek o wpis
+  do CEIDG (działalność gospodarcza od dnia we wniosku); ust. 3 — przekroczenie
+  progu w kwartale → działalność gospodarcza od dnia przekroczenia.
 
 **Pułapka:** nie kwalifikuj działalności nierejestrowanej wyłącznie po kwocie
 przychodu. Odczytaj cały art. 5 wraz z wyłączeniami i regułą wejścia w
@@ -59,14 +64,17 @@ działalność gospodarczą po przekroczeniu progu.
 
 ## 4. Podejmowanie i wykonywanie działalności — Rozdział 2
 
-Art. 17 wiąże możliwość podjęcia działalności z wpisem do właściwego rejestru
-w przypadkach wymaganych ustawą. Po zmianie Dz.U. 2026 poz. 507 terminologia
-CEIDG została dostosowana do nowego modelu wniosku.
+Art. 17 ust. 1 — działalność można podjąć w dniu złożenia wniosku o wpis do
+CEIDG z informacją o podjęciu działalności albo po wpisie do rejestru
+przedsiębiorców KRS (brzmienie od 2026-10-14, 2026/507); ust. 3 — spółka
+kapitałowa w organizacji może działać przed wpisem.
 
-Art. 18 przewiduje ulgę na start dla przedsiębiorcy będącego osobą fizyczną
-spełniającego ustawowe warunki. Nie podawaj okresu ani skutków składkowych
-bez równoległego odczytu aktualnego art. 18 i ustawy o systemie ubezpieczeń
-społecznych — skutki ZUS należą do DR-04.
+Art. 18 ust. 1 — ulga na start: osoba fizyczna podejmująca działalność po raz
+pierwszy albo po 60 miesiącach od zawieszenia/zakończenia, niewykonująca jej na
+rzecz byłego pracodawcy (praca w bieżącym lub poprzednim roku) — brak
+obowiązkowych ubezpieczeń społecznych przez **6 miesięcy**; ust. 2 — rezygnacja
+przez zgłoszenie do ubezpieczeń; ust. 3 — wyłączenie dla warunków art. 5a
+ustawy o s.u.s. Skutki składkowe → DR-04.
 
 ## 5. Załatwianie spraw — Rozdział 3
 
@@ -95,6 +103,12 @@ Przy kontroli zawsze ustal:
 5. ewentualny zbieg kontroli;
 6. limity czasu i wyjątki;
 7. środek sprzeciwu/zażalenia przewidziany w aktualnym tekście.
+
+Kwalifikatory: art. 48 ust. 1–2 — zawiadomienie o zamiarze kontroli; wszczęcie
+nie wcześniej niż po 7 dniach i nie później niż przed upływem 30 dni od
+doręczenia (po 30 dniach — ponowne zawiadomienie). Art. 55 ust. 1 — łączny czas
+kontroli jednego organu w roku: mikro 6, mały 18, średni 24, pozostali 48 dni
+roboczych; wyjątki — art. 55 ust. 2.
 
 Rozdział 5 jest reżimem ogólnym. Ustawa szczególna może przewidywać wyjątki,
 dlatego kontrola podatkowa/KAS/PIP wymaga uruchomienia właściwego DR.

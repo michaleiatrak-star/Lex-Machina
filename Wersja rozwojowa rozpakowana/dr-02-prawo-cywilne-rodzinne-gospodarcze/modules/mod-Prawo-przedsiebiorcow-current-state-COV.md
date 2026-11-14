@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # Prawo przedsiębiorców — current-state COV
 
+**Akt:** PrPrzeds (Prawo przedsiębiorców) — t.j. Dz.U. 2026 poz. 1484 (stan 2026-10-28; obejmuje 2025/1795, 2025/1826 i 2026/507 — art. 5 ust. 2, art. 17 ust. 1 w brzmieniu od 2026-10-14; po t.j. bez zmian, ELI 2026-11-14).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1).
+
 ## 1. Źródło urzędowe
 
 Ustawa z 6 marca 2018 r. — Prawo przedsiębiorców.

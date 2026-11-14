@@ -1,5 +1,6 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99.17 (2026-11-14): Bazy urzędów i sądów dyscyplinarnych w orzeczenia-sadowe-v2; KAS na t.j. 2026/1492 (poprawki art. 63, 77, 82-83 UKAS); DR-02: Prawo przedsiębiorców, zastaw rejestrowy (2025/1792 i 2026/1073 jeszcze nie obowiązują)
 - 3.99.16 (2026-11-13): mod-VAT-WIS: opłata — art. 42e (art. 42d uchylony); mod-podatki-sektorowe: reglamentacja → mod-wekslowe-kontrola-przedsiebiorcy-koncesje (ELI 2026-11-13)
 - 3.99.15 (2026-11-13): t.j. (ELI 2026-11-13): KAS Dz.U. 2026 poz. 1492 (zastępuje 2025/1131; obejmuje 2026/1281), Prawo przedsiębiorców Dz.U. 2026 poz. 1484 — MAPA-AKTOW, SKILL, mod-KAS, mod-limit-platnosci-gotowkowych
 - 3.99.14 (2026-11-11, ELI 2026-11-11): MAPA-AKTOW: CIT — zmiany po t.j. 2026/554 wg ELI: 2026/779, 912 (art. 17 ust. 1 pkt 4g), 846, 1287, 1371; ⏳ 2026/1123 od 1.01.2028.
