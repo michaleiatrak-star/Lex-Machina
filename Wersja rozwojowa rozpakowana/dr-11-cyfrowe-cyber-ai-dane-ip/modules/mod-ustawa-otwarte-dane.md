@@ -1,5 +1,8 @@
 # Modul - Otwarte dane i ponowne wykorzystywanie informacji sektora publicznego
 
+**Akt:** UOD (ustawa o otwartych danych i ponownym wykorzystywaniu informacji sektora publicznego) — t.j. Dz.U. 2023 poz. 1524.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Ustawa z 11.08.2021 r. o otwartych danych i ponownym wykorzystywaniu informacji sektora publicznego**
 - Dz.U. 2023 poz. 1524 t.j. (tekst jednolity aktu z Dz.U. 2021 poz. 1641)

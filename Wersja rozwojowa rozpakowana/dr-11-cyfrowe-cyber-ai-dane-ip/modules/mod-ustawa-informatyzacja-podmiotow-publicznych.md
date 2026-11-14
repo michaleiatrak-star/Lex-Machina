@@ -1,5 +1,10 @@
 # Moduł — Informatyzacja podmiotów publicznych i KSeF
 
+**Akt:** UDE (ustawa o doręczeniach elektronicznych) — t.j. Dz.U. 2026 poz. 3 (zm. po t.j.: 2026/507 od 2026-10-14 — art. 152).
+**Akt:** UInf (ustawa o informatyzacji działalności podmiotów realizujących zadania publiczne) — t.j. Dz.U. 2026 poz. 1241.
+**Akt:** UDC (ustawa o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych) — t.j. Dz.U. 2023 poz. 1440.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Ustawa o informatyzacji działalności podmiotów realizujących zadania publiczne — **Dz.U. 2025 poz. 1703 (obecny t.j. Dz.U. 2026 poz. 1241) t.j. ze zm.**; obwieszczenie z 7.11.2025, stan t.j. 28.10.2025. ✅ RZĄD 1 ELI, VER 2026-08-28.
 - **KSeF nie jest odrębną ustawą.** Reżim Krajowego Systemu e-Faktur jest częścią ustawy o VAT. System utworzyła ustawa z 29.10.2021 r. o zmianie ustawy o VAT oraz niektórych innych ustaw — **Dz.U. 2021 poz. 2076**, art. 4. ⛔ Poprzedni wpis „ustawa o KSeF — Dz.U. 2021 poz. 1237” był błędny i został usunięty.

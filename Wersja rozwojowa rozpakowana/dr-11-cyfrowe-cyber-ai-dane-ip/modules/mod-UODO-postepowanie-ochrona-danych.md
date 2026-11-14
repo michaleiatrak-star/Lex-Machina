@@ -1,5 +1,12 @@
 # Moduł [BA] — Postępowanie przed UODO i ochrona danych osobowych
 
+**Akt:** UODO (ustawa o ochronie danych osobowych) — t.j. Dz.U. 2019 poz. 1781 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 104; 2026/548 od 2026-07-23 — art. 34; 2026/1003 od 2026-10-28 — art. 59, 59a).
+**Akt:** UInf (ustawa o informatyzacji działalności podmiotów realizujących zadania publiczne) — t.j. Dz.U. 2026 poz. 1241.
+**Akt:** PrPras (Prawo prasowe) — t.j. Dz.U. 2018 poz. 1914.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** PPSA (Prawo o postępowaniu przed sądami administracyjnymi) — t.j. Dz.U. 2026 poz. 143 (zm. po t.j.: 2026/846 od 2026-06-26 — art. 53, 264).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Hasła spraw:** skarga do UODO, Prezes UODO, kara administracyjna UODO, wyciek danych, naruszenie ochrony danych osobowych, zgłoszenie naruszenia w 72 godziny
 
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.

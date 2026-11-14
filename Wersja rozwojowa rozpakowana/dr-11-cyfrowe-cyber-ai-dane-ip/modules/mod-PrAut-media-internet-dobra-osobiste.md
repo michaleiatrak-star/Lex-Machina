@@ -1,5 +1,11 @@
 # mod-CZ-ip-media-internet-dobra-osobiste.md — IP, media, Internet, dobra osobiste i platformy
 
+**Akt:** USUDE (ustawa o świadczeniu usług drogą elektroniczną) — t.j. Dz.U. 2024 poz. 1513 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 1, 2, 2a, 3, 4, 7, 9, 11, 12, 13, 14, 15, 15a, 16, 17, 18, 20, 21, 22, 22zj).
+**Akt:** PrAut (ustawa o prawie autorskim i prawach pokrewnych) — t.j. Dz.U. 2025 poz. 24 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 22; 2026/1477 od 2026-11-10 — art. 5, 35, 127).
+**Akt:** PWP (Prawo własności przemysłowej) — t.j. Dz.U. 2023 poz. 1170 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 296).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Hasła spraw:** wizerunek, publikacja wizerunku, wizerunek dziecka, zdjęcia w internecie, media społecznościowe, Facebook, dobra osobiste w internecie, hejt
 
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.

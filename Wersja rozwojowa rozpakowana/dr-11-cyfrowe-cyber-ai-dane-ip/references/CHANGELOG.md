@@ -1,5 +1,6 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.37 (2026-11-14): DR-11: wskazania z kwalifikatorem (UODO, KSC 2026/20, PKE 2024/1221, PrAut, PWP, UZNK 2026/85); MiCA — brak krajowej ustawy wykonawczej w ELI, organ oznaczony jako niezweryfikowany
 - 3.36 (2026-11-13): mod-ustawa-uslugi-elektroniczne: zakaz niezamówionej informacji handlowej — art. 398 Prawa komunikacji elektronicznej (Dz.U. 2024 poz. 1221); art. 10 UŚUDE uchylony (ELI 2026-11-13)
 - 3.35 (2026-11-11, ELI 2026-11-11): MAPA-AKTOW: prawo autorskie — zmiana po t.j. 2026/1477 (art. 35¹ ust. 7 wynagrodzenie za użyczanie, nowy art. 127², od 10.11.2026); moduły bez zmian (przepisy nieomawiane).
 - 3.34 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)

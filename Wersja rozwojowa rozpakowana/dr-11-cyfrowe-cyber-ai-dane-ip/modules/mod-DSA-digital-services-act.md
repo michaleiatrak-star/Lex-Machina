@@ -1,5 +1,9 @@
 # Modul - DSA - Digital Services Act (Akt o Uslugach Cyfrowych)
 
+**Akt:** USUDE (ustawa o świadczeniu usług drogą elektroniczną) — t.j. Dz.U. 2024 poz. 1513 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 1, 2, 2a, 3, 4, 7, 9, 11, 12, 13, 14, 15, 15a, 16, 17, 18, 20, 21, 22, 22zj).
+**Akt:** URTV (ustawa o radiofonii i telewizji) — t.j. Dz.U. 2022 poz. 1722 (zm. po t.j.: 2024/96 od 2024-01-26 — zakres: tekst nowelizacji w ELI; 2024/1222 od 2024-11-10 — art. 4, 26, 37, 38a, 38b, 40; 2026/1003 od 2026-10-28 — art. 6; 2026/1296 od 2026-11-06 — art. 10, 10a, 47t).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Hasła spraw:** platforma internetowa, usuwanie nielegalnych treści, zgłoszenie treści, moderacja treści, hosting, portal społecznościowy, marketplace, blokada konta
 
 ## Akt prawny

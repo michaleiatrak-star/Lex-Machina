@@ -1,5 +1,13 @@
 # Modul - Swiadczenie uslug droga elektroniczna
 
+**Akt:** UODO (ustawa o ochronie danych osobowych) — t.j. Dz.U. 2019 poz. 1781 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 104; 2026/548 od 2026-07-23 — art. 34; 2026/1003 od 2026-10-28 — art. 59, 59a).
+**Akt:** PKE (Prawo komunikacji elektronicznej) — akt pierwotny, bez t.j.: Dz.U. 2024 poz. 1221.
+**Akt:** USUDE (ustawa o świadczeniu usług drogą elektroniczną) — t.j. Dz.U. 2024 poz. 1513.
+**Akt:** PrAut (ustawa o prawie autorskim i prawach pokrewnych) — t.j. Dz.U. 2025 poz. 24 (zm. po t.j.: 2026/1477 od 2026-11-10 — art. 5, 35, 127).
+**Akt:** URTV (ustawa o radiofonii i telewizji) — t.j. Dz.U. 2022 poz. 1722 (zm. po t.j.: 2024/96 od 2024-01-26 — zakres: tekst nowelizacji w ELI; 2024/1222 od 2024-11-10 — art. 4, 26, 37, 38a, 38b, 40; 2026/1003 od 2026-10-28 — art. 6).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Hasła spraw:** spam, newsletter, informacja handlowa bez zgody, marketing elektroniczny, regulamin sklepu internetowego, usługa drogą elektroniczną
 
 ## Akt prawny

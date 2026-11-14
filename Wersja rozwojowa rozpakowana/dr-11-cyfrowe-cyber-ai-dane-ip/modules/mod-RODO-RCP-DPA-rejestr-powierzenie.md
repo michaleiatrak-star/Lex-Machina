@@ -1,5 +1,8 @@
 # Moduł [BD] — RCP (art. 30 RODO) + umowa powierzenia DPA (art. 28 RODO)
 
+**Akt:** UODO (ustawa o ochronie danych osobowych) — t.j. Dz.U. 2019 poz. 1781 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 104; 2026/548 od 2026-07-23 — art. 34; 2026/1003 od 2026-10-28 — art. 59, 59a).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Hasła spraw:** rejestr czynności przetwarzania, umowa powierzenia przetwarzania, podmiot przetwarzający, procesor, dostawca chmury, inspektor ochrony danych, IOD
 
 > **Dodano:** 2026-07-05 (AUDYT-2026-07-05a) — wypełnienie luki operacyjnej RODO.

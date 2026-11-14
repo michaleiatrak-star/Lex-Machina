@@ -1,5 +1,8 @@
 # Modul - DMA - Digital Markets Act (Akt o Rynkach Cyfrowych)
 
+**Akt:** UOKiK (ustawa o ochronie konkurencji i konsumentów — Prezes UOKiK jako krajowy organ ochrony konkurencji; DMA stosuje się bezpośrednio) — t.j. Dz.U. 2025 poz. 1714 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 29, 31).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Rozporządzenie (UE) 2022/1925 z 14.09.2022 r. o kontestowalnych i uczciwych rynkach w sektorze cyfrowym (DMA)**
 - Dz.Urz. UE L 265/1 z 12.10.2022

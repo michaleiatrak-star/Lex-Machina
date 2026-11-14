@@ -1,5 +1,10 @@
 # mod-PrAut-wlasnosc-intelektualna-IP
 
+**Akt:** PrAut (ustawa o prawie autorskim i prawach pokrewnych) — t.j. Dz.U. 2025 poz. 24 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 22; 2026/1477 od 2026-11-10 — art. 5, 35, 127).
+**Akt:** PWP (Prawo własności przemysłowej) — t.j. Dz.U. 2023 poz. 1170 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 296).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Hasła spraw:** naruszenie praw autorskich, skopiowanie zdjęć, plagiat, licencja, utwór, autorskie prawa majątkowe, kopiowanie treści
 
 **Stan operacyjny:** 2026-08-28  

@@ -1,5 +1,15 @@
 # Moduł [AB] — Prawo AI / AI Act
 
+**Akt:** UODO (ustawa o ochronie danych osobowych) — t.j. Dz.U. 2019 poz. 1781 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 104; 2026/548 od 2026-07-23 — art. 34; 2026/1003 od 2026-10-28 — art. 59, 59a).
+**Akt:** KSC (ustawa o krajowym systemie cyberbezpieczeństwa) — t.j. Dz.U. 2026 poz. 20 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 1, 2, 2a, 3, 3a, 4, 5, 5a, 6, 7, 7a, 7b, 7c, 7d, 7e, 7f, 7g, 7i, 7j, 7k; 2026/815 od 2026-07-04 — art. 15, 26, 46; 2026/1003 od 2026-10-28 — art. 26; 2026/1206 [OD 2027-01-11: 2026/1206] — zakres: tekst nowelizacji w ELI).
+**Akt:** PrAut (ustawa o prawie autorskim i prawach pokrewnych) — t.j. Dz.U. 2025 poz. 24 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 22; 2026/1477 od 2026-11-10 — art. 5, 35, 127).
+**Akt:** PWP (Prawo własności przemysłowej) — t.j. Dz.U. 2023 poz. 1170 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 296).
+**Akt:** URTV (ustawa o radiofonii i telewizji) — t.j. Dz.U. 2022 poz. 1722 (zm. po t.j.: 2024/96 od 2024-01-26 — zakres: tekst nowelizacji w ELI; 2024/1222 od 2024-11-10 — art. 4, 26, 37, 38a, 38b, 40; 2026/1003 od 2026-10-28 — art. 6; 2026/1296 od 2026-11-06 — art. 10, 10a, 47t).
+**Akt:** KC (Kodeks cywilny) — t.j. Dz.U. 2026 poz. 795.
+**Akt:** KPA (Kodeks postępowania administracyjnego) — t.j. Dz.U. 2025 poz. 1691.
+**Akt:** KP (Kodeks pracy) — t.j. Dz.U. 2026 poz. 1245.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > **Plik:** `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-AI-Act-framework.md`
 > **Wersja:** 1.2 (2026-09-27, FAZA 3E — naprawa F-205)
 > **Status:** AKTUALIZOWANY — luki U-14 domknięte: art. 25, art. 6 ust. 3, zał. III (pełna, poprawiona lista), art. 13 ust. 3

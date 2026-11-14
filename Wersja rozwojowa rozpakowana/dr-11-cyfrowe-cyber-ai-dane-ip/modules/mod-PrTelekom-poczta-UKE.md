@@ -1,5 +1,11 @@
 # mod-DW — Komunikacja elektroniczna, telekomunikacja, poczta i UKE
 
+**Akt:** UODO (ustawa o ochronie danych osobowych) — t.j. Dz.U. 2019 poz. 1781 (zm. po t.j.: 2026/548 od 2026-07-23 — art. 34; 2026/1003 od 2026-10-28 — art. 59, 59a).
+**Akt:** PKE (Prawo komunikacji elektronicznej) — akt pierwotny, bez t.j.: Dz.U. 2024 poz. 1221.
+**Akt:** PrPoczt (Prawo pocztowe) — t.j. Dz.U. 2026 poz. 558.
+**Akt:** KP (Kodeks pracy) — t.j. Dz.U. 2026 poz. 1245.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Status modułu
 
 Moduł prawa polskiego klasy eksperckiej. Stosować analogicznie do modułów prawa pracy i prawa karnego: intake → akty prawne → procedura → dowody → strategia → ryzyka → orzecznictwo → checklisty → workflow.

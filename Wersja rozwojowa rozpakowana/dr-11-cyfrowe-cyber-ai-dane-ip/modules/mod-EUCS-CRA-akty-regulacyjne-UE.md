@@ -1,5 +1,9 @@
 # Moduł — Nowe akty cyfrowe UE: CRA, EUCS, DA, DGA
 
+**Akt:** UODO (ustawa o ochronie danych osobowych) — t.j. Dz.U. 2019 poz. 1781 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 104; 2026/548 od 2026-07-23 — art. 34; 2026/1003 od 2026-10-28 — art. 59, 59a).
+**Akt:** KSC (ustawa o krajowym systemie cyberbezpieczeństwa) — t.j. Dz.U. 2026 poz. 20 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 1, 2, 2a, 3, 3a, 4, 5, 5a, 6, 7, 7a, 7b, 7c, 7d, 7e, 7f, 7g, 7i, 7j, 7k; 2026/815 od 2026-07-04 — art. 15, 26, 46; 2026/1003 od 2026-10-28 — art. 26; 2026/1206 [OD 2027-01-11: 2026/1206] — zakres: tekst nowelizacji w ELI).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Cyber Resilience Act (CRA) — Rozp. (UE) 2024/2847
   Dz.Urz. UE L 2024/2847, wejście w życie: 11.12.2024

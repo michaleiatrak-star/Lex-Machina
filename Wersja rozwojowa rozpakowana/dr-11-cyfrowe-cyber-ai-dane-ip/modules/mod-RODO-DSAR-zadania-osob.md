@@ -1,5 +1,9 @@
 # Moduł [BC] — DSAR / Żądania podmiotów danych (art. 12, 15–22 RODO)
 
+**Akt:** UODO (ustawa o ochronie danych osobowych) — t.j. Dz.U. 2019 poz. 1781 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 104; 2026/548 od 2026-07-23 — art. 34; 2026/1003 od 2026-10-28 — art. 59, 59a).
+**Akt:** PrPras (Prawo prasowe) — t.j. Dz.U. 2018 poz. 1914.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Hasła spraw:** żądanie dostępu do danych, kopia danych osobowych, usunięcie danych osobowych, nie usuwa danych, prawo do bycia zapomnianym, sprostowanie danych osobowych, sprzeciw wobec przetwarzania, przenoszenie danych, ograniczenie przetwarzania, DSAR
 
 > **Dodano:** 2026-07-05 (AUDYT-2026-07-05a) — wypełnienie luki operacyjnej RODO.

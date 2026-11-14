@@ -1,5 +1,9 @@
 # Moduł — Prawo własności przemysłowej (patenty, znaki towarowe, wzory)
 
+**Akt:** PWP (Prawo własności przemysłowej) — t.j. Dz.U. 2023 poz. 1170 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 296).
+**Akt:** UZNK (ustawa o zwalczaniu nieuczciwej konkurencji) — t.j. Dz.U. 2026 poz. 85.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny / źródło
 - Ustawa Prawo własności przemysłowej — Dz.U. 2023 poz. 1170 (t.j.)
   ✅ [VER: isap.sejm.gov.pl, 2026-05-31]

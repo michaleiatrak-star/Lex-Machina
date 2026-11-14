@@ -1,5 +1,12 @@
 # RODO i Ochrona Danych Osobowych — Szczegółowy Framework
 
+**Akt:** UODO (ustawa o ochronie danych osobowych) — t.j. Dz.U. 2019 poz. 1781 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 104; 2026/548 od 2026-07-23 — art. 34; 2026/1003 od 2026-10-28 — art. 59, 59a).
+**Akt:** UInf (ustawa o informatyzacji działalności podmiotów realizujących zadania publiczne) — t.j. Dz.U. 2026 poz. 1241.
+**Akt:** PrAut (ustawa o prawie autorskim i prawach pokrewnych) — t.j. Dz.U. 2025 poz. 24 (zm. po t.j.: 2026/1296 od 2026-11-06 — art. 22; 2026/1477 od 2026-11-10 — art. 5, 35, 127).
+**Akt:** PrPras (Prawo prasowe) — t.j. Dz.U. 2018 poz. 1914.
+**Akt:** KP (Kodeks pracy) — t.j. Dz.U. 2026 poz. 1245.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## ZASADY ABSOLUTNE — SPRAWDŹ JAKO PIERWSZE
 ```
 1. Organ nadzorczy w Polsce = Prezes UODO (nie sąd w pierwszym kroku)

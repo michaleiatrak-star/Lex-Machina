@@ -1,11 +1,14 @@
 # Modul - MiCA - Kryptoaktywa (Rozp. UE 2023/1114)
 
+**Akt:** AML (ustawa o przeciwdziałaniu praniu pieniędzy oraz finansowaniu terroryzmu — rejestr działalności w zakresie walut wirtualnych; MiCA stosuje się bezpośrednio) — t.j. Dz.U. 2025 poz. 644 (zm. po t.j.: 2025/1669 od 2026-06-30 — art. 72; 2026/875 [OD 2027-01-01: 2026/875] — art. 129f, 129h; 2026/1206 [OD 2027-01-11: 2026/1206] — art. 2, 89).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2023/1114 z 31.05.2023 r. w sprawie rynkow kryptoaktywow (MiCA)**
 - Opublikowane: Dz.Urz. UE L 2023/1114 (09.06.2023)
   VER: eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:32023R1114 [2026-05-31]
 - Stosowanie: w pelni od **30.12.2024** (ART, EMT od 30.06.2024)
-- Organ nadzoru: KNF (Komisja Nadzoru Finansowego)
+- Organ nadzoru: ⚠️ [NIEWERYFIKOWANE] — w ELI (wyszukiwanie tytułów „kryptoaktyw”, 2026-11-14) brak krajowej ustawy wyznaczającej organ właściwy z art. 93 MiCA; są tylko rozporządzenia MF 2026/355–357 (DAC8). Nie przypisuj KNF kompetencji bez podstawy ustawowej.
 
 **Weryfikacja eur-lex i KNF przed kazdy cytowaniem.**
 

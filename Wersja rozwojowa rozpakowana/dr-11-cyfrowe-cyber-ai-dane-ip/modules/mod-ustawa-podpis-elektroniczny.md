@@ -1,5 +1,8 @@
 # Modul - Podpis elektroniczny i uslugi zaufania (eIDAS)
 
+**Akt:** UUZ (ustawa o usługach zaufania oraz identyfikacji elektronicznej) — t.j. Dz.U. 2024 poz. 1725 (zm. po t.j.: 2026/252 od 2026-04-03 — art. 4, 15, 20a, 21b, 21t, 21u, 30a, 39, 46).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## Akt prawny
 **Rozp. UE 910/2014 (eIDAS 1.0) - stosowane bezposrednio**
 - Stosowane od 01.07.2016 r.
