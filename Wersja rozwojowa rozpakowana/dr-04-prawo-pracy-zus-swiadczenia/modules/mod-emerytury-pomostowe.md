@@ -1,4 +1,8 @@
 # Emerytury pomostowe
+
+**Akt:** KP — t.j. Dz.U. 2026 poz. 1245 (stan 2026-08-27; zm. 2026/1046 od 2026-11-05 — art. 18³d, 94³, 94³ᵃ: mobbing i równe traktowanie, oba brzmienia w t.j. z odnośnikami).
+**Akt:** FUS (ustawa o emeryturach i rentach z FUS) — t.j. Dz.U. 2025 poz. 1749 (zm. 2025/718 i 2025/1159 od 2026-01-01 — m.in. art. 80, 94, 115–118a, 129–130, 138, 144; 2026/425 od 2026-04-14 — art. 50e; 2026/26 [OD 2027-01-01: 2026/26] — art. 5, 5a, 13, 14, 50c, 50d, 119, 126, 134, część przepisów od 2026-04-13).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
 v1.0.0 (utworzony 2026-08-18, F-29 pkt 4 — całkowity brak pokrycia tego tematu w DR-04)
 
 **Zweryfikowano 2026-08-18** (ZASADA 14): RZĄD 2/3 — lexlege.pl, dlajurysty.pl,

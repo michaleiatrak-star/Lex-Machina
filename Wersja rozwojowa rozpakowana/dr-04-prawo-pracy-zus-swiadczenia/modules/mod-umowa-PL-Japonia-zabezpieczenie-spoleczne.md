@@ -1,5 +1,10 @@
 # Umowa RP–Japonia o zabezpieczeniu społecznym (Tokio, 15.04.2026) v1.0.0 (dodany 2026-10-20)
 
+**Akt:** SUS (ustawa o systemie ubezpieczeń społecznych) — t.j. Dz.U. 2026 poz. 1474 (stan 2026-10-04; zm. 2025/1413 od 2026-11-01 — art. 45, 50; 2026/507 [OD 2028-11-01: 2026/507] — art. 36b, 43).
+**Akt:** FUS (ustawa o emeryturach i rentach z FUS) — t.j. Dz.U. 2025 poz. 1749 (zm. 2025/718 i 2025/1159 od 2026-01-01 — m.in. art. 80, 94, 115–118a, 129–130, 138, 144; 2026/425 od 2026-04-14 — art. 50e; 2026/26 [OD 2027-01-01: 2026/26] — art. 5, 5a, 13, 14, 50c, 50d, 119, 126, 134, część przepisów od 2026-04-13).
+**Akt:** UWyp (ustawa o ubezpieczeniu społecznym z tytułu wypadków przy pracy i chorób zawodowych) — t.j. Dz.U. 2025 poz. 1644 (zm. 2025/1083 od 2026-01-01 — art. 3, 5, 6; 2026/26 [OD 2027-01-01: 2026/26] — art. 2, 15, 16).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 > ⛔ **UMOWA NIE OBOWIĄZUJE** (stan na 2026-10-20). Wejdzie w życie dopiero w dniu określonym
 > w jej art. 31 (pierwszy dzień trzeciego miesiąca po otrzymaniu późniejszej z not) i musi zostać
 > **ogłoszona w Dz.U.** Ustawa ratyfikacyjna to tylko zgoda Sejmu na ratyfikację — **nie** jest

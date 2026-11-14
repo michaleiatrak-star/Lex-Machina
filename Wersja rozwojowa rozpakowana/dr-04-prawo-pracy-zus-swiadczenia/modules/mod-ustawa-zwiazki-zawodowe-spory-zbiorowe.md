@@ -1,5 +1,10 @@
 # mod-ustawa-zwiazki-zawodowe-spory-zbiorowe
 
+**Akt:** KP — t.j. Dz.U. 2026 poz. 1245 (stan 2026-08-27; zm. 2026/1046 od 2026-11-05 — art. 18³d, 94³, 94³ᵃ: mobbing i równe traktowanie, oba brzmienia w t.j. z odnośnikami).
+**Akt:** UZZ (ustawa o związkach zawodowych) — t.j. Dz.U. 2026 poz. 549 (zm. 2026/1340 od 2026-10-30 — art. 32 ust. 9¹, art. 32¹).
+**Akt:** UUZP (ustawa o układach zbiorowych pracy i porozumieniach zbiorowych) — Dz.U. 2025 poz. 1661 (akt pierwotny, bez t.j.; w mocy od 2025-12-13).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ⚠️ **Nazwa pliku jest HISTORYCZNA i węższa niż rzeczywisty zakres** — ✅ ROZSTRZYGNIĘTE 2026-08-15 (F-28 pkt 4): moduł opisuje TRZY tematy, nie dwa sugerowane nazwą: (1) związki zawodowe, (2) UKŁADY ZBIOROWE PRACY (sekcja 3 — pominięte w nazwie, mimo że to jedna z dwóch ustaw źródłowych modułu), (3) spory zbiorowe. Rename pliku ŚWIADOMIE NIE wykonany — wymagałby synchronizacji 4 miejsc w 3 plikach (`SKILL.md`, `MAPA-AKTOW.md`, `prawo-polskie-v2/ROUTING-MAP.md` — 2 wiersze, oraz cross-odesłanie z `mod-ustawa-zwolnienia-grupowe.md`), z realnym ryzykiem rozerwania referencji, przy niskiej korzyści (moduł ma tylko 1 plik, łatwy do znalezienia przez treść). Zamiast tego — ten nagłówek jako trwałe wyjaśnienie zakresu.
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
@@ -41,7 +46,7 @@ Związki zawodowe (zakładanie, prawa, ochrona działaczy), zakładowe organizac
 
 ```
 □ Jaki problem: ochrona działacza ZZ / układ zbiorowy / spór zbiorowy / strajk?
-□ Czy ZOZ jest reprezentatywna (≥ 8% ogółu zatrudnionych — art. 24125d KP)?
+□ Czy ZOZ jest reprezentatywna — art. 25³ ust. 1 UZZ: co najmniej 8% zatrudnionych (gdy należy do ponadzakładowej organizacji reprezentatywnej w RDS) albo 15%; ust. 2 — przy braku takiej: organizacja największa (dział XI KP uchylony ustawą 2025/1661)?
 □ Czy doszło do zwolnienia działacza ZZ bez zgody zarządu ZOZ (art. 32 ustawy)?
 □ Czy pracodawca przeprowadził konsultację ZZ przy zwolnieniu?
 □ Czy spór dotyczy zbiorowych interesów pracowniczych (nie indywidualnych)?
@@ -133,7 +138,7 @@ Procedura:
 
 - [ ] Nowa ustawa Dz.U. 2025 poz. 1661 zastosowana (nie stare przepisy)?
 - [ ] Aktualny t.j. ustawy o ZZ (Dz.U. 2026 poz. 549) zweryfikowany? Zdarzenie od 30.10.2026 — art. 32 ust. 9¹ i art. 32¹ w brzmieniu po zm. Dz.U. 2026 poz. 1340?
-- [ ] Reprezentatywność ZOZ (≥ 8%) ustalona?
+- [ ] Reprezentatywność ZOZ (art. 25³ UZZ: 8% / 15% / największa) ustalona?
 - [ ] Ochrona działacza (zgoda zarządu ZOZ) sprawdzona?
 
 ---

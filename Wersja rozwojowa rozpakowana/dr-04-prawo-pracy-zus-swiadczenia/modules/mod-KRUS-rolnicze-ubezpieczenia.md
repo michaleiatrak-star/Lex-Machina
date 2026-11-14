@@ -1,5 +1,7 @@
 # mod-KRUS-rolnicze-ubezpieczenia
 
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** KRUS — Dz.U. 2025 poz. 1770 t.j. (obwieszczenie
 Marszałka Sejmu z 20.11.2025, publ. 12.12.2025; zastępuje t.j. 2025.197,

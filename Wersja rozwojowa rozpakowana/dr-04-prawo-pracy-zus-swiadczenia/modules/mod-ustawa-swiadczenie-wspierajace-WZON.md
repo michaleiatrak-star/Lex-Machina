@@ -1,5 +1,8 @@
 # mod-ustawa-swiadczenie-wspierajace-WZON
 
+**Akt:** SUS (ustawa o systemie ubezpieczeń społecznych) — t.j. Dz.U. 2026 poz. 1474 (stan 2026-10-04; zm. 2025/1413 od 2026-11-01 — art. 45, 50; 2026/507 [OD 2028-11-01: 2026/507] — art. 36b, 43).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o świadczeniu wspierającym — Dz.U. 2023 poz. 1429 | Ustawa o rehabilitacji — Dz.U. 2026 poz. 884 t.j. ze zm.
 **Data weryfikacji online:** 2026-06-05

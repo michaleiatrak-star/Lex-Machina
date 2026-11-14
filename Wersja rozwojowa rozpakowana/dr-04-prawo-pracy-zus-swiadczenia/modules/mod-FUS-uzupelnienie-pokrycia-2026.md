@@ -8,6 +8,9 @@ source_policy: "RZĄD 1 only"
 
 # Emerytury i renty z FUS — uzupełnienie pokrycia
 
+**Akt:** FUS (ustawa o emeryturach i rentach z FUS) — t.j. Dz.U. 2025 poz. 1749 (zm. 2025/718 i 2025/1159 od 2026-01-01 — m.in. art. 80, 94, 115–118a, 129–130, 138, 144; 2026/425 od 2026-04-14 — art. 50e; 2026/26 [OD 2027-01-01: 2026/26] — art. 5, 5a, 13, 14, 50c, 50d, 119, 126, 134, część przepisów od 2026-04-13).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## 1. Źródło
 
 Ustawa z 17.12.1998 r. o emeryturach i rentach z FUS.

@@ -1,4 +1,8 @@
 # mod-wypadek-przy-pracy-choroba-zawodowa.md
+
+**Akt:** KP — t.j. Dz.U. 2026 poz. 1245 (stan 2026-08-27; zm. 2026/1046 od 2026-11-05 — art. 18³d, 94³, 94³ᵃ: mobbing i równe traktowanie, oba brzmienia w t.j. z odnośnikami).
+**Akt:** UWyp (ustawa o ubezpieczeniu społecznym z tytułu wypadków przy pracy i chorób zawodowych) — t.j. Dz.U. 2025 poz. 1644 (zm. 2025/1083 od 2026-01-01 — art. 3, 5, 6; 2026/26 [OD 2027-01-01: 2026/26] — art. 2, 15, 16).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
 ## DR-04 · Prawo Pracy/ZUS · Wypadek przy pracy i choroba zawodowa — procedura
 
 > Wydzielony 2026-06-12 z mod-KP-prawo-pracy.md (ANEKS B).
@@ -46,7 +50,7 @@ są w jednym, bardziej szczegółowym miejscu:
 □ ⭐ Czy wypadek jest CIĘŻKI/ŚMIERTELNY/ZBIOROWY — jeśli TAK, sprawdź
   czy pracodawca ZAWIADOMIŁ okręgowego inspektora PRACY i PROKURATORA
   (art. 234 §2 KP, patrz sekcja "ZAWIADOMIENIE PIP I PROKURATORA" niżej)
-□ Czy sporządzono protokół powypadkowy (art. 234 §1 KP — 14 dni)?
+□ Czy sporządzono protokół powypadkowy (obowiązek ustalenia okoliczności — art. 234 §1 KP; termin 14 dni wynika z rozporządzenia o ustalaniu okoliczności i przyczyn wypadków, nie z KP ⚠️ [NIEWERYFIKOWANE])?
 □ Czy pracownik podpisał/zakwestionował protokół?
   → Zakwestionowanie: złożyć uwagi na piśmie, wnioskować o uzupełnienie
 □ Czy ZUS wydał decyzję o uznaniu/odmowie uznania wypadku?
@@ -75,7 +79,7 @@ ROSZCZENIA UZUPEŁNIAJĄCE Z KC (gdy wina pracodawcy):
 ### Terminy krytyczne
 ```
 Zgłoszenie wypadku przez pracownika pracodawcy: NIEZWŁOCZNIE (art. 234 §2 KP)
-Protokół powypadkowy: max 14 dni od zawiadomienia (art. 234 §1 KP — weryfikuj)
+Protokół powypadkowy: 14 dni od zawiadomienia — rozporządzenie o ustalaniu okoliczności i przyczyn wypadków przy pracy (art. 234 §1 KP nie zawiera terminu) ⚠️ [NIEWERYFIKOWANE]
 Zatwierdzenie protokołu przez pracodawcę: niezwłocznie po sporządzeniu
 Wniosek o jednorazowe odszkodowanie do ZUS: po zakończeniu leczenia/rehabilitacji
 Przedawnienie roszczeń z KC (wypadek): 3 lata od dnia, gdy poszkodowany dowiedział

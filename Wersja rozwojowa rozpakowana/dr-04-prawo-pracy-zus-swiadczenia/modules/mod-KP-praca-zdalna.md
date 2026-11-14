@@ -1,4 +1,8 @@
 # mod-KP-praca-zdalna.md
+
+**Akt:** KP — t.j. Dz.U. 2026 poz. 1245 (stan 2026-08-27; zm. 2026/1046 od 2026-11-05 — art. 18³d, 94³, 94³ᵃ: mobbing i równe traktowanie, oba brzmienia w t.j. z odnośnikami).
+**Akt:** UWyp (ustawa o ubezpieczeniu społecznym z tytułu wypadków przy pracy i chorób zawodowych) — t.j. Dz.U. 2025 poz. 1644 (zm. 2025/1083 od 2026-01-01 — art. 3, 5, 6; 2026/26 [OD 2027-01-01: 2026/26] — art. 2, 15, 16).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
 ## DR-04 · Prawo Pracy · Praca zdalna (art. 67⁵-67²⁴ KP)
 
 > Wydzielony 2026-06-12 z mod-KP-prawo-pracy.md (ANEKS C).

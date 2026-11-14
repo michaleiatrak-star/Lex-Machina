@@ -1,5 +1,8 @@
 # mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK
 
+**Akt:** UOKiK — t.j. Dz.U. 2025 poz. 1714 (zm. 2026/1296 od 2026-11-06 — art. 29, 31).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o ochronie konkurencji i konsumentów (UOKIK) — Dz.U. 2025 poz. 1714 t.j. ze zm. | Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym — weryfikuj t.j. w ELI (RZĄD 1)
 **Data weryfikacji online:** 2026-06-05

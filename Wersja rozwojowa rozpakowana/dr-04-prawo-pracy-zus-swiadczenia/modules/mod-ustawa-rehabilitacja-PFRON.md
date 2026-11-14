@@ -1,5 +1,8 @@
 # mod-BK-niepelnosprawnosc-pfron-swiadczenie-wspierajace — NIEPEŁNOSPRAWNOŚĆ — PZON/WZON/PFRON/świadczenie wspierające
 
+**Akt:** URehab (ustawa o rehabilitacji zawodowej i społecznej oraz zatrudnianiu osób niepełnosprawnych) — t.j. Dz.U. 2026 poz. 884 (zm. 2026/26 [OD 2027-01-01: 2026/26] — art. 5; 2026/1102 [OD 2029-01-01: 2026/1102] — art. 47a–47b).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
 Status: moduł prawa polskiego klasy wzorcowej, uzupełniony do standardu prawa pracy i prawa karnego.
@@ -195,7 +198,7 @@ Stosuj bezwzględnie `shared/DISABILITY-FUNCTIONAL-ASSESSMENT.md`.
 ## ANEKS — ŚWIADCZENIE UZUPEŁNIAJĄCE (500+ dla niepełnosprawnych)
 
 **Akt:** Ustawa z 31.07.2019 r. o świadczeniu uzupełniającym dla osób niezdolnych
-do samodzielnej egzystencji — Dz.U. 2026 poz. 723 t.j.
+do samodzielnej egzystencji — Dz.U. 2026 poz. 723 t.j. (zm. 2026/26 [OD 2027-01-01: 2026/26] — art. 7).
 > ⚠️ KOREKTA 2026-09-01: wcześniej wskazywano tu Dz.U. 2026 poz. 884, który jest
 > tekstem jednolitym USTAWY REHABILITACYJNEJ (PFRON), a nie tej ustawy. ✅ VER 2026-09-01 RZĄD 1 (ELI DU/2026/723: obwieszczenie 27.05.2026, ogł. 2.06.2026, obowiązujący; rejestr t.j. aktu bazowego DU/2019/1622)
 **⚠️ Kwoty zmieniane rokrocznie — ZAWSZE weryfikuj przed cytowaniem:**

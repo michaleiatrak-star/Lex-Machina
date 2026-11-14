@@ -1,5 +1,8 @@
 # Moduł [AY] — Pomoc społeczna, świadczenia i sprawy lokalowe publiczne
 
+**Akt:** UPS (ustawa o pomocy społecznej) — t.j. Dz.U. 2026 poz. 639 (zm. 2026/974 od 2026-08-05 — art. 1, 50–50b; 2026/986 od 2026-08-07 — art. 16b, 111a–112b).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.

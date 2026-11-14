@@ -1,5 +1,9 @@
 # mod-ustawa-PIP-inspekcja-pracy
 
+**Akt:** KP — t.j. Dz.U. 2026 poz. 1245 (stan 2026-08-27; zm. 2026/1046 od 2026-11-05 — art. 18³d, 94³, 94³ᵃ: mobbing i równe traktowanie, oba brzmienia w t.j. z odnośnikami).
+**Akt:** UPIP (ustawa o Państwowej Inspekcji Pracy) — t.j. Dz.U. 2024 poz. 1712 (zm. po t.j., w mocy: 2025/321 od 2025-03-15 — art. 10, 14; 2025/368 od 2025-04-09 — art. 2, 6, 7, 14, 29; 2025/620 od 2025-06-01 — art. 10, 13, 14, 18, 19, 37, 63; 2025/769 od 2026-01-01 — art. 37a–37b; 2026/160 od 2026-02-27 — art. 14; 2026/473 od 2026-07-08 — art. 10, 11, 13, 14–14b, 18, 19, 23–23a, 26, 31, 33–37aa (m.in. decyzje okręgowego inspektora o ustaleniu stosunku pracy)).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o PIP — Dz.U. 2024 poz. 1712 t.j. + zm. Dz.U. 2025 poz. 321/368/620/769, Dz.U. 2026 poz. 160
 **Data weryfikacji online:** 2026-06-13, druga weryfikacja 2026-07-17

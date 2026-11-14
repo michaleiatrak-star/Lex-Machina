@@ -8,6 +8,10 @@ source_policy: "RZĄD 1 only"
 
 # Ustawa zasiłkowa — choroba i macierzyństwo F-108/30
 
+**Akt:** KP — t.j. Dz.U. 2026 poz. 1245 (stan 2026-08-27; zm. 2026/1046 od 2026-11-05 — art. 18³d, 94³, 94³ᵃ: mobbing i równe traktowanie, oba brzmienia w t.j. z odnośnikami).
+**Akt:** UZas (ustawa zasiłkowa) — t.j. Dz.U. 2026 poz. 854 (zm. 2026/441 od 2026-07-01 — art. 1, 2, 61b, 69; 2026/1123 [OD 2028-01-01: 2026/1123] — art. 32).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 ## 1. Źródło
 
 Ustawa z 25 czerwca 1999 r. o świadczeniach pieniężnych z ubezpieczenia

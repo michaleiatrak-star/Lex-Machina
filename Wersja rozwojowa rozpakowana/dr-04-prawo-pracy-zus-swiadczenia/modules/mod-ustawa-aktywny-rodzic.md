@@ -1,5 +1,8 @@
 # Moduł — Aktywny Rodzic (babciowe i inne świadczenia)
 
+**Akt:** UAktRodz (ustawa o wspieraniu rodziców w aktywności zawodowej — „Aktywny rodzic”) — t.j. Dz.U. 2026 poz. 532 (zm. 2026/1123 [OD 2028-01-01: 2026/1123] — m.in. art. 3, 7, 9, 10, 15, 18a, 18c, 29, 35, 44, 47–49b).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
 ## Akt prawny

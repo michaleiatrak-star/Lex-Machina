@@ -1,5 +1,9 @@
 # mod-KP-prawo-pracy
 
+**Akt:** KP — t.j. Dz.U. 2026 poz. 1245 (stan 2026-08-27; zm. 2026/1046 od 2026-11-05 — art. 18³d, 94³, 94³ᵃ: mobbing i równe traktowanie, oba brzmienia w t.j. z odnośnikami).
+**Akt:** SUS (ustawa o systemie ubezpieczeń społecznych) — t.j. Dz.U. 2026 poz. 1474 (stan 2026-10-04; zm. 2025/1413 od 2026-11-01 — art. 45, 50; 2026/507 [OD 2028-11-01: 2026/507] — art. 36b, 43).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** KP — Dz.U. 2026 poz. 1245 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane) (obejmuje m.in. 2025/807 jawność wynagrodzeń, 2025/1423 reforma stażu, 2026/25; ⛔ także 2026/1046 — w życie 5.11.2026)
 **Data weryfikacji online:** 2026-06-05
@@ -273,7 +277,7 @@ Wykonaj przed opuszczeniem stanowiska pracy:
 
 | Ryzyko | Opis | Działanie zaradcze |
 |---|---|---|
-| Utrata terminu 21 dni | Termin zawity — brak przywrócenia | Priorytet absolutny — złóż odwołanie niezwłocznie |
+| Utrata terminu 21 dni | Przywrócenie możliwe tylko przy braku winy pracownika — wniosek do sądu pracy w 7 dni od ustania przyczyny, z uprawdopodobnieniem (art. 265 § 1–2 KP) | Złóż odwołanie w terminie; po uchybieniu — natychmiast wniosek z art. 265 |
 | Podpisanie porozumienia | Brak odwołania, karencja zasiłku | Nie podpisuj bez analizy prawnej |
 | Brak dowodów | Niemożność wykazania roszczeń | Zabezpieczaj dowody natychmiast |
 | Kwalifikacja prawna stosunku pracy | B2B zakwalifikowany jako pracowniczy | Analiza cech stosunku pracy (art. 22 KP); dla umowy ramowej zlecenia z systemem oferta–przyjęcie poszczególnych zleceń → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/b2b-podwykonawcze.md` sekcja G.1D (dodane 2026-09-27, F-205) |

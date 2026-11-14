@@ -1,4 +1,8 @@
 # Obchodzenie prawa pracy — mechanizmy, ryzyko, reforma PIP 2026
+
+**Akt:** KP — t.j. Dz.U. 2026 poz. 1245 (stan 2026-08-27; zm. 2026/1046 od 2026-11-05 — art. 18³d, 94³, 94³ᵃ: mobbing i równe traktowanie, oba brzmienia w t.j. z odnośnikami).
+**Akt:** SUS (ustawa o systemie ubezpieczeń społecznych) — t.j. Dz.U. 2026 poz. 1474 (stan 2026-10-04; zm. 2025/1413 od 2026-11-01 — art. 45, 50; 2026/507 [OD 2028-11-01: 2026/507] — art. 36b, 43).
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
 v1.1.0 (dodany 2026-07-30, rozbudowany o mechanizm "sklep-czytelnia" tego samego dnia — na żądanie użytkownika)
 
 Zweryfikowano 2026-07-30 (ZASADA 14): Rząd 1 — gov.pl/rodzina (MRPiPS);
