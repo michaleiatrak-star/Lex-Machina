@@ -26,6 +26,10 @@ WSPÓLNE ZASADY DLA MODUŁU:
 2. Oddziel odpowiedzialność dyscyplinarną od cywilnej, karnej i administracyjnej.
 3. W zawiadomieniu kluczowe są: konkretny czyn, data, dowód, norma etyczna, skutek.
 4. Sprawdź przedawnienie dyscyplinarne i status pokrzywdzonego/pokrzywdzonej.
+5. Ustawa zawodowa przed KPK: pojęcia i terminy zdefiniowane w ustawie zawodowej mają pierwszeństwo; KPK stosuje się odpowiednio tylko w sprawach nieuregulowanych. Przykład adwokatury (ELI DU/2024/1564, odczyt 2026-11-15): pokrzywdzony — art. 93 ust. 4 PoA, nie art. 49 § 1 KPK; odesłanie — art. 95n pkt 1 PoA. Najpierw `isap_tekst` ustawy zawodowej z frazą (np. „Pokrzywdzonym jest”), potem KPK.
+6. Odmowa wszczęcia / umorzenie przez rzecznika: odczytaj w ELI przepis ustawy zawodowej o środku i sądzie (adwokaci: art. 91 ust. 2 PoA, po DU/2026/1290 ust. 2 pkt 2) oraz przepis o terminie odwołania od postanowień kończących (adwokaci: art. 88a ust. 4 PoA) obok art. 460 KPK. Gdy pouczenie podaje inny termin niż ustawa zawodowa: oba warianty + art. 16 § 1 KPK; koniec terminu z dniem tygodnia (art. 123 § 3 KPK).
+7. Dokument wymieniony w aktach, którego w aktach nie ma (np. pismo wskazane w zawiadomieniu jako załącznik): nie opisuj jego treści; zapisz „wymieniony w [plik], treść nieznana” i wnieś o jego dołączenie.
+8. Orzeczenia SN w sprawach dyscyplinarnych adwokatów (SDI, DSI): rejestr wsd.adwokatura.pl publikuje także wyroki SN z tezami. Gdy sn.pl wymaga weryfikacji (captcha), to źródło zastępcze; status 🟨 z adnotacją „rejestr WSD”, do potwierdzenia na sn.pl.
 
 ## KLUCZOWE AKTY PRAWNE — ISAP
 
