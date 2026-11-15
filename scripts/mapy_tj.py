@@ -217,6 +217,30 @@ DR_NAME = re.compile(r"^dr-(\d\d)-")
 TODAY = os.environ.get("MAPY_TJ_DZIS", "")
 
 
+_NOWEL = None
+
+
+def changes_after_tj(tj_id):
+    """Zmiany po t.j. tą samą regułą co monitoring (check_nowelizacje.changes_after: unia
+    dat stanu prawnego/ogłoszenia i sekcji API, F-153/F-155) — [(ELI zmiany, data wejścia)]."""
+    global _NOWEL
+    if _NOWEL is None:
+        import importlib.util
+        from pathlib import Path
+        path = os.path.join(ROOT, "audyt-systemu-v4", "scripts", "check_nowelizacje.py")
+        sys.path.insert(0, os.path.dirname(path))
+        spec = importlib.util.spec_from_file_location("check_nowelizacje", path)
+        _NOWEL = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_NOWEL)
+        _NOWEL._cache = Path(CACHE)
+    try:
+        info = _NOWEL.changes_after(tj_id, _NOWEL._cache)
+    except Exception as exc:
+        print(f"ELI_ERROR\t{tj_id}\t{exc}", file=sys.stderr)
+        return []
+    return [(eli_id, date) for eli_id, date, _prom, _title in info["changes"] if date]
+
+
 def merged(system, catalog):
     """Akty systemu: nagłówki modułów (dziedzina z modułu) + katalog ELI (dziedzina z mapy albo tytułu)."""
     today = TODAY or __import__("datetime").date.today().isoformat()
@@ -232,10 +256,8 @@ def merged(system, catalog):
                 e["tj"] = act["tj"]
             continue
         zm = []
-        for amend in act.get("amendmentsAfter", []):
-            d = entry_date(amend)
-            if d:
-                zm.append((amend.replace("DU/", ""), d, d > today))
+        for amend, d in changes_after_tj(act["tj"]):
+            zm.append((amend.replace("DU/", ""), d, d > today))
         acts[base] = {"abbr": "", "tj": act["tj"], "zm": zm, "moduly": [], "tytul": act.get("title", ""), "status": "",
                       "domeny": doms or ["DR-05"], "zrodlo": "katalog ELI (tytuł)" if act.get("domainSource") == "TITLE" else "katalog ELI (mapa)"}
     return acts
