@@ -63,6 +63,6 @@ Dodano do rejestru obszary obowiązkowe:
 
 ## Katalog tekstów jednolitych
 
-Pełna lista obowiązujących t.j. w konwencji modułów: `KATALOG-TJ.md` (ten katalog) i `dr-XX/KATALOG-TJ.md`.
+Pełna lista obowiązujących t.j. w konwencji modułów: `krajowe/shared/KATALOG-TJ.md` (całość) i `dr-XX/KATALOG-TJ.md` (dziedziny).
 
 <!-- mapy_tj:koniec -->

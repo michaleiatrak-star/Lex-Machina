@@ -1,7 +1,7 @@
 d8c78479e6507c692d0c12794411da69472c25b4b66a711d7ae1bb256c28b7bc  ./MAPA-AKTOW.md
 610a40a169dbcbbd00256dec4cf2b64ca65de6f5ed2e898fb6f450ed992024a5  ./MAPA-POKRYCIA.md
 a986dcd31efdd096cf4b443546167244d8a775903ead547b5efd34c80f594660  ./PORTABILITY-MANIFEST.md
-a2c58ffea068298467c35495ac6841491b461c84a81abee6385f3d69a8bdc7d1  ./SKILL.md
+9ccc8a02b442c160bc1a2c6151af9903447d2b0b4d7c1ddb6728165ee4208a7a  ./SKILL.md
 47051ab8dbef53d8b88099b73b2ef0aa23b5d25890379654938526598bbafd37  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 ba3897fc7fe723ea2279c614828279fee03193d8d112be5a12e3dc9e6f0c893c  ./modules/mod-FUS-uzupelnienie-pokrycia-2026.md
@@ -48,5 +48,5 @@ f63c691e27aa528a60df64324da136e4d991e9ac85fc2f4c368db3e88e835d0b  ./modules/mod-
 c0b5f21afce5774f1e7981dd74ec8de9e45a92c1043b0dfa040b23cdf82e231e  ./modules/mod-ustawa-zwolnienia-grupowe.md
 ead0f55a7c8b3ead3fe2ee67e7b453a5e8d16e4adf7c9657b1ba6eb6a516ae70  ./modules/mod-wypadek-przy-pracy-choroba-zawodowa.md
 15f481d30d7dc6fe6ef0e6065af013617b371dd45d807685cf1f37d29e5b72fa  ./modules/mod-zwolnienia-grupowe-current-state-COV.md
-4f67499f6ad209ceeff1d04ac7f7927c8cb77b395f683ba1a5802fe77534ae62  ./references/CHANGELOG.md
+bb12f209bdf0770d1ef7e80d84c20a8da36a8d065d3f3a829b7fa9a24129a4fa  ./references/CHANGELOG.md
 524575362b60f3d2eeb1b219131da9540142ca27bf15bcd7e46e31618e6ccc06  ./references/HISTORIA-ZMIAN-PLIKOW.md

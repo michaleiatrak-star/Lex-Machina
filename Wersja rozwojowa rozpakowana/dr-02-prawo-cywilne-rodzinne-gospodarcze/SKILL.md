@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.128"
+version: "3.129"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 dependencies:
   requires:
@@ -633,6 +633,8 @@ view dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/[nazwa-modulu].md
 ```
 view dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-02-prawo-cywilne-rodzinne-gospodarcze/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

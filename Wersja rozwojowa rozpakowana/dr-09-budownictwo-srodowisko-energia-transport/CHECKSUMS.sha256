@@ -1,7 +1,7 @@
 914a045c5dfc83e36af661df9128a63e39b4511af5c2d9c9a2138068b993705f  ./MAPA-AKTOW.md
 83afde5b91959f4ea4969efc140eba5f4e52d255c6cfee1892bb96db1c77ca89  ./MAPA-POKRYCIA.md
 b98cd207fee28b302956c1019e3235e74c558cdb35e87764a20020e630672fdb  ./PORTABILITY-MANIFEST.md
-0aa22c005c5f0cdb86be9cb4103942a76e06c9b0884f58f13e98344b215a3836  ./SKILL.md
+a0c90cc96a260d2850e9b5187b9c0d05a7726f01f586b5f2e2a5f4062028267a  ./SKILL.md
 a26e0ecdd82d926b5fbc5fdb70950895a2b41c69d18c97724274c1394341fae4  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 072bf011b1f64184d23ef53ea2dcf635a7e6faf984cf05645c5f75facb7df7bd  ./modules/mod-GDDKiA-specustawa-drogowa-ZRID.md
@@ -49,5 +49,5 @@ e51f29961558964120f4d5a3e4a0fbdc612782beae471f11f6328943abaf8d99  ./modules/ochr
 50539e56f2cdcf5d3243b342015876b95ac8174a492f4ec76fabdaa3a3dcddc3  ./modules/ochrona-zabytkow/czesc-04-dps-linie-napowietrzne.md
 8b50e2623629ef82f5a1e58e5f52a838a748508f8ea7bdecee196d1b8fbdd4c4  ./modules/ochrona-zabytkow/czesc-05-plac-zabaw-mikrokawalerki.md
 28f0e06e2a5e03f81126d73fa4c6d5cdf525cb2aa5a630c96e4081b6e0d2110d  ./modules/ochrona-zabytkow/czesc-06-parking-przeksztalcenie-cross.md
-79d7374d4efeb105045840b132a3a31c97f40d2a8df5982ee85621c6a0387b6b  ./references/CHANGELOG.md
+1f1462e708e60359f1049b974cd5ce75d50fd31c01a7257c601516569bfea002  ./references/CHANGELOG.md
 abe6aa1f0c7be329d8f30b4e26b575581c1ed0421413f61d72d7af313e414223  ./references/HISTORIA-ZMIAN-PLIKOW.md

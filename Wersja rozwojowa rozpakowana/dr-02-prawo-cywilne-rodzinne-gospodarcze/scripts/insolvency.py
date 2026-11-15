@@ -101,7 +101,9 @@ A_MARKER = 'poziom A / COV-ART'
 def commentary_status(article, modules):
     if article['source_status'] != 'TEKST_W_TJ':
         return 'NIE_DOTYCZY_'+article['source_status']
-    if modules and all(A_MARKER in (ROOT/'modules'/m).read_text()[:600] for m in modules):
+    # The marker belongs to the module's head (everything before its first "## " section): a fixed
+    # 600-character window broke when the **Akt:** header lines were added above it.
+    if modules and all(A_MARKER in (ROOT/'modules'/m).read_text().split('\n## ', 1)[0] for m in modules):
         return 'KOMENTARZ_A_COV_ART'
     return 'PROCEDURA_TEMATYCZNA_I_ODCZYT_JEDNOSTKI'
 

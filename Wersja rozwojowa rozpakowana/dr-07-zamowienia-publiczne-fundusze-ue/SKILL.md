@@ -1,6 +1,6 @@
 ---
 name: dr-07-zamowienia-publiczne-fundusze-ue
-version: "3.25"
+version: "3.26"
 description: "Zamówienia publiczne i fundusze UE: PZP, postępowania zakupowe, KIO, środki ochrony prawnej, finansowanie UE i powiązane zagadnienia realizacyjne."
 dependencies:
   requires:
@@ -172,6 +172,8 @@ view dr-07-zamowienia-publiczne-fundusze-ue/modules/[nazwa-modulu].md
 ```
 view dr-07-zamowienia-publiczne-fundusze-ue/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-07-zamowienia-publiczne-fundusze-ue/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

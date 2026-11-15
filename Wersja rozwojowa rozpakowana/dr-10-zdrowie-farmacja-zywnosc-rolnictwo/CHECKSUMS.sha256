@@ -1,7 +1,7 @@
 973ad38be1fb95e6e88de792a9474144358d28bb255d255c19502d4eac4b5243  ./MAPA-AKTOW.md
 f3c655f9bc61cc2cecafbcc16bf7571959f1edb09906586b463ae86872825298  ./MAPA-POKRYCIA.md
 93c70aa27ded8dd55a23051bde455f08453fa3d966b2b0d6bfde845a27df6de1  ./PORTABILITY-MANIFEST.md
-9323f8692456043b476b78cf1eb4674a9185e677ef3e92cd39df0dbd412cf957  ./SKILL.md
+9d7408d212e179b949957ca12e089128b3c5cb044e24fe4a033bab5707ca3c39  ./SKILL.md
 ee2f304c7b47b9ae45e7c4a708348f6be9a5d29f60faa1b3f15124ea502375ea  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 a776ababc0ed71f402a78fd8f0141c8455bde753f734cf02556731994375910a  ./modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny.md
@@ -36,5 +36,5 @@ bdeec37c76eaa94ed40717051b109e1a8cd1db821db9b8894e7251ab8d9e71aa  ./modules/mod-
 a13fc544df2117ff3afbf934b4a35ef92effa6b6f1c1619c08c223c4fdf3dcc7  ./modules/mod-ustawa-zawody-prawnicze-pokrewne.md
 9c47a311e5b9a5d3421c88b8c5b71206bba440bb800099fbd89a40339778eea9  ./modules/mod-ustawa-zdrowie-psychiczne.md
 04471f1d3f4f4e9140787ff26cb716f7260f4a36a19fde5a0d8e1e43f4c0434a  ./modules/mod-wyroby-medyczne.md
-617f68f46485f7d50e1c70923e9202dc06973e5952848881a7480d1885b1ea0f  ./references/CHANGELOG.md
+3ef0f8f95d3a39f077a9ed1b5a1b6798199b2b3c0f01d73728e4baec40305de3  ./references/CHANGELOG.md
 855248345d0da0b0116e7414a8819b5e9c8ce4113495cb3b8388e40ac593d670  ./references/HISTORIA-ZMIAN-PLIKOW.md

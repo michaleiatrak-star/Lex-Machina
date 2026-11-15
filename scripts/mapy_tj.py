@@ -122,7 +122,8 @@ def tekst(entry, base):
 
 
 def etykieta(e):
-    title = e["tytul"] or ""
+    # A title broken over lines in ELI would break the Markdown table row.
+    title = " ".join((e["tytul"] or "").split())
     issuer = re.match(r"^((?:Rozporządzenie|Obwieszczenie|Dekret|Zarządzenie|Uchwała)\b.*?) z dnia ", title)
     name = title_short(title)
     if not e["abbr"] and issuer:
@@ -321,7 +322,7 @@ def merged(system, catalog):
             src = "katalog ELI (mapa DR)"
         elif act.get("type") != "Ustawa":
             doms, via = basis_domains(base, system)
-            src = f"podstawa prawna: {via}" if doms else ""
+            src = f"podstawa prawna: {via}".rstrip() if doms else ""
         else:
             doms = []
             src = ""
@@ -340,6 +341,27 @@ OPIS_DR = ("Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teks
 OPIS_PL = ("Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite z ELI w systemie, w konwencji modułów, "
            "z dziedzinami DR. Źródło dziedziny: nagłówek modułu (pewne), podstawa prawna aktu wykonawczego (dziedzina ustawy), "
            "tytuł (heurystyka) albo „brak trafienia — do przypisania”.")
+
+
+def kept_catalog_rows(path):
+    """Rows of an existing KATALOG-TJ.md: [akt, tekst, dziedziny/używają, źródło]."""
+    if not os.path.exists(path):
+        return []
+    lines = []
+    with open(path, encoding="utf-8") as fh:
+        for line in fh:
+            line = line.rstrip("\n")
+            if lines and lines[-1].startswith("| ") and not lines[-1].endswith("|") and line and not line.startswith("|"):
+                lines[-1] += line  # a row broken by a title with a newline (older files)
+            else:
+                lines.append(line)
+    out = []
+    for line in lines:
+        if line.startswith("| ") and "Dz.U." in line:
+            cells = [" ".join(c.split()) for c in line.strip().strip("|").split("|")]
+            if len(cells) >= 4:
+                out.append(cells[:4])
+    return out
 
 
 def write(path, text, args, label, problems):
@@ -381,20 +403,30 @@ def main():
         text = open(map_file, encoding="utf-8").read()
         problems = write(map_file, replace_section(add_tj_suffix(text), ""), args, os.path.relpath(map_file, root), problems)
     acts = merged(system, load_catalog(args.katalog))
-    order = sorted(acts.items(), key=lambda kv: etykieta(kv[1]).lower())
+    shared = os.path.join(root, "prawo-polskie-v2", "krajowe", "shared")
+    entries = [{"label": etykieta(e), "text": tekst(e, b), "mods": ", ".join(e["moduly"]) or "—", "src": e["zrodlo"], "doms": e["domeny"]}
+               for b, e in acts.items()]
+    if not args.katalog:
+        # Without the ELI catalogue (the daily workflow): the catalogue rows already in the file stay
+        # as they are; only the acts of the modules' headers are rebuilt. A full rebuild: --katalog.
+        held = {re.search(r"Dz\.U\. \d{4} poz\. \d+", e["text"]).group(0) for e in entries}
+        for cells in kept_catalog_rows(os.path.join(shared, "KATALOG-TJ.md")):
+            dz = re.search(r"Dz\.U\. \d{4} poz\. \d+", cells[1])
+            if dz and dz.group(0) not in held and cells[3] != "nagłówek modułu":
+                entries.append({"label": cells[0], "text": cells[1], "mods": "—", "src": cells[3],
+                                "doms": [d.strip() for d in cells[2].split(",") if d.strip()]})
+    entries.sort(key=lambda e: e["label"].lower())
     cols = ["Akt", "Tekst jednolity i zmiany po t.j.", "Używają", "Źródło dziedziny"]
     for label, skill_dir in dirs.items():
-        rows = [f"| {etykieta(e)} | {tekst(e, b)} | {', '.join(e['moduly']) or '—'} | {e['zrodlo']} |"
-                for b, e in order if label in e["domeny"]]
+        rows = [f"| {e['label']} | {e['text']} | {e['mods']} | {e['src']} |" for e in entries if label in e["doms"]]
         body = f"# {label} — katalog tekstów jednolitych\n\n" + section(rows, f"Obowiązujące teksty jednolite — {label} ({len(rows)})", cols, OPIS_DR) + "\n"
         problems = write(os.path.join(skill_dir, "KATALOG-TJ.md"), body, args, f"{os.path.basename(skill_dir)}/KATALOG-TJ.md ({len(rows)})", problems)
-    rows = [f"| {etykieta(e)} | {tekst(e, b)} | {', '.join(sorted(e['domeny']))} | {e['zrodlo']} |" for b, e in order]
-    shared = os.path.join(root, "prawo-polskie-v2", "krajowe", "shared")
+    rows = [f"| {e['label']} | {e['text']} | {', '.join(sorted(e['doms']))} | {e['src']} |" for e in entries]
     body = "# KATALOG-TJ — obowiązujące teksty jednolite systemu\n\n" + section(rows, f"Teksty jednolite ({len(rows)})", ["Akt", "Tekst jednolity i zmiany po t.j.", "Dziedziny", "Źródło dziedziny"], OPIS_PL) + "\n"
     problems = write(os.path.join(shared, "KATALOG-TJ.md"), body, args, f"prawo-polskie-v2/krajowe/shared/KATALOG-TJ.md ({len(rows)})", problems)
     reg = os.path.join(shared, "LEGAL-REGISTRY.md")
     text = open(reg, encoding="utf-8").read()
-    pointer = START + "\n\n## Katalog tekstów jednolitych\n\nPełna lista obowiązujących t.j. w konwencji modułów: `KATALOG-TJ.md` (ten katalog) i `dr-XX/KATALOG-TJ.md`.\n\n" + KONIEC
+    pointer = START + "\n\n## Katalog tekstów jednolitych\n\nPełna lista obowiązujących t.j. w konwencji modułów: `krajowe/shared/KATALOG-TJ.md` (całość) i `dr-XX/KATALOG-TJ.md` (dziedziny).\n\n" + KONIEC
     problems = write(reg, replace_section(text, pointer), args, "prawo-polskie-v2/krajowe/shared/LEGAL-REGISTRY.md", problems)
     print(f"AKTY={len(acts)} PLIKI_DO_ZMIANY={problems}")
     return 1 if (args.sprawdz and problems) else 0

@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: "3.63"
+version: "3.64"
 description: "Zdrowie, farmacja, żywność i rolnictwo: działalność lecznicza, prawa pacjenta, produkty lecznicze, żywność, weterynaria i regulacje sektora rolnego."
 dependencies:
   requires:
@@ -239,6 +239,8 @@ view dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/[nazwa-modulu].md
 ```
 view dr-10-zdrowie-farmacja-zywnosc-rolnictwo/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

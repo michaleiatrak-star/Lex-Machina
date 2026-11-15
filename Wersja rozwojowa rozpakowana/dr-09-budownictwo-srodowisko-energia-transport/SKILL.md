@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: "3.67"
+version: "3.68"
 description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 dependencies:
   requires:
@@ -541,6 +541,8 @@ view dr-09-budownictwo-srodowisko-energia-transport/modules/[nazwa-modulu].md
 ```
 view dr-09-budownictwo-srodowisko-energia-transport/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-09-budownictwo-srodowisko-energia-transport/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

@@ -1,6 +1,6 @@
 ---
 name: dr-11-cyfrowe-cyber-ai-dane-ip
-version: "3.40"
+version: "3.41"
 description: "Prawo cyfrowe, cyber, AI, dane i IP: RODO, KSC/NIS2, AI Act, usługi cyfrowe, prywatność, cyberbezpieczeństwo, prawo autorskie i własność intelektualna."
 dependencies:
   requires:
@@ -202,6 +202,8 @@ view dr-11-cyfrowe-cyber-ai-dane-ip/modules/[nazwa-modulu].md
 ```
 view dr-11-cyfrowe-cyber-ai-dane-ip/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-11-cyfrowe-cyber-ai-dane-ip/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

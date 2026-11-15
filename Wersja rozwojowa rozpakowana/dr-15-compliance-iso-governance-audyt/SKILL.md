@@ -1,6 +1,6 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: "3.25"
+version: "3.26"
 description: "Compliance, governance i audyt: systemy zgodności, sygnaliści, AML instytucjonalny, zarządzanie ryzykiem, kontrole, ISO i audyt organizacyjno-prawny."
 dependencies:
   requires:
@@ -173,6 +173,8 @@ view dr-15-compliance-iso-governance-audyt/modules/[nazwa-modulu].md
 ```
 view dr-15-compliance-iso-governance-audyt/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-15-compliance-iso-governance-audyt/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

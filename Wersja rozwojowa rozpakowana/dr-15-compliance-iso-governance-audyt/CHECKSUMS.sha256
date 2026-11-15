@@ -1,7 +1,7 @@
 7ca12435ad189c9e252ec7694f8db1012c819045635a4bcee1be87dc9483d04b  ./MAPA-AKTOW.md
 b4e4809b80101c3a6620b5fb829a0d24161a36f0c103c93a5d2e0eafce963db9  ./MAPA-POKRYCIA.md
 c1cccf7db6d09928c5aff063b7fc990028daab838a0ccdc59172a89cf87697ae  ./PORTABILITY-MANIFEST.md
-cca492fe9bd60451da110583898a59071b0c2fc546a6b81035082a34e186171e  ./SKILL.md
+9cd2202dfb8d4b4ae034b30a6723b92d4250ddde1170921719a6093504df6605  ./SKILL.md
 dadfd03f05260f342babd23ca2b3d81f948c1568f131cd5e8a8637cfeb7bab5c  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 70fb0668e54e01e2ce1797c3d56a7909059f901a92c5eac718741093e2824440  ./modules/mod-AML-nadzor-finansowy-instytucje.md
@@ -14,4 +14,4 @@ a0423a3664dba81cd171ed30ab1e4e2e19b18946de5333c547a8185803569b33  ./modules/mod-
 9fe6aff220b5d9dd34fabe54e75f17a2404222ffc908cb2c5e51f31184c92e64  ./modules/mod-ustawa-antykorupcyjna-1997-ograniczenia.md
 2437b993007f071382facce11ba15861e5e20cb86f92522d4b8b28d3d2c864a6  ./modules/mod-ustawa-nauczyciele-uczelnie.md
 2f6e0c5213177ebeabe23cb29dbd50d5cc462e9e53c86ebf80785472629a3e7a  ./modules/mod-ustawa-sygnalisci.md
-eb9927c08b9993e70b58cba78124e0bd6c65c75e206eea039509e78ae491e0d9  ./references/CHANGELOG.md
+bdea1d982f71c980510997c7db141e9820146101aa2f1b2458044a86c8d2f268  ./references/CHANGELOG.md

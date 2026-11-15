@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: "3.80"
+version: "3.81"
 description: "Prawo karne, wykroczenia i egzekucja: KK, KPK, KKW, KW, KPW, KKS, kwalifikacja karnomaterialna, tryby ścigania i wykonanie orzeczeń."
 dependencies:
   requires:
@@ -536,6 +536,8 @@ view dr-03-prawo-karne-wykroczenia-egzekucja/modules/[nazwa-modulu].md
 ```
 view dr-03-prawo-karne-wykroczenia-egzekucja/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-03-prawo-karne-wykroczenia-egzekucja/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

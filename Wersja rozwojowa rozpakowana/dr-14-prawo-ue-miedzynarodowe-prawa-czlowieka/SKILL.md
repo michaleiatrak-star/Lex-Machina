@@ -1,6 +1,6 @@
 ---
 name: dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
-version: "3.22"
+version: "3.23"
 description: "Prawo UE, międzynarodowe i prawa człowieka: prawo pierwotne i wtórne UE, TSUE, EKPC/ETPC, traktaty, kolizje jurysdykcji i standardy praw człowieka."
 dependencies:
   requires:
@@ -245,6 +245,8 @@ view dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/[nazwa-modulu].md
 ```
 view dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

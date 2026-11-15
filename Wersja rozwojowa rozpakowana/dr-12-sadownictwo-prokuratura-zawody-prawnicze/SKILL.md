@@ -1,6 +1,6 @@
 ---
 name: dr-12-sadownictwo-prokuratura-zawody-prawnicze
-version: "4.38"
+version: "4.39"
 description: "Sądownictwo, prokuratura i zawody prawnicze: ustrój sądów, prokuratura, adwokaci, radcowie, notariusze, komornicy, koszty i odpowiedzialność zawodowa."
 dependencies:
   requires:
@@ -354,6 +354,8 @@ view dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/[nazwa-modulu].md
 ```
 view dr-12-sadownictwo-prokuratura-zawody-prawnicze/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-12-sadownictwo-prokuratura-zawody-prawnicze/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

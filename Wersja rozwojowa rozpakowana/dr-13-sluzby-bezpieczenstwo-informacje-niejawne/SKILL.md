@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: "3.27"
+version: "3.28"
 description: "Służby, bezpieczeństwo i informacje niejawne: Policja, ABW/AW i inne służby, obrona, ochrona informacji niejawnych oraz publicznoprawne ramy bezpieczeństwa."
 dependencies:
   requires:
@@ -192,6 +192,8 @@ view dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/[nazwa-modulu].md
 ```
 view dr-13-sluzby-bezpieczenstwo-informacje-niejawne/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

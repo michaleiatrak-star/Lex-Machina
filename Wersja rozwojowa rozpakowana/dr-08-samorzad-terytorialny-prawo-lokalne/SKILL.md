@@ -1,6 +1,6 @@
 ---
 name: dr-08-samorzad-terytorialny-prawo-lokalne
-version: "3.30"
+version: "3.31"
 description: "Samorząd terytorialny i prawo lokalne: gmina, powiat, województwo, uchwały, akty prawa miejscowego, nadzór, kompetencje JST i lokalne planowanie."
 dependencies:
   requires:
@@ -139,6 +139,8 @@ view dr-08-samorzad-terytorialny-prawo-lokalne/modules/[nazwa-modulu].md
 ```
 view dr-08-samorzad-terytorialny-prawo-lokalne/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-08-samorzad-terytorialny-prawo-lokalne/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

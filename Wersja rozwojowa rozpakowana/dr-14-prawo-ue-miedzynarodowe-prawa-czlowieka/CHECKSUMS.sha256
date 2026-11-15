@@ -1,7 +1,7 @@
 48372c32b188ddbbe261229eb3ce5850d5c013da9179c1f67b53e773629adff8  ./MAPA-AKTOW.md
 afc080fa6c163b25960985dc80c541245402958855d3ac853835e9640037f01d  ./MAPA-POKRYCIA.md
 433b720250fe97d5e9dd1f0db7ce7a1bb464a4de16c6e9b8fe4fc16e2396a083  ./PORTABILITY-MANIFEST.md
-6e5c6da016e4219d9233a0ff590cfc4d5e4a1fa435ba481303ee55b73be672bf  ./SKILL.md
+a1915b387c12e98acc7711ebdc5971a2adfde7ca15c5b03ce840e58a81643cf0  ./SKILL.md
 674c95294d72b9adf311234a798c639d004bd5e0fdcaacbcd912be772e223a2e  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 fa3ea87011ad596437590a4aa605284958dc927b2380ea4f99ce2e43ca932cce  ./modules/mod-EKPC-ETPC-prawa-czlowieka.md
@@ -16,4 +16,4 @@ da0af184de8574dd0273bcebf4a5a3cdd5a16a5ca78ddcc272573b20e276539a  ./modules/mod-
 178d4360c350d28cc2e37d83fcbca4cde36eb182643b48cb233d296495ce6ab8  ./modules/mod-konwencje-wiedenskie-dyplomatyczne-konsularne.md
 d115e3f1fc173557139c079f4059960120c2c2e75c20bc91fd710c985c860d88  ./modules/mod-maly-ruch-graniczny.md
 0b59277c3701a24d6294cb077412f7c5253560944385d8df1a909cc88f69e66c  ./modules/mod-rejestr-zrodla-prawa-lifecycle.md
-d6fe0a3043dcd6b70772e646fda6778f73a21b34790608610f4f81174b1f18a3  ./references/CHANGELOG.md
+71801d6183b7c209b9c628aecf15790633afe59f13d98faf7aa90a8ca7ac40a5  ./references/CHANGELOG.md

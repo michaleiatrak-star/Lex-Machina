@@ -1,6 +1,6 @@
 ---
 name: dr-01-ustroj-konstytucyjny-i-zrodla-prawa
-version: "3.25"
+version: "3.26"
 description: "Prawo konstytucyjne i ustrojowe: Konstytucja, organy państwa, TK, źródła prawa, legislacja i skarga konstytucyjna; analiza z aktualną weryfikacją źródeł."
 dependencies:
   requires:
@@ -129,6 +129,8 @@ view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/[nazwa-modulu].md
 ```
 view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 

@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: "3.62"
+version: "3.63"
 description: "Prawo pracy, ZUS i świadczenia: KP, zatrudnienie, rozwiązanie stosunku pracy, ubezpieczenia społeczne, emerytury, renty, KRUS, PFRON i pomoc społeczna."
 dependencies:
   requires:
@@ -344,6 +344,8 @@ view dr-04-prawo-pracy-zus-swiadczenia/modules/[nazwa-modulu].md
 ```
 view dr-04-prawo-pracy-zus-swiadczenia/MAPA-AKTOW.md
 ```
+
+Akt bez wiersza w mapie: katalog wszystkich obowiązujących tekstów jednolitych dziedziny w konwencji modułów (t.j., zmiany po t.j., moduły) — `dr-04-prawo-pracy-zus-swiadczenia/KATALOG-TJ.md`. Brzmienie przepisu zawsze z ELI.
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
 
