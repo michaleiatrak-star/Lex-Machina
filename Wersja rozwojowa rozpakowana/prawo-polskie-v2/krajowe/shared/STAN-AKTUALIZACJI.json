@@ -1,0 +1,6168 @@
+{
+ "kadencja": 10,
+ "ostatnia_aktualizacja": "2026-11-14",
+ "procesy": {
+  "1000": {
+   "data": "2025-08-19",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1006": {
+   "data": "2026-03-11",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "1008": {
+   "data": "2025-03-06",
+   "eli": "DU/2025/290",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1009": {
+   "data": "2025-03-13",
+   "eli": "DU/2025/321",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1034": {
+   "data": "2025-04-16",
+   "eli": "DU/2025/525",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1035": {
+   "data": "2025-03-06",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1036": {
+   "data": "2025-03-06",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1037": {
+   "data": "2025-03-06",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1038": {
+   "data": "2025-04-16",
+   "eli": "DU/2025/523",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1039": {
+   "data": "2025-03-05",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1040": {
+   "data": "2025-03-05",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1041": {
+   "data": "2025-02-20",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "1058": {
+   "data": "2025-05-07",
+   "eli": "DU/2025/637",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1059": {
+   "data": "2025-03-07",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "106": {
+   "data": "2023-12-21",
+   "eli": "DU/2023/2768",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1074": {
+   "data": "2025-04-29",
+   "eli": "DU/2025/603",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1075": {
+   "data": "2025-05-07",
+   "eli": "DU/2025/631",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1076": {
+   "data": "2025-07-24",
+   "eli": "DU/2025/1021",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1077": {
+   "data": "2025-03-20",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1078": {
+   "data": "2025-08-05",
+   "eli": "DU/2025/1077",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1079": {
+   "data": "2025-07-22",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1080": {
+   "data": "2025-03-18",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1081": {
+   "data": "2025-04-24",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1090": {
+   "data": "2025-06-16",
+   "eli": "DU/2025/779",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1106": {
+   "data": "2025-06-04",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1107": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1698",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1108": {
+   "data": "2025-06-05",
+   "eli": "DU/2025/769",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1109": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "1110": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "1112": {
+   "data": "2025-06-05",
+   "eli": "DU/2025/758",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1113": {
+   "data": "2025-05-21",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1114": {
+   "data": "2025-08-28",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1115": {
+   "data": "2025-03-18",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1129": {
+   "data": "2025-04-22",
+   "eli": "DU/2025/531",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1130": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1131": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "1132": {
+   "data": "2025-04-22",
+   "eli": "DU/2025/537",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1133": {
+   "data": "2025-04-16",
+   "eli": "DU/2025/527",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1141": {
+   "data": "2025-05-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1142": {
+   "data": "2025-07-03",
+   "eli": "DU/2025/900",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1143": {
+   "data": "2026-02-09",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1148": {
+   "data": "2026-01-08",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "1171": {
+   "data": "2025-07-02",
+   "eli": "DU/2025/884",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1172": {
+   "data": "2025-05-30",
+   "eli": "DU/2025/718",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1173": {
+   "data": "2025-04-16",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1174": {
+   "data": "2025-06-16",
+   "eli": "DU/2025/794",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1175": {
+   "data": "2025-04-28",
+   "eli": "DU/2025/565",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1176": {
+   "data": "2025-05-20",
+   "eli": "DU/2025/680",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1184": {
+   "data": "2025-08-27",
+   "eli": "DU/2025/1235",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1185": {
+   "data": "2025-04-23",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1186": {
+   "data": "2025-05-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1187": {
+   "data": "2025-11-28",
+   "eli": "DU/2025/1665",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1188": {
+   "data": "2025-05-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1196": {
+   "data": "2026-03-26",
+   "eli": "DU/2026/435",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1201": {
+   "data": "2025-07-03",
+   "eli": "DU/2025/921",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1202": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1166",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1203": {
+   "data": "2025-08-05",
+   "eli": "DU/2025/1080",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1204": {
+   "data": "2026-03-11",
+   "eli": "DU/2026/370",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1205": {
+   "data": "2025-10-15",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "1208": {
+   "data": "2025-07-24",
+   "eli": "DU/2025/1023",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1209": {
+   "data": "2025-06-06",
+   "eli": "DU/2025/759",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "123": {
+   "data": "2023-12-19",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1231": {
+   "data": "2025-07-03",
+   "eli": "DU/2025/894",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1232": {
+   "data": "2025-07-03",
+   "eli": "DU/2025/896",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1233": {
+   "data": "2025-08-05",
+   "eli": "DU/2025/1074",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1234": {
+   "data": "2025-07-03",
+   "eli": "DU/2025/897",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1235": {
+   "data": "2025-05-21",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1237": {
+   "data": "2025-05-19",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1238": {
+   "data": "2025-07-23",
+   "eli": "DU/2025/1017",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1239": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "124": {
+   "data": "2023-12-19",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1240": {
+   "data": "2025-07-03",
+   "eli": "DU/2025/905",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1241": {
+   "data": "2025-07-21",
+   "eli": "DU/2025/1019",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1242": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1157",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1243": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1244": {
+   "data": "2025-07-24",
+   "eli": "DU/2025/1018",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1246": {
+   "data": "2025-08-05",
+   "eli": "DU/2025/1083",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "125": {
+   "data": "2024-01-31",
+   "eli": "DU/2024/122",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1261": {
+   "data": "2025-07-23",
+   "eli": "DU/2025/1008",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1262": {
+   "data": "2025-07-31",
+   "eli": "DU/2025/1069",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1263": {
+   "data": "2025-08-05",
+   "eli": "DU/2025/1085",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1264": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1178",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1265": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1417",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1266": {
+   "data": "2025-07-08",
+   "eli": "DU/2025/924",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1267": {
+   "data": "2025-07-10",
+   "eli": "DU/2025/935",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1268": {
+   "data": "2025-07-23",
+   "eli": "DU/2025/1006",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1269": {
+   "data": "2025-07-08",
+   "eli": "DU/2025/923",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "127": {
+   "data": "2023-12-22",
+   "eli": "DU/2023/2778",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1270": {
+   "data": "2025-07-23",
+   "eli": "DU/2025/1014",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1271": {
+   "data": "2025-07-02",
+   "eli": "DU/2025/891",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1272": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1167",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1273": {
+   "data": "2025-08-21",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "128": {
+   "data": "2023-12-27",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1280": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1180",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1281": {
+   "data": "2025-07-23",
+   "eli": "DU/2025/1022",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1282": {
+   "data": "2025-07-31",
+   "eli": "DU/2025/1064",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1284": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1302": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1165",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1303": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1173",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1304": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1172",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1305": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1161",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1306": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1170",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1307": {
+   "data": "2025-08-27",
+   "eli": "DU/2025/1216",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1308": {
+   "data": "2025-12-22",
+   "eli": "DU/2025/1864",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1309": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1162",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1310": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1311": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1556",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1312": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1543",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1313": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1314": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1179",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1315": {
+   "data": "2025-07-31",
+   "eli": "DU/2025/1056",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1316": {
+   "data": "2025-06-26",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1317": {
+   "data": "2025-06-10",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1318": {
+   "data": "2025-12-17",
+   "eli": null,
+   "etap": "II czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1319": {
+   "data": "2025-08-05",
+   "eli": "DU/2025/1077",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1320": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1342": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1171",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1343": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1176",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1344": {
+   "data": "2026-02-12",
+   "eli": "DU/2026/187",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1345": {
+   "data": "2025-07-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1346": {
+   "data": "2026-02-25",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1347": {
+   "data": "2025-10-08",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1348": {
+   "data": "2026-03-24",
+   "eli": "DU/2026/424",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1374": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1158",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1375": {
+   "data": "2025-07-23",
+   "eli": "DU/2025/1020",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1376": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1168",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1377": {
+   "data": "2025-08-25",
+   "eli": "DU/2025/1191",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1378": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1416",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1379": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1847",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1380": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1174",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1381": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1382": {
+   "data": "2025-08-05",
+   "eli": "DU/2025/1077",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1383": {
+   "data": "2025-07-21",
+   "eli": "DU/2025/973",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1384": {
+   "data": "2025-10-16",
+   "eli": "DU/2025/1445",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1387": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1388": {
+   "data": "2025-08-27",
+   "eli": "DU/2025/1218",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1389": {
+   "data": "2025-12-02",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "139": {
+   "data": "2023-12-29",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1390": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/317",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1402": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1420",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1404": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1423",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1407": {
+   "data": "2025-08-27",
+   "eli": "DU/2025/1203",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "141": {
+   "data": "2024-01-31",
+   "eli": "DU/2024/124",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "142": {
+   "data": "2024-01-31",
+   "eli": "DU/2024/123",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1424": {
+   "data": "2025-12-05",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1425": {
+   "data": "2025-10-29",
+   "eli": "DU/2025/1508",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1426": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1423",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1427": {
+   "data": "2025-11-18",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1428": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1415",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1429": {
+   "data": "2025-08-25",
+   "eli": "DU/2025/1192",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1430": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1431": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1413",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1432": {
+   "data": "2025-10-16",
+   "eli": "DU/2025/1427",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1433": {
+   "data": "2025-08-25",
+   "eli": "DU/2025/1187",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1434": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1545",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1435": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1424",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1436": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1175",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1437": {
+   "data": "2025-12-01",
+   "eli": "DU/2025/1734",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1438": {
+   "data": "2025-08-25",
+   "eli": "DU/2025/1189",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1439": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1414",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1440": {
+   "data": "2025-11-17",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1441": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1426",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1442": {
+   "data": "2025-10-29",
+   "eli": "DU/2025/1518",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1443": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1425",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1444": {
+   "data": "2025-12-12",
+   "eli": "DU/2025/1793",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1445": {
+   "data": "2025-11-18",
+   "eli": "DU/2025/1673",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1446": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1159",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1447": {
+   "data": "2025-12-04",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "1448": {
+   "data": "2025-10-17",
+   "eli": "DU/2025/1456",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1449": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1541",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1450": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1408",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1451": {
+   "data": "2025-12-22",
+   "eli": "DU/2025/1872",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1456": {
+   "data": "2026-04-14",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1457": {
+   "data": "2025-12-31",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "1458": {
+   "data": "2025-12-31",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "1459": {
+   "data": "2025-07-10",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1472": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1160",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1479": {
+   "data": "2025-12-12",
+   "eli": "DU/2025/1795",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1480": {
+   "data": "2025-10-15",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "1481": {
+   "data": "2025-08-25",
+   "eli": "DU/2025/1188",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1482": {
+   "data": "2025-10-29",
+   "eli": "DU/2025/1507",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1483": {
+   "data": "2025-08-29",
+   "eli": "DU/2025/1211",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1484": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1411",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1485": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1407",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1486": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1412",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1487": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1446",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1488": {
+   "data": "2025-12-02",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1492": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1522": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1409",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1523": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1169",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1524": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1563",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1525": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1542",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1526": {
+   "data": "2026-07-30",
+   "eli": "DU/2026/1036",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1527": {
+   "data": "2025-09-05",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1528": {
+   "data": "2026-03-06",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1529": {
+   "data": "2026-10-22",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "154": {
+   "data": "2024-06-10",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "155": {
+   "data": "2024-04-30",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "156": {
+   "data": "2024-04-30",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1560": {
+   "data": "2025-12-01",
+   "eli": "DU/2025/1705",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1561": {
+   "data": "2025-12-01",
+   "eli": "DU/2025/1709",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1600": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "1601": {
+   "data": "2026-01-07",
+   "eli": "DU/2026/25",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1603": {
+   "data": "2025-09-26",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1604": {
+   "data": "2025-12-01",
+   "eli": "DU/2025/1716",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1605": {
+   "data": "2025-12-02",
+   "eli": "DU/2025/1729",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1606": {
+   "data": "2025-11-17",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1607": {
+   "data": "2025-11-17",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1608": {
+   "data": "2026-01-07",
+   "eli": "DU/2026/24",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1609": {
+   "data": "2025-11-06",
+   "eli": "DU/2025/1537",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1610": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1533",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1611": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1564",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1612": {
+   "data": "2025-11-06",
+   "eli": "DU/2025/1540",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1613": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/988",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1614": {
+   "data": "2025-12-18",
+   "eli": "MP/2026/12",
+   "etap": "II czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "OGŁOSZONA"
+  },
+  "1623": {
+   "data": "2025-10-08",
+   "eli": "DU/2025/1366",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1625": {
+   "data": "2025-09-10",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "1626": {
+   "data": "2025-11-18",
+   "eli": "DU/2025/1652",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1627": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1661",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1628": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1809",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1629": {
+   "data": "2026-02-12",
+   "eli": "DU/2026/184",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1630": {
+   "data": "2025-12-12",
+   "eli": "DU/2025/1794",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1631": {
+   "data": "2025-12-15",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1632": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/317",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1633": {
+   "data": "2025-09-24",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1634": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1700",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1635": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1814",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1636": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1818",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1637": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1531",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1638": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1669",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1639": {
+   "data": "2025-11-18",
+   "eli": "DU/2025/1612",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1649": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1679",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1650": {
+   "data": "2026-07-02",
+   "eli": "DU/2026/904",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1651": {
+   "data": "2026-04-22",
+   "eli": "DU/2026/566",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1652": {
+   "data": "2026-01-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1653": {
+   "data": "2025-09-24",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "1654": {
+   "data": "2026-09-02",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "1676": {
+   "data": "2026-07-07",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1677": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1676",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1678": {
+   "data": "2025-11-18",
+   "eli": "DU/2025/1609",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1679": {
+   "data": "2025-11-18",
+   "eli": "DU/2025/1608",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1683": {
+   "data": "2025-09-26",
+   "eli": "DU/2025/1303",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1684": {
+   "data": "2025-09-26",
+   "eli": "DU/2025/1302",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1685": {
+   "data": "2025-09-26",
+   "eli": "DU/2025/1301",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1708": {
+   "data": "2026-03-06",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "171": {
+   "data": "2024-02-19",
+   "eli": "DU/2024/227",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1721": {
+   "data": "2025-11-17",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1726": {
+   "data": "2025-11-07",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1727": {
+   "data": "2025-11-18",
+   "eli": "DU/2025/1610",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1728": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1811",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1729": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1882",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1730": {
+   "data": "2026-02-12",
+   "eli": "DU/2026/179",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1731": {
+   "data": "2026-01-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1732": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/318",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1746": {
+   "data": "2025-11-04",
+   "eli": "DU/2025/1535",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1747": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1671",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1749": {
+   "data": "2026-01-19",
+   "eli": "DU/2026/62",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1750": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1840",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1752": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1658",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1753": {
+   "data": "2025-12-02",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1757": {
+   "data": "2026-02-12",
+   "eli": null,
+   "etap": "Praca w komisjach nad wnioskiem Prezydenta › Sprawozdanie komisji",
+   "status": "UCHWALONA"
+  },
+  "1758": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/985",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1759": {
+   "data": "2025-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "176": {
+   "data": "2024-07-12",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1760": {
+   "data": "2026-07-17",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1761": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1826",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1762": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1806",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1763": {
+   "data": "2026-02-12",
+   "eli": "DU/2026/177",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1764": {
+   "data": "2025-10-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1765": {
+   "data": "2026-06-02",
+   "eli": "DU/2026/737",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1766": {
+   "data": "2026-02-06",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1767": {
+   "data": "2026-01-07",
+   "eli": "DU/2026/27",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1768": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "177": {
+   "data": "2024-04-12",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1796": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1841",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1797": {
+   "data": "2026-01-20",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1798": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1817",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1804": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1812",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1805": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1837",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1806": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1792",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1807": {
+   "data": "2026-01-20",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1808": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/316",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1809": {
+   "data": "2026-03-16",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1810": {
+   "data": "2025-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1811": {
+   "data": "2026-06-11",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1812": {
+   "data": "2026-02-06",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1813": {
+   "data": "2026-02-13",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1814": {
+   "data": "2025-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1815": {
+   "data": "2025-10-14",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1816": {
+   "data": "2026-03-26",
+   "eli": "DU/2026/436",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1817": {
+   "data": "2026-07-30",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "1824": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1659",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1825": {
+   "data": "2026-01-07",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1826": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1657",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1835": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1838",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1836": {
+   "data": "2026-01-07",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1837": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1854",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1838": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1858",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1839": {
+   "data": "2025-11-27",
+   "eli": "DU/2025/1668",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1849": {
+   "data": "2025-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "185": {
+   "data": "2024-04-09",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1850": {
+   "data": "2025-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1855": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1863",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1856": {
+   "data": "2026-01-07",
+   "eli": "DU/2026/26",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1857": {
+   "data": "2026-01-07",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1858": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1820",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1859": {
+   "data": "2026-01-28",
+   "eli": "DU/2026/160",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1860": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1810",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1861": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1807",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1862": {
+   "data": "2026-01-09",
+   "eli": "DU/2026/50",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1863": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1844",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "187": {
+   "data": "2024-02-08",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "188": {
+   "data": "2024-02-19",
+   "eli": "DU/2024/232",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1880": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1822",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1881": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1804",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1884": {
+   "data": "2026-05-12",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "1885": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1846",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1886": {
+   "data": "2025-12-05",
+   "eli": "DU/2025/1746",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1887": {
+   "data": "2026-01-09",
+   "eli": "DU/2026/31",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1888": {
+   "data": "2026-01-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1889": {
+   "data": "2026-09-17",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "1890": {
+   "data": "2025-11-07",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1891": {
+   "data": "2025-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1892": {
+   "data": "2026-03-26",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1893": {
+   "data": "2025-11-17",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1894": {
+   "data": "2025-11-19",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1898": {
+   "data": "2025-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1899": {
+   "data": "2026-02-13",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1929": {
+   "data": "2026-10-27",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "1930": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1813",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1931": {
+   "data": "2025-12-04",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "1933": {
+   "data": "2026-10-27",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "1937": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/331",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1938": {
+   "data": "2026-01-09",
+   "eli": "DU/2026/39",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1939": {
+   "data": "2026-02-12",
+   "eli": "DU/2026/180",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "194": {
+   "data": "2024-06-10",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "1940": {
+   "data": "2025-11-17",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1941": {
+   "data": "2026-07-30",
+   "eli": "DU/2026/1033",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1942": {
+   "data": "2025-11-07",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1945": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1849",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1950": {
+   "data": "2025-12-02",
+   "eli": "DU/2025/1697",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1951": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1823",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1955": {
+   "data": "2026-02-19",
+   "eli": "DU/2026/252",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1956": {
+   "data": "2026-02-09",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "1962": {
+   "data": "2026-09-25",
+   "eli": "DU/2026/1290",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1963": {
+   "data": "2026-06-02",
+   "eli": "DU/2026/731",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1964": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "1985": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1843",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "199": {
+   "data": "2024-03-18",
+   "eli": "DU/2024/414",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1995": {
+   "data": "2025-12-05",
+   "eli": "DU/2025/1739",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "1996": {
+   "data": "2025-12-18",
+   "eli": "DU/2025/1881",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2002": {
+   "data": "2025-12-18",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2003": {
+   "data": "2025-12-02",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2004": {
+   "data": "2026-02-18",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "2005": {
+   "data": "2026-01-09",
+   "eli": "DU/2026/34",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2006": {
+   "data": "2026-05-12",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2007": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "201": {
+   "data": "2024-03-25",
+   "eli": "DU/2024/467",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2010": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2026": {
+   "data": "2026-01-09",
+   "eli": "DU/2026/32",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2027": {
+   "data": "2026-02-12",
+   "eli": "DU/2026/176",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2028": {
+   "data": "2026-01-09",
+   "eli": "DU/2026/35",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2029": {
+   "data": "2026-04-16",
+   "eli": "DU/2026/542",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2030": {
+   "data": "2026-02-13",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2031": {
+   "data": "2026-03-24",
+   "eli": "DU/2026/425",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2032": {
+   "data": "2026-01-09",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2033": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1354",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2034": {
+   "data": "2026-02-13",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2037": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/312",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "204": {
+   "data": "2024-03-28",
+   "eli": "DU/2024/492",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "205": {
+   "data": "2025-07-22",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "206": {
+   "data": "2026-07-16",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "2060": {
+   "data": "2026-04-16",
+   "eli": "DU/2026/548",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2061": {
+   "data": "2026-04-02",
+   "eli": "DU/2026/504",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2063": {
+   "data": "2026-01-09",
+   "eli": "DU/2026/41",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2064": {
+   "data": "2026-04-17",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "W TOKU"
+  },
+  "207": {
+   "data": "2024-02-20",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2072": {
+   "data": "2026-01-09",
+   "eli": "DU/2026/36",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2075": {
+   "data": "2026-03-24",
+   "eli": "DU/2026/421",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2076": {
+   "data": "2026-03-26",
+   "eli": "DU/2026/507",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2077": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/328",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2078": {
+   "data": "2026-03-24",
+   "eli": "DU/2026/465",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2079": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/317",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "208": {
+   "data": "2024-04-25",
+   "eli": "DU/2024/653",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2080": {
+   "data": "2026-11-05",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu",
+   "status": "W TOKU"
+  },
+  "2081": {
+   "data": "2026-06-19",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2082": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "209": {
+   "data": "2024-08-09",
+   "eli": "DU/2024/1228",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "210": {
+   "data": "2024-09-26",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2101": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/340",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2102": {
+   "data": "2025-12-18",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2105": {
+   "data": "2026-01-28",
+   "eli": "DU/2026/119",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2106": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/347",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2107": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "2108": {
+   "data": "2026-02-25",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2109": {
+   "data": "2026-01-21",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "211": {
+   "data": "2024-08-08",
+   "eli": "DU/2024/1246",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2110": {
+   "data": "2026-09-17",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2111": {
+   "data": "2026-09-17",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2112": {
+   "data": "2026-02-12",
+   "eli": "DU/2026/174",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2119": {
+   "data": "2026-04-02",
+   "eli": "DU/2026/471",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2120": {
+   "data": "2026-02-25",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2121": {
+   "data": "2026-05-12",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2122": {
+   "data": "2026-03-24",
+   "eli": "DU/2026/441",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2126": {
+   "data": "2026-11-05",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2127": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1354",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2128": {
+   "data": "2026-09-15",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "2129": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2130": {
+   "data": "2026-01-07",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2144": {
+   "data": "2026-05-04",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "2150": {
+   "data": "2026-04-02",
+   "eli": "DU/2026/516",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2159": {
+   "data": "2026-05-11",
+   "eli": "DU/2026/644",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "216": {
+   "data": "2024-05-22",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2160": {
+   "data": "2026-04-02",
+   "eli": "DU/2026/483",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2161": {
+   "data": "2026-04-22",
+   "eli": "DU/2026/567",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2162": {
+   "data": "2026-04-30",
+   "eli": "DU/2026/615",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2163": {
+   "data": "2026-04-02",
+   "eli": "DU/2026/484",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2164": {
+   "data": "2026-04-22",
+   "eli": "DU/2026/568",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2165": {
+   "data": "2026-04-30",
+   "eli": "DU/2026/605",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2168": {
+   "data": "2026-04-30",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2172": {
+   "data": "2026-02-19",
+   "eli": "DU/2026/203",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2178": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/319",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2180": {
+   "data": "2026-03-09",
+   "eli": "DU/2026/305",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "219": {
+   "data": "2024-07-15",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "2196": {
+   "data": "2026-01-23",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2197": {
+   "data": "2026-04-30",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2198": {
+   "data": "2026-02-13",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2200": {
+   "data": "2026-05-11",
+   "eli": "DU/2026/638",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2201": {
+   "data": "2026-03-26",
+   "eli": "DU/2026/444",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2206": {
+   "data": "2026-03-24",
+   "eli": "DU/2026/426",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2208": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/988",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2209": {
+   "data": "2026-03-10",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2210": {
+   "data": "2026-03-13",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2211": {
+   "data": "2026-02-09",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2212": {
+   "data": "2026-03-13",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2223": {
+   "data": "2026-03-26",
+   "eli": "DU/2026/445",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2227": {
+   "data": "2026-03-25",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "223": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "2236": {
+   "data": "2026-04-30",
+   "eli": "DU/2026/607",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "224": {
+   "data": "2024-04-12",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2240": {
+   "data": "2026-03-24",
+   "eli": "DU/2026/451",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2245": {
+   "data": "2026-04-02",
+   "eli": "DU/2025/475",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2250": {
+   "data": "2026-04-02",
+   "eli": "DU/2026/473",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "227": {
+   "data": "2024-04-25",
+   "eli": "DU/2024/653",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2270": {
+   "data": "2026-07-24",
+   "eli": "DU/2026/1005",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2271": {
+   "data": "2026-10-20",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2272": {
+   "data": "2026-06-11",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2273": {
+   "data": "2026-05-26",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2274": {
+   "data": "2026-07-24",
+   "eli": "DU/2026/1005",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2276": {
+   "data": "2026-05-21",
+   "eli": "DU/2026/682",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2277": {
+   "data": "2026-03-11",
+   "eli": "DU/2026/333",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2287": {
+   "data": "2026-06-19",
+   "eli": "DU/2026/846",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2288": {
+   "data": "2026-06-17",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2289": {
+   "data": "2026-07-30",
+   "eli": "DU/2026/1046",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2290": {
+   "data": "2026-06-02",
+   "eli": "DU/2026/734",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2291": {
+   "data": "2026-05-11",
+   "eli": "DU/2026/637",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2292": {
+   "data": "2026-05-11",
+   "eli": "DU/2026/640",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2293": {
+   "data": "2026-06-02",
+   "eli": "DU/2026/755",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2294": {
+   "data": "2026-06-11",
+   "eli": "DU/2026/794",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2295": {
+   "data": "2026-05-11",
+   "eli": "DU/2026/632",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2307": {
+   "data": "2026-05-11",
+   "eli": "DU/2026/646",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "231": {
+   "data": "2024-04-25",
+   "eli": "DU/2024/651",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2317": {
+   "data": "2026-07-30",
+   "eli": null,
+   "etap": "Praca w komisjach nad wnioskiem Prezydenta › Sprawozdanie komisji",
+   "status": "UCHWALONA"
+  },
+  "2318": {
+   "data": "2026-06-29",
+   "eli": "DU/2026/875",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2319": {
+   "data": "2026-06-02",
+   "eli": "DU/2026/739",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "232": {
+   "data": "2025-12-15",
+   "eli": "DU/2025/1820",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2320": {
+   "data": "2026-03-13",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2321": {
+   "data": "2026-03-13",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2322": {
+   "data": "2026-08-19",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "233": {
+   "data": "2024-06-11",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2352": {
+   "data": "2026-06-19",
+   "eli": "DU/2026/825",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2353": {
+   "data": "2026-04-17",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2355": {
+   "data": "2026-06-19",
+   "eli": "DU/2026/815",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2356": {
+   "data": "2025-12-04",
+   "eli": null,
+   "etap": "Projekt wpłynął do Sejmu",
+   "status": "W TOKU"
+  },
+  "2357": {
+   "data": "2024-05-22",
+   "eli": null,
+   "etap": "Projekt wpłynął do Sejmu",
+   "status": "W TOKU"
+  },
+  "2358": {
+   "data": "2026-05-27",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "2359": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2360": {
+   "data": "2026-06-11",
+   "eli": "DU/2026/780",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2361": {
+   "data": "2026-05-21",
+   "eli": "DU/2026/676",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2362": {
+   "data": "2026-10-22",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2363": {
+   "data": "2026-09-04",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2371": {
+   "data": "2026-05-21",
+   "eli": "DU/2026/680",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2372": {
+   "data": "2026-07-02",
+   "eli": "DU/2026/901",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2373": {
+   "data": "2026-06-01",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "2374": {
+   "data": "2026-07-21",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "2387": {
+   "data": "2026-07-02",
+   "eli": "DU/2026/882",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2388": {
+   "data": "2026-05-11",
+   "eli": "DU/2026/635",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2389": {
+   "data": "2026-03-27",
+   "eli": "DU/2026/415",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2390": {
+   "data": "2026-03-27",
+   "eli": "DU/2026/414",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2393": {
+   "data": "2025-11-17",
+   "eli": null,
+   "etap": "Opinia organizacji samorządowej",
+   "status": "W TOKU"
+  },
+  "2394": {
+   "data": "2026-10-19",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "2395": {
+   "data": "2026-06-19",
+   "eli": "DU/2026/864",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2396": {
+   "data": "2026-05-29",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2398": {
+   "data": "2026-06-29",
+   "eli": "DU/2026/902",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "24": {
+   "data": "2024-05-08",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2404": {
+   "data": "2026-05-11",
+   "eli": "DU/2026/636",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "241": {
+   "data": "2024-05-09",
+   "eli": "DU/2024/731",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2410": {
+   "data": "2026-08-13",
+   "eli": "DU/2026/1097",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2411": {
+   "data": "2026-09-25",
+   "eli": "DU/2026/1281",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2412": {
+   "data": "2026-07-24",
+   "eli": "DU/2026/1006",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2413": {
+   "data": "2026-04-27",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2414": {
+   "data": "2026-04-27",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2415": {
+   "data": "2026-10-07",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2416": {
+   "data": "2026-06-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "242": {
+   "data": "2024-04-16",
+   "eli": "DU/2024/619",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "244": {
+   "data": "2024-03-14",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2440": {
+   "data": "2026-05-11",
+   "eli": "DU/2026/633",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2443": {
+   "data": "2026-07-24",
+   "eli": "DU/2026/1003",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2444": {
+   "data": "2026-05-15",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2445": {
+   "data": "2026-06-11",
+   "eli": "DU/2026/779",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2446": {
+   "data": "2026-07-02",
+   "eli": "DU/2026/912",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2447": {
+   "data": "2026-09-02",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "2449": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "245": {
+   "data": "2024-07-10",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2451": {
+   "data": "2026-04-17",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2452": {
+   "data": "2026-05-12",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2453": {
+   "data": "2026-05-15",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2456": {
+   "data": "2026-06-17",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2457": {
+   "data": "2026-07-02",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "2458": {
+   "data": "2026-06-19",
+   "eli": "DU/2026/821",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2459": {
+   "data": "2026-06-11",
+   "eli": "DU/2026/781",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2460": {
+   "data": "2026-06-11",
+   "eli": "DU/2026/791",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2468": {
+   "data": "2026-08-07",
+   "eli": "DU/2026/1077",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "248": {
+   "data": "2024-05-02",
+   "eli": "DU/2024/696",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2488": {
+   "data": "2026-06-19",
+   "eli": "DU/2026/830",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2489": {
+   "data": "2026-06-11",
+   "eli": "DU/2026/775",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2490": {
+   "data": "2026-04-30",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2497": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/989",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2498": {
+   "data": "2026-08-07",
+   "eli": "DU/2026/1073",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2499": {
+   "data": "2026-07-24",
+   "eli": "DU/2026/1004",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "25": {
+   "data": "2024-02-22",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2500": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/971",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2527": {
+   "data": "2026-05-11",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "2528": {
+   "data": "2026-09-04",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2529": {
+   "data": "2026-09-04",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "W TOKU"
+  },
+  "253": {
+   "data": "2024-10-07",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "2530": {
+   "data": "2026-09-04",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2533": {
+   "data": "2026-06-11",
+   "eli": "DU/2026/760",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "254": {
+   "data": "2024-10-07",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "2549": {
+   "data": "2026-08-07",
+   "eli": "DU/2026/1079",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2550": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/974",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2551": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/982",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2552": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/982",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2553": {
+   "data": "2026-09-15",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "257": {
+   "data": "2024-04-25",
+   "eli": "DU/2024/647",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2578": {
+   "data": "2026-07-02",
+   "eli": "DU/2026/900",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2579": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/986",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "258": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2580": {
+   "data": "2026-08-13",
+   "eli": "DU/2026/1098",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2581": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/965",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "259": {
+   "data": "2024-07-22",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2597": {
+   "data": "2026-07-30",
+   "eli": "DU/2026/1040",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2598": {
+   "data": "2026-08-20",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "2599": {
+   "data": "2026-05-26",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "26": {
+   "data": "2024-02-22",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "260": {
+   "data": "2024-12-05",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2600": {
+   "data": "2026-08-27",
+   "eli": "DU/2026/1159",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2601": {
+   "data": "2026-06-17",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2602": {
+   "data": "2026-07-31",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2603": {
+   "data": "2026-06-10",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "261": {
+   "data": "2024-05-08",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2620": {
+   "data": "2026-08-07",
+   "eli": "DU/2026/1074",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2621": {
+   "data": "2026-11-05",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2622": {
+   "data": "2026-07-01",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "2623": {
+   "data": "2026-07-03",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2642": {
+   "data": "2026-08-27",
+   "eli": "DU/2026/1206",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2643": {
+   "data": "2026-07-24",
+   "eli": "DU/2026/1007",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2644": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2645": {
+   "data": "2026-06-17",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2647": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2648": {
+   "data": "2026-08-27",
+   "eli": "DU/2026/1156",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2649": {
+   "data": "2026-09-25",
+   "eli": "DU/2026/1273",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2667": {
+   "data": "2026-08-13",
+   "eli": "DU/2026/1100",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2668": {
+   "data": "2026-07-30",
+   "eli": "DU/2026/1036",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2669": {
+   "data": "2026-08-28",
+   "eli": "DU/2026/1161",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2670": {
+   "data": "2026-10-20",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2671": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2672": {
+   "data": "2026-07-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2673": {
+   "data": "2026-07-03",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2674": {
+   "data": "2026-07-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2675": {
+   "data": "2026-08-28",
+   "eli": "DU/2026/1155",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2677": {
+   "data": "2026-09-25",
+   "eli": "DU/2026/1270",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "268": {
+   "data": "2024-06-05",
+   "eli": "DU/2024/850",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2684": {
+   "data": "2026-07-24",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "2685": {
+   "data": "2026-07-17",
+   "eli": "DU/2026/972",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "269": {
+   "data": "2024-06-03",
+   "eli": "DU/2024/834",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2693": {
+   "data": "2026-10-23",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "2694": {
+   "data": "2026-09-25",
+   "eli": "DU/2026/1296",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2695": {
+   "data": "2026-08-28",
+   "eli": "DU/2026/1154",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2696": {
+   "data": "2026-07-30",
+   "eli": "DU/2026/1034",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2697": {
+   "data": "2026-07-01",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "2698": {
+   "data": "2026-08-19",
+   "eli": "DU/2026/1123",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2699": {
+   "data": "2026-08-13",
+   "eli": "DU/2026/1099",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "27": {
+   "data": "2024-02-08",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2700": {
+   "data": "2026-09-01",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2701": {
+   "data": "2026-08-13",
+   "eli": "DU/2026/1102",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2702": {
+   "data": "2026-07-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2703": {
+   "data": "2026-07-03",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2704": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2705": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "2706": {
+   "data": "2026-07-03",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2721": {
+   "data": "2026-10-14",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "2722": {
+   "data": "2026-07-03",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2723": {
+   "data": "2026-07-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2724": {
+   "data": "2026-06-19",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2737": {
+   "data": "2026-10-28",
+   "eli": "DU/2026/1440",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2738": {
+   "data": "2026-10-28",
+   "eli": "DU/2026/1439",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "274": {
+   "data": "2024-05-15",
+   "eli": "DU/2024/743",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2745": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2746": {
+   "data": "2026-09-18",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2747": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2748": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2749": {
+   "data": "2026-09-23",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "275": {
+   "data": "2024-06-07",
+   "eli": "DU/2024/863",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2750": {
+   "data": "2026-09-17",
+   "eli": null,
+   "etap": "Praca w komisjach nad wnioskiem Prezydenta › Sprawozdanie komisji",
+   "status": "UCHWALONA"
+  },
+  "276": {
+   "data": "2024-07-17",
+   "eli": "DU/2024/1092",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2769": {
+   "data": "2026-10-20",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "277": {
+   "data": "2024-04-25",
+   "eli": "DU/2024/649",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2771": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2772": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2778": {
+   "data": "2026-09-03",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2779": {
+   "data": "2026-07-08",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2799": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1353",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "28": {
+   "data": "2024-01-25",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2800": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "2801": {
+   "data": "2026-10-09",
+   "eli": "DU/2026/1340",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2802": {
+   "data": "2026-09-18",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2803": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2804": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2805": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2806": {
+   "data": "2026-07-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2810": {
+   "data": "2026-10-09",
+   "eli": "DU/2026/1326",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2821": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1347",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2822": {
+   "data": "2026-08-28",
+   "eli": "DU/2026/1157",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2823": {
+   "data": "2026-07-23",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2824": {
+   "data": "2026-09-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2825": {
+   "data": "2026-09-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2826": {
+   "data": "2026-07-29",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2827": {
+   "data": "2026-07-29",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2828": {
+   "data": "2026-07-17",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2837": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1371",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2838": {
+   "data": "2026-10-28",
+   "eli": "DU/2026/1446",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2839": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1398",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2840": {
+   "data": "2026-11-04",
+   "eli": "DU/2026/1479",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2841": {
+   "data": "2026-11-04",
+   "eli": "DU/2026/1478",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2842": {
+   "data": "2026-09-03",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2846": {
+   "data": "2026-10-09",
+   "eli": "DU/2026/1343",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2848": {
+   "data": "2026-07-27",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2865": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2866": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1358",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2867": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2868": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "2869": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "2870": {
+   "data": "2026-10-23",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "2871": {
+   "data": "2026-10-07",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "2872": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1354",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "2873": {
+   "data": "2026-07-29",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2874": {
+   "data": "2026-09-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2883": {
+   "data": "2026-09-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2884": {
+   "data": "2026-09-17",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2885": {
+   "data": "2026-09-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2886": {
+   "data": "2026-07-31",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "2887": {
+   "data": "2026-07-31",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "29": {
+   "data": "2024-04-26",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "293": {
+   "data": "2024-05-15",
+   "eli": "DU/2024/742",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "294": {
+   "data": "2024-07-29",
+   "eli": "DU/2024/1148",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "296": {
+   "data": "2024-07-18",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "2995": {
+   "data": "2026-10-22",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "2996": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "2997": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "2998": {
+   "data": "2026-10-23",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "2999": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "30": {
+   "data": "2024-10-29",
+   "eli": "DU/2024/1615",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3000": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3001": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3002": {
+   "data": "2026-10-23",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3003": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3004": {
+   "data": "2026-10-22",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3007": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3008": {
+   "data": "2026-09-18",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3009": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3010": {
+   "data": "2026-11-04",
+   "eli": "DU/2026/1476",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3011": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3012": {
+   "data": "2026-11-04",
+   "eli": "DU/2026/1477",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3013": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3015": {
+   "data": "2026-10-04",
+   "eli": "DU/2026/1308",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3028": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1349",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3029": {
+   "data": "2026-09-15",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "303": {
+   "data": "2024-06-05",
+   "eli": "DU/2024/851",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3030": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "3032": {
+   "data": "2026-09-16",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3033": {
+   "data": "2026-09-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3034": {
+   "data": "2026-09-03",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3035": {
+   "data": "2026-10-21",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3036": {
+   "data": "2026-09-01",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3037": {
+   "data": "2026-09-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3038": {
+   "data": "2026-10-20",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3039": {
+   "data": "2026-09-03",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3040": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3066": {
+   "data": "2026-09-18",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3074": {
+   "data": "2026-10-23",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3085": {
+   "data": "2026-11-05",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3086": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3087": {
+   "data": "2026-10-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3088": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3089": {
+   "data": "2026-09-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3090": {
+   "data": "2026-05-11",
+   "eli": null,
+   "etap": "Projekt wpłynął do Sejmu",
+   "status": "W TOKU"
+  },
+  "3094": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3099": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1354",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "31": {
+   "data": "2023-12-15",
+   "eli": "DU/2023/2730",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3100": {
+   "data": "2026-10-01",
+   "eli": "DU/2026/1287",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3101": {
+   "data": "2026-11-04",
+   "eli": "DU/2026/1466",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3102": {
+   "data": "2026-10-15",
+   "eli": "DU/2026/1348",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "311": {
+   "data": "2024-06-11",
+   "eli": "DU/2024/879",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3120": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3121": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "3122": {
+   "data": "2026-10-06",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3123": {
+   "data": "2026-10-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3124": {
+   "data": "2026-09-17",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3125": {
+   "data": "2026-09-17",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3126": {
+   "data": "2026-09-17",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3134": {
+   "data": "2026-09-28",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3135": {
+   "data": "2026-10-28",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3136": {
+   "data": "2026-10-28",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3137": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3138": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3139": {
+   "data": "2026-10-21",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3140": {
+   "data": "2026-10-21",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3141": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "3142": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3143": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3144": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3145": {
+   "data": "2026-10-08",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "3146": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3147": {
+   "data": "2026-10-28",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "3148": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3149": {
+   "data": "2026-10-28",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3150": {
+   "data": "2026-10-08",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "3153": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3154": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3155": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3156": {
+   "data": "2026-10-06",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3157": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "3159": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "316": {
+   "data": "2026-10-27",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3160": {
+   "data": "2026-10-28",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3163": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "317": {
+   "data": "2024-06-19",
+   "eli": "DU/2024/928",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3172": {
+   "data": "2026-10-20",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3173": {
+   "data": "2026-06-18",
+   "eli": null,
+   "etap": "Projekt wpłynął do Sejmu",
+   "status": "W TOKU"
+  },
+  "3174": {
+   "data": "2026-10-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3175": {
+   "data": "2026-10-20",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3176": {
+   "data": "2026-10-23",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "3177": {
+   "data": "2026-10-22",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "318": {
+   "data": "2024-06-11",
+   "eli": "DU/2024/878",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3184": {
+   "data": "2026-10-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3186": {
+   "data": "2026-10-23",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "319": {
+   "data": "2024-06-07",
+   "eli": "DU/2024/858",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "32": {
+   "data": "2024-08-09",
+   "eli": "DU/2024/1243",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "320": {
+   "data": "2024-06-07",
+   "eli": "DU/2024/862",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3204": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3205": {
+   "data": "2026-10-22",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3206": {
+   "data": "2026-10-22",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "321": {
+   "data": "2025-10-17",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "322": {
+   "data": "2024-05-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "323": {
+   "data": "2024-04-24",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3231": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3232": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3233": {
+   "data": "2026-11-05",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3234": {
+   "data": "2026-10-20",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3235": {
+   "data": "2026-10-20",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "324": {
+   "data": "2024-11-21",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "3245": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "325": {
+   "data": "2024-04-24",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "326": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1827",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "3261": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3262": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3263": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3264": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3266": {
+   "data": "2026-11-05",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3267": {
+   "data": "2026-10-23",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3268": {
+   "data": "2026-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3269": {
+   "data": "2026-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "327": {
+   "data": "2025-11-18",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "3278": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "3281": {
+   "data": "2026-11-05",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "3293": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "3295": {
+   "data": "2026-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3296": {
+   "data": "2026-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3297": {
+   "data": "2026-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3298": {
+   "data": "2026-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3299": {
+   "data": "2026-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "33": {
+   "data": "2023-11-29",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3305": {
+   "data": "2026-10-21",
+   "eli": null,
+   "etap": "Projekt wpłynął do Sejmu",
+   "status": "W TOKU"
+  },
+  "3306": {
+   "data": "2026-10-21",
+   "eli": null,
+   "etap": "Projekt wpłynął do Sejmu",
+   "status": "W TOKU"
+  },
+  "3307": {
+   "data": "2026-10-21",
+   "eli": null,
+   "etap": "Projekt wpłynął do Sejmu",
+   "status": "W TOKU"
+  },
+  "3308": {
+   "data": "2026-10-15",
+   "eli": null,
+   "etap": "Opinia organizacji samorządowej",
+   "status": "W TOKU"
+  },
+  "3309": {
+   "data": "2026-09-11",
+   "eli": null,
+   "etap": "Opinia organizacji samorządowej",
+   "status": "W TOKU"
+  },
+  "3310": {
+   "data": "2026-11-04",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3311": {
+   "data": "2026-10-14",
+   "eli": null,
+   "etap": "Projekt wpłynął do Sejmu",
+   "status": "W TOKU"
+  },
+  "3312": {
+   "data": "2026-09-18",
+   "eli": null,
+   "etap": "Opinia organizacji samorządowej",
+   "status": "W TOKU"
+  },
+  "3332": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3333": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3334": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3335": {
+   "data": "2026-11-06",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "3355": {
+   "data": "2026-11-13",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "341": {
+   "data": "2024-06-05",
+   "eli": "DU/2024/852",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "342": {
+   "data": "2024-06-07",
+   "eli": "DU/2024/854",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "346": {
+   "data": "2024-06-07",
+   "eli": "DU/2024/859",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "347": {
+   "data": "2024-07-03",
+   "eli": "DU/2024/1006",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "348": {
+   "data": "2024-07-17",
+   "eli": "DU/2024/1090",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "349": {
+   "data": "2024-05-07",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "350": {
+   "data": "2026-06-17",
+   "eli": null,
+   "etap": "Praca w komisjach po II czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "351": {
+   "data": "2024-08-26",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "382": {
+   "data": "2024-06-11",
+   "eli": "DU/2024/885",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "384": {
+   "data": "2024-06-28",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "385": {
+   "data": "2024-05-14",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "386": {
+   "data": "2024-06-10",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "405": {
+   "data": "2024-06-14",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "406": {
+   "data": "2024-08-14",
+   "eli": "DU/2024/1254",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "407": {
+   "data": "2024-08-08",
+   "eli": "DU/2024/1246",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "409": {
+   "data": "2024-09-26",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "410": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "419": {
+   "data": "2024-06-28",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "420": {
+   "data": "2024-07-17",
+   "eli": "DU/2024/1091",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "423": {
+   "data": "2024-08-09",
+   "eli": "DU/2024/1221",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "424": {
+   "data": "2024-08-09",
+   "eli": "DU/2024/1222",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "430": {
+   "data": "2024-07-17",
+   "eli": "DU/2024/1081",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "431": {
+   "data": "2024-06-11",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "432": {
+   "data": "2024-06-11",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "435": {
+   "data": "2024-09-27",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "436": {
+   "data": "2024-06-11",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "437": {
+   "data": "2024-08-08",
+   "eli": "DU/2024/1237",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "438": {
+   "data": "2024-06-28",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "439": {
+   "data": "2024-11-08",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "440": {
+   "data": "2025-04-07",
+   "eli": "DU/2025/479",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "441": {
+   "data": "2024-10-09",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "442": {
+   "data": "2024-12-05",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "443": {
+   "data": "2024-10-07",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "444": {
+   "data": "2024-10-09",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "445": {
+   "data": "2024-11-27",
+   "eli": "DU/2024/1761",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "471": {
+   "data": "2024-08-14",
+   "eli": "DU/2024/1248",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "472": {
+   "data": "2024-07-17",
+   "eli": "DU/2024/1089",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "481": {
+   "data": "2024-10-01",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "494": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1831",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "496": {
+   "data": "2024-11-13",
+   "eli": "DU/2024/1672",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "497": {
+   "data": "2024-08-09",
+   "eli": "DU/2024/1230",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "522": {
+   "data": "2025-01-21",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "523": {
+   "data": "2024-07-25",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "526": {
+   "data": "2024-07-10",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "528": {
+   "data": "2024-12-17",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "545": {
+   "data": "2024-07-30",
+   "eli": "DU/2024/1166",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "546": {
+   "data": "2024-07-30",
+   "eli": "DU/2024/1165",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "547": {
+   "data": "2024-07-30",
+   "eli": "DU/2024/1155",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "548": {
+   "data": "2024-08-08",
+   "eli": "DU/2024/1229",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "552": {
+   "data": "2024-07-26",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "553": {
+   "data": "2024-10-14",
+   "eli": "DU/2024/1565",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "554": {
+   "data": "2024-10-28",
+   "eli": "DU/2024/1597",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "555": {
+   "data": "2025-04-03",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "556": {
+   "data": "2026-02-12",
+   "eli": "DU/2026/178",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "558": {
+   "data": "2025-10-09",
+   "eli": null,
+   "etap": "III czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "559": {
+   "data": "2024-07-22",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "560": {
+   "data": "2025-01-07",
+   "eli": "DU/2025/28",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "573": {
+   "data": "2025-01-08",
+   "eli": "DU/2025/31",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "589": {
+   "data": "2024-10-17",
+   "eli": "DU/2024/1559",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "59": {
+   "data": "2023-11-27",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "599": {
+   "data": "2025-07-22",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "600": {
+   "data": "2024-11-05",
+   "eli": "DU/2024/1635",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "601": {
+   "data": "2024-10-28",
+   "eli": "DU/2024/1593",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "602": {
+   "data": "2024-10-14",
+   "eli": "DU/2024/1544",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "603": {
+   "data": "2024-11-18",
+   "eli": "DU/2024/1692",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "604": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Stanowisko Senatu › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "605": {
+   "data": "2024-10-14",
+   "eli": "DU/2024/1562",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "606": {
+   "data": "2024-10-17",
+   "eli": "DU/2024/1558",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "607": {
+   "data": "2024-11-13",
+   "eli": "DU/2024/1674",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "608": {
+   "data": "2025-12-17",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "609": {
+   "data": "2025-06-25",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "610": {
+   "data": "2025-10-15",
+   "eli": "DU/2025/1436",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "611": {
+   "data": "2026-11-09",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "612": {
+   "data": "2024-08-26",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "613": {
+   "data": "2024-08-26",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "622": {
+   "data": "2024-10-21",
+   "eli": "DU/2024/1572",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "63": {
+   "data": "2023-12-04",
+   "eli": "DU/2023/2626",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "643": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "644": {
+   "data": "2024-09-11",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "65": {
+   "data": "2023-11-24",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "650": {
+   "data": "2024-10-14",
+   "eli": "DU/2024/1535",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "655": {
+   "data": "2024-10-17",
+   "eli": "DU/2024/1560",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "656": {
+   "data": "2024-11-20",
+   "eli": "DU/2024/1721",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "659": {
+   "data": "2025-07-22",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "660": {
+   "data": "2024-09-13",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "661": {
+   "data": "2024-11-15",
+   "eli": "DU/2024/1684",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "664": {
+   "data": "2024-12-17",
+   "eli": "DU/2024/1907",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "665": {
+   "data": "2024-10-07",
+   "eli": "DU/2024/1494",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "669": {
+   "data": "2024-09-28",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "670": {
+   "data": "2024-11-29",
+   "eli": "DU/2024/1781",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "671": {
+   "data": "2026-10-23",
+   "eli": null,
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "UCHWALONA"
+  },
+  "672": {
+   "data": "2024-10-03",
+   "eli": "DU/2024/1473",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "673": {
+   "data": "2024-10-17",
+   "eli": "DU/2024/1585",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "674": {
+   "data": "2024-11-15",
+   "eli": "DU/2024/1685",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "687": {
+   "data": "2025-01-17",
+   "eli": "DU/2025/63",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "690": {
+   "data": "2024-12-20",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "692": {
+   "data": "2024-11-15",
+   "eli": "DU/2024/1681",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "693": {
+   "data": "2024-12-20",
+   "eli": "DU/2024/1925",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "698": {
+   "data": "2025-02-24",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "699": {
+   "data": "2025-02-05",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "700": {
+   "data": "2025-02-24",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "702": {
+   "data": "2024-11-27",
+   "eli": "DU/2024/1762",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "703": {
+   "data": "2025-12-02",
+   "eli": "DU/2025/1696",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "71": {
+   "data": "2023-12-06",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "72": {
+   "data": "2023-12-15",
+   "eli": "DU/2023/2760",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "722": {
+   "data": "2024-11-15",
+   "eli": "DU/2024/1688",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "726": {
+   "data": "2024-12-12",
+   "eli": "DU/2024/1863",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "727": {
+   "data": "2024-11-27",
+   "eli": "DU/2024/1764",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "728": {
+   "data": "2024-11-07",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "729": {
+   "data": "2026-06-17",
+   "eli": null,
+   "etap": "Praca w komisjach po II czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "73": {
+   "data": "2023-12-05",
+   "eli": null,
+   "etap": "Wycofano",
+   "status": "W TOKU"
+  },
+  "730": {
+   "data": "2024-10-15",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "74": {
+   "data": "2023-12-22",
+   "eli": "DU/2023/2776",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "741": {
+   "data": "2024-11-27",
+   "eli": "DU/2024/1757",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "742": {
+   "data": "2024-12-23",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "743": {
+   "data": "2024-12-12",
+   "eli": "DU/2024/1881",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "744": {
+   "data": "2024-12-06",
+   "eli": "DU/2024/1847",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "745": {
+   "data": "2024-12-28",
+   "eli": "DU/2024/1976",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "746": {
+   "data": "2024-12-28",
+   "eli": "DU/2024/1975",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "747": {
+   "data": "2024-12-28",
+   "eli": "DU/2024/1974",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "748": {
+   "data": "2025-08-05",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "75": {
+   "data": "2024-05-09",
+   "eli": "DU/2024/721",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "750": {
+   "data": "2025-01-10",
+   "eli": "DU/2025/39",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "751": {
+   "data": "2024-12-12",
+   "eli": "DU/2024/1853",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "752": {
+   "data": "2024-12-06",
+   "eli": "DU/2024/1855",
+   "etap": "Ustawę przekazano Prezydentowi do podpisu",
+   "status": "OGŁOSZONA"
+  },
+  "753": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1840",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "754": {
+   "data": "2024-11-27",
+   "eli": "DU/2024/1754",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "755": {
+   "data": "2024-11-27",
+   "eli": "DU/2024/1755",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "756": {
+   "data": "2024-11-27",
+   "eli": "DU/2024/1756",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "757": {
+   "data": "2024-12-17",
+   "eli": "DU/2024/1897",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "759": {
+   "data": "2024-12-19",
+   "eli": "DU/2024/1933",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "760": {
+   "data": "2024-12-18",
+   "eli": "DU/2024/1911",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "761": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1841",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "762": {
+   "data": "2024-12-12",
+   "eli": "DU/2024/1871",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "763": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1823",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "764": {
+   "data": "2024-12-19",
+   "eli": "DU/2024/1915",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "765": {
+   "data": "2025-01-30",
+   "eli": "DU/2025/146",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "766": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1834",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "772": {
+   "data": "2025-02-24",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "773": {
+   "data": "2025-02-21",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "774": {
+   "data": "2025-07-22",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "777": {
+   "data": "2024-12-24",
+   "eli": "DU/2024/1965",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "800": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1827",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "801": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1824",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "802": {
+   "data": "2024-11-25",
+   "eli": "DU/2024/1717",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "803": {
+   "data": "2025-01-28",
+   "eli": "DU/2025/129",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "804": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1836",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "810": {
+   "data": "2025-02-06",
+   "eli": "DU/2025/179",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "811": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1828",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "812": {
+   "data": "2024-12-18",
+   "eli": "DU/2024/1914",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "813": {
+   "data": "2024-12-19",
+   "eli": "DU/2024/1940",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "823": {
+   "data": "2024-11-19",
+   "eli": null,
+   "etap": "Skierowano do I czytania na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "824": {
+   "data": "2025-04-18",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "825": {
+   "data": "2025-03-14",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "826": {
+   "data": "2025-03-14",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "827": {
+   "data": "2024-11-19",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "828": {
+   "data": "2025-03-19",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "829": {
+   "data": "2025-08-05",
+   "eli": "DU/2025/1088",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "830": {
+   "data": "2025-03-06",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "835": {
+   "data": "2025-12-02",
+   "eli": "DU/2025/1696",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "836": {
+   "data": "2026-02-24",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "837": {
+   "data": "2026-02-24",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "838": {
+   "data": "2025-05-09",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "839": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1826",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "840": {
+   "data": "2024-12-20",
+   "eli": "DU/2024/1926",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "841": {
+   "data": "2024-12-09",
+   "eli": "DU/2024/1831",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "842": {
+   "data": "2024-12-20",
+   "eli": "DU/2024/1964",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "852": {
+   "data": "2024-12-20",
+   "eli": "DU/2024/1961",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "864": {
+   "data": "2025-01-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "865": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "866": {
+   "data": "2024-12-20",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "867": {
+   "data": "2025-01-09",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "868": {
+   "data": "2026-03-11",
+   "eli": "DU/2026/346",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "876": {
+   "data": "2025-04-17",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "878": {
+   "data": "2025-02-06",
+   "eli": "DU/2025/172",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "879": {
+   "data": "2025-02-25",
+   "eli": "DU/2025/240",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "880": {
+   "data": "2025-05-14",
+   "eli": "DU/2025/641",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "895": {
+   "data": "2025-02-18",
+   "eli": "DU/2025/216",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "896": {
+   "data": "2025-02-20",
+   "eli": "DU/2025/222",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "897": {
+   "data": "2024-12-20",
+   "eli": "DU/2024/1946",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "906": {
+   "data": "2025-03-06",
+   "eli": "DU/2025/304",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "907": {
+   "data": "2025-09-25",
+   "eli": null,
+   "etap": "Praca w komisjach po I czytaniu › Sprawozdanie komisji",
+   "status": "W TOKU"
+  },
+  "908": {
+   "data": "2025-02-21",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "909": {
+   "data": "2025-08-21",
+   "eli": "DU/2025/1169",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "92": {
+   "data": "2023-12-15",
+   "eli": "DU/2023/2699",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "923": {
+   "data": "2025-03-18",
+   "eli": null,
+   "etap": "Wniosek Prezydenta (weto) › Skierowanie",
+   "status": "UCHWALONA"
+  },
+  "924": {
+   "data": "2025-03-26",
+   "eli": "DU/2025/389",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "925": {
+   "data": "2025-02-06",
+   "eli": "DU/2025/165",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "926": {
+   "data": "2025-03-17",
+   "eli": null,
+   "etap": "Prezydent skierował ustawę do Trybunału Konstytucyjnego",
+   "status": "UCHWALONA"
+  },
+  "927": {
+   "data": "2025-01-31",
+   "eli": "DU/2025/159",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "932": {
+   "data": "2025-03-06",
+   "eli": "DU/2025/295",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "933": {
+   "data": "2025-03-25",
+   "eli": "DU/2025/409",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "934": {
+   "data": "2025-06-18",
+   "eli": "DU/2025/807",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "935": {
+   "data": "2026-03-27",
+   "eli": null,
+   "etap": "Rozpatrywanie na forum Sejmu wniosku Prezydenta › Głosowanie",
+   "status": "UCHWALONA"
+  },
+  "948": {
+   "data": "2025-04-10",
+   "eli": "DU/2025/620",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "949": {
+   "data": "2025-04-10",
+   "eli": "DU/2025/621",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "950": {
+   "data": "2025-05-08",
+   "eli": "DU/2025/619",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "951": {
+   "data": "2025-05-08",
+   "eli": "DU/2025/622",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "952": {
+   "data": "2025-03-20",
+   "eli": "DU/2025/374",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "953": {
+   "data": "2025-03-06",
+   "eli": "DU/2025/289",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "954": {
+   "data": "2025-03-25",
+   "eli": "DU/2025/413",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "955": {
+   "data": "2025-03-24",
+   "eli": "DU/2025/393",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "956": {
+   "data": "2025-03-05",
+   "eli": "DU/2025/303",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "962": {
+   "data": "2025-01-24",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Głosowanie",
+   "status": "W TOKU"
+  },
+  "964": {
+   "data": "2025-04-14",
+   "eli": "DU/2025/497",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "965": {
+   "data": "2025-04-18",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "966": {
+   "data": "2025-03-05",
+   "eli": null,
+   "etap": "I czytanie na posiedzeniu Sejmu › Skierowanie",
+   "status": "W TOKU"
+  },
+  "970": {
+   "data": "2025-01-21",
+   "eli": null,
+   "etap": "Skierowano do I czytania w komisjach › Skierowanie",
+   "status": "W TOKU"
+  },
+  "981": {
+   "data": "2025-03-14",
+   "eli": "DU/2025/340",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "982": {
+   "data": "2025-03-31",
+   "eli": "DU/2025/427",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "983": {
+   "data": "2025-06-17",
+   "eli": "DU/2025/799",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "988": {
+   "data": "2025-04-16",
+   "eli": "DU/2025/526",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "989": {
+   "data": "2025-03-20",
+   "eli": "DU/2025/368",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "992": {
+   "data": "2025-03-18",
+   "eli": "DU/2025/352",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "993": {
+   "data": "2025-06-17",
+   "eli": "DU/2025/820",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "994": {
+   "data": "2025-04-16",
+   "eli": "DU/2025/524",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "995": {
+   "data": "2025-05-07",
+   "eli": "DU/2025/630",
+   "etap": "Prezydent podpisał ustawę",
+   "status": "OGŁOSZONA"
+  },
+  "996": {
+   "data": "2025-07-24",
+   "eli": null,
+   "etap": "I czytanie w komisjach",
+   "status": "W TOKU"
+  },
+  "997": {
+   "data": "2025-07-31",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "998": {
+   "data": "2025-10-02",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  },
+  "999": {
+   "data": "2025-04-18",
+   "eli": null,
+   "etap": "Wpłynęło stanowisko rządu",
+   "status": "W TOKU"
+  }
+ }
+}

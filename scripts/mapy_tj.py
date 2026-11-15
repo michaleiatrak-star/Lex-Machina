@@ -122,7 +122,11 @@ def tekst(entry, base):
 
 
 def etykieta(e):
-    name = title_short(e["tytul"])
+    title = e["tytul"] or ""
+    issuer = re.match(r"^((?:Rozporządzenie|Obwieszczenie|Dekret|Zarządzenie|Uchwała)\b.*?) z dnia ", title)
+    name = title_short(title)
+    if not e["abbr"] and issuer:
+        return f"{issuer.group(1)} — {name}"
     return f"{e['abbr']} — {name}" if e["abbr"] else name[:1].upper() + name[1:]
 
 
@@ -241,6 +245,60 @@ def changes_after_tj(tj_id):
     return [(eli_id, date) for eli_id, date, _prom, _title in info["changes"] if date]
 
 
+# Dziedzina ustawy spoza nagłówków modułów po tytule (heurystyka, jawnie oznaczona w „Źródło dziedziny”).
+# Kolejność ma znaczenie: pierwsze trafienia (do dwóch). Akty wykonawcze dziedziczą dziedzinę ustawy,
+# na podstawie której je wydano (ELI „Podstawa prawna”), nie reguły tytułu.
+TITLE_RULES = [
+    (r"podat|akcyz|\bcło\b|celn|ordynacj\w* podatk|finans\w* publiczn|budżet|rachunkow|praniu pieniędzy|bankow|kredyt|ubezpiecze\w* gospodarcz|kapitałow|giełd|obrocie instrumentami|walut|płatnicz|kas\w* rejestrując|loteri|gier hazard|skarbow", "06"),
+    (r"zamówie\w* publiczn|koncesj\w* na roboty|partnerstwie publiczno|funduszy europejsk|polityki spójności|pomocy publicznej|polityki rozwoju", "07"),
+    (r"samorząd|gminn|powiat|województw|wojewod|metropolitaln|referendum lokaln|dochodach jednostek", "08"),
+    (r"budowl|planowani\w* przestrzenn|środowisk|odpad|energ|klimat|\bwod|transport|drog|kolej|lotnic|morsk|żegl|geodez|górnicz|geologiczn|gazow|paliw|nieruchomości|mieszkan|lasach|leśn|łowiec|przyrod|zabytk|portach|ruchu drogowym|pojazd|kierowc|atomow|jądrow|promieniow|emisj", "09"),
+    (r"zdrow|lecznicz|farmac|lekar|pielęgniar|pacjent|szpital|żywnoś|weteryn|rolni|rolny|nasien|zwierząt|roślin|sanitar|epidem|narkoman|alkohol|tyto|medyczn|aptek|ratownictw\w* medyczn|krwi|transplant|uzdrowisk|niepłodn|pasz|nawoz|ryb", "10"),
+    (r"danych osobowych|cyberbezpiecz|telekomunik|komunikacji elektronicznej|elektroniczn|informatyz|cyfryzac|sztucznej inteligencji|prawie autorskim|własności przemysłowej|zaufania|podpis\w* elektron|pocztow|radiofonii|prasow", "11"),
+    (r"sądów|sąd\w* powszechn|sądzie najwyższym|prokurat|adwokat|radc|notari|komornik|kurator|krajowej radzie sądownictwa|kosztach sądowych|biegł|mediator|tłumacz\w* przysięgł|rzecznik\w* patentow|doradztw\w* podatkow", "12"),
+    (r"policj|wojsk|obron|żołnierz|służb\w* (?:specjaln|celno|więzien|ochrony)|straż\w* (?:granicznej|pożarnej|marszałk)|informacji niejawnych|bezpieczeństw\w* (?:państwa|wewnętrzn)|agencji bezpieczeństwa|agencji wywiadu|broni|amunicj|ochronie ludności|zarządzani\w* kryzysow|granic\w* państwow|antyterror|cudzoziem|kontrwywiad|żandarm", "13"),
+    (r"umow\w* międzynarodow|ratyfik|unii europejskiej|konwencj|stosunk\w* zagraniczn|służbie zagranicznej", "14"),
+    (r"sygnalist|biegłych rewidentach|audyt|nadzorze publicznym|normalizac|akredytac|ograniczeniu prowadzenia działalności", "15"),
+    (r"pracy|zatrudnieni|emerytur|\brent|ubezpieczeń społecznych|zasiłk|świadcze\w* (?:rodzin|socjaln|pieniężn)|pomocy społecznej|niepełnosprawn|związk\w* zawodow|pracodawc|bezrobot|kombatant|weteran|wynagrodze", "04"),
+    (r"karn|wykrocze|przestęp|więziennictw|probacj|egzekucyjn\w* w administracji|nieletnich", "03"),
+    (r"cywiln|rodzinn\w* i opiekuńcz|spół|upadłości|restrukturyzac|ksiąg\w* wieczyst|własności lokali|spółdziel|fundacj|stowarzysz|gospodarcz|przedsiębiorc|konsument|spadk|postępowaniu grupowym|zastaw|hipote|weksl|czek", "02"),
+    (r"postępowani\w* administracyjn|sądów administracyjnych|ewidencji ludności|dowod\w* osobist|stanu cywilnego|oświat|szkoln|szkół|nauk|szkolnictw|kultur|sport|mediów|petycj|informacji publicznej|paszport|obywatelstw|wyznani|kościo", "05"),
+    (r"konstytucj|trybunale konstytucyjnym|trybunale stanu|wykonywaniu mandatu|kodeks wyborczy|wyborach|rzecznik\w* praw obywatelskich|najwyższej izbie kontroli|ogłaszaniu aktów|orderach|godle|hymnie|referendum ogólnokrajow|rzecznik\w* praw dziecka", "01"),
+]
+
+
+def title_domains(title):
+    t = (title or "").lower()
+    hits = []
+    for pattern, dr in TITLE_RULES:
+        if re.search(pattern, t) and f"DR-{dr}" not in hits:
+            hits.append(f"DR-{dr}")
+    return hits[:2]
+
+
+def basis_domains(base, system):
+    """Akt wykonawczy: dziedziny ustaw z „Podstawa prawna” (z nagłówków modułów albo z tytułu ustawy)."""
+    try:
+        refs = eli(base).get("references", {})
+    except Exception:
+        return [], ""
+    doms, names = [], []
+    for item in refs.get("Podstawa prawna", [])[:3]:
+        bid = item.get("id", "")
+        if not bid.startswith("DU/"):
+            continue
+        try:
+            b_base, _tj, title, _st = base_of(*bid.split("/")[1:])
+        except Exception:
+            continue
+        found = system[b_base]["domeny"] if b_base in system else title_domains(title)
+        names.append(system[b_base]["abbr"] if b_base in system and system[b_base]["abbr"] else title_short(title)[:60])
+        for d in found:
+            if d not in doms and d != PAUZA:
+                doms.append(d)
+    return doms[:2], ", ".join(names)
+
+
 def merged(system, catalog):
     """Akty systemu: nagłówki modułów (dziedzina z modułu) + katalog ELI (dziedzina z mapy albo tytułu)."""
     today = TODAY or __import__("datetime").date.today().isoformat()
@@ -258,8 +316,21 @@ def merged(system, catalog):
         zm = []
         for amend, d in changes_after_tj(act["tj"]):
             zm.append((amend.replace("DU/", ""), d, d > today))
-        acts[base] = {"abbr": "", "tj": act["tj"], "zm": zm, "moduly": [], "tytul": act.get("title", ""), "status": "",
-                      "domeny": doms or ["DR-05"], "zrodlo": "katalog ELI (tytuł)" if act.get("domainSource") == "TITLE" else "katalog ELI (mapa)"}
+        title = act.get("title", "")
+        if doms and act.get("domainSource") == "MAP":
+            src = "katalog ELI (mapa DR)"
+        elif act.get("type") != "Ustawa":
+            doms, via = basis_domains(base, system)
+            src = f"podstawa prawna: {via}" if doms else ""
+        else:
+            doms = []
+            src = ""
+        if not doms:
+            doms = title_domains(title)
+            src = "tytuł (heurystyka)" if doms else "brak trafienia — domyślnie DR-05, do przypisania"
+            doms = doms or ["DR-05"]
+        acts[base] = {"abbr": "", "tj": act["tj"], "zm": zm, "moduly": [], "tytul": title, "status": "",
+                      "domeny": doms, "zrodlo": src}
     return acts
 
 
@@ -267,7 +338,8 @@ OPIS_DR = ("Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teks
            "(nagłówki **Akt:** modułów oraz katalog ELI), w konwencji modułów. Indeks core-law (RAG) czyta ten plik; "
            "routing modułów — tylko MAPA-AKTOW. Brzmienie przepisu zawsze z ELI.")
 OPIS_PL = ("Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite z ELI w systemie, w konwencji modułów, "
-           "z dziedzinami DR. Źródło dziedziny: nagłówek modułu (pewne), katalog ELI (mapa) albo katalog ELI (tytuł — heurystyka).")
+           "z dziedzinami DR. Źródło dziedziny: nagłówek modułu (pewne), podstawa prawna aktu wykonawczego (dziedzina ustawy), "
+           "tytuł (heurystyka) albo „brak trafienia — do przypisania”.")
 
 
 def write(path, text, args, label, problems):

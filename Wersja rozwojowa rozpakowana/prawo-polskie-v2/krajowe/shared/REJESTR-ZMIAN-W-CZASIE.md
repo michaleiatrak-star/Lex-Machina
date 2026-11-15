@@ -5,6 +5,8 @@ aktu z tej listy sprawdź wiersz; brzmienie i tak pobierasz z ELI (RZĄD 1). Utr
 `audyt-systemu-v4/scripts/check_nowelizacje.py --rejestr` (codziennie, `tj-eli-codziennie.yml`); procedura:
 `audyt-systemu-v4/references/METODYKA-MODULY-DR.md` (W-4…W-6).
 
+> **Projekty ustaw w toku:** `PROJEKTY-W-TOKU.md` (Sejm, etap, akty i moduły). **Zmiany od ostatniej aktualizacji systemu** (data w `STAN-AKTUALIZACJI.json`): `ZMIANY-OD-AKTUALIZACJI.md` — lista robocza zmian w modułach i mapach; po ich wprowadzeniu `check_procedowane.py --zatwierdz`. Projekt to kierunek zmian, nie brzmienie przepisu.
+
 ## A. Zmiany nadchodzące
 
 Generowane z ELI i znaczników `[OD RRRR-MM-DD: RRRR/poz]` w modułach — **nie edytuj ręcznie**. Wiersz znika

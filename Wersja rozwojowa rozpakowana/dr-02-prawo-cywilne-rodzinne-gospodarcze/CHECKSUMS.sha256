@@ -1,7 +1,7 @@
 1496f004689c4ec9b0a500742178ff5612fc7ad54a59d324c30b174e66d22bd6  ./MAPA-AKTOW.md
 c3baa5e256c73658f09cd07050b7c2c896c010d65c42127bd0bd40a45d99f824  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-7cc639a754aaaee650885e5911857092c155ea9cfd322a5f6ce90aa2006a1885  ./SKILL.md
+7513905d8ce1e522843e4c3f5243dd383920cc40c62a0517f1df1eceb25bf6f3  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 cc593297b031c62abf297375b063f57f1021c7b9d69c8fe22018c60d55414566  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -106,7 +106,7 @@ b29cb43577bb9f9041e8873c92b96c12c5b3146f74b48b92044d686e7f079995  ./modules/mod-
 69616470caa63a5a4ad31a96b4ea1bda8f3265c05ee6114f157668234e0a666a  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 8e37c15cf15c480bf8a20b5aa8f745be6ee02c0b90f6a2d11310b84e34386692  ./modules/mod-ustawa-zastaw-rejestrowy.md
 8cea8adf63670a0de3612f63495d97695a6c93ddf665e8250cddea9b65ac5daf  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-7a0d14a2737dc29358dff529e7a8b02107732693ff069daecc9ef1e48a4069a8  ./references/CHANGELOG.md
+5d1acd77419c8d8f5d9bf72c4413543dd1bc4db629aa315ae24dee8e163d21b4  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json

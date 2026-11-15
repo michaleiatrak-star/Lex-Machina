@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.269 (2026-11-15): Pełny katalog obowiązujących t.j. (2 664 akty z ELI) w KATALOG-TJ dziedzin i prawo-polskie-v2: dziedzina z nagłówka modułu, podstawy prawnej aktu wykonawczego albo tytułu; monitoring projektów ustaw (PROJEKTY-W-TOKU), lista zmian od ostatniej aktualizacji systemu (ZMIANY-OD-AKTUALIZACJI, STAN-AKTUALIZACJI.json)
 - 6.268 (2026-11-14): Moduł wrogiego przejęcia: skrót OfPubl (monitoring ustawy o ofercie publicznej); rejestr: W-4 dla 2026/1074 i 2026/1206
 - 6.267 (2026-11-14): Moduł wekslowy: skróty PrWeksl/PrCzek rozpoznawane przez monitoring; METODYKA: forma skrótu w nagłówku
 - 6.266 (2026-11-13): check_nowelizacje.py: lista numerów z rokiem przy pierwszym („2026/473, 830, 1003”); szkic W-4 dopasowuje akt po dacie i tytule (NBP i Ordynacja podatkowa z 29.08.1997); scalenie z paczką 2 DR-02 (#154)
