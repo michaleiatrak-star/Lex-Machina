@@ -68,13 +68,14 @@ def refresh_checksums(skill: Path) -> None:
     path = skill / "CHECKSUMS.sha256"
     if not path.is_file():
         return
-    out = []
-    for row in path.read_text(encoding="utf-8").splitlines():
-        digest, sep, name = row.partition("  ")
-        target = skill / name
-        if sep and target.is_file():
-            digest = hashlib.sha256(target.read_bytes()).hexdigest()
-        out.append(f"{digest}{sep}{name}")
+    # The manifest lists every file on disk (new files added, removed ones dropped); files under a
+    # dotted top directory (.claude-plugin/, .mcp.json) are the plugin channel, outside the skill ZIP.
+    files = sorted(
+        p.relative_to(skill).as_posix() for p in skill.rglob("*")
+        if p.is_file() and not p.relative_to(skill).parts[0].startswith(".")
+        and p.name != "CHECKSUMS.sha256" and "__pycache__" not in p.parts and p.suffix != ".pyc"
+    )
+    out = [f"{hashlib.sha256((skill / name).read_bytes()).hexdigest()}  ./{name}" for name in files]
     path.write_text("\n".join(out) + "\n", encoding="utf-8")
 
 
