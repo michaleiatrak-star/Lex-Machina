@@ -66,9 +66,13 @@ jobs:
       # Monitoring modułów DR (METODYKA-MODULY-DR W-2, W-5, W-6): nowelizacje po t.j.
       # nieodnotowane w module, zmiany z datą przyszłą i te, które właśnie weszły w życie.
       # Wynik w jednym zgłoszeniu aktualizowanym codziennie; nie blokuje aktualizacji t.j.
+      # Kod 1 skryptu = znaleziska, nie awaria: bez continue-on-error i set +e (powłoka kroku
+      # ma -e) przerywał workflow przed PR z t.j. (przebiegi 2026-11-14…19 bez PR).
       - name: Monitoring zmian w aktach modułów DR
+        continue-on-error: true
         shell: bash
         run: |
+          set +e
           set -uo pipefail
           python3 "Wersja rozwojowa rozpakowana/audyt-systemu-v4/scripts/check_nowelizacje.py" \
             --root "Wersja rozwojowa rozpakowana" --tylko-wskazania \

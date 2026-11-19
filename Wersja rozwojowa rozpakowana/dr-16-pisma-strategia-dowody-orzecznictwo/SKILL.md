@@ -1,6 +1,6 @@
 ---
 name: dr-16-pisma-strategia-dowody-orzecznictwo
-version: "3.15"
+version: "3.16"
 description: "Pisma, strategia, dowody i orzecznictwo: routing narzędzi procesowych, analiza dowodowa, research orzeczeń, kalkulatory i wsparcie budowy strategii sprawy."
 dependencies:
   requires:
@@ -158,7 +158,7 @@ PRAWO MATERIALNE I USTROJOWE — ZASTOSOWANIE PROCESOWE:
                ochrona źródeł, dobra osobiste, KRRiT)
 
   [✓] OK    mod-ustawa-archiwa-dokumentacja
-              (Ustawa o narodowym zasobie archiwalnym i archiwach — Dz.U. 2020 poz. 164 ze zm.;
+              (Ustawa o narodowym zasobie archiwalnym i archiwach — Dz.U. 2026 poz. 1519 t.j.;
                KPA; ustawa o dostępie do informacji publicznej; RODO;
                retencja akt, udostępnienie dokumentacji, brakowanie,
                archiwizacja elektroniczna, akta osobowe, dowodzenie dokumentem archiwalnym)

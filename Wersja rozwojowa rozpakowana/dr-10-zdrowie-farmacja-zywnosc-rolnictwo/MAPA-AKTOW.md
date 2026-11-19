@@ -22,7 +22,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa o samorządzie pielęgniarek i położnych | Dz.U. 2025 poz. 1760 t.j. ze zm. | `mod-ustawa-pielegniarka-polozna` — odpowiedzialność zawodowa | ✅ aktywny |
 | Ustawa o medycynie laboratoryjnej | Dz.U. 2025 poz. 1295 t.j. ze zm. | `mod-ustawa-diagnostyka-laboratoryjna` | ✅ aktywny |
 | Ustawa o wyrobach medycznych | Dz.U. 2024 poz. 1620 t.j. (akt pierwotny: Dz.U. 2022 poz. 974) | `mod-wyroby-medyczne` | ✅ aktywny; fresh gate |
-| Ustawa o produktach biobójczych | Dz.U. 2021 poz. 24 t.j. ze zm. | `mod-ustawa-produkty-biobojcze` | ✅ aktywny |
+| Ustawa o produktach biobójczych | Dz.U. 2026 poz. 1502 t.j. ze zm. | `mod-ustawa-produkty-biobojcze` | ✅ aktywny |
 | Prawo oświatowe | Dz.U. 2026 poz. 820 t.j. ze zm. | `mod-ustawa-oswiata-szkolnictwo-wyzsze` + `mod-prawa-ucznia` | ✅ aktywny; temporal gate zmian po t.j. |
 | Prawo o szkolnictwie wyższym i nauce | Dz.U. 2026 poz. 1362 t.j. (stan 10.09.2026; zastąpił 2024/1571; 2026/637 od 1.01.2027 w przypisach t.j.) | `mod-ustawa-oswiata-szkolnictwo-wyzsze` | ✅ aktywny |
 | Edukacja specjalna / dostępność | Prawo oświatowe jw. + Dz.U. 2024 poz. 1411 t.j. | `mod-ustawa-edukacja-specjalna-dostepnosc` | ✅ aktywny |

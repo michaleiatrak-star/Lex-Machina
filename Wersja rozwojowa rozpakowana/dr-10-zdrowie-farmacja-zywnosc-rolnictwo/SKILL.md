@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: "3.64"
+version: "3.65"
 description: "Zdrowie, farmacja, żywność i rolnictwo: działalność lecznicza, prawa pacjenta, produkty lecznicze, żywność, weterynaria i regulacje sektora rolnego."
 dependencies:
   requires:
@@ -192,7 +192,7 @@ ZAWODY MEDYCZNE:
 
 WYROBY MEDYCZNE I CHEMIA:
   [✓] OK    mod-ustawa-produkty-biobojcze
-              (produkty biobójcze: Dz.U. 2021 poz. 24 + BPR 528/2012)
+              (produkty biobójcze: Dz.U. 2026 poz. 1502 t.j. + BPR 528/2012)
   [✓] OK    mod-REACH-CLP-chemikalia
               (REACH 1907/2006 + CLP 1272/2008 — rejestracja, SVHC, karty SDS)
 
