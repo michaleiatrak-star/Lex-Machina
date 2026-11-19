@@ -27,6 +27,17 @@ Trzeba wskazać:
 - nieważność postępowania,
 - wadliwość uzasadnienia.
 
+## Praktyka zarzutów (źródła i przepisy jurysdykcji)
+
+Dla prawa polskiego: `JUR:pisma-srodki-odwolawcze` — wybór środka i adresata (SO-0), wymogi treści,
+praktyka formułowania zarzutów ze wskazanych źródeł, korekty przestarzałych tez z aktualnym t.j.
+Zasady ogólne z tych źródeł:
+- zarzut z konkretu sprawy, nie z szablonu; nie przedstawiaj alternatywnego stanu faktycznego —
+  wykaż przekroczone kryterium oceny dowodów;
+- rozdziel błąd ustaleń od błędu subsumcji, zanim postawisz zarzut prawa materialnego;
+- każdy zarzut procesowy z możliwym wpływem na wynik; wniosek końcowy zgodny z kompetencją sądu
+  (zmiana zamiast uchylenia, gdy sąd odwoławczy może orzec co do istoty).
+
 ## Kolejność budowy
 
 1. Zakres zaskarżenia

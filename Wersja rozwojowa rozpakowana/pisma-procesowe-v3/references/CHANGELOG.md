@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.56 (2026-11-19): Środki odwoławcze PL: MOD-SRODKI-ODWOLAWCZE (apelacja cywilna i karna, zażalenie pionowe i poziome, odwołanie ZUS i KPA) — przepisy z t.j. KPC 2026/468, KPK 2026/490, KPA 2025/1691 (ELI 2026-11-19), praktyka zarzutów ze wskazanych źródeł, korekta tez sprzed t.j. (KPK art. 427 § 4–5 uchylone, art. 167), [OD 2027-01-01: 2026/26] art. 477⁹ i 477¹⁴ KPC; appellate-engine-v8 i routing
 - 5.55 (2026-11-19): F-240: podważenie świadka — SW-DETECT-HARD, inwentarz zeznań ze wszystkich protokołów (tools/inwentarz_zeznan.py), SW-P6/SW-A9 niepamięć wobec wiedzy, checkpoint SW-INW, PEER-APPLY PA-1–PA-5, kroki W1-SW-INW i W3-PEER-APPLY
 - 5.54 (2026-11-11, LEGAL GAUNTLET v3 E7): W1.1: zakres IN_SCOPE / OUT_OF_SCOPE przy kilku postępowaniach w materiale, ustalenia W3 jako rekordy teza → źródło → akapit, READY tylko po FILE CHECK PASS (shared/MOD-SLOWNIK-STATUSOW.md, HYBRID-VALIDATION F3.0).
 - 5.53 (2026-11-11, LEGAL GAUNTLET v3 E5): W1.1: wniosek do organu → MOD-WNIOSEK-INSTYTUCJONALNY; pismo dotyczące dziecka → MOD-DOBRO-DZIECKA.
