@@ -298,6 +298,10 @@ W Claude Code (subagent shared:recenzent-niezalezny): przekaż WYŁĄCZNIE ście
   i ścieżki akt — bez rozumowania autora, bez list W2/W3, bez raportu W3 (zgł. #110).
   Wynik subagenta (tabela ATAK/UWAGA-SĄDU/INTERES-KLIENTA/SPÓJNOŚĆ + PEER-OK/UWAGI/STOP)
   zastępuje 4 role poniżej. Izolacja: BLIND.
+⛔ Uwagi recenzenta wprowadzaj wg MOD-PEER-REVIEW §6 PEER-APPLY (PA-1…PA-5, F-240):
+  przed usunięciem twierdzenia — odczyt źródła we wszystkich protokołach, kierunek wobec
+  dosłownej tezy, zgoda użytkownika dla treści przez niego wskazanej, tabela decyzji dla
+  użytkownika, inwentarz SW-INW z --pismo po zmianach.
 W aplikacji Lex Machina (narzędzie independent_review dostępne): wywołaj je z samym tekstem
   pisma (bez CZĘŚCI ROBOCZEJ, bez ocen i listy mocnych tez); akta dobiera aplikacja.
   Wynik zastępuje 4 role poniżej; zapisz izolację z wyniku (BLIND / NON_BLIND).

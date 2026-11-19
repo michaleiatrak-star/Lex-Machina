@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.54"
+version: "5.55"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -485,6 +485,13 @@ KROK ET: Eliminacja tez i weryfikacja przepisów
   ⚠️ EWENTUALNE  → wchodzą jako "ewentualnie" + CV-ALT
   ⛔ WYELIMINOWANE → NIE wchodzą do petitum ani uzasadnienia
 ```
+
+### W1.2c-SW — INWENTARZ ZEZNAŃ ŚWIADKA (⛔ OBOWIĄZKOWE przy SW-DETECT-HARD, F-240)
+
+> Wyzwalacz: pismo podważa / ocenia zeznania świadka albo akta mają ≥2 protokoły jego zeznań.
+> `view shared/MOD-ATAK-NA-SWIADKA.md` → FAZA 0–1A (SW-P1…SW-P6, SW-INW) PRZED CP-1b.
+> Tabela SW-INW w odpowiedzi W1; po każdej zmianie pisma (także PEER-APPLY) `inwentarz_zeznan.py --pismo`.
+> Niewykonane = W1-SW-INW ✗ w ST-FINAL, nie „skrótowo”.
 
 ### W1.2c-PRE — KARTY DOWODOWE I ŁAŃCUCHY (gdy ≥2 dokumenty dostarczone)
 

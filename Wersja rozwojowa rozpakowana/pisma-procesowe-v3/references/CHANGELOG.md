@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.55 (2026-11-19): F-240: podważenie świadka — SW-DETECT-HARD, inwentarz zeznań ze wszystkich protokołów (tools/inwentarz_zeznan.py), SW-P6/SW-A9 niepamięć wobec wiedzy, checkpoint SW-INW, PEER-APPLY PA-1–PA-5, kroki W1-SW-INW i W3-PEER-APPLY
 - 5.54 (2026-11-11, LEGAL GAUNTLET v3 E7): W1.1: zakres IN_SCOPE / OUT_OF_SCOPE przy kilku postępowaniach w materiale, ustalenia W3 jako rekordy teza → źródło → akapit, READY tylko po FILE CHECK PASS (shared/MOD-SLOWNIK-STATUSOW.md, HYBRID-VALIDATION F3.0).
 - 5.53 (2026-11-11, LEGAL GAUNTLET v3 E5): W1.1: wniosek do organu → MOD-WNIOSEK-INSTYTUCJONALNY; pismo dotyczące dziecka → MOD-DOBRO-DZIECKA.
 - 5.52 (2026-11-10, LEGAL GAUNTLET v3 E3): W1.1: bramka MOD-DOPUSZCZALNOSC-GATE przed tezą centralną; FATAL = DRAFT/BLOCKED, stop przed W1.2.

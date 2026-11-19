@@ -1,7 +1,9 @@
 # MOD-ATAK-NA-SWIADKA — Podważanie świadka jako ogniwa łańcucha dowodowego
 
 > **Plik:** `shared/MOD-ATAK-NA-SWIADKA.md`
-> **Wersja:** 1.1.0 (2026-07-02) — naprawa WARN-22: dodano FAZA 6 (specyfika
+> **Wersja:** 1.2.0 (2026-11-19, F-240) — SW-DETECT-HARD, inwentarz wszystkich protokołów świadka
+> (SW-P2, `tools/inwentarz_zeznan.py`), SW-P6 niepamięć wobec wiedzy, SW-A9, checkpoint SW-INW.
+> Poprzednio: 1.1.0 (2026-07-02) — naprawa WARN-22: dodano FAZA 6 (specyfika
 > dziedzinowa DR-02/03/04/05), zastępująca nieaktualne odwołania CHECKLIST-DEDUP
 > do nieistniejącej struktury §CZĘŚĆ I-IV / TA-1..TA-9 (patrz HISTORIA ZMIAN)
 > **Status:** PRODUKCJA — plik kanoniczny shared/
@@ -60,6 +62,13 @@ Ten moduł wypełnia tę lukę.
           → wykonaj FAZĘ 1 dla każdego takiego ogniwa
     NIE → moduł nieaktywny; kontynuuj normalnie
 
+  ⛔ SW-DETECT-HARD (F-240) — AKTYWNY niezależnie od W1.2c, gdy:
+    zadanie = podważenie / ocena wiarygodności / sprzeczne zeznania świadka, LUB
+    akta zawierają ≥2 protokoły zeznań tego samego świadka (także z innej sprawy).
+    Wczytaj PRZED CP-1b. Brak wykonania = krok W1-SW-INW „✗ POMINIĘTY” w ST-FINAL
+    (zakaz opisu „skrótowo”). Luka źródłowa F-240: moduł był wpięty tylko w W1.2c-LANCUCH;
+    pominięcie W1.2c pominęło inwentarz zeznań i istotną sprzeczność.
+
   Trigger dodatkowy:
     Materiał zawiera protokół rozprawy z zeznaniami świadka → AKTYWNY
     Prośba o "podważenie świadka" / "cross-examination" → AKTYWNY
@@ -79,7 +88,16 @@ SW-P1 DANE FORMALNE:
   Relacja ze stronami: zależność służbowa? osobista? ekonomiczna?
   Karalność za składanie fałszywych zeznań (protokół: "pouczony / nie karany")
 
-SW-P2 TREŚĆ ZEZNAŃ (per twierdzenie):
+SW-P2 TREŚĆ ZEZNAŃ (per twierdzenie) — ze WSZYSTKICH protokołów świadka (każda rozprawa,
+  każda sprawa), nie tylko z protokołu, którego dotyczy pismo. Host z powłoką:
+    python3 -I shared/tools/inwentarz_zeznan.py --swiadek NAZWISKO P1.txt P2.txt [--pismo PISMO.txt]
+  (tekst protokołu: pdftotext -layout). Narzędzie wskazuje pary; ocenia autor.
+  Kolumny inwentarza: ID | protokół + znacznik czasu | pytający | cytat | źródło wiedzy |
+    KIERUNEK wobec DOSŁOWNEJ tezy dowodowej z protokołu (KORZ / NIEKORZ / NEUTR) | STATUS
+    (UŻYTE: pkt pisma / POMINIĘTE: powód).
+  ⛔ Kierunek ustalaj z brzmienia tezy dowodowej, nie z parafrazy (autora, recenzenta).
+  Synonimy ról i pojęć traktuj jako jeden temat (informatyk = programista; SMS / WhatsApp =
+  wiadomość); inaczej sprzeczność między protokołami nie zostanie zestawiona.
   Wyodrębnij KAŻDE twierdzenie faktyczne:
     W-001: "[cytat/parafraza]" — bezpośrednio zaobserwowane / z relacji / domysł
     W-002: "[cytat/parafraza]" — ...
@@ -112,6 +130,25 @@ SW-P5 SPRZECZNOŚCI ZEWNĘTRZNE:
   
   Porównaj z zeznaniami innych świadków:
     [W1-001 Nawrot] vs [W2-003 Parzych] — SPRZECZNOŚĆ: [opis]
+
+SW-P6 NIEPAMIĘĆ WOBEC WIEDZY (F-240) — każde W-NW zestaw z wypowiedziami z INNYCH protokołów
+  na ten sam temat (po synonimach). Wcześniejsza ocena, szczegół, data, dokument
+  („współpraca układała się dobrze”, „było zarządzenie”) = świadek tę wiedzę miał.
+  Format: [W-013 17.03 „współpraca jako informatyk dobra”] vs [W-032 13.11 „nie pamiętam,
+  od kiedy był programistą”] — SW-A9.
+```
+
+---
+
+## FAZA 1A — SW-INW: INWENTARZ DLA UŻYTKOWNIKA (checkpoint informacyjny, przed W2)
+
+```
+Pokaż użytkownikowi tabelę SW-P2 z kierunkiem i statusem, w tym:
+  - wszystkie wypowiedzi KORZ (zachowywane w piśmie albo powód pominięcia),
+  - wszystkie pary SW-P4/P5/P6 (użyte / pominięte + powód).
+Pominięcie wypowiedzi KORZ albo pary SW-A9 bez powodu = błąd blokujący W2.
+Po zmianach pisma (także po PEER-REVIEW) uruchom inwentarz z --pismo ponownie:
+  kod 3 = para, której żadna strona nie trafiła do pisma → decyzja autora i informacja dla użytkownika.
 ```
 
 ---
@@ -207,6 +244,15 @@ SW-A8 — WYKLUCZENIE PRZEZ BRAK WIEDZY (świadek nie był przy zdarzeniu):
      zeznaniu tego świadka — który expressis verbis wykluczył posiadanie
      wiedzy w tym zakresie. Strona [X] nie powołała innego świadka
      bezpośrednio obserwującego [zdarzenie Y]."
+
+SW-A9 — NIEPAMIĘĆ WOBEC WCZEŚNIEJSZEJ WIEDZY (F-240):
+  Sygnały: z SW-P6 — świadek zaprzecza wiedzy albo „nie pamięta” tego, co w innym
+           protokole opisał ze szczegółem lub ocenił.
+  Technika pisma:
+    "W [protokół 1, znacznik] świadek [ocenił / opisał] [fakt] ('[cytat]'). W [protokół 2,
+     znacznik] zeznał, że [nie pamięta / nie miał z tym styczności] ('[cytat]'). Świadek
+     znał tę okoliczność, więc rozbieżności nie tłumaczy upływ czasu."
+  Skuteczność: ↑↑↑ — zarzut z protokołów, bez potrzeby dowodu zewnętrznego.
 ```
 
 ---
@@ -221,6 +267,7 @@ MACIERZ PRIORYTETÓW:
     SW-A2 (zaprzeczenie przez dokument klasy A/B)
     SW-A5 (niespójność wewnętrzna w protokole)
     SW-A8 (świadek sam wyklucza swoją wiedzę)
+    SW-A9 (niepamięć wobec wcześniej wykazanej wiedzy)
 
   🟠 SILNE (użyj gdy brak 🔴 lub dla wzmocnienia):
     SW-A1 (konflikt interesu — udokumentowany)
@@ -412,6 +459,10 @@ Sygnały typowe (poglądowe):
 □ SW-P1..P5: profil per świadek-ogniwo — kompletny?
 □ SW-P4: sprzeczności wewnętrzne — sprawdzone?
 □ SW-P5: sprzeczności z dokumentami D[id] — sprawdzone?
+□ SW-P2: inwentarz ze WSZYSTKICH protokołów świadka, kierunek wobec dosłownej tezy, status?
+□ SW-P6: każde W-NW zestawione z innymi protokołami (synonimy ról)?
+□ SW-INW: tabela pokazana użytkownikowi; inwentarz z --pismo po ostatniej zmianie pisma = kod 0
+  albo każda pominięta para z powodem?
 □ SW-ATAK: ≤3 wektory priorytetowe wybrane (nie wszystkie 8)?
 □ W2.4c sekcja wbudowana do projektu pisma (W2)?
 □ SW-TARCZKA dla naszych świadków — wbudowana do W2?

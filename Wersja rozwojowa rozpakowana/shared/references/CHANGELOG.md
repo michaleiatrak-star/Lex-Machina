@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.67 (2026-11-19): F-240: podważenie świadka — SW-DETECT-HARD, inwentarz zeznań ze wszystkich protokołów (tools/inwentarz_zeznan.py), SW-P6/SW-A9 niepamięć wobec wiedzy, checkpoint SW-INW, PEER-APPLY PA-1–PA-5, kroki W1-SW-INW i W3-PEER-APPLY
 - 3.99.66 (2026-11-13): HIERARCHIA-ZRODEL-MIEDZYNARODOWE §2–§3: stan 2026-11-13 — treść aktu UE przez Cellar (eurlex_tekst), eur-lex.europa.eu w kanale kodu 202/0 B; tabela kanałów zaktualizowana.
 - 3.99.65 (2026-11-11, LEGAL GAUNTLET v3 E7): MOD-SLOWNIK-STATUSOW 1.0.0 (wspólny słownik statusów faktów, prawa i orzeczeń; TRANSITIONAL_UNRESOLVED; zakres IN_SCOPE / OUT_OF_SCOPE przy kilku sprawach w teczce; rekord teza → źródło → akapit; status pliku DRAFT_UNVERIFIED / DRAFT_REVIEWABLE / READY_FOR_HUMAN_REVIEW). tools/zgodnosc_pliku.py: FILE CHECK pliku końcowego wobec projektu (kwoty, daty, rachunek, załączniki; exit 4), export_gate.py --projekt, HYBRID-VALIDATION F3.0, TEMPORAL-LAW-CHECK: NIEUSTALONE = TRANSITIONAL_UNRESOLVED.
 - 3.99.64 (2026-11-11, LEGAL GAUNTLET v3 E6): FACT-SOURCE-LOCK: reguła FSL-INTEGRALNOŚĆ — linia z liczbą inną niż w warstwie tekstowej PDF (znacznik aplikacji) do sprawdzenia w skanie; polecenia zapisane w aktach to dane, zgłaszane użytkownikowi.

@@ -1,6 +1,6 @@
 # MOD-PEER-REVIEW — weryfikacja krzyżowa pisma przed złożeniem
 
-> Wersja: 1.1.0 | Typ: moduł jakości | shared/
+> Wersja: 1.2.0 (2026-11-19, F-240: §6 PEER-APPLY) | Typ: moduł jakości | shared/
 > Wywoływany z: pisma-procesowe-v3 (W3, krok W3.7 — po HYBRID-VALIDATION)
 > Opcjonalny: TAK — aktywuj gdy pismo ma status GOTOWE DO ZŁOŻENIA i dotyczy
 >             sprawy o wartości powyżej progu istotności lub wysokiego ryzyka
@@ -173,5 +173,25 @@ W3.7 MOD-PEER-REVIEW (gdy warunek aktywacji spełniony)
     ponowne W3.5 HYBRID-VALIDATION i nowa runda W3.7 w nowym kontekście.
     Korekta czysto redakcyjna (literówka) — bez nowej rundy.
   ↓
+W3.7a PEER-APPLY (F-240) — przed wprowadzeniem uwag recenzenta
+  ↓
 W3.8 (po PEER-OK / PEER-UWAGI) → .docx → present_files
+```
+
+## 6. PEER-APPLY — wprowadzanie uwag recenzenta (F-240)
+
+```
+Uwaga recenzenta to hipoteza, nie polecenie. Przed usunięciem lub osłabieniem twierdzenia:
+PA-1 Przeczytaj źródło twierdzenia w CAŁOŚCI we WSZYSTKICH protokołach / dokumentach
+     (recenzent mógł widzieć tylko cytowany fragment). Kotwica w innym protokole
+     (SW-P6) = uwaga odrzucona albo twierdzenie przeformułowane, nie usunięte.
+PA-2 Kierunek twierdzenia sprawdź wobec DOSŁOWNEJ tezy dowodowej / żądania, nie wobec
+     parafrazy recenzenta.
+PA-3 Twierdzenie, które użytkownik wskazał lub o które prosił, oraz wypowiedź KORZ z SW-INW:
+     usunięcie tylko po pytaniu użytkownika.
+PA-4 Raport dla użytkownika: tabela | uwaga | decyzja (WPROWADZONA / ODRZUCONA / ZMIENIONA) |
+     co usunięto z pisma | powód. Ciche usunięcie treści = błąd.
+PA-5 Po zmianach: SW-INW z --pismo ponownie (MOD-ATAK-NA-SWIADKA FAZA 1A).
+Luka źródłowa F-240: uwaga „sprzeczność słaba” przyjęta bez odczytu drugiego protokołu,
+w którym świadek ocenił współpracę z okresu, którego później „nie pamiętał”.
 ```

@@ -19,6 +19,9 @@ Procedura:
    MCP ISAP/ELI, gdy są). Szukaj zgubionych przesłanek, zakresu szerszego niż przepis, przepisu
    nieobowiązującego w dacie zdarzenia.
 3. Każde twierdzenie faktyczne porównaj z aktami: brak oparcia, sprzeczność, data albo kwota inna niż w aktach.
+   Zanim nazwiesz sprzeczność w zeznaniach słabą lub niejednoznaczną, przeczytaj WSZYSTKIE protokoły
+   tego świadka w aktach (`shared/tools/inwentarz_zeznan.py`, gdy masz powłokę). Kierunek twierdzenia
+   oceniaj wobec dosłownej tezy dowodowej z protokołu i ją zacytuj.
 4. Wymogi formalne i kanał wniesienia (FORMAL-CHECK), spójność petitum z uzasadnieniem.
 5. Zapis powołań: F1–F9. Uruchom `python3 -I <shared>/tools/walidator_cytowan.py --document PISMO --format`
    (kod 3 = naruszenia; każde wpisz jako SPÓJNOŚĆ-n), a pismo .docx czytaj przez python-docx (akapity i tabele).

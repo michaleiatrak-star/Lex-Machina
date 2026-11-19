@@ -60,6 +60,7 @@ REJESTR = {
   "W1-MACIERZ":  { name: "MOD-MACIERZ-DOWOD-TEZA [CP-1c-macierz]", status: "○ OCZEKUJE" },
   "W1-LANCUCH":  { name: "MOD-LANCUCH-DOWODOWY [CP-1c-lancuch]", status: "○ OCZEKUJE" },
   "W1-ANOMALIE": { name: "MOD-DOKUMENT-ANOMALIE [CP-1d-anomalie]", status: "○ OCZEKUJE" },
+  "W1-SW-INW":   { name: "MOD-ATAK-NA-SWIADKA SW-P2/SW-P6 + SW-INW (F-240; gdy SW-DETECT-HARD)", status: "○ OCZEKUJE" },
   "W1-RED-TEAM": { name: "MOD-RED-TEAM-WLASNY [CP-W1]",         status: "○ OCZEKUJE" },
   "PRE-W2-POV":  { name: "MOD-PODMIOT-ONLINE-VERIFY AUTODIAGNOZA [CP-PRE-W2-POV]", status: "○ OCZEKUJE" },
   "PRE-W2":      { name: "PRE-W2-VERIFICATION-GATE [CP-PRE-W2]", status: "○ OCZEKUJE" },
@@ -71,6 +72,7 @@ REJESTR = {
   "W3-LQG":      { name: "LEGAL-QUALITY-GATE [CP-W3-lqg]",       status: "○ OCZEKUJE" },
   "W3-AUDYT":    { name: "AUDYT-KOŃCOWY + COURT-SIMULATION",      status: "○ OCZEKUJE" },
   "W3-PEER":     { name: "PEER-REVIEW + POST-VALIDATION [CP-PEER]", status: "○ OCZEKUJE" },
+  "W3-PEER-APPLY": { name: "PEER-APPLY PA-1..PA-5 + SW-INW --pismo (F-240)", status: "○ OCZEKUJE" },
   "HYBRID":      { name: "HYBRID-VALIDATION",                     status: "○ OCZEKUJE" },
   "DOCX":        { name: "Generowanie .docx",                     status: "○ OCZEKUJE" },
 

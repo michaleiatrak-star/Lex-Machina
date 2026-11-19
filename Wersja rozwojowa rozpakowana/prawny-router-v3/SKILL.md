@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.79"
+version: "3.80"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -120,7 +120,8 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.79 (2026-11-13): UP-5: kanał prawa UE = eurlex_tekst / Cellar REST (Accept xhtml, pol); eur-lex.europa.eu w kanale kodu daje HTTP 202 i 0 B (pomiar 2026-11-13) — usunięto sprzeczne zdanie „curl działa dla eur-lex”.
+  Wersja bieżąca: 3.80 (2026-11-19): F-240: podważenie świadka — SW-DETECT-HARD, inwentarz zeznań ze wszystkich protokołów (tools/inwentarz_zeznan.py), SW-P6/SW-A9 niepamięć wobec wiedzy, checkpoint SW-INW, PEER-APPLY PA-1–PA-5, kroki W1-SW-INW i W3-PEER-APPLY
+  3.79 (2026-11-13): UP-5: kanał prawa UE = eurlex_tekst / Cellar REST (Accept xhtml, pol); eur-lex.europa.eu w kanale kodu daje HTTP 202 i 0 B (pomiar 2026-11-13) — usunięto sprzeczne zdanie „curl działa dla eur-lex”.
   3.78 (2026-11-09): UP-5 — rodzina prawa nordyckiego: shared/RODZINA-PRAWA-NORDYCKIE.md (NR-1…NR-6: państwo i UE/EOG, ustawy wspólne a krajowe, nauka o źródłach, orzecznictwo bez stare decisis, brak kodeksu cywilnego, forma)
   3.77 (2026-11-08): UP-5 — rodzina common law i systemy mieszane: shared/RODZINA-PRAWA-COMMON-LAW.md (CL-1…CL-7: jurysdykcja, moc wiążąca, ratio, losy precedensu, ustawa a precedens, odróżnienie, forma pisma)
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
@@ -561,9 +562,9 @@ została poprawnie zamknięta.
 - **Reguła 20a — status pisma:** DRAFT/FINAL i checkpointy pisma prowadzi `pisma-procesowe-v3`.
 - **Reguła 21 — zlecenie złożone:** przypisz PRIMARY osobno każdemu komponentowi i nie
   omijaj checkpointu jednego komponentu z powodu równoległego wykonania innych.
-- **Reguła 22 — świadek:** frazy „pytania do świadka”, „przesłuchanie”,
-  „kontrprzesłuchanie” lub ich synonimy wymagają przed odpowiedzią odczytu
-  `przesluchanie-swiadkow-v2-min90/SKILL.md` i wejścia od PRE-W1a.
+- **Reguła 22 — świadek:** „pytania do świadka”, „przesłuchanie”, „kontrprzesłuchanie” → odczyt
+  `przesluchanie-swiadkow-v2-min90/SKILL.md` od PRE-W1a; podważenie zeznań lub ich wiarygodności →
+  też `shared/MOD-ATAK-NA-SWIADKA.md` (SW-DETECT-HARD, inwentarz SW-INW) przed CP-1b (F-240).
 - **Reguła 23 — re-check każdej tury:** jeżeli odpowiedź wspomina, potwierdza, koryguje
   albo ocenia przepis, sygnaturę lub kwalifikację, ponownie wykonaj HARD GATE
   dla każdego powołania w tej turze.

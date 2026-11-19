@@ -9,6 +9,15 @@ to ta sama logika klasyfikacji, jaką shared/DEDUPLICATION-POLICY.md
 stosuje do modułów merytorycznych: rzeczy używane przez ≥2 skille
 produkcyjne (tu: pisma-procesowe-v3 i pisma-proste-v2) należą do shared/.
 
+## inwentarz_zeznan.py — inwentarz zeznań świadka (F-240)
+
+```bash
+python3 -I inwentarz_zeznan.py --swiadek Kowalski protokol1.txt protokol2.txt --pismo pismo.txt
+```
+Wszystkie wypowiedzi świadka (protokół, znacznik czasu, pytający, flagi NW/RELACJA/WIEDZA), pary między
+protokołami (SW-A9: niepamięć wobec wiedzy; zaprzeczenie tylko w jednej wersji), status w piśmie.
+Kod 3 = para, której żadna strona nie trafiła do pisma. Testy: `test_inwentarz_zeznan.py`.
+
 ## walidator_cytowan.py — deterministyczna weryfikacja cytowań (audyt komercyjny, punkt 1)
 
 Sprawdza, czy każde powołanie (art., §, Dz.U., sygnatura orzeczenia) w

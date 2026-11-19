@@ -1,5 +1,6 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.80 (2026-11-19): F-240: podważenie świadka — SW-DETECT-HARD, inwentarz zeznań ze wszystkich protokołów (tools/inwentarz_zeznan.py), SW-P6/SW-A9 niepamięć wobec wiedzy, checkpoint SW-INW, PEER-APPLY PA-1–PA-5, kroki W1-SW-INW i W3-PEER-APPLY
 - 3.79 (2026-11-13): UP-5: kanał prawa UE = eurlex_tekst / Cellar REST (Accept xhtml, pol); eur-lex.europa.eu w kanale kodu daje HTTP 202 i 0 B (pomiar 2026-11-13) — usunięto sprzeczne zdanie „curl działa dla eur-lex”.
 - 3.78 (2026-11-09): UP-5 — rodzina prawa nordyckiego: shared/RODZINA-PRAWA-NORDYCKIE.md (NR-1…NR-6), wpis w PROFIL-LEKKI (wyzwalacz: jurysdykcja DK, FI, IS, NO, SE, FO).
 - 3.77 (2026-11-08, rodzina prawa jako kategoria jurysdykcji): UP-5 — sprawa w systemie common law albo w dziedzinie systemu mieszanego opartej na common law wczytuje shared/RODZINA-PRAWA-COMMON-LAW.md (CL-1…CL-7). CN-GATE i REM-GATE bez zmian; odwołanie dopisane w istniejącej linii UP-5 i w eskalacji (korpus bez nowych linii, T17).
