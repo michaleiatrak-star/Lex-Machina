@@ -97,7 +97,6 @@ Wygenerowana z `audyt-systemu-v4/scripts/mapa_jurysdykcji.py` (klasa MODUŁ PL) 
 | `JUR:zazalenie-adresat-gate` | `prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md` | wymogi pism, akty i przepisy; pakiet PL (dziś shared/router) |
 | `JUR:polish-law-completeness-matrix` | `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md` | źródła i bazy, sądy i procedura; pakiet PL (dziś shared/router) |
 | `JUR:definicje-administracyjne` | `prawo-polskie-v2/krajowe/shared/definicje/DEF-ADMINISTRACYJNE.md` | akty i przepisy, źródła i bazy; pakiet PL (dziś shared/router) |
-| `JUR:pisma-srodki-odwolawcze` | `pisma-procesowe-v3/modules/MOD-SRODKI-ODWOLAWCZE.md` | wymogi pism, terminy, akty i przepisy; środki odwoławcze PL (apelacja cywilna i karna, zażalenie, odwołanie ZUS i KPA); E3: przenieść do pakietu PL (limit plików prawo-polskie-v2) |
 | `JUR:pisma-oplaty` | `prawo-polskie-v2/krajowe/pisma-procesowe-v3/modules/MOD-OPLATY.md` | akty i przepisy, opłaty; E3: przenieść do pakietu PL (dziś w skillu wykonawczym) |
 | `JUR:umowy-shared-fm-hardship` | `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-shared-fm-hardship.md` | akty i przepisy, źródła i bazy; E3: przenieść do pakietu PL (dziś w skillu wykonawczym) |
 | `JUR:dowody-mp11-rodo-cyber` | `prawo-polskie-v2/krajowe/analizator-dowodow-v3/modules/MP11-rodo-cyber.md` | akty i przepisy, organy; E3: przenieść do pakietu PL (dziś w skillu wykonawczym) |

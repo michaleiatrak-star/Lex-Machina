@@ -2,7 +2,7 @@ cf6c6743a521c0eca773159e16c5dc87a9a47b8cb8492381985125af1aa0c239  ./KATALOG-TJ.m
 e673bf57fae0769fd6a298c539a586c98d7fb74f3261d7bfd8554a3c8ee988fb  ./MAPA-AKTOW.md
 cd82bf0c1c20e4f4fd89b33fc8de1978392418aa375d5ae426ee29527b18246c  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-4e9f67920c26cb5017afed8bb87ee2ca26d159daa9652ce8ffb81ceb96da0ab0  ./SKILL.md
+8ee8eee9a4cd89fe6092b5e1dd1732779e5736b2270e15ba9b4eca265816f0af  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 cc593297b031c62abf297375b063f57f1021c7b9d69c8fe22018c60d55414566  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -34,7 +34,7 @@ e0f31461555c21c1796194db547542c4ae8f0919ee4118b91ec1736830086d2a  ./modules/mod-
 d0d4829ad296da9ed47bb7029c9a2f34d39ce118e9841c0a03e6abf6c8f6aa64  ./modules/mod-KPC-current-state-COV.md
 0e07d4a357e40cfdc7a811c72f00fed6d0f537719c632b6b5b879e08256748b7  ./modules/mod-KPC-egzekucja-windykacja.md
 1182d444f0bf410baffe1840688c2f7d7f1442f18ba2969d90ccf5c914472c36  ./modules/mod-KPC-nieproces-czesc-ogolna.md
-67e67ac67086f77a119e51dbbe66e79971ecd3a05b6c130071d6c8bc2c1126f4  ./modules/mod-KPC-prawomocnosc-granice-apelacji.md
+b52f941a5bb7f1b876f3bde7bf3927bc2723461c8f5996c4e95aa254642f0a6a  ./modules/mod-KPC-prawomocnosc-granice-apelacji.md
 d30b9c933ce386b7066940ab968e810e745f114860d7e4f4efd60ad3baf0ae6f  ./modules/mod-KPC-uzupelnienie-pokrycia-2026.md
 aeec75def4fe532c88c34069c7d87e85d81b43c2a705cb7855cdcc563da03785  ./modules/mod-KRO-opieka-i-kuratela.md
 d4273240235f1580da94d5677529e575b5e1d04e6e932bb3c9b49711d6c33778  ./modules/mod-KRO-przysposobienie-adopcja-miedzynarodowa.md
@@ -107,7 +107,7 @@ b29cb43577bb9f9041e8873c92b96c12c5b3146f74b48b92044d686e7f079995  ./modules/mod-
 69616470caa63a5a4ad31a96b4ea1bda8f3265c05ee6114f157668234e0a666a  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 8e37c15cf15c480bf8a20b5aa8f745be6ee02c0b90f6a2d11310b84e34386692  ./modules/mod-ustawa-zastaw-rejestrowy.md
 8cea8adf63670a0de3612f63495d97695a6c93ddf665e8250cddea9b65ac5daf  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-951c6f3f60d26a19239cac587d2a2f9115791a60f8c06c37efa9466617516bbd  ./references/CHANGELOG.md
+fbabe10bbd399013c00ef71f7fa81c56cba7f3d48af8639371b09cd7b1899e69  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json

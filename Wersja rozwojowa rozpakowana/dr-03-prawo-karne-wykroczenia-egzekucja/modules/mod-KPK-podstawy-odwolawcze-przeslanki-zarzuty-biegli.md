@@ -474,3 +474,23 @@ Zgodnie z pierwotnym zakresem F-66, następujące elementy NIE zostały opracowa
 **NAPRAWIONE / RZĄD 1:** art. 156 §1-6, art. 437 §1-2, art. 498 oraz art. 575 §1-2 mają zweryfikowane aktualne brzmienie w t.j. Dz.U. 2026 poz. 490; pięć nowelizacji po t.j. nie dotyka tych jednostek.
 
 Aktualizacja rejestru F-66 (WARN-OTWARTE.md) i AUDIT-JOURNAL.md nastąpi po zakończeniu pełnego łańcucha dostawy (Reguła 6/7 HARDGATE-AUDYT), zgodnie z instrukcją audytu.
+
+## Środki odwoławcze w praktyce — apelacja i zażalenie karne (dodano 2026-11-19)
+
+> Praktyka ze źródeł (2026-11-19): każda reguła ma źródło (Pn). Orzeczenia przytoczone przez źródła wtórne oznaczone `[ORZ-DO-WERYFIKACJI]` — przed powołaniem `weryfikator-orzeczen`. Tezy źródeł starszych niż t.j. sprawdzone z t.j.; rozbieżność = KOREKTA.
+
+### SO-4 — Apelacja i zażalenie w sprawach karnych
+
+- **Treść (art. 427):** wskazanie zaskarżonego rozstrzygnięcia lub ustalenia i czego się domaga (§ 1); od oskarżyciela publicznego, obrońcy, pełnomocnika — także zarzuty i uzasadnienie (§ 2); nowe fakty i dowody, jeżeli nie mogły być powołane w I instancji (§ 3).
+- **Zakaz zarzutu nieprzeprowadzenia dowodu z urzędu (art. 427 § 3a)** — wyjątek: okoliczność istotna dla tego, czy popełniono czyn zabroniony, czy jest przestępstwem i jakim, warunków art. 64/65 KK albo pobytu w zakładzie psychiatrycznym (art. 93g KK). **KOREKTA źródła P8 (2015):** opisywane tam art. 427 § 4–5 są w t.j. 2026/490 uchylone, a art. 167 brzmi obecnie „Dowody przeprowadza się na wniosek stron albo z urzędu”; zakazy „aktywności sądu” z P8 nie obowiązują w tej postaci — stosuj § 3a.
+- **Zarzuty dowodowe dopuszczalne (P8, aktualne co do typu uchybienia):** nierozpoznanie albo niezasadne oddalenie wniosku dowodowego (art. 170 § 1), uchybienia w sposobie przeprowadzenia dowodu (np. porządek pytań art. 370, odczytanie zeznań art. 391–392). Zarzut naruszenia art. 168a — sprawdź brzmienie t.j.: przepis ogranicza uznawanie dowodu za niedopuszczalny (zmiana od czasu P8).
+- **Podstawy (art. 438):** pkt 1 — kwalifikacja prawna; pkt 1a — inne naruszenie prawa materialnego, chyba że orzeczenie mimo błędnej podstawy odpowiada prawu; pkt 2 — obraza przepisów postępowania, jeżeli **mogła** mieć wpływ na treść; pkt 3 — błąd w ustaleniach, jeżeli mógł mieć wpływ; pkt 4 — rażąca niewspółmierność kary/środka. Uchybienie procesowe, które nie doprowadziło do wadliwego orzeczenia, nie jest skuteczną podstawą (P8). Zarzut pkt 2 zawsze z opisem możliwego wpływu.
+- **Granice (art. 433, 434, 447):** sąd rozpoznaje w granicach zaskarżenia i — gdy zarzuty wskazano — w granicach zarzutów (art. 433 § 1); musi rozważyć wszystkie zarzuty (§ 2). Apelacja co do winy obejmuje cały wyrok, co do kary — całe rozstrzygnięcie o karze i środkach karnych (art. 447 § 1–2). Niedopuszczalny zarzut obok dopuszczalnych powinien prowadzić do jego pominięcia i rozpoznania w części (P8) — nie mieszaj zarzutów wyłączonych (art. 447 § 5: zarzuty z pkt 3–4 związane z porozumieniem z art. 343, 343a, 387; § 6: wyłącznie zarzuty do trybu art. 105, 420, 626).
+- **Kierunek:** orzeczenie na niekorzyść tylko przy środku na niekorzyść, w granicach zaskarżenia i podniesionych uchybień (art. 434 § 1); art. 440 i 455 działają niezależnie od granic. Sąd odwoławczy nie skaże uniewinnionego (art. 454 § 1) — przy apelacji oskarżyciela od uniewinnienia wniosek o uchylenie i przekazanie.
+- **Uchylenie do ponownego rozpoznania** tylko w wypadkach art. 439 § 1, art. 454 albo gdy trzeba przeprowadzić przewód na nowo w całości (art. 437 § 2); wady uzasadnienia (art. 424) nie są podstawą uchylenia (art. 455a) — zarzut „wadliwego uzasadnienia” buduj jako zarzut ustaleń lub oceny dowodów, nie samoistnie.
+- **Forma:** apelacja od wyroku sądu okręgowego nie od prokuratora — podpis adwokata, radcy prawnego albo radcy Prokuratorii (art. 446 § 1); odpisy (art. 446 § 2); profesjonalny pełnomocnik może wnieść przez portal informacyjny (art. 428 § 3).
+- **Zażalenie na postanowienie prokuratora:** `references/engines/prosecution-complaint-engine-v8.md` i `JUR:zazalenie-adresat-gate`.
+
+#### Źródła praktyki (odczyt 2026-11-19)
+
+- P8 — B. Augustyniak, D. Świecki, M. Wąsek-Wiaderek, Postępowanie odwoławcze… (KSSiP, Znowelizowany KPK w pracy prokuratora i sędziego, 2015; rozdz. I D. Świecki): https://www.kssip.gov.pl/sites/default/files/postepowanie_odwolawcze._-_srodek_-_internet.pdf

@@ -29,8 +29,15 @@ Trzeba wskazać:
 
 ## Praktyka zarzutów (źródła i przepisy jurysdykcji)
 
-Dla prawa polskiego: `JUR:pisma-srodki-odwolawcze` — wybór środka i adresata (SO-0), wymogi treści,
-praktyka formułowania zarzutów ze wskazanych źródeł, korekty przestarzałych tez z aktualnym t.j.
+Dla prawa polskiego: sekcje „w praktyce” modułów DR — DR-02 `mod-KPC-prawomocnosc-granice-apelacji`
+(apelacja i zażalenie cywilne), DR-03 `mod-KPK-podstawy-odwolawcze-przeslanki-zarzuty-biegli`,
+DR-04 `mod-SUS-ZUS-ubezpieczenia-spoleczne` (odwołanie do sądu), DR-05 `mod-KPA-decyzja-i-odwolanie`:
+wybór środka, wymogi treści, praktyka zarzutów ze wskazanych źródeł, korekty tez sprzed t.j.
+Lista kontrolna przed oddaniem pisma (każdy środek):
+- środek, adresat i termin z modułu DR; termin z JUR:terminy-procesowe na dacie doręczenia z akt;
+- zakres zaskarżenia; każdy zarzut: konkret → przepis → uchybienie → wpływ → wniosek;
+- nowe fakty i dowody z uprawdopodobnieniem; orzeczenia [ORZ-DO-WERYFIKACJI] zweryfikowane albo usunięte;
+- opłata i forma: JUR:pisma-oplaty.
 Zasady ogólne z tych źródeł:
 - zarzut z konkretu sprawy, nie z szablonu; nie przedstawiaj alternatywnego stanu faktycznego —
   wykaż przekroczone kryterium oceny dowodów;

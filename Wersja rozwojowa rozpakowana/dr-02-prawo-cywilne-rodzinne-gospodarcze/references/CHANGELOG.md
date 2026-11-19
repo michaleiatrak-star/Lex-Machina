@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.131 (2026-11-19): Środki odwoławcze w praktyce (sekcja dodana 2026-11-19): wybór środka, wymogi treści i praktyka zarzutów ze wskazanych źródeł (P1–P10, URL), przepisy z t.j. ELI 2026-11-19; orzeczenia ze źródeł wtórnych [ORZ-DO-WERYFIKACJI]; korekty tez sprzed t.j.
 - 3.130 (2026-11-19): automatyczna aktualizacja numerów t.j. z ELI 2026-11-19: o Krajowym Rejestrze Sądowym 2025/869 → 2026/1505 (sam numer t.j.; treść przepisów nie porównywana)
 - 3.129 (2026-11-15): DR-02: testy prawa upadłościowego (okno znacznika poziomu A); odesłania do KATALOG-TJ w DR; mapy_tj zachowuje katalog w przebiegu dziennym; check_procedowane zarejestrowany
 - 3.128 (2026-11-15): Pełny katalog obowiązujących t.j. (2 664 akty z ELI) w KATALOG-TJ dziedzin i prawo-polskie-v2: dziedzina z nagłówka modułu, podstawy prawnej aktu wykonawczego albo tytułu; monitoring projektów ustaw (PROJEKTY-W-TOKU), lista zmian od ostatniej aktualizacji systemu (ZMIANY-OD-AKTUALIZACJI, STAN-AKTUALIZACJI.json)

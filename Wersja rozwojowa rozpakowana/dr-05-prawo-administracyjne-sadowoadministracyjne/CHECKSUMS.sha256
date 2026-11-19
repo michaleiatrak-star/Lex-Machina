@@ -2,7 +2,7 @@
 bee2878bc39528f70f39a6e86b1222b844783a79d8a54a745927ed0fbbe623f0  ./MAPA-AKTOW.md
 346b51beaec59e5775c6a634a8390cfb0d55d01ee64027be16d54f2f4598d82e  ./MAPA-POKRYCIA.md
 a808237feda76fe62f698fa05077021474124d22b033504d5c34a649534077fd  ./PORTABILITY-MANIFEST.md
-21b7781cb02cff4acade71a244ab4f8b47e7ff31438f8658fd70dfb11c830022  ./SKILL.md
+1d1fac77c8897dc79f675045454cb612d992f4622e9664dd46891c7114898e30  ./SKILL.md
 baecf8aed4d2ca051e8212f1e45ad5dc19ad072d16f130d24009bd3e8404214b  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 4040777bcb05a54a87878198fc16537d7d015dcbbb943c624c879ed7363982ca  ./modules/kpa-tryby-nadzwyczajne/czesc-01-tryby-nadzwyczajne.md
@@ -14,7 +14,7 @@ e6f6506fc79e37ff83beff705e0bd159bcc669ad772a1c877c39757e3e96b860  ./modules/kpa-
 715177374c921e864fa9936457128e49ea7ccdb191da90d09aaa056d707b3c63  ./modules/kpa-tryby-nadzwyczajne/czesc-07-oplaty-koszty.md
 4f676d5c7e7adbf2229c2e6256d755a708ee3ebacc8e0016c9f903c879248a74  ./modules/kpa-tryby-nadzwyczajne/czesc-08-strategia-orzecznictwo-referencje.md
 e27a41d075aaac9319cb725222f45bd123af88ca2e2e94c8127b1ebb547b9c60  ./modules/mod-KPA-current-state-COV.md
-6aceb1b267ed228f86f295ecb84db05df94f738a0e5162f4c7ea527d40febcd3  ./modules/mod-KPA-decyzja-i-odwolanie.md
+bbaa285bc484fb0929a41345f98a15a988f3183f42401b8fb99c4b4fa23b9d16  ./modules/mod-KPA-decyzja-i-odwolanie.md
 7dd4a1657ed77b521f0021a9a13196b4282ba902282abf15996f4aa816b98d6a  ./modules/mod-KPA-mechanizmy-w-toku-sprawy.md
 32bd676ba81ab44cffc603a1fb65712e50efae0cd7f64ff9f03662e277459d7d  ./modules/mod-KPA-postepowanie-administracyjne.md
 2de9648bf04daba0583ee58da0bd2ba87925bf117891a193d65bc0d45c47b80a  ./modules/mod-KPA-tryby-nadzwyczajne-i-strategia.md
@@ -36,4 +36,4 @@ d43cbc3f2cbf1b2cdf450168383b555a117f6123fca38a9ac6d30d416be7dbaf  ./modules/mod-
 45ed527aab3f9303ce52db8ba431058b317f8f58949fb5c683a9c3e6f2d77723  ./modules/mod-ustawa-sygnalisci.md
 4c7de393bcd1074c5f7c8d8f661bcbb237fc2f9a834fb6ca6fc215a59865fff7  ./modules/mod-ustawa-wojewoda-administracja-rzadowa.md
 60792da9d81b99af13a2870dd889a8c2149653e6666e741e7351a7aa1bbaadde  ./modules/mod-ustawa-zaskarzanie-decyzji-wlasnosci.md
-5a1b93ec4a89b04f3bd358c9d819d6976573df31560c2254f3f6ab9035b1179a  ./references/CHANGELOG.md
+b65134be4d0479f5c87d3bf759894434f898118c69cac86d290cc6a77315f8c4  ./references/CHANGELOG.md
