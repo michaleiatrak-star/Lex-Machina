@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.117"
+version: "6.118"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.117 (2026-11-15): DR-02: testy prawa upadłościowego (okno znacznika poziomu A); odesłania do KATALOG-TJ w DR; mapy_tj zachowuje katalog w przebiegu dziennym; check_procedowane zarejestrowany
+  Wersja bieżąca: 6.118 (2026-11-19): automatyczna aktualizacja numerów t.j. z ELI 2026-11-19: Ministra Sprawiedliwości w sprawie zakładania i prowadzenia ksiąg wieczystych w  2024/1583 → 2026/1512; o Krajowym Rejestrze Sądowym 2025/869 → 2026/1505; o Państwowym Instytucie Medycznym Ministerstwa Spraw Wewnętrznych i Administracj 2025/447 → 2026/1511; o Służbie Więziennej 2025/1750 → 2026/1504; o finansowym wsparciu rodzin i innych osób w nabywaniu własnego mieszkania 2021/403 → 2023/1296; o narodowym zasobie archiwalnym i archiwach 2020/164 → 2026/1519; o produktach biobójczych 2021/24 → 2026/1502 (sam numer t.j.; treść przepisów nie porównywana)
+  6.117 (2026-11-15): DR-02: testy prawa upadłościowego (okno znacznika poziomu A); odesłania do KATALOG-TJ w DR; mapy_tj zachowuje katalog w przebiegu dziennym; check_procedowane zarejestrowany
   6.116 (2026-11-15): Pełny katalog obowiązujących t.j. (2 664 akty z ELI) w KATALOG-TJ dziedzin i prawo-polskie-v2: dziedzina z nagłówka modułu, podstawy prawnej aktu wykonawczego albo tytułu; monitoring projektów ustaw (PROJEKTY-W-TOKU), lista zmian od ostatniej aktualizacji systemu (ZMIANY-OD-AKTUALIZACJI, STAN-AKTUALIZACJI.json)
   6.115 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI
   6.114 (2026-11-14): Mapy aktów w jednej konwencji t.j.: MAPA-AKTOW DR-01…15 uzupełnione o 105 aktów z nagłówków modułów (sekcja RAG bez wpływu na routing), sufiks t.j. w tabelach routingu, LEGAL-REGISTRY: 247 tekstów jednolitych systemu; scripts/mapy_tj.py w dziennym workflow ELI
@@ -23,7 +24,6 @@ changelog: |
   6.107 (2026-11-14): DR-08: wskazania z kwalifikatorem; dochody JST — model ustawy z 1.10.2024 (art. 8: udziały od dochodów), t.j. 2026/1252; UDP art. 13b ust. 4–5 i 13f z płacą min. 2026/2027; W-4 2024/1907
   6.106 (2026-11-14): DR-07: wskazania z kwalifikatorem (PZP 2026/793, PrNot, NIK, RIO, UNDFP, UZRFE, pomoc publiczna); UNDFP art. 31 ust. 4 zamiast art. 34; W-4 2026/1099
   6.105 (2026-11-14): DR-06: wskazania z kwalifikatorem (OP, VAT, PIT, CIT, PCC, akcyza, KAS, AML); akcyza 2026 — podstawa art. 165a; PCC próg 3000 zł od 3.11.2026; W-4 dla 2026/1102, 1270, 1347, 1354, 1446
-  6.104 (2026-11-14): DR-03 komplet: 71 modułów + 8 części kwalifikatora w formacie wskazań; poprawki zagrożeń art. 234-244b KK, przedawnienie cyber, art. 244 przy nakazie Policji, tabela kar frameworku
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

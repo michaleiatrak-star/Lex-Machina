@@ -8,7 +8,7 @@
 **Akt:** USOZ (ustawa o świadczeniach opieki zdrowotnej finansowanych ze środków publicznych) — t.j. Dz.U. 2025 poz. 1461 (zm. po t.j.: 2025/1537 od 2026-01-01 — art. 2, 4, 7, 7a, 19a, 20, 22, 23, 23b, 23c, 23e, 23h, 30, 31d, 40, 42d, 42f, 42i, 42j, 47c; 2025/1739 od 2026-01-01 — art. 97, 116, 132c, 132d; 2026/203 od 2026-03-05 — art. 12, 50, 87; 2026/791 od 2026-07-01 — art. 49, 50, 51, 188e, 240; 2026/972 od 2026-08-05 — art. 31lc, 31n, 31o; 2026/986 od 2026-08-07 — art. 42b, 159a, 189a, 189b; 2026/1007 od 2026-08-11 — art. 23e, 97, 102; 2026/26 [OD 2027-01-01: 2026/26] — art. 87a).
 **Akt:** UWM (ustawa o wyrobach medycznych) — t.j. Dz.U. 2024 poz. 1620.
 **Akt:** UBZZ (ustawa o bezpieczeństwie żywności i żywienia) — t.j. Dz.U. 2026 poz. 1399.
-**Akt:** UPB (ustawa o produktach biobójczych) — t.j. Dz.U. 2021 poz. 24 (zm. po t.j.: 2025/1716 od 2026-02-06 — art. 3, 7, 8, 11, 12, 13, 17, 19, 20, 21, 23, 24, 26, 27, 28, 29, 30; 2025/1709 od 2026-03-06 — art. 6, 6a, 45, 45a).
+**Akt:** UPB (ustawa o produktach biobójczych) — t.j. Dz.U. 2026 poz. 1502 (obwieszczenie z 6.11.2026, stan prawny na 2026-11-05; obejmuje 2025/1716 — art. 3, 7, 8, 11, 12, 13, 17, 19, 20, 21, 23, 24, 26, 27, 28, 29, 30, i 2025/1709 — art. 6, 6a, 45, 45a; poza t.j.: art. 2–6 ustawy 2025/1716 i art. 15 ustawy 2025/1709; brak zmian po t.j. — ELI 2026-11-19).
 **Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
 
 **Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.

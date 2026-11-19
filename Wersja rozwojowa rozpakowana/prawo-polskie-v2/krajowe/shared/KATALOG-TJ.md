@@ -115,7 +115,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | O finansowaniu wspólnej polityki rolnej | Dz.U. 2022 poz. 2068 t.j. | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
 | O finansowaniu zadań oświatowych | Dz.U. 2026 poz. 650 t.j. | DR-05 | tytuł (heurystyka) |
 | O finansowym wsparciu niektórych przedsięwzięć mieszkaniowych | Dz.U. 2026 poz. 511 t.j.; zm. po t.j.: 2026/986 od 2026-08-07 | DR-09 | tytuł (heurystyka) |
-| O finansowym wsparciu rodzin i innych osób w nabywaniu własnego mieszkania | Dz.U. 2021 poz. 403 t.j.; zm. po t.j.: 2022/1561 od 2022-08-10 | DR-09 | tytuł (heurystyka) |
+| O finansowym wsparciu rodzin i innych osób w nabywaniu własnego mieszkania | Dz.U. 2023 poz. 1296 t.j.; zm. po t.j.: 2022/1561 od 2022-08-10 | DR-09 | tytuł (heurystyka) |
 | O finansowym wspieraniu produkcji audiowizualnej | Dz.U. 2021 poz. 198 t.j. | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
 | O fundacji - Zakład Narodowy imienia Ossolińskich | Dz.U. 2017 poz. 1881 t.j. | DR-02 | tytuł (heurystyka) |
 | O fundacji - Zakłady Kórnickie | Dz.U. 2020 poz. 1705 t.j. | DR-02 | tytuł (heurystyka) |
@@ -213,7 +213,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | O Narodowym Instytucie Wolności - Centrum Rozwoju Społeczeństwa Obywatelskiego | Dz.U. 2026 poz. 94 t.j. | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
 | O Narodowym Planie Rozwoju | Dz.U. 2022 poz. 260 t.j. | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
 | O narodowym spisie powszechnym ludności i mieszkań w 2021 r | Dz.U. 2021 poz. 1143 t.j.; zm. po t.j.: 2024/1222 od 2024-11-10 | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
-| O narodowym zasobie archiwalnym i archiwach | Dz.U. 2020 poz. 164 t.j.; zm. po t.j.: 2020/1747 od 2020-10-09, 2025/1173 od 2026-01-01 | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
+| O narodowym zasobie archiwalnym i archiwach | Dz.U. 2026 poz. 1519 t.j.; zm. po t.j.: 2020/1747 od 2020-10-09, 2025/1173 od 2026-01-01 | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
 | O nasiennictwie | Dz.U. 2021 poz. 129 t.j.; zm. po t.j.: 2025/1709 od 2026-01-05 | DR-10 | tytuł (heurystyka) |
 | O nauczycielskich świadczeniach kompensacyjnych | Dz.U. 2026 poz. 86 t.j. | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
 | O nawozach i nawożeniu | Dz.U. 2024 poz. 105 t.j.; zm. po t.j.: 2025/1795 od 2026-03-18 | DR-10 | tytuł (heurystyka) |
@@ -271,7 +271,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | O Państwowej Komisji Badania Wypadków Morskich | Dz.U. 2019 poz. 1374 t.j.; zm. po t.j.: 2026/1079 od 2026-09-10 | DR-09 | tytuł (heurystyka) |
 | O Państwowej Komisji do spraw badania wpływów rosyjskich na bezpieczeństwo wewnętrzne Rzeczypospolitej Polskiej w latach 2007-2022 | Dz.U. 2024 poz. 548 t.j. | DR-13 | tytuł (heurystyka) |
 | O Państwowej Komisji do spraw przeciwdziałania wykorzystaniu seksualnemu małoletnich poniżej lat 15 | Dz.U. 2024 poz. 94 t.j.; zm. po t.j.: 2026/187 [OD 2028-05-19: 2026/187] | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
-| O Państwowym Instytucie Medycznym Ministerstwa Spraw Wewnętrznych i Administracji | Dz.U. 2025 poz. 447 t.j.; zm. po t.j.: 2026/160 od 2026-02-27 | DR-10 | tytuł (heurystyka) |
+| O Państwowym Instytucie Medycznym Ministerstwa Spraw Wewnętrznych i Administracji | Dz.U. 2026 poz. 1511 t.j.; zm. po t.j.: 2026/160 od 2026-02-27 | DR-10 | tytuł (heurystyka) |
 | O Państwowym Ratownictwie Medycznym | Dz.U. 2026 poz. 141 t.j. | DR-10 | tytuł (heurystyka) |
 | O planowaniu rodziny, ochronie płodu ludzkiego i warunkach dopuszczalności przerywania ciąży | Dz.U. 2022 poz. 1575 t.j. | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
 | O pobieraniu, przechowywaniu i przeszczepianiu komórek, tkanek i narządów | Dz.U. 2023 poz. 1185 t.j. | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
@@ -452,7 +452,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | O służbie cywilnej | Dz.U. 2026 poz. 590 t.j. | DR-02 | tytuł (heurystyka) |
 | O służbie funkcjonariuszy Służby Kontrwywiadu Wojskowego oraz Służby Wywiadu Wojskowego | Dz.U. 2025 poz. 694 t.j.; zm. po t.j.: 2025/1366 od 2025-07-01, 2025/718 od 2026-01-01, 2026/1123 [OD 2028-01-01: 2026/1123] | DR-13 | tytuł (heurystyka) |
 | O służbie medycyny pracy | Dz.U. 2022 poz. 437 t.j.; zm. po t.j.: 2026/187 [OD 2028-05-19: 2026/187] | DR-04 | tytuł (heurystyka) |
-| O Służbie Więziennej | Dz.U. 2025 poz. 1750 t.j.; zm. po t.j.: 2025/1823 od 2025-07-01, 2026/1123 [OD 2028-01-01: 2026/1123] | DR-13 | tytuł (heurystyka) |
+| O Służbie Więziennej | Dz.U. 2026 poz. 1504 t.j.; zm. po t.j.: 2025/1823 od 2025-07-01, 2026/1123 [OD 2028-01-01: 2026/1123] | DR-13 | tytuł (heurystyka) |
 | O służbie zagranicznej | Dz.U. 2026 poz. 788 t.j. | DR-14 | tytuł (heurystyka) |
 | O tachografach | Dz.U. 2024 poz. 1037 t.j. | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
 | O towarach paczkowanych | Dz.U. 2026 poz. 1436 t.j. | DR-05 | brak trafienia — domyślnie DR-05, do przypisania |
@@ -1932,7 +1932,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | Rozporządzenie Ministra Sprawiedliwości — w sprawie wysokości opłaty za udział w egzaminie radcowskim | Dz.U. 2025 poz. 1706 t.j. | DR-12 | podstawa prawna: URP |
 | Rozporządzenie Ministra Sprawiedliwości — w sprawie wyznaczenia sądów okręgowych właściwych do rozpoznawania spraw z zakresu ochrony unijnych znaków towarowych i wzorów wspólnotowych | Dz.U. 2022 poz. 1395 t.j. | DR-01, DR-12 | podstawa prawna: PUSP |
 | Rozporządzenie Ministra Sprawiedliwości — w sprawie zakresu rocznego sprawozdania z działalności komornika sądowego | Dz.U. 2023 poz. 242 t.j. | DR-12 | podstawa prawna: UKS |
-| Rozporządzenie Ministra Sprawiedliwości — w sprawie zakładania i prowadzenia ksiąg wieczystych w systemie teleinformatycznym | Dz.U. 2024 poz. 1583 t.j.; zm. po t.j.: 2025/99 od 2025-01-25, 2025/773 od 2025-06-17, 2026/740 od 2026-07-01 | DR-02 | podstawa prawna: UKWH |
+| Rozporządzenie Ministra Sprawiedliwości — w sprawie zakładania i prowadzenia ksiąg wieczystych w systemie teleinformatycznym | Dz.U. 2026 poz. 1512 t.j.; zm. po t.j.: 2025/99 od 2025-01-25, 2025/773 od 2025-06-17, 2026/740 od 2026-07-01 | DR-02 | podstawa prawna: UKWH |
 | Rozporządzenie Ministra Sprawiedliwości — w sprawie zapisu dźwięku albo obrazu i dźwięku z przebiegu posiedzenia jawnego w postępowaniu cywilnym | Dz.U. 2023 poz. 309 t.j. | DR-02, DR-07 | podstawa prawna: KPC |
 | Rozporządzenie Ministra Sprawiedliwości — w sprawie zespołu do przygotowania pytań testowych na egzamin wstępny na aplikację adwokacką i radcowską oraz wykazu tytułów aktów prawnych | Dz.U. 2023 poz. 2366 t.j. | DR-12 | podstawa prawna: PrAdw |
 | Rozporządzenie Ministra Sprawiedliwości — w sprawie zespołu do przygotowania pytań testowych na egzamin wstępny na aplikację komorniczą oraz wykazu tytułów aktów prawnych | Dz.U. 2024 poz. 132 t.j. | DR-12 | podstawa prawna: UKS |
@@ -2499,7 +2499,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | RzeczZnal — o rzeczach znalezionych | Dz.U. 2023 poz. 501 t.j. | DR-02 | nagłówek modułu |
 | SUS — o systemie ubezpieczeń społecznych | Dz.U. 2026 poz. 1474 t.j. | DR-04 | nagłówek modułu |
 | Timeshare — o timeshare | Dz.U. 2011 poz. 1370 (akt pierwotny, bez t.j.) | DR-02 | nagłówek modułu |
-| u.KRS — o Krajowym Rejestrze Sądowym | Dz.U. 2025 poz. 869 t.j.; zm. po t.j.: 2026/176 [OD 2027-02-18: 2026/176], 2025/1556 [OD 2027-04-01: 2025/1556], 2025/1792 [OD 2027-06-17: 2025/1792], 2026/644 [OD 2028-01-10: 2026/644], 2026/346 [OD 2028-09-30: 2026/346] | DR-02 | nagłówek modułu |
+| u.KRS — o Krajowym Rejestrze Sądowym | Dz.U. 2026 poz. 1505 t.j. | DR-02 | nagłówek modułu |
 | UABW — o Agencji Bezpieczeństwa Wewnętrznego oraz Agencji Wywiadu | Dz.U. 2026 poz. 937 t.j.; zm. po t.j.: 2026/1003 od 2026-10-28, 2026/1281 od 2026-10-31, 2026/1123 [OD 2028-01-01: 2026/1123] | DR-13 | nagłówek modułu |
 | UAktRodz — o wspieraniu rodziców w aktywności zawodowej oraz w wychowaniu dziecka - "Aktywny rodzic" | Dz.U. 2026 poz. 532 t.j.; zm. po t.j.: 2026/1123 [OD 2028-01-01: 2026/1123] | DR-04 | nagłówek modułu |
 | UAnt — o ograniczeniu prowadzenia działalności gospodarczej przez osoby pełniące funkcje publiczne | Dz.U. 2025 poz. 499 t.j.; zm. po t.j.: 2026/160 od 2026-02-27, 2026/177 od 2026-03-04, 2026/1003 od 2026-10-28 | DR-15 | nagłówek modułu |
@@ -2580,7 +2580,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | UOZE — o odnawialnych źródłach energii | Dz.U. 2026 poz. 68 t.j.; zm. po t.j.: 2026/516 od 2026-04-30, 2026/900 od 2026-07-21, 2026/912 od 2026-07-31, 2026/1347 [OD 2026-12-01: 2026/1347] | DR-09 | nagłówek modułu |
 | UOZP — o ochronie zdrowia psychicznego | Dz.U. 2024 poz. 917 t.j.; zm. po t.j.: 2026/187 [OD 2028-05-19: 2026/187] | DR-10 | nagłówek modułu |
 | UOZw — o ochronie zwierząt | Dz.U. 2026 poz. 1485 t.j. | DR-10 | nagłówek modułu |
-| UPB — o produktach biobójczych | Dz.U. 2021 poz. 24 t.j.; zm. po t.j.: 2025/1716 od 2026-02-06, 2025/1709 od 2026-03-06 | DR-10 | nagłówek modułu |
+| UPB — o produktach biobójczych | Dz.U. 2026 poz. 1502 t.j. | DR-10 | nagłówek modułu |
 | UPEA — o postępowaniu egzekucyjnym w administracji | Dz.U. 2026 poz. 1311 t.j. | DR-05, DR-08 | nagłówek modułu |
 | UPGRP — o Prokuratorii Generalnej Rzeczypospolitej Polskiej | Dz.U. 2024 poz. 1192 t.j.; zm. po t.j.: 2025/1172 od 2026-03-01, 2026/370 od 2026-04-03 | DR-07 | nagłówek modułu |
 | UPIP — o Państwowej Inspekcji Pracy | Dz.U. 2024 poz. 1712 t.j.; zm. po t.j.: 2025/321 od 2025-03-15, 2025/368 od 2025-04-09, 2025/620 od 2025-06-01, 2025/769 od 2026-01-01, 2026/160 od 2026-02-27, 2026/473 od 2026-07-08 | DR-04 | nagłówek modułu |

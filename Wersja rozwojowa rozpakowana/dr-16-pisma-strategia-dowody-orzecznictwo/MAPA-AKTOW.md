@@ -14,7 +14,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / narzędzie → mo
 | KPC — odtworzenie zaginionych / zniszczonych akt | KPC jw. | `mod-KPC-odtworzenie-akt-zaginionych-zniszczonych` | ✅ aktywny |
 | Prawo prasowe / media | Dz.U. 2018 poz. 1914 t.j. ze zm. | `mod-ustawa-prawo-prasowe-media` | ✅ aktywny; fresh gate |
 | Konstytucja — prawa i wolności procesowe | Konstytucja RP, Dz.U. 1997 nr 78 poz. 483 ze zm. | `mod-Konstytucja-prawa-i-wolnosci-procesowe` | ✅ aktywny |
-| Archiwa i dokumentacja | Dz.U. 2020 poz. 164 t.j. ze zm. | `mod-ustawa-archiwa-dokumentacja` | ✅ aktywny |
+| Archiwa i dokumentacja | Dz.U. 2026 poz. 1519 t.j. ze zm. | `mod-ustawa-archiwa-dokumentacja` | ✅ aktywny |
 | Obywatelstwo polskie | Dz.U. 2025 poz. 1611 t.j. ze zm. | `mod-ustawa-obywatelstwo-paszporty-ewidencja` | ✅ aktywny |
 | Dokumenty paszportowe | Dz.U. 2026 poz. 196 t.j. ze zm. | `mod-ustawa-obywatelstwo-paszporty-ewidencja` | ✅ aktywny |
 | Ewidencja ludności | Dz.U. 2026 poz. 384 t.j. ze zm. | `mod-ustawa-obywatelstwo-paszporty-ewidencja` | ✅ aktywny |

@@ -25,7 +25,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | O systemie oceny zgodności wyrobów przeznaczonych na potrzeby obronności i bezpieczeństwa państwa | Dz.U. 2022 poz. 747 t.j. | — | tytuł (heurystyka) |
 | O szczególnych zasadach, warunkach i trybie mianowania na wyższe stopnie wojskowe żołnierzy uczestniczących w walkach o wolność i niepodległość Polski podczas II wojny światowej i w okresie powojennym | Dz.U. 2026 poz. 563 t.j. | — | tytuł (heurystyka) |
 | O służbie funkcjonariuszy Służby Kontrwywiadu Wojskowego oraz Służby Wywiadu Wojskowego | Dz.U. 2025 poz. 694 t.j.; zm. po t.j.: 2025/1366 od 2025-07-01, 2025/718 od 2026-01-01, 2026/1123 [OD 2028-01-01: 2026/1123] | — | tytuł (heurystyka) |
-| O Służbie Więziennej | Dz.U. 2025 poz. 1750 t.j.; zm. po t.j.: 2025/1823 od 2025-07-01, 2026/1123 [OD 2028-01-01: 2026/1123] | — | tytuł (heurystyka) |
+| O Służbie Więziennej | Dz.U. 2026 poz. 1504 t.j.; zm. po t.j.: 2025/1823 od 2025-07-01, 2026/1123 [OD 2028-01-01: 2026/1123] | — | tytuł (heurystyka) |
 | O ujawnianiu informacji o dokumentach organów bezpieczeństwa państwa z lat 1944-1990 oraz treści tych dokumentów | Dz.U. 2025 poz. 1519 t.j. | — | tytuł (heurystyka) |
 | O urzędzie Ministra Obrony Narodowej | Dz.U. 2025 poz. 445 t.j. | — | tytuł (heurystyka) |
 | O ustanowieniu "Programu modernizacji Policji, Straży Granicznej, Państwowej Straży Pożarnej i Służby Ochrony Państwa w latach 2017-2020" | Dz.U. 2019 poz. 2198 t.j. | — | tytuł (heurystyka) |

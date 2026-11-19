@@ -54,7 +54,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Prawo przedsiębiorców — current-state | Dz.U. 2026 poz. 1484 t.j. (obejmuje zm. 2025/1795, 2025/1826, 2026/507) | `mod-Prawo-przedsiebiorcow-current-state-COV.md` + `mod-prawo-przedsiebiorcow` | 🟢 B+/COV |
 | Prawo przedsiębiorców — kontrola / koncesje + weksle | jw. + akty wekslowe | `mod-wekslowe-kontrola-przedsiebiorcy-koncesje` | ✅ aktywny |
 | Ustawa o CEIDG i Punkcie Informacji dla Przedsiębiorcy | Dz.U. 2026 poz. 30 t.j.; zm. po t.j.: 2026/734 (od 20.06.2026), 2026/507 — etapami: 21.04.2026 (art. 1 pkt 2 lit. a, pkt 46, pkt 53 w zakresie art. 64 ust. 2), 14.10.2026 (zasadnicza część), 1.11.2026 (art. 1 pkt 4 lit. a tiret pierwsze, pkt 43 lit. a), ⏳ 1.11.2028 (m.in. publikacja informacji o spółce cywilnej, art. 42a–42b) ✅ [VER] RZĄD 1 2026-10-15 (ELI) | `mod-prawo-przedsiebiorcow` (routing CEIDG) | ✅ aktywny; fresh gate |
-| KRS | Dz.U. 2025 poz. 869 t.j. ze zm. | `mod-ustawa-KRS-rejestr-sadowy` | 🟢 B+/COV |
+| KRS | Dz.U. 2026 poz. 1505 t.j. ze zm. | `mod-ustawa-KRS-rejestr-sadowy` | 🟢 B+/COV |
 | UZNK | Dz.U. 2026 poz. 85 t.j. ze zm. | `mod-ustawa-UZNK-nieuczciwa-konkurencja` | ✅ aktywny |
 | Prawo upadłościowe | Dz.U. 2026 poz. 913 t.j. ze zm. | `mod-PrUpad-upadlosc-restrukturyzacja` + rodzina PrUp | ✅ aktywny; fresh gate |
 | PrUp — Pełny tekst PrUp, wersje czasowe, indeks artykułów i odczyt ELI | Dz.U. 2026 poz. 913 t.j.; 2026/1206: zmiana art. 452 i 456 od 11.01.2027 | `mod-PrUpad-zrodla-i-wersje` | źródło pełne / workflow B; fresh gate |

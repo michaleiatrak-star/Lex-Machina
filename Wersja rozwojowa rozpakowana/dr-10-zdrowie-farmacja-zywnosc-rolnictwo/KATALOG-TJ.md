@@ -43,7 +43,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | O organizacji rynku rybnego | Dz.U. 2023 poz. 2045 t.j. | — | tytuł (heurystyka) |
 | O paszach | Dz.U. 2025 poz. 320 t.j. | — | tytuł (heurystyka) |
 | O Państwowej Inspekcji Ochrony Roślin i Nasiennictwa | Dz.U. 2023 poz. 1992 t.j.; zm. po t.j.: 2025/1709 od 2026-01-05 | — | tytuł (heurystyka) |
-| O Państwowym Instytucie Medycznym Ministerstwa Spraw Wewnętrznych i Administracji | Dz.U. 2025 poz. 447 t.j.; zm. po t.j.: 2026/160 od 2026-02-27 | — | tytuł (heurystyka) |
+| O Państwowym Instytucie Medycznym Ministerstwa Spraw Wewnętrznych i Administracji | Dz.U. 2026 poz. 1511 t.j.; zm. po t.j.: 2026/160 od 2026-02-27 | — | tytuł (heurystyka) |
 | O Państwowym Ratownictwie Medycznym | Dz.U. 2026 poz. 141 t.j. | — | tytuł (heurystyka) |
 | O podatku rolnym | Dz.U. 2025 poz. 1344 t.j.; zm. po t.j.: 2026/875 [OD 2027-01-01: 2026/875] | — | tytuł (heurystyka) |
 | O podstawowej opiece zdrowotnej | Dz.U. 2025 poz. 515 t.j.; zm. po t.j.: 2026/791 od 2026-07-01 | — | tytuł (heurystyka) |
@@ -548,7 +548,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | UOHZ — o organizacji hodowli i rozrodzie zwierząt gospodarskich | Dz.U. 2017 poz. 2132 t.j. | mod-ustawa-hodowla-zdrowie-zwierzat | nagłówek modułu |
 | UOZP — o ochronie zdrowia psychicznego | Dz.U. 2024 poz. 917 t.j.; zm. po t.j.: 2026/187 [OD 2028-05-19: 2026/187] | mod-ustawa-psycholog-zawod, mod-ustawa-zdrowie-psychiczne | nagłówek modułu |
 | UOZw — o ochronie zwierząt | Dz.U. 2026 poz. 1485 t.j. | mod-ustawa-hodowla-zdrowie-zwierzat, mod-ustawa-hodowla-zezwolenia-gatunki | nagłówek modułu |
-| UPB — o produktach biobójczych | Dz.U. 2021 poz. 24 t.j.; zm. po t.j.: 2025/1716 od 2026-02-06, 2025/1709 od 2026-03-06 | mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny, mod-PrFarm-prawo-farmaceutyczne, mod-PrFarm-szczegolowy, mod-REACH-CLP-chemikalia, mod-ustawa-produkty-biobojcze, mod-wyroby-medyczne | nagłówek modułu |
+| UPB — o produktach biobójczych | Dz.U. 2026 poz. 1502 t.j. | mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny, mod-PrFarm-prawo-farmaceutyczne, mod-PrFarm-szczegolowy, mod-REACH-CLP-chemikalia, mod-ustawa-produkty-biobojcze, mod-wyroby-medyczne | nagłówek modułu |
 | UPIS — o Państwowej Inspekcji Sanitarnej | Dz.U. 2024 poz. 416 t.j.; zm. po t.j.: 2026/605 od 2026-05-21 | mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny, mod-REACH-CLP-chemikalia, mod-rzecznik-praw-pacjenta-RPP, mod-ustawa-aptekarz-zawod, mod-ustawa-bezpieczenstwo-zywnosci, mod-ustawa-hodowla-zdrowie-zwierzat, mod-ustawa-rolne-zywnosc-weterynaria, mod-ustawa-sport-turystyka-imprezy-masowe | nagłówek modułu |
 | UPP — o prawach pacjenta i Rzeczniku Praw Pacjenta | Dz.U. 2024 poz. 581 t.j.; zm. po t.j.: 2026/791 od 2026-07-01, 2026/26 [OD 2027-01-01: 2026/26] | mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny, mod-PrFarm-prawo-farmaceutyczne, mod-PrFarm-refundacja-nadzor-sankcje, mod-prawa-ucznia, mod-rzadkie-choroby-genetyczne-plan-leki-sieroce, mod-rzecznik-praw-pacjenta-RPP, mod-ustawa-dzialalnosc-lecznicza-pacjent, mod-ustawa-medyczne-szczegolowy, mod-ustawa-prawa-pacjenta-framework, mod-ustawa-system-informacji-ochrona-zdrowia-SIOZ, mod-ustawa-zawod-lekarza, mod-ustawa-zdrowie-psychiczne | nagłówek modułu |
 | UPPZ — o produktach pochodzenia zwierzęcego | Dz.U. 2026 poz. 981 t.j. | mod-ustawa-bezpieczenstwo-zywnosci, mod-ustawa-inspekcja-weterynaryjna, mod-ustawa-lekarz-weterynarii-zawod, mod-ustawa-rolne-zywnosc-weterynaria | nagłówek modułu |

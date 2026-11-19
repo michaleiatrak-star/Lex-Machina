@@ -8,7 +8,7 @@
 **Akt:** UWM (ustawa o wyrobach medycznych) — t.j. Dz.U. 2024 poz. 1620.
 **Akt:** UPIS (ustawa o Państwowej Inspekcji Sanitarnej) — t.j. Dz.U. 2024 poz. 416 (zm. po t.j.: 2026/605 od 2026-05-21 — art. 2, 2b, 3, 4, 4c, 4d, 4e, 4g, 4j, 4k, 4m, 4n, 4p, 8, 11, 13, 13a, 13d, 13e, 20).
 **Akt:** UZZw (ustawa o zdrowiu zwierząt) — akt pierwotny, bez t.j.: Dz.U. 2025 poz. 1795.
-**Akt:** UPB (ustawa o produktach biobójczych) — t.j. Dz.U. 2021 poz. 24 (zm. po t.j.: 2025/1716 od 2026-02-06 — art. 3, 7, 8, 11, 12, 13, 17, 19, 20, 21, 23, 24, 26, 27, 28, 29, 30; 2025/1709 od 2026-03-06 — art. 6, 6a, 45, 45a).
+**Akt:** UPB (ustawa o produktach biobójczych) — t.j. Dz.U. 2026 poz. 1502 (obwieszczenie z 6.11.2026, stan prawny na 2026-11-05; obejmuje 2025/1716 — art. 3, 7, 8, 11, 12, 13, 17, 19, 20, 21, 23, 24, 26, 27, 28, 29, 30, i 2025/1709 — art. 6, 6a, 45, 45a; poza t.j.: art. 2–6 ustawy 2025/1716 i art. 15 ustawy 2025/1709; brak zmian po t.j. — ELI 2026-11-19).
 **Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-14 (W-1: terminy, progi i kwoty porównane z t.j.).
 
 Status: moduł prawa polskiego klasy wzorcowej. **RZĄD 1 VER 2026-08-28:** Prawo farmaceutyczne — Dz.U. 2026 poz. 612 t.j.; Państwowa Inspekcja Sanitarna — **Dz.U. 2024 poz. 416 t.j. ze zm.** (ELI nadal wskazuje ten t.j.; po t.j. istnieje nowelizacja, dlatego przed cytatem używaj tekstu ujednoliconego).

@@ -1,8 +1,8 @@
-59c9fa9080d431af9e3475cd2880c9b4201ee9e3b89cd78091eac31759b18d80  ./KATALOG-TJ.md
-1496f004689c4ec9b0a500742178ff5612fc7ad54a59d324c30b174e66d22bd6  ./MAPA-AKTOW.md
-c3baa5e256c73658f09cd07050b7c2c896c010d65c42127bd0bd40a45d99f824  ./MAPA-POKRYCIA.md
+cf6c6743a521c0eca773159e16c5dc87a9a47b8cb8492381985125af1aa0c239  ./KATALOG-TJ.md
+e673bf57fae0769fd6a298c539a586c98d7fb74f3261d7bfd8554a3c8ee988fb  ./MAPA-AKTOW.md
+cd82bf0c1c20e4f4fd89b33fc8de1978392418aa375d5ae426ee29527b18246c  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-d1f16eeed40a3f69f705e2f556007cb4bee16e6536564943183a4b63c1b8fcfa  ./SKILL.md
+4e9f67920c26cb5017afed8bb87ee2ca26d159daa9652ce8ffb81ceb96da0ab0  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 cc593297b031c62abf297375b063f57f1021c7b9d69c8fe22018c60d55414566  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -86,7 +86,7 @@ c1f04942873f9af0c2c479707840ba1a84d8c90854b7de73d4aa2b61207e8fc5  ./modules/mod-
 690740831daf787dcb38d31793496110d743c728726b945ec1ccba498dba8e71  ./modules/mod-sklad-sadu-liczba-sedziow.md
 89dedbdc03cb2d17996c16f64a4abd97eaa840f0630ab0b8c72ba5d7fa11e076  ./modules/mod-transakcje-handlowe-opoznienia.md
 f86a446e109f8b76f23d3512e7d7f8c17698ae372266c3f6538b4514368ba770  ./modules/mod-ubezwlasnowolnienie-opieka-kuratela.md
-2d021c992b0c08fa38e77cb84f216755e6c13faf6008cce6e5f031d4d32d17ce  ./modules/mod-ustawa-KRS-rejestr-sadowy.md
+17a2e6f343cbf6773d57b83c2e632ebe8900e9e958ee46537cecc03aa11f3978  ./modules/mod-ustawa-KRS-rejestr-sadowy.md
 51b4832894b81dd88afd82b07b58791ae7da1d191aaf4e9d68b63fbd195fdafb  ./modules/mod-ustawa-UOKIK-antymonopolowe.md
 8265b17aa600e3c52acd31d814f5af94b03e178d6cef9d321ce64f68f242e28e  ./modules/mod-ustawa-UZNK-nieuczciwa-konkurencja.md
 eac0cd8e63a17297609f55fa1317fad0d66e0a79b31e4a689782d4ae89989406  ./modules/mod-ustawa-cudzoziemcy.md
@@ -107,7 +107,7 @@ b29cb43577bb9f9041e8873c92b96c12c5b3146f74b48b92044d686e7f079995  ./modules/mod-
 69616470caa63a5a4ad31a96b4ea1bda8f3265c05ee6114f157668234e0a666a  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 8e37c15cf15c480bf8a20b5aa8f745be6ee02c0b90f6a2d11310b84e34386692  ./modules/mod-ustawa-zastaw-rejestrowy.md
 8cea8adf63670a0de3612f63495d97695a6c93ddf665e8250cddea9b65ac5daf  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-74f89ca31772465d319ecd8b199a99a4e79a16c1af886f4d85c227427214652b  ./references/CHANGELOG.md
+951c6f3f60d26a19239cac587d2a2f9115791a60f8c06c37efa9466617516bbd  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json

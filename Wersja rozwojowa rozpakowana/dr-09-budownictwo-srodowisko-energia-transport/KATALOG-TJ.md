@@ -29,7 +29,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | O etykietowaniu energetycznym produktów związanych z energią | Dz.U. 2020 poz. 378 t.j. | — | tytuł (heurystyka) |
 | O finansowaniu infrastruktury transportu lądowego | Dz.U. 2021 poz. 688 t.j. | — | tytuł (heurystyka) |
 | O finansowym wsparciu niektórych przedsięwzięć mieszkaniowych | Dz.U. 2026 poz. 511 t.j.; zm. po t.j.: 2026/986 od 2026-08-07 | — | tytuł (heurystyka) |
-| O finansowym wsparciu rodzin i innych osób w nabywaniu własnego mieszkania | Dz.U. 2021 poz. 403 t.j.; zm. po t.j.: 2022/1561 od 2022-08-10 | — | tytuł (heurystyka) |
+| O finansowym wsparciu rodzin i innych osób w nabywaniu własnego mieszkania | Dz.U. 2023 poz. 1296 t.j.; zm. po t.j.: 2022/1561 od 2022-08-10 | — | tytuł (heurystyka) |
 | O Funduszu Kolejowym | Dz.U. 2024 poz. 1133 t.j.; zm. po t.j.: 2026/635 od 2026-05-27 | — | tytuł (heurystyka) |
 | O gospodarowaniu nieruchomościami rolnymi Skarbu Państwa | Dz.U. 2025 poz. 826 t.j.; zm. po t.j.: 2026/318 od 2026-03-27, 2026/815 od 2026-07-04 | — | tytuł (heurystyka) |
 | O inwestycjach w zakresie budowy drogi wodnej łączącej Zalew Wiślany z Zatoką Gdańską | Dz.U. 2024 poz. 285 t.j. | — | tytuł (heurystyka) |

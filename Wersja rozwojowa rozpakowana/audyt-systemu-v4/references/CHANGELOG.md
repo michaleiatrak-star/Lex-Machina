@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.271 (2026-11-19): automatyczna aktualizacja numerów t.j. z ELI 2026-11-19: Ministra Sprawiedliwości w sprawie zakładania i prowadzenia ksiąg wieczystych w  2024/1583 → 2026/1512; o Krajowym Rejestrze Sądowym 2025/869 → 2026/1505; o Państwowym Instytucie Medycznym Ministerstwa Spraw Wewnętrznych i Administracj 2025/447 → 2026/1511; o Służbie Więziennej 2025/1750 → 2026/1504; o finansowym wsparciu rodzin i innych osób w nabywaniu własnego mieszkania 2021/403 → 2023/1296; o narodowym zasobie archiwalnym i archiwach 2020/164 → 2026/1519; o produktach biobójczych 2021/24 → 2026/1502 (sam numer t.j.; treść przepisów nie porównywana)
 - 6.270 (2026-11-15): DR-02: testy prawa upadłościowego (okno znacznika poziomu A); odesłania do KATALOG-TJ w DR; mapy_tj zachowuje katalog w przebiegu dziennym; check_procedowane zarejestrowany
 - 6.269 (2026-11-15): Pełny katalog obowiązujących t.j. (2 664 akty z ELI) w KATALOG-TJ dziedzin i prawo-polskie-v2: dziedzina z nagłówka modułu, podstawy prawnej aktu wykonawczego albo tytułu; monitoring projektów ustaw (PROJEKTY-W-TOKU), lista zmian od ostatniej aktualizacji systemu (ZMIANY-OD-AKTUALIZACJI, STAN-AKTUALIZACJI.json)
 - 6.268 (2026-11-14): Moduł wrogiego przejęcia: skrót OfPubl (monitoring ustawy o ofercie publicznej); rejestr: W-4 dla 2026/1074 i 2026/1206

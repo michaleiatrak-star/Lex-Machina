@@ -96,7 +96,7 @@ Generowane przez `scripts/mapy_tj.py`: wszystkie obowiązujące teksty jednolite
 | O Narodowym Instytucie Wolności - Centrum Rozwoju Społeczeństwa Obywatelskiego | Dz.U. 2026 poz. 94 t.j. | — | brak trafienia — domyślnie DR-05, do przypisania |
 | O Narodowym Planie Rozwoju | Dz.U. 2022 poz. 260 t.j. | — | brak trafienia — domyślnie DR-05, do przypisania |
 | O narodowym spisie powszechnym ludności i mieszkań w 2021 r | Dz.U. 2021 poz. 1143 t.j.; zm. po t.j.: 2024/1222 od 2024-11-10 | — | brak trafienia — domyślnie DR-05, do przypisania |
-| O narodowym zasobie archiwalnym i archiwach | Dz.U. 2020 poz. 164 t.j.; zm. po t.j.: 2020/1747 od 2020-10-09, 2025/1173 od 2026-01-01 | — | brak trafienia — domyślnie DR-05, do przypisania |
+| O narodowym zasobie archiwalnym i archiwach | Dz.U. 2026 poz. 1519 t.j.; zm. po t.j.: 2020/1747 od 2020-10-09, 2025/1173 od 2026-01-01 | — | brak trafienia — domyślnie DR-05, do przypisania |
 | O nauczycielskich świadczeniach kompensacyjnych | Dz.U. 2026 poz. 86 t.j. | — | brak trafienia — domyślnie DR-05, do przypisania |
 | O niektórych formach wspierania działalności innowacyjnej | Dz.U. 2022 poz. 2474 t.j. | — | brak trafienia — domyślnie DR-05, do przypisania |
 | O niektórych zabezpieczeniach finansowych | Dz.U. 2024 poz. 294 t.j. | — | brak trafienia — domyślnie DR-05, do przypisania |
