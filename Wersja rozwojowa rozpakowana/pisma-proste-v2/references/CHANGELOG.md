@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-proste-v2
 
+- 2.35 (2026-11-20): F-242: nagłówek i styl obowiązkowe w każdym piśmie (sygnatura, nadawca z akt lub papieru firmowego, bez ⬛ na dane z akt, styl kancelaryjny, papier firmowy z numeracją stron)
 - 2.34 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
 - 2.33 (2026-10-17c, AUDYT-2026-10-17c): Sąd właściwy: pismo do sądu bez sądu w aktach — DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych; sąd i adres tylko z court_for_address albo z tabeli aktu.
 - 2.32 (2026-10-16a, AUDYT-2026-10-16a): KROK 8 — pismo lub regulamin ponad ok. 10 stron według `shared/MOD-DLUGIE-PISMO.md` (plan, części [CZĘŚĆ k/N], ciągła numeracja, podpis w ostatniej części); jeden plik z całości po HYBRID-VAL.

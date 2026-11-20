@@ -1,7 +1,10 @@
 # MOD-ATAK-NA-SWIADKA — Podważanie świadka jako ogniwa łańcucha dowodowego
 
 > **Plik:** `shared/MOD-ATAK-NA-SWIADKA.md`
-> **Wersja:** 1.2.0 (2026-11-19, F-240) — SW-DETECT-HARD, inwentarz wszystkich protokołów świadka
+> **Wersja:** 1.3.0 (2026-11-20, F-241) — SW-A1b stawiennictwo bez wezwania, SW-A10 kwalifikacja
+> sprzeczności (zmiana wersji, nie „brak wiedzy”), SW-CYT cytat bez zarzutów strony przeciwnej,
+> SW-ZRODLA dowody spoza protokołów, SW-W4 dokument wskazany przez świadka (art. 248 § 1, 233 § 2 k.p.c.).
+> Poprzednio: 1.2.0 (2026-11-19, F-240) — SW-DETECT-HARD, inwentarz wszystkich protokołów świadka
 > (SW-P2, `tools/inwentarz_zeznan.py`), SW-P6 niepamięć wobec wiedzy, SW-A9, checkpoint SW-INW.
 > Poprzednio: 1.1.0 (2026-07-02) — naprawa WARN-22: dodano FAZA 6 (specyfika
 > dziedzinowa DR-02/03/04/05), zastępująca nieaktualne odwołania CHECKLIST-DEDUP
@@ -166,6 +169,19 @@ SW-A1 — KONFLIKT INTERESU / STRONNICZOŚĆ:
      wiarygodności zgodnie z art. 233 §1 k.p.c."
   Skuteczność: ↑ gdy udokumentowana relacja + brak zewnętrznego potwierdzenia
 
+SW-A1b — STAWIENNICTWO BEZ WEZWANIA SĄDU (F-241):
+  Sprawdź w aktach: wezwanie/zawiadomienie na dany termin (kogo i na co sąd wezwał) oraz protokół
+  (kto zgłosił obecność świadka, kiedy sąd dopuścił dowód). Gdy świadek nie był wezwany, a dowód
+  dopuszczono po informacji strony lub jej pełnomocnika o jego obecności:
+    "Świadek stawił się bez wezwania Sądu, z inicjatywy [strony] — jej pełnomocnik poinformował:
+     '[cytat z protokołu]' ([data], [znacznik]), a dowód dopuszczono dopiero po tej informacji
+     ([znacznik])."
+  Gdy sąd wezwał na ten termin w innym celu (np. przesłuchanie strony): dodaj to jednym zdaniem
+  z datą wezwania. Tylko słowa protokołu: nie „przyprowadzony”, „podstawiony”, „zorganizowany”.
+  Waga umiarkowana (strona może sama sprowadzić świadka): łącz z SW-A1, nigdy jako zarzut wobec
+  pełnomocnika. Uchybienie procesowe → osobno, poza pismem (zastrzeżenie do protokołu), po
+  sprawdzeniu przepisu w ELI.
+
 SW-A2 — ZAPRZECZENIE ISTNIENIU OKOLICZNOŚCI:
   ⛔ KLUCZOWY — atak wprost na prawdziwość ogniwa łańcucha
   Sygnały: nasze dowody dokumentowe zaprzeczają temu co zeznał świadek.
@@ -253,6 +269,24 @@ SW-A9 — NIEPAMIĘĆ WOBEC WCZEŚNIEJSZEJ WIEDZY (F-240):
      znacznik] zeznał, że [nie pamięta / nie miał z tym styczności] ('[cytat]'). Świadek
      znał tę okoliczność, więc rozbieżności nie tłumaczy upływ czasu."
   Skuteczność: ↑↑↑ — zarzut z protokołów, bez potrzeby dowodu zewnętrznego.
+
+SW-A10 — KWALIFIKACJA SPRZECZNOŚCI: JAKI WNIOSEK WYNIKA Z PARY (F-241):
+  Każdą parę SW-P4/P5/P6 przed redakcją zaklasyfikuj:
+    (a) fakt z WŁASNEJ percepcji lub udziału świadka (jego praca, jego współpraca ze stroną,
+        wiadomości, które sam otrzymał, zdarzenia, w których uczestniczył) →
+        wniosek: świadek ZMIENIŁ WERSJĘ; „obie wersje nie mogą być prawdziwe”; upływ czasu
+        tego nie tłumaczy (gdy wcześniej opisał lub ocenił ten fakt).
+    (b) fakt POZA jego percepcją (relacja innych, dokumenty, których nie widział) →
+        SW-A3 / SW-A8: brak bezpośredniej wiedzy.
+  ⛔ BŁĄD: pisać „świadek nie ma pewnej wiedzy” o fakcie z grupy (a) — osłabia zarzut.
+  Gdy wersja zależy od faktu, który zna tylko mocodawca (np. czy pisał po dniu pierwszego
+  przesłuchania) → zapytaj, zanim wpiszesz zarzut; bez odpowiedzi wątek idzie do wariantu poza pismem.
+
+SW-ZRODLA — DOWODY SPOZA PROTOKOŁÓW (F-241):
+  Przed redakcją zapytaj jednym pytaniem o źródła, które mogą potwierdzić tezę niezależnie od
+  zeznań: wiadomości (SMS, komunikatory, e-mail, zrzuty z listą uczestników grupy), nagrania
+  rozpraw (fragmenty z czasem), dokumenty wewnętrzne strony przeciwnej, wydruki z systemów
+  (np. PUE ZUS). Brak odpowiedzi → pismo z protokołów + w uwagach lista źródeł, które by je wzmocniły.
 ```
 
 ---
@@ -268,6 +302,7 @@ MACIERZ PRIORYTETÓW:
     SW-A5 (niespójność wewnętrzna w protokole)
     SW-A8 (świadek sam wyklucza swoją wiedzę)
     SW-A9 (niepamięć wobec wcześniej wykazanej wiedzy)
+    SW-A10(a) (zmiana wersji o fakcie z własnej percepcji świadka)
 
   🟠 SILNE (użyj gdy brak 🔴 lub dla wzmocnienia):
     SW-A1 (konflikt interesu — udokumentowany)
@@ -307,6 +342,14 @@ FORMAT sekcji w piśmie:
   samodzielnej podstawy ustalenia [faktu X], w szczególności
   wobec [kontrdownodu D-NNN] potwierdzającego [fakt odmienny].
 
+SW-CYT — CYTAT ZEZNAŃ NIEKORZYSTNYCH (F-241):
+  Cytuj tylko fragment, który dowodzi sprzeczności albo słabości źródła wiedzy; utnij zdanie przed
+  zarzutem wobec mocodawcy. Przy SW-A3 cytuj same wskaźniki źródła („pracownicy zgłaszali”,
+  „z tego co wiem”), nie treść zarzutu. Pełne zdanie z zarzutem strony przeciwnej wolno przytoczyć
+  tylko wtedy, gdy w tym samym akapicie obalasz je dowodem z akt.
+  ⛔ BŁĄD: powtórzenie w piśmie wersji strony przeciwnej (np. całego opisu zarzucanego zachowania),
+  także gdy uwagi do pisma zapowiadają, że ten wątek pominięto.
+
 ANTYCYPACJA ZARZUTU WOBEC NASZEGO ŚWIADKA:
   Jeśli nasz łańcuch opiera się na świadku (np. Nawrot):
     → Wstaw sekcję SW-TARCZKA:
@@ -329,6 +372,8 @@ Na podstawie SW-ATAK wygeneruj odpowiednie wnioski procesowe:
 
 SW-W1: KONFRONTACJA (art. 272 k.p.c.) — weryfikuj ISAP
   Trigger: SW-A5 (sprzeczność między dwoma świadkami)
+  Ryzyko: obaj świadkowie strony przeciwnej mogą na konfrontacji uzgodnić wersję na niekorzyść
+  mocodawcy — rozważ i wskaż decyzję w uwagach poza pismem.
   Wniosek: "Wnoszę o zarządzenie konfrontacji świadka [X] ze świadkiem [Y]
     w zakresie [sprzecznych twierdzeń W-001 vs W-007]."
 
@@ -349,6 +394,12 @@ SW-W4: WNIOSEK O DOKUMENTY (art. 248 k.p.c.) — weryfikuj ISAP
   Trigger: SW-A2 — zeznanie podważa dokument, ale dokument nie jest w aktach
   Wniosek: "Wnoszę o zobowiązanie [strona] do złożenia [dokument X] na
     okoliczność [fakt Y], który pozostaje w sprzeczności z zeznaniem świadka [Z]."
+  Trigger 2 (F-241): świadek sam powołał dokument strony przeciwnej (zarządzenie, polecenie,
+    wiadomość do grupy) → zobowiązanie posiadacza do przedstawienia (art. 248 § 1 k.p.c.:
+    dokument „stanowiący dowód faktu istotnego dla rozstrzygnięcia sprawy”), teza: istnienie,
+    data, adresaci, treść. Najlepszy substytut dowodu, którego mocodawca nie ma.
+  Skutek odmowy: art. 233 § 2 k.p.c. dotyczy odmowy „wbrew postanowieniu sądu” — w piśmie
+    tylko w tej postaci albo wcale (nie jako automatyczny skutek samego wniosku).
 ```
 
 ---

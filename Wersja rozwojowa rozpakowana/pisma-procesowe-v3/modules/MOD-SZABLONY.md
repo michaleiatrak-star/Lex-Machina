@@ -15,6 +15,22 @@ Przed napisaniem pisma:
 3. Sprawdź właściwość sądu (SR/SO + miejscowość)
 4. Oblicz opłatę lub wskaż zwolnienie (patrz MOD-OPLATY)
 
+### SZ0a — NAGŁÓWEK I STYL OBOWIĄZKOWE (F-242, 2026-11-20)
+
+Każde pismo (w czacie i w aplikacji) ma, bez wyjątku:
+- miejscowość i datę (data dzisiejsza);
+- sąd/organ z wydziałem i adresem;
+- `Sygn. akt` — z akt sprawy lub karty sprawy (w aplikacji: sygnatura sprawy);
+- uczestnika/nadawcę: imię i nazwisko albo nazwę oraz adres — z dokumentów sprawy albo z papieru
+  firmowego (w aplikacji: Ustawienia > Papier firmowy, wstawiane do nagłówka pliku z logo);
+- pozostałe strony z adresami i pełnomocnikami, jak w aktach;
+- podpis: imię i nazwisko nadawcy.
+Dane obecne w aktach lub na papierze firmowym wpisuj — nigdy ⬛. Luka tylko na dane, których nie ma
+nigdzie, z pytaniem w uwagach poza pismem.
+Styl profesjonalny, kancelaryjny: rzeczowo, terminologia procesowa, bez publicystyki i ocen
+emocjonalnych; objętość według sprawy (bez stałego limitu stron); plik na papierze firmowym z
+numeracją stron.
+
 ---
 
 ## SZ-NAGŁÓWEK UNIWERSALNY

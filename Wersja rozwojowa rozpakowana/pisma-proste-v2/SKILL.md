@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.34"
+version: "2.35"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -391,6 +391,11 @@ SYTUACJA C — niestandardowy stan faktyczny
 ---
 
 ## LISTA KONTROLNA PRZED WYDANIEM (szczegóły w references/M8-checklista.md)
+
+> F-242 (obowiązkowe): nagłówek z miejscowością i datą, adresatem, `Sygn. akt` (gdy sprawa ma
+> sygnaturę), nadawcą — imię i nazwisko albo nazwa i adres — z dokumentów sprawy albo z papieru
+> firmowego; podpis nadawcy. Danych obecnych w aktach lub na papierze firmowym nie zostawiaj jako ⬛.
+> Styl profesjonalny, kancelaryjny; objętość według sprawy.
 
 ```
 CHECKLISTA FINALNA (pisma proste)
