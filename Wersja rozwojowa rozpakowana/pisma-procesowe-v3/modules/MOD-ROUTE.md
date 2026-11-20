@@ -18,7 +18,7 @@ PYTANIE                                          ODPOWIEDŹ    MODUŁ
 5. Czy pismo wszczyna postępowanie?              TAK/NIE  →  MOD-OPLATY (gdy TAK)
 6. Czy pismo dotyczy KPA/WSA/NSA?               TAK/NIE  →  MOD-ADMIN (gdy TAK)
 7. Czy to analiza pisma przeciwnika / riposta?   TAK/NIE  →  MOD-OBAL + V10 engines (gdy TAK)
-8. Czy to apelacja?                              TAK/NIE  →  appellate-engine-v8 aktywny (gdy TAK)
+8. Czy to apelacja, zażalenie albo odwołanie?   TAK/NIE  →  appellate-engine-v8 + moduł DR środka (DR-02/03/04/05, sekcja „w praktyce”)
 9. Czy to zażalenie do prokuratury?              TAK/NIE  →  prosecution-complaint-engine-v8 (gdy TAK)
 ```
 

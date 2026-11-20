@@ -211,3 +211,62 @@ tę lukę dla dwóch najpilniejszych tematów.
 - Zastosowanie zakazu reformationis in peius w postępowaniu
   NIEPROCESOWYM — zależne od typu sprawy, wymaga odrębnej analizy
   przy konkretnym stanie faktycznym.
+
+## Środki odwoławcze w praktyce — apelacja i zażalenie (dodano 2026-11-19)
+
+> Praktyka ze źródeł (2026-11-19): każda reguła ma źródło (Pn). Orzeczenia przytoczone przez źródła wtórne oznaczone `[ORZ-DO-WERYFIKACJI]` — przed powołaniem `weryfikator-orzeczen`. Tezy źródeł starszych niż t.j. sprawdzone z t.j.; rozbieżność = KOREKTA.
+
+### Wybór środka (KPC, t.j. 2026/468)
+
+| Orzeczenie / akt | Środek | Do kogo / za pośrednictwem | Termin | Kwalifikator |
+|---|---|---|---|---|
+| wyrok sądu I instancji (cywilny) | apelacja | sąd II instancji, wnoszona do sądu, który wydał wyrok | 2 tygodnie od doręczenia wyroku z uzasadnieniem; 3 tygodnie przy przedłużonym terminie uzasadnienia | KPC art. 367 § 1–2, art. 369 § 1–1¹; art. 369 § 3 — termin zachowany także przy wniesieniu wprost do sądu II instancji |
+| postanowienie kończące postępowanie i katalog art. 394 § 1 | zażalenie (pionowe) | sąd II instancji | tydzień od doręczenia postanowienia z uzasadnieniem | KPC art. 394 § 1–3 |
+| postanowienia z katalogu art. 394¹a § 1 (m.in. koszty, zwolnienie od kosztów, grzywna, wyłączenie sędziego, rygor natychmiastowej wykonalności) | zażalenie poziome | inny skład sądu I instancji (3 sędziów) | jak art. 394 § 2 (odesłanie w art. 394¹a § 2) | KPC art. 394¹a § 1, § 1², § 2, § 3 |
+| przepis szczególny daje zażalenie, nie wskazując sądu | zażalenie | sąd II instancji | art. 394 § 2 | KPC art. 394 § 4 |
+
+### SO-1 — Apelacja cywilna
+
+#### Wymogi treści (KPC art. 368)
+- § 1 pkt 1–5: oznaczenie wyroku i zakresu zaskarżenia (całość albo część), zwięzłe zarzuty, uzasadnienie zarzutów, w razie potrzeby nowe fakty i dowody, wniosek o zmianę albo uchylenie z zakresem.
+- § 1¹: zarzut co do podstawy faktycznej wskazuje fakty ustalone niezgodnie z rzeczywistością albo istotne fakty nieustalone.
+- § 1²: nowe fakty i dowody — uprawdopodobnienie, że nie mogły być powołane w I instancji albo potrzeba wynikła później.
+- § 1³: fakt z nagrania — wskazać część zapisu.
+- § 2: sprawy majątkowe — wartość przedmiotu zaskarżenia.
+
+#### Granice i skutki
+- art. 378 § 1: sąd II instancji rozpoznaje sprawę w granicach apelacji; z urzędu tylko nieważność w granicach zaskarżenia. Wniosek praktyczny: czego nie zarzucono, tego sąd zwykle nie bada (źródło P1).
+- art. 380: na wniosek sąd bada niezaskarżalne zażaleniem postanowienia, które miały wpływ na rozstrzygnięcie — wniosek trzeba zgłosić w apelacji.
+- art. 381–382: nowe fakty i dowody mogą być pominięte, gdy strona mogła je powołać wcześniej; orzekanie na materiale z obu instancji.
+- art. 384: zakaz reformationis in peius, chyba że apelację wniosła także strona przeciwna.
+- art. 386 § 4: uchylenie i przekazanie poza nieważnością i odrzuceniem pozwu/umorzeniem tylko przy nierozpoznaniu istoty sprawy albo konieczności przeprowadzenia postępowania dowodowego w całości — wniosek o uchylenie bez tych przesłanek jest słaby; domyślnie wnoś o zmianę.
+- art. 373 § 1: odrzucenie apelacji spóźnionej, nieopłaconej, niedopuszczalnej albo z nieusuniętymi brakami.
+
+#### Praktyka formułowania zarzutów (ze źródeł)
+1. **Zarzut z konkretu sprawy, nie z szablonu.** Każdy zarzut na podstawie konkretnego stanu faktycznego i skali naruszenia (P1). Kopiowanie zarzutów art. 233 § 1 bez odniesienia do sprawy to typowy problem (P4 — omówienie Wolters Kluwer w wynikach wyszukiwania; pełny tekst niedostępny).
+2. **Art. 233 § 1 KPC — nie alternatywny stan faktyczny.** Zarzut nie może polegać na przedstawieniu własnej wersji faktów; trzeba wykazać rażącą wadliwość oceny i wskazać przekroczone kryterium (logika, doświadczenie życiowe, wszechstronność) (P1). Sąd może dać wiarę jednemu z dwóch sprzecznych źródeł — sama sprzeczność z jednym z nich nie jest błędem (P1).
+3. **Matryca zarzutu dowodowego:** dowód → ocena sądu (strona uzasadnienia) → naruszone kryterium → jaki fakt powinien zostać ustalony → wpływ na rozstrzygnięcie. Bez ostatniego ogniwa zarzut proceduralny jest bezskuteczny — wzór zarzutu zawiera „mających istotny wpływ na treść rozstrzygnięcia” (P1).
+4. **Rozdziel błąd subsumcji od błędu ustaleń.** Przed zarzutem prawa materialnego sprawdź, czy sąd nie zastosował prawa poprawnie do błędnie ustalonych faktów — wtedy właściwy jest zarzut ustaleń (art. 368 § 1¹), a zarzut materialny jest wtórny (P1, P3).
+5. **Zarzut prawa materialnego wskazuje skutek dla rozstrzygnięcia** (jaki wynik przy prawidłowej wykładni/zastosowaniu) (P1).
+6. **Typowe błędy (P1):** nieważność bez podstaw (np. powaga rzeczy osądzonej bez wskazania sprawy i sygnatury); zarzut pominięcia dowodu bez wykazania jego istotności; błędne przypisanie przyznania faktu (art. 229); błędne przytoczenie treści zeznań lub dokumentu; zarzut wobec opinii biegłego bez wskazania wewnętrznej sprzeczności i bez wniosku o opinię uzupełniającą.
+7. **Nowe dowody w apelacji (P2):** apelacja nie służy powtórzeniu postępowania; dopuszczenie nowego dowodu zależy od uznania sądu `[ORZ-DO-WERYFIKACJI: SN I PKN 28/00, 12.09.2000]`; brak adwokata w I instancji nie jest samodzielną podstawą powołania nowych faktów `[ORZ-DO-WERYFIKACJI: SN V CKN 1269/00, 16.05.2002]`. Uprawdopodobnienie z art. 368 § 1² w samej apelacji, z dowodem na brak winy.
+8. **Postanowienia niezaskarżalne:** gdy wpływały na wynik (np. oddalenie wniosku dowodowego), wniosek z art. 380 w apelacji; bez niego sąd ich nie bada.
+
+### SO-2 — Zażalenie cywilne (pionowe i poziome)
+
+- **Dobór drogi (P5, P6):** reguła — zażalenie dewolutywne; poziome tylko w katalogu art. 394¹a § 1 (I instancja) albo art. 394² § 1–1¹ (II instancja). Zażalenia „osierocone” (przepis szczególny nie mówi, kto rozpoznaje) były najczęstszym problemem pełnomocników (P6); od nowelizacji z 2023 r. rozstrzyga je art. 394 § 4 — sąd II instancji (P5, potwierdzone t.j. 2026/468).
+- **Uzasadnienie jako warunek (P6):** postanowienia z posiedzenia niejawnego sąd uzasadnia tylko na żądanie zgłoszone w tygodniu od doręczenia (art. 357 § 2¹); termin na zażalenie biegnie od doręczenia postanowienia z uzasadnieniem (art. 394 § 2). Wyjątek: gdy sąd z urzędu doręczył postanowienie z uzasadnieniem, wniosek odpada (art. 357 § 2⁴); gdy sąd odstąpił od uzasadnienia — termin od ogłoszenia/doręczenia (art. 394 § 2 zd. 2).
+- **„Zasadnicze powody rozstrzygnięcia” to nie uzasadnienie (P6)** — nie otwierają biegu terminu ani drogi zażalenia; częsty błąd stron (P5).
+- **Skład i odrzucenie:** zażalenie poziome — 3 sędziów (art. 394¹a § 1²); odrzucenie spóźnionego/niedopuszczalnego — 1 sędzia sądu, który wydał postanowienie (§ 1¹). Wątpliwości składu przy rozstrzygnięciach niemerytorycznych mogą prowadzić do nieważności (P6) — w zażaleniu na odrzucenie sprawdź skład.
+- **Autokontrola:** zarzut nieważności albo oczywista zasadność — sąd, który wydał postanowienie, może sam je uchylić (art. 395 § 2); formułuj taki zarzut wprost na początku.
+- **Treść (art. 394 § 3):** wskazanie postanowienia, wniosek o zmianę albo uchylenie, zwięzłe uzasadnienie, w miarę potrzeby nowe fakty i dowody. Do postępowania zażaleniowego odpowiednio przepisy o apelacji (art. 397 § 3).
+- **Odpowiedź na zażalenie:** tydzień od doręczenia (art. 395 § 1¹).
+
+#### Źródła praktyki (odczyt 2026-11-19)
+
+- P1 — Najczęstsze zarzuty w apelacjach cywilnych i sposób ich formułowania, poradnikprzedsiebiorcy.pl (10.12.2024): https://poradnikprzedsiebiorcy.pl/-najczestsze-zarzuty-w-apelacjach-cywilnych-i-sposob-ich-formulowania
+- P2 — Ł. Nysztal, Zgłoszenie nowych dowodów w apelacji cywilnej, infor.pl (10.10.2010; przepisy sprawdzone z t.j. 2026/468): https://www.infor.pl/prawo/w-sadzie/postepowanie-sadowe/256496,Zgloszenie-nowych-dowodow-w-apelacji-cywilnej.html
+- P3 — Zarzuty — materiał dydaktyczny, Wydział Prawa UWr: https://prawo.uwr.edu.pl/wp-content/uploads/sites/210/2022/07/Zarzuty-uproszcz-apelacja.pdf (z wyników wyszukiwania; nie odczytany w całości)
+- P4 — Art. 233 KPC — dobór orzecznictwa w apelacji, Wolters Kluwer Expert Insights (24.06.2026): https://www.wolterskluwer.com/pl-pl/expert-insights/art-233-kpc-dobor-orzecznictwa-apelacja (pełny tekst niedostępny — HTTP 403; teza z omówienia)
+- P5 — Postępowanie zażaleniowe — trzy nowelizacje w pięć lat, prawo.pl: https://www.prawo.pl/prawnicy-sady/zmiany-w-postepowaniu-zazaleniowym-od-2019-r,527235.html
+- P6 — Zażalenia poziome: luki w przepisach utrudniają pracę sądom i pełnomocnikom, prawo.pl: https://www.prawo.pl/prawnicy-sady/zazalenia-poziome-luki-w-przepisach-utrudniaja-prace-sadom-i,504054.html

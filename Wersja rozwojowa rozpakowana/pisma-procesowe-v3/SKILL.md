@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.55"
+version: "5.56"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -455,7 +455,8 @@ Przed zbudowaniem mapy przesłanka → dowód wykonaj weryfikację twierdzeń st
 > ```
 > view references/engines/pleading-engine-v8.md          (każde pismo złożone — matryca roszczenia)
 > view references/engines/theory-of-case-engine.md      (≥2 roszczenia / apelacja)
-> view references/engines/appellate-engine-v8.md        (⛔ obowiązkowy przy apelacji)
+> view references/engines/appellate-engine-v8.md        (⛔ obowiązkowy przy apelacji, zażaleniu i odwołaniu)
+> + moduły DR (PL): DR-02 mod-KPC-prawomocnosc-granice-apelacji, DR-03 mod-KPK-podstawy-odwolawcze-przeslanki-zarzuty-biegli, DR-04 mod-SUS-ZUS-ubezpieczenia-spoleczne, DR-05 mod-KPA-decyzja-i-odwolanie — sekcje „w praktyce” (⛔ obowiązkowe przy apelacji, zażaleniu i odwołaniu: wybór środka, terminy, praktyka zarzutów)
 > view references/engines/rebuttal-drafting-engine-v9.md (riposta / odpowiedź)
 > view references/engines/prosecution-complaint-engine-v8.md (⛔ obowiązkowy: zażalenie do prokuratury)
 > view references/engines/opponent-pleading-attack-engine-v9.md (analiza pisma przeciwnika)

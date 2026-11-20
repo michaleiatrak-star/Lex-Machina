@@ -107,7 +107,7 @@ Składki / Podleganie ubezpieczeniom → Sąd OKRĘGOWY (BEZ WZGLĘDU na
      ⛔ nie „30 dni od wyroku SA"] SKARGA KASACYJNA → SN (przymus adwokacki) <!-- T28-OK: cytat opisowy — dokumentacja korekty -->
 ```
 
-> ⚠️ **POMINIĘCIE SPRZECIWU = sąd ODRZUCI odwołanie (art. 477¹⁴a KPC)**
+> ⚠️ **POMINIĘCIE SPRZECIWU = sąd ODRZUCI odwołanie oparte wyłącznie na zarzutach do orzeczenia lekarza orzecznika (art. 477⁹ § 3¹ KPC)** — KOREKTA 2026-11-19: było „art. 477¹⁴a”; art. 477¹⁴a dotyczy przekazania sprawy organowi rentowemu przez sąd II instancji (t.j. 2026/468).
 > Pułapka: Orzeczenie pozornie korzystne (np. błędna data niezdolności) → złóż sprzeciw kwestionując datę!
 
 ---
@@ -379,3 +379,22 @@ GOTOWY WZÓR WNIOSKU: `pisma-proste-v2/references/SPJ-interpretacja-
 zus.md` (dodany 2026-07-21) — pełne elementy, opłata, właściwość,
 strategia równoległego wniosku do GIP.
 ```
+
+## Odwołanie do sądu w praktyce (dodano 2026-11-19)
+
+> Praktyka ze źródeł (2026-11-19): każda reguła ma źródło (Pn). Orzeczenia przytoczone przez źródła wtórne oznaczone `[ORZ-DO-WERYFIKACJI]` — przed powołaniem `weryfikator-orzeczen`. Tezy źródeł starszych niż t.j. sprawdzone z t.j.; rozbieżność = KOREKTA.
+
+### SO-3 — Odwołanie od decyzji ZUS (KRUS) do sądu
+
+- **Droga:** na piśmie do organu, który wydał decyzję (albo do jego protokołu); także do protokołu w sądzie (art. 477⁹ § 1, § 5). Organ przekazuje odwołanie do sądu w 30 dni albo sam zmienia/uchyla decyzję, jeśli uzna odwołanie za słuszne w całości (§ 2); przy zwłoce — ponaglenie (§ 7).
+- **Termin:** miesiąc od doręczenia; spóźnione — odrzucenie, chyba że przekroczenie nienadmierne i niezawinione (§ 3). Bezczynność organu — odwołanie w każdym czasie po 2 miesiącach od zgłoszenia roszczenia (§ 4).
+- **Sprzeciw do komisji lekarskiej — bramka (art. 477⁹ § 3¹):** gdy decyzja opiera się na orzeczeniu lekarza orzecznika, od którego nie wniesiono sprzeciwu, a odwołanie zawiera wyłącznie zarzuty co do tego orzeczenia — odrzucenie. Sprawdź w aktach: czy był sprzeciw; jeśli nie — czy odwołanie ma inne zarzuty niż medyczne. [OD 2027-01-01: 2026/26] — nowe brzmienie (orzeczenie także osoby wykonującej samodzielny zawód medyczny; sprzeciw rozpatruje lekarz orzecznik w trybie ponownego rozpatrzenia, nie komisja lekarska).
+- **Nowe okoliczności zdrowotne:** powstałe po orzeczeniu — organ kieruje do lekarza orzecznika zamiast do sądu (§ 2¹); powstałe po złożeniu odwołania — sąd uchyla decyzję i umarza (art. 477¹⁴ § 4).
+- **Zakres sporu wyznacza decyzja (P7):** nie dochodzi się w sądzie prawa, o którym decyzja nie rozstrzygała `[ORZ-DO-WERYFIKACJI: SN II UKN 204/99, 23.11.1999]`; nowe żądanie sąd przekazuje organowi (art. 477¹⁰ § 2). Odwołanie przysługuje od decyzji, nie od pism informacyjnych ZUS (P7).
+- **Treść (art. 477¹⁰ § 1):** oznaczenie decyzji, zwięzłe zarzuty, wnioski, uzasadnienie, podpis. Orzecznictwo jest odformalizowane — wystarcza wyraźne niezadowolenie i wola zmiany `[ORZ-DO-WERYFIKACJI: SN III UK 52/09, 10.12.2009]` (P7); pismo nazwane „sprzeciwem” złożone w terminie może być odwołaniem (P7). Mimo to w piśmie zawodowym: konkretne zarzuty (co organ pominął, jak błędnie policzył staż, które dokumenty zignorował) i wnioski dowodowe (świadkowie, biegły właściwej specjalności).
+- **Braki formalne (P7):** brak podpisu albo oznaczenia decyzji nieusunięty po wezwaniu → zwrot; prawomocny zwrot = uprawomocnienie decyzji `[ORZ-DO-WERYFIKACJI: SN I UZ 7/09, 21.04.2009]`.
+- **Rozstrzygnięcie sądu:** oddalenie albo zmiana i orzeczenie co do istoty (art. 477¹⁴ § 1–2); uchylenie i przekazanie tylko przy decyzji z rażącym naruszeniem procedury nakładającej zobowiązanie/obniżającej świadczenie (§ 2¹). Wniosek pisma: o zmianę decyzji i przyznanie/ustalenie prawa — nie o „uchylenie” (poza § 2¹).
+
+#### Źródła praktyki (odczyt 2026-11-19)
+
+- P7 — Spór z ZUS: odwołanie od decyzji organu rentowego, rp.pl (24.04.2012; przepisy sprawdzone z t.j. 2026/468): https://pro.rp.pl/zus/art13772711-spor-z-zus-odwolanie-od-decyzje-organu-rentowego

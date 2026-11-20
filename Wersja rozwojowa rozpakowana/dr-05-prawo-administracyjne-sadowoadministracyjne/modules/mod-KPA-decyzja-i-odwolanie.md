@@ -286,3 +286,23 @@ rp.pl [Z cytowanym wyrokiem WSA Warszawa], przepisy.gofin.pl
 ## Połącz z
 - DR-05/mod-KPA-postepowanie-administracyjne (moduł MACIERZYSTY)
 - DR-05/mod-KPA-tryby-nadzwyczajne-i-strategia (wznowienie/nieważność MOGĄ dotyczyć też postanowień)
+
+## Odwołanie w praktyce (dodano 2026-11-19)
+
+> Praktyka ze źródeł (2026-11-19): każda reguła ma źródło (Pn). Orzeczenia przytoczone przez źródła wtórne oznaczone `[ORZ-DO-WERYFIKACJI]` — przed powołaniem `weryfikator-orzeczen`. Tezy źródeł starszych niż t.j. sprawdzone z t.j.; rozbieżność = KOREKTA.
+
+### SO-5 — Odwołanie od decyzji administracyjnej (KPA)
+
+- **Treść (art. 128):** nie wymaga szczegółowego uzasadnienia — wystarczy niezadowolenie; przepisy szczególne mogą wymagać więcej (sprawdź ustawę materialną: podatkowe, budowlane, środowiskowe). Praktyka (P9): przy sprawach złożonych formułuj zarzuty precyzyjnie, bo wyznaczają kierunek kontroli i przyszłą skargę do WSA.
+- **Droga i termin (art. 129):** do organu odwoławczego za pośrednictwem organu, który wydał decyzję; 14 dni od doręczenia (od ogłoszenia — decyzja ustna). Częsty błąd: złożenie wprost do organu wyższego stopnia (P10) — organ przekazuje pismo (art. 65 § 1 KPA), a podanie wniesione do organu niewłaściwego przed upływem terminu uważa się za wniesione w terminie (art. 65 § 2) — ale przekazanie wydłuża sprawę; wnoś za pośrednictwem organu I instancji i zachowaj dowód nadania (P9). Uchybienie terminu: prośba o przywrócenie w 7 dni od ustania przyczyny z dopełnieniem czynności (art. 58 § 1–2); o przywróceniu terminu do odwołania postanawia ostatecznie organ odwoławczy (art. 59 § 2).
+- **Autokontrola (art. 132):** organ I instancji może uwzględnić odwołanie w całości, gdy wniosły je wszystkie strony albo pozostałe się zgodziły; inaczej przekazuje akta w 7 dni (art. 133).
+- **Postępowanie wyjaśniające w II instancji (art. 136 § 2–3):** na zgodny wniosek stron zawarty w odwołaniu organ odwoławczy przeprowadza je sam zamiast kasacji — rozważ ten wniosek, gdy zależy na czasie.
+- **Rozstrzygnięcia (art. 138):** utrzymanie, uchylenie i orzeczenie co do istoty, umorzenie; kasacja tylko przy naruszeniu procedury i istotnym zakresie do wyjaśnienia (§ 2), z wytycznymi wykładni (§ 2a).
+- **Zakaz reformationis in peius (art. 139):** wyjątek — rażące naruszenie prawa lub interesu społecznego; oceń ryzyko przed wniesieniem odwołania od decyzji częściowo korzystnej.
+- **Niedopuszczalność i uchybienie terminu** stwierdza organ odwoławczy postanowieniem ostatecznym (art. 134) — droga dalej: przywrócenie terminu (art. 58–59 KPA); zaskarżalność postanowienia do WSA sprawdź w PPSA przed wskazaniem tej drogi.
+- Silnik ogólny: `references/engines/admin-pleading-engine-v8.md`.
+
+#### Źródła praktyki (odczyt 2026-11-19)
+
+- P9 — Odwołanie od decyzji administracyjnej, e-prawnik.pl i infor.pl (omówienia art. 128–129 KPA): https://e-prawnik.pl/artykuly/odwolanie-od-decyzji-administracyjnej.html
+- P10 — Postępowanie sądowoadministracyjne — zajęcia 5, Wydział Prawa UWr: https://prawo.uni.wroc.pl/sites/default/files/students-resources/Post%C4%99powanie%20s%C4%85dowoadministracyjne%20-%20zaj%C4%99cia%205.pdf
