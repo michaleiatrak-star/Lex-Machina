@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.56"
+version: "5.57"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -493,6 +493,14 @@ KROK ET: Eliminacja tez i weryfikacja przepisów
 > `view shared/MOD-ATAK-NA-SWIADKA.md` → FAZA 0–1A (SW-P1…SW-P6, SW-INW) PRZED CP-1b.
 > Tabela SW-INW w odpowiedzi W1; po każdej zmianie pisma (także PEER-APPLY) `inwentarz_zeznan.py --pismo`.
 > Niewykonane = W1-SW-INW ✗ w ST-FINAL, nie „skrótowo”.
+
+### W1.2c-PT — PISMO W TOKU SPRAWY PO ROZPRAWIE (⛔ OBOWIĄZKOWE, F-241)
+
+> Wyzwalacz: pismo w związku z przebiegiem rozprawy (zeznania, nowy dowód, stanowisko co do dowodu).
+> `view modules/MOD-PISMO-W-TOKU.md` → PT-1 forma (art. 205³ § 5: zwrot pisma przygotowawczego bez
+> zarządzenia; wniosek dowodowy art. 235¹), PT-2 zakres = teza dowodowa sądu + roszczenie,
+> PT-3 do 3 stron, PT-4 czysty tekst dla sądu, PT-5 kontrola w W3.
+> Razem z `shared/MOD-ATAK-NA-SWIADKA.md` SW-A1b, SW-A10, SW-CYT, SW-ZRODLA, SW-W4.
 
 ### W1.2c-PRE — KARTY DOWODOWE I ŁAŃCUCHY (gdy ≥2 dokumenty dostarczone)
 

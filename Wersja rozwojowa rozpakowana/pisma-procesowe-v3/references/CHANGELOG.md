@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.57 (2026-11-20): F-241: pismo w toku sprawy (MOD-PISMO-W-TOKU: forma art. 205³ § 5 / 235¹ k.p.c., zakres = teza dowodowa, do 3 stron, czysty tekst); MOD-ATAK-NA-SWIADKA 1.3.0 (SW-A1b, SW-A10, SW-CYT, SW-ZRODLA, SW-W4); PR-A6/PR-B6
 - 5.56 (2026-11-19): Środki odwoławcze: appellate-engine-v8 z praktyką zarzutów ze źródeł i listą kontrolną; odesłania do sekcji „w praktyce” DR-02 (apelacja i zażalenie KPC), DR-03 (KPK), DR-04 (odwołanie ZUS), DR-05 (KPA) — SKILL.md, MOD-ROUTE, MODULY-MAPA
 - 5.55 (2026-11-19): F-240: podważenie świadka — SW-DETECT-HARD, inwentarz zeznań ze wszystkich protokołów (tools/inwentarz_zeznan.py), SW-P6/SW-A9 niepamięć wobec wiedzy, checkpoint SW-INW, PEER-APPLY PA-1–PA-5, kroki W1-SW-INW i W3-PEER-APPLY
 - 5.54 (2026-11-11, LEGAL GAUNTLET v3 E7): W1.1: zakres IN_SCOPE / OUT_OF_SCOPE przy kilku postępowaniach w materiale, ustalenia W3 jako rekordy teza → źródło → akapit, READY tylko po FILE CHECK PASS (shared/MOD-SLOWNIK-STATUSOW.md, HYBRID-VALIDATION F3.0).

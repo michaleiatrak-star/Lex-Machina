@@ -45,6 +45,8 @@ W2 — PROJEKT PISMA
 MOD-SZABLONY           W2.1       zawsze gdy redagujesz pismo
                                    (SZ1/SZ3 → szablony eksperckie w
                                    references/templates/ — pozew, odpowiedź na pozew)
+MOD-PISMO-W-TOKU       W1.2c-PT   pismo w toku sprawy po rozprawie: forma (art. 205³ § 5,
+                                   art. 235¹ k.p.c.), zakres = teza dowodowa, do 3 stron, czysty tekst
 MOD-ROUTE              —          WYŁĄCZNIE informacyjna matryca pytań TAK/NIE;
                                    NIE jest routerem, NIE wczytuj jako krok;
                                    view modules/MOD-ROUTE.md (tylko na żądanie)

@@ -66,6 +66,8 @@ PR-A3: Czy pismo zawiera przyznanie niekorzystne (choćby ukryte)?
         → "Choć pracownik spóźniał się, to..." = przyznanie spóźnień
 PR-A4: Czy jest zdanie, które — wyrwane z kontekstu — szkodzi klientowi?
 PR-A5: Czy jest argument, który można obrócić przeciwko stronie składającej?
+PR-A6: Czy pismo powtarza wersję przeciwnika (pełne cytaty zarzutów wobec klienta), zamiast uciąć
+        cytat przed zarzutem? (MOD-ATAK-NA-SWIADKA SW-CYT, F-241)
 
 Format: lista ATAK-[nr]: [cytat lub opis] → [jak zaatakować]
 ```
@@ -82,6 +84,8 @@ PR-B3: Czy każde twierdzenie ma dowód wprost wskazany w piśmie?
 PR-B4: Czy pismo jest dłuższe niż potrzeba? Gdzie można skrócić?
         → użyj MOD-KONCENTRACJA do weryfikacji limitu stron
 PR-B5: Czy język jest procesowy, czy publicystyczny?
+PR-B6: Czy forma pisma pozwala je przyjąć (pismo przygotowawcze bez zarządzenia = zwrot) i czy
+        każdy akapit służy tezie dowodowej sądu? (MOD-PISMO-W-TOKU PT-1/PT-2, F-241)
 
 Format: lista UWAGA-SĄDU-[nr]: [kwestia] → [rekomendacja]
 ```
