@@ -1,6 +1,7 @@
-# MOD-PISMO-W-TOKU — pismo w toku sprawy po rozprawie (forma, zakres, objętość, czysty tekst)
+# MOD-PISMO-W-TOKU — pismo w toku sprawy po rozprawie (forma, zakres, styl kancelaryjny, czysty tekst)
 
-> **Wersja:** 1.0.0 (2026-11-20, F-241)
+> **Wersja:** 1.1.0 (2026-11-20, F-241) — KOREKTA: bez stałego limitu stron (objętość zależy od sprawy);
+> styl kancelaryjny, papier firmowy kancelarii z numeracją stron.
 > **Wyzwalacz:** pismo składane w toku sprawy w związku z przebiegiem rozprawy (zeznania świadka,
 > nowy dowód, stanowisko co do dowodu) — wniosek dowodowy, pismo przygotowawcze, stanowisko.
 > **Pozycja:** przed W2 (wybór formy i zakresu), w W2.6 (redakcja), w W3 (kontrola przed plikiem).
@@ -10,7 +11,7 @@
 
 Diagnoza (F-241): projekt nazwany „pismem przygotowawczym” z pełną argumentacją, choć ta sama odpowiedź
 ostrzegała, że takie pismo bez zarządzenia zostanie zwrócone; wątki spoza tezy dowodowej (inne
-roszczenia, własne zaprzeczenia, wniosek o przesłuchanie strony); objętość dwukrotnie ponad potrzebę;
+roszczenia, własne zaprzeczenia, wniosek o przesłuchanie strony) i powtórzenia;
 luki ⬛ na dane obecne w aktach; uwagi kontroli wpisane w tekst dla sądu.
 
 ## PT-1 FORMA (przed W2)
@@ -47,12 +48,16 @@ zakresie/terminie.
      - zarzuty wobec pełnomocnika strony przeciwnej.
 ```
 
-## PT-3 OBJĘTOŚĆ
+## PT-3 STYL I OBJĘTOŚĆ
 
 ```
-Wniosek dowodowy / pismo w toku po jednej rozprawie: do 3 stron A4 (TNR 12, ok. 3000 znaków na
-stronę). Skracaj powtórzenia, łącz cytaty, usuń akapity spoza PT-2 — nie usuwaj dowodów ani
-sprzeczności, które służą tezie. Aplikacja ostrzega przy pliku, gdy objętość przekracza 3 strony.
+Objętość wynika z materiału sprawy (liczba dowodów, sprzeczności, wątków) — nie ma stałego limitu
+stron. Zwięzłość = brak powtórzeń, jeden cytat na jedną tezę, brak akapitów spoza PT-2.
+Język i styl kancelaryjny: zdania rzeczowe, terminologia procesowa, bez ocen emocjonalnych i
+publicystyki; strona mówi o sobie w trzeciej osobie („powód”), gdy pismo składa pełnomocnik
+albo gdy tak przyjęto w aktach.
+Plik: papier firmowy kancelarii (szablon z Ustawień), numeracja stron w stopce; bez papieru
+firmowego — profil kancelaryjny aplikacji (TNR 12) z numeracją stron.
 ```
 
 ## PT-4 CZYSTY TEKST DLA SĄDU
@@ -76,7 +81,7 @@ Przepis potwierdzony tylko częściowo (kontrola treści przepisu) → przeformu
 [ ] każdy wniosek dowodowy: dowód + wyszczególnione fakty (art. 235¹)
 [ ] istotność powiązana z tezą sądu i nazwanym roszczeniem (PT-2)
 [ ] lista „pominięte celowo” poza pismem
-[ ] ≤ 3 strony (PT-3)
+[ ] styl kancelaryjny, bez powtórzeń; papier firmowy z numeracją stron (PT-3)
 [ ] brak znaczników, uwag i zbędnych ⬛ w tekście (PT-4)
 [ ] cytaty zeznań niekorzystnych ucięte przed zarzutami (MOD-ATAK-NA-SWIADKA SW-CYT)
 [ ] wniosek z każdej sprzeczności zgodny z SW-A10 (zmiana wersji vs brak wiedzy)

@@ -499,7 +499,8 @@ KROK ET: Eliminacja tez i weryfikacja przepisów
 > Wyzwalacz: pismo w związku z przebiegiem rozprawy (zeznania, nowy dowód, stanowisko co do dowodu).
 > `view modules/MOD-PISMO-W-TOKU.md` → PT-1 forma (art. 205³ § 5: zwrot pisma przygotowawczego bez
 > zarządzenia; wniosek dowodowy art. 235¹), PT-2 zakres = teza dowodowa sądu + roszczenie,
-> PT-3 do 3 stron, PT-4 czysty tekst dla sądu, PT-5 kontrola w W3.
+> PT-3 styl kancelaryjny, objętość według sprawy, papier firmowy z numeracją stron,
+> PT-4 czysty tekst dla sądu, PT-5 kontrola w W3.
 > Razem z `shared/MOD-ATAK-NA-SWIADKA.md` SW-A1b, SW-A10, SW-CYT, SW-ZRODLA, SW-W4.
 
 ### W1.2c-PRE — KARTY DOWODOWE I ŁAŃCUCHY (gdy ≥2 dokumenty dostarczone)

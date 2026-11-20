@@ -49,7 +49,7 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.68 (2026-11-20): F-241: pismo w toku sprawy (MOD-PISMO-W-TOKU: forma art. 205³ § 5 / 235¹ k.p.c., zakres = teza dowodowa, do 3 stron, czysty tekst); MOD-ATAK-NA-SWIADKA 1.3.0 (SW-A1b, SW-A10, SW-CYT, SW-ZRODLA, SW-W4); PR-A6/PR-B6
+  Wersja bieżąca: 3.99.68 (2026-11-20): F-241: pismo w toku sprawy (MOD-PISMO-W-TOKU: forma art. 205³ § 5 / 235¹ k.p.c., zakres = teza dowodowa, styl kancelaryjny i papier firmowy z numeracją stron, czysty tekst); MOD-ATAK-NA-SWIADKA 1.3.0 (SW-A1b, SW-A10, SW-CYT, SW-ZRODLA, SW-W4); PR-A6/PR-B6
   3.99.67 (2026-11-19): F-240: podważenie świadka — SW-DETECT-HARD, inwentarz zeznań ze wszystkich protokołów (tools/inwentarz_zeznan.py), SW-P6/SW-A9 niepamięć wobec wiedzy, checkpoint SW-INW, PEER-APPLY PA-1–PA-5, kroki W1-SW-INW i W3-PEER-APPLY
   3.99.66 (2026-11-13): HIERARCHIA-ZRODEL-MIEDZYNARODOWE §2–§3: stan 2026-11-13 — treść aktu UE przez Cellar (eurlex_tekst), eur-lex.europa.eu w kanale kodu 202/0 B; tabela kanałów zaktualizowana.
   3.99.65 (2026-11-11): MOD-SLOWNIK-STATUSOW 1.0.0 (wspólny słownik statusów faktów, prawa i orzeczeń; TRANSITIONAL_UNRESOLVED; zakres IN_SCOPE / OUT_OF_SCOPE przy kilku sprawach w teczce; rekord teza → źródło → akapit; status pliku DRAFT_UNVERIFIED / DRAFT_REVIEWABLE / READY_FOR_HUMAN_REVIEW). tools/zgodnosc_pliku.py: FILE CHECK pliku końcowego wobec projektu (kwoty, daty, rachunek, załączniki; exit 4), export_gate.py --projekt, HYBRID-VALIDATION F3.0, TEMPORAL-LAW-CHECK: NIEUSTALONE = TRANSITIONAL_UNRESOLVED.
