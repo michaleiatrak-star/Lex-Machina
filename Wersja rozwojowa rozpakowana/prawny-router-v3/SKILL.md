@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.80"
+version: "3.81"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -120,7 +120,8 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.80 (2026-11-19): F-240: podważenie świadka — SW-DETECT-HARD, inwentarz zeznań ze wszystkich protokołów (tools/inwentarz_zeznan.py), SW-P6/SW-A9 niepamięć wobec wiedzy, checkpoint SW-INW, PEER-APPLY PA-1–PA-5, kroki W1-SW-INW i W3-PEER-APPLY
+  Wersja bieżąca: 3.81 (2026-11-24): Oznaczenia lex:wykonuje-aplikacja: bramka anonimizera (ANONIMIZER), detekcja trybu (TRYB), renderowanie widgetow (WIDGET-HOST); tresc bez zmian dla czatu
+  3.80 (2026-11-19): F-240: podważenie świadka — SW-DETECT-HARD, inwentarz zeznań ze wszystkich protokołów (tools/inwentarz_zeznan.py), SW-P6/SW-A9 niepamięć wobec wiedzy, checkpoint SW-INW, PEER-APPLY PA-1–PA-5, kroki W1-SW-INW i W3-PEER-APPLY
   3.79 (2026-11-13): UP-5: kanał prawa UE = eurlex_tekst / Cellar REST (Accept xhtml, pol); eur-lex.europa.eu w kanale kodu daje HTTP 202 i 0 B (pomiar 2026-11-13) — usunięto sprzeczne zdanie „curl działa dla eur-lex”.
   3.78 (2026-11-09): UP-5 — rodzina prawa nordyckiego: shared/RODZINA-PRAWA-NORDYCKIE.md (NR-1…NR-6: państwo i UE/EOG, ustawy wspólne a krajowe, nauka o źródłach, orzecznictwo bez stare decisis, brak kodeksu cywilnego, forma)
   3.77 (2026-11-08): UP-5 — rodzina common law i systemy mieszane: shared/RODZINA-PRAWA-COMMON-LAW.md (CL-1…CL-7: jurysdykcja, moc wiążąca, ratio, losy precedensu, ustawa a precedens, odróżnienie, forma pisma)
@@ -132,7 +133,7 @@ changelog: |
 W każdej sprawie prawnej, przed analizą:
 
 1. `view JUR:weryfikacja-przepisow-kanon` — świeża weryfikacja każdego powołania w tej turze.
-2. `view references/KROK0A-anonimizer.md` — zamknij bramkę anonimizera.
+2. `view references/KROK0A-anonimizer.md` — zamknij bramkę anonimizera. <!-- lex:wykonuje-aplikacja-linia: ANONIMIZER -->
 3. `view references/KROK1-detekcja.md` — ustal tryb i jurysdykcję.
    Gdy w tej turze użytkownik dostarczył dokument, akta, korespondencję lub wklejony
    tekst: `view shared/MOD-WEJSCIE-DOKUMENTU.md` — WD-1 przed analizą, WD-2 przy każdym
@@ -236,7 +237,7 @@ KROK 0-ST → ⛔ [ST-INIT — STEP-TRACKER] (zaraz po HG-ACTIVE, przed jakimkol
 KROK 0-RPK → Gdy zakres obejmuje ≥10 ponumerowanych jednostek albo pracę
           partiami nad wyliczoną listą: view shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md
           i wykonaj RPK-INIT/RPK-COMMIT/RPK-RESUME zgodnie z modułem.
-KROK 0A → [ANONIMIZER] → view references/KROK0A-anonimizer.md
+KROK 0A → [ANONIMIZER] → view references/KROK0A-anonimizer.md <!-- lex:wykonuje-aplikacja-linia: ANONIMIZER -->
 KROK 0B → [KONTEKST SESJI] → wykryj czy użytkownik wkleił/wgrał plik
           kontekstu (# KONTEKST SESJI...) lub czy napisał "masz kontekst" /
           "wczytaj sesję" / "plik z poprzedniej sesji" — jeśli TAK:
@@ -309,7 +310,7 @@ KROK 6  → Jeśli pismo → generuj .docx
 KROK 7  → DISCLAIMER → view shared/DISCLAIMER.md
 ```
 
-> ⛔ KROK 0A jest BRAMKĄ TWARDĄ. Żaden kolejny krok nie może być wykonany
+> ⛔ KROK 0A jest BRAMKĄ TWARDĄ. Żaden kolejny krok nie może być wykonany <!-- lex:wykonuje-aplikacja-linia: ANONIMIZER -->
 > jeśli KROK 0A nie jest zamknięty (decyzja_sesji ≠ null).
 
 ---
@@ -522,7 +523,7 @@ została poprawnie zamknięta.
 
 - **Reguła 1 — wejście:** router jest pierwszym krokiem; wczytaj PRIMARY przed analizą.
 - **Reguła 1C — pliki:** wykonaj KROK 0C i PD0; status krytyczny blokuje analizę.
-- **Reguła 2 — anonimizacja:** zamknij KROK 0A przed analizą.
+- **Reguła 2 — anonimizacja:** zamknij KROK 0A przed analizą. <!-- lex:wykonuje-aplikacja-linia: ANONIMIZER -->
 - **Reguła 3 — HARD GATE:** przed analizą wykonaj KROK 1B.
 - **Reguła 4 — niejednoznaczność:** zadaj jedno pytanie, nie zakładaj trybu.
 - **Reguła 5 — kreator:** żądanie kreatora uruchamia go natychmiast.
@@ -605,14 +606,14 @@ Bramki blokujące:
 Niespełnienie któregokolwiek punktu → STOP; wykonaj brakujący krok albo uruchom
 jawny TRYB ZDEGRADOWANY.
 
-## RENDEROWANIE WIDGETÓW
+## RENDEROWANIE WIDGETÓW <!-- lex:wykonuje-aplikacja: WIDGET-HOST -->
 
 > Pliki `.jsx` przez `present_files` NIE renderują się w claude.ai.
 > Jedyna poprawna metoda inline: `show_widget` z HTML (vanilla JS).
 > Pliki .docx / .pdf → present_files (dokumenty do pobrania — tu zasada nie dotyczy).
 
-**Anonimizer — aktualny standard:**
-`view prawny-router-v3/anonimizer/anonimizer-skill.md`
+**Anonimizer — aktualny standard:** <!-- lex:wykonuje-aplikacja-linia: ANONIMIZER -->
+`view prawny-router-v3/anonimizer/anonimizer-skill.md` <!-- lex:wykonuje-aplikacja-linia: ANONIMIZER -->
 
 ---
 

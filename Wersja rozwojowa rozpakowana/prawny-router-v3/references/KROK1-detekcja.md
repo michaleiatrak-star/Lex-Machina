@@ -6,7 +6,7 @@
 
 ---
 
-## KROK 1 — DETEKCJA TRYBU
+## KROK 1 — DETEKCJA TRYBU <!-- lex:wykonuje-aplikacja: TRYB -->
 
 | Sygnał | Tryb |
 |---|---|
