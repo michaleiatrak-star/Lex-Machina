@@ -77,14 +77,14 @@ KLAUZULE RYZYKA W UMOWACH (natychmiast):
 
 KLAUZULE DO DODANIA (umowy z dostawcami AI):
   □ Klasyfikacja systemu AI (poziom ryzyka: minimalny/ograniczony/wysoki/zakazany)
-  □ Zgodność z wymaganiami dla systemów wysokiego ryzyka (od 02.08.2026)
+  □ Zgodność z wymaganiami dla systemów wysokiego ryzyka (zał. III od 02.12.2027, zał. I od 02.08.2028 — art. 113 po zmianie 2026/1744)
   □ Obowiązek aktualizacji gdy AI Act wymaga zmian systemu
   □ Prawo do wyjaśnień (human oversight) przy decyzjach AI wysokiego ryzyka
   □ Klauzula AI Act compliance w SLA/umowie serwisowej
 
 HORYZONT:
   Za 6 m-cy (do ~12.2025): systemy GPAI — pełne wymogi → audyt dokumentacji
-  Za 12 m-cy (do 02.08.2026): systemy wysokiego ryzyka — pełna compliance
+  Do 02.12.2027 (zał. III) / 02.08.2028 (zał. I): systemy wysokiego ryzyka — pełna compliance ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
   → web_search: "AI Act harmonogram stosowania 2025 2026 art.6 systemy wysokiego ryzyka"
 ```
 

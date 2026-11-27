@@ -25,3 +25,11 @@ adwersarialne, format manifestu złotego standardu, protokół sędziego z
 manifestu wad są opracowaniem własnym Lex Machina — oryginalne umowy testowe
 źródłowego projektu są tam celowo wyłączone z publikacji (`.gitignore`
 repozytorium źródłowego) i nie były dostępne do skopiowania ani parafrazy.
+
+Od 2026-11-27: zakres zagadnień z commercial-legal-pl v0.8 (monitoring pracowników
+z użyciem AI, AI Act od strony dostawcy, DPA wobec organów państw trzecich, art. 82 RODO
+a indemnifikacja, tajemnica zawodowa w NDA, nowe pola eksploatacji jako zobowiązanie,
+doręczenia trzyczłonowe, rozpiska terminów) — opracowanie własne, bez przejęcia
+brzmienia klauzul źródła; przepisy odczytane z ELI i EUR-Lex. Pliki z nagłówkiem
+„Atrybucja (Apache 2.0)” w sekcjach dodanych 2026-11-27 (także w
+prawo-polskie-v2/krajowe/analizator-umow-v1/references/).

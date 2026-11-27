@@ -93,7 +93,24 @@ REKOMENDACJA (gotowe brzmienie):
   e) [pola specyficzne dla danego utworu].
   Przeniesienie obejmuje wyłączne prawo zezwalania na wykonywanie zależnego prawa
   autorskiego (opracowania) — zob. §[Y]."
-```
+
+NOWE POLA EKSPLOATACJI — ZOBOWIĄZANIE, NIE PRZENIESIENIE (dodane 2026-11-27)
+  Atrybucja (Apache 2.0): zasada z commercial-legal-pl v0.8 (baza-klauzul/08), opracowanie własne.
+  Brzmienia (t.j. Dz.U. 2025 poz. 24, bez zmian art. 41 i 45 w nowelizacjach 2026/1296
+  i 2026/1477) ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2025/24/text.pdf, 2026-11-27]:
+  art. 41 ust. 2 — umowa obejmuje pola „wyraźnie w nich wymienione”;
+  art. 41 ust. 4 — umowa może dotyczyć tylko pól „znanych w chwili jej zawarcia”;
+  art. 45 — „Jeżeli umowa nie stanowi inaczej”, twórcy przysługuje odrębne wynagrodzenie
+  za korzystanie z utworu na każdym odrębnym polu eksploatacji.
+  → Klauzula „przenosi także na polach, które powstaną w przyszłości” jest bezskuteczna
+    co do pól nieznanych (ust. 4). Skuteczna konstrukcja: ZOBOWIĄZANIE twórcy do
+    zawarcia umowy przenoszącej na nowe pole, gdy powstanie (z terminem, formą pisemną
+    pod rygorem nieważności — art. 53: umowa o przeniesienie autorskich praw majątkowych
+    wymaga formy pisemnej pod rygorem nieważności)
+    i z ustalonym wynagrodzeniem albo wyraźnym zastrzeżeniem, że wynagrodzenie
+    podstawowe obejmuje także to pole (art. 45 „jeżeli umowa nie stanowi inaczej”).
+  → Brak zastrzeżenia o wynagrodzeniu = ryzyko roszczenia o odrębne wynagrodzenie
+    za każde pole (art. 45).
 
 **IP-2 — Brak praw zależnych i prawa do modyfikacji (HIGH RISK)**
 ```

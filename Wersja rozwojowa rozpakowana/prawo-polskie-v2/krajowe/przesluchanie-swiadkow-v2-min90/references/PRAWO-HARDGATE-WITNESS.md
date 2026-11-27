@@ -15,13 +15,13 @@ przepisy lub orzeczenia. Każdy obszar wymaga weryfikacji w ELI (RZĄD 1) przed 
 
 | Zagadnienie | Przepis (orientacyjny — weryfikuj) | Ryzyko dezaktualizacji |
 |---|---|---|
-| Pytania sugestywne w przesłuchaniu bezpośrednim | art. 271 KPC | niska |
+| Przebieg zeznań (najpierw „co i z jakiego źródła wiadomo”, potem pytania) — art. 271 NIE zakazuje pytań sugerujących; uchyla je przewodniczący w ramach kierowania rozprawą | art. 271 § 1 KPC ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/468/text.pdf, 2026-11-27] | niska |
 | Świadkowie wyłączeni od zeznań (prawo odmowy) | art. 261 KPC | niska |
 | Przedmiot zeznań — fakty istotne dla rozstrzygnięcia | art. 227 KPC | niska |
-| Zakaz zastępowania zeznań dokumentem | art. 258 KPC | niska |
+| ~~Zakaz zastępowania zeznań dokumentem — art. 258 KPC~~ — art. 258 UCHYLONY (t.j. 2026 poz. 468) | — | — |
 | Mediator jako świadek | art. 259¹ KPC | średnia (dodany nowelizacją) |
 | Konfrontacja świadków | art. 272 KPC | niska |
-| Odczytanie zeznań z poprzedniego postępowania | art. 271¹ KPC | średnia |
+| Zeznanie na piśmie, gdy sąd tak postanowi (nie: odczytanie zeznań z innego postępowania) | art. 271¹ KPC ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/468/text.pdf, 2026-11-27] | średnia |
 
 ### 1B. KPK — postępowanie karne
 
@@ -30,7 +30,7 @@ przepisy lub orzeczenia. Każdy obszar wymaga weryfikacji w ELI (RZĄD 1) przed 
 | Prawo do odmowy zeznań (osoba najbliższa) | art. 182 KPK | niska |
 | Prawo do odmowy odpowiedzi na pytanie | art. 183 KPK | niska |
 | Zakaz zastępowania zeznań notatkami | art. 174 KPK | niska |
-| Dowody uzyskane z naruszeniem przepisów | art. 168a KPK | wysoka (nowelizacje) — ✅ FLAGA POTWIERDZONA TRAFNA 2026-07-30: burzliwa historia legislacyjna w 2026 r. — patrz przypis niżej |
+| Dowody uzyskane z naruszeniem przepisów — dowodu NIE uznaje się za niedopuszczalny wyłącznie z tego powodu, poza wyjątkami (zabójstwo, umyślny uszczerbek, pozbawienie wolności przez funkcjonariusza) | art. 168a KPK ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/490/text.pdf, 2026-11-27]; bez zmian w nowelizacjach 2026/421, 638, 760, 882, 901 | wysoka (historia 2026 — przypis niżej) |
 
 ⚡ POTWIERDZONE 2026-07-30 (na żądanie użytkownika) — FLAGA "WYSOKIE
 RYZYKO" PRZY ART. 168a OKAZAŁA SIĘ TRAFNA. Złożona historia
@@ -50,7 +50,10 @@ legislacyjna 2026 r.:
    NIEZWERYFIKOWANY na dzień 30.07.2026 (3+ miesiące po wecie —
    MOŻLIWE, że coś się zmieniło od kwietnia)
 
-⭐ WNIOSEK NA DZIEŃ WERYFIKACJI: skoro reforma z lutego NIE WESZŁA W
+✅ 2026-11-27: t.j. KPK Dz.U. 2026 poz. 490 i późniejsze nowelizacje (2026/421, 638, 760, 882,
+901) — art. 168a w brzmieniu permisywnym (jak wyżej w tabeli). Notatka poniżej jest historyczna.
+
+⭐ WNIOSEK NA DZIEŃ WERYFIKACJI (2026-07-30): skoro reforma z lutego NIE WESZŁA W
 ŻYCIE (weto utrzymane) — STARA, PERMISYWNA wersja z 2016 r.
 (dopuszczająca dowód z naruszeniem prawa, poza wąskimi wyjątkami)
 PRAWDOPODOBNIE POZOSTAJE W MOCY. ALE sytuacja jest AKTYWNA i

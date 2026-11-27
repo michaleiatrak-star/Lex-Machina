@@ -162,7 +162,7 @@ STOP-4 CEL ROZDZIAŁU OSIĄGNIĘTY:
 | RYZYKO-KONTROLA | otwarte/WHY przy wrogim świadku | tylko PEACE/LEJEK | WHY-GATE → BLOK E |
 | RYZYKO-ODPOWIEDŹ | NIE szkodzi tezie | z ostrożnością | przeformułuj lub BLOK E |
 | RYZYKO-KUMULACJA | sekwencja otwiera narrację | zmień kolejność | reorganizuj blok |
-| sugestywne | sugeruje odpowiedź | tylko cross KPK | weryfikuj HARDGATE |
+| sugerujące | sugeruje treść odpowiedzi | KPK: nigdy (art. 171 § 4, uchylane § 6, art. 370 § 4); KPC: brak wyraźnego zakazu, przewodniczący może uchylić | KPK → BLOK E; KPC → przeformułuj, ryzyko uchylenia |
 | niedopuszczalne | narusza zakaz dowodowy | nigdy | BLOK E + alternatywa |
 | irrelewantne | brak celu procesowego | nigdy | usuń |
 | obraźliwe/manipulacyjne | narusza godność | nigdy | usuń |
@@ -173,24 +173,27 @@ STOP-4 CEL ROZDZIAŁU OSIĄGNIĘTY:
 
 ### KPC
 
-- Pytania sugestywne w przesłuchaniu bezpośrednim (art. 271 KPC)
-- Prawo odmowy zeznań: małżonek, krewni, osoby przysposobione (art. 261 §1 KPC)
-- Tajemnica zawodowa lub państwowa (art. 261 §2 KPC)
-- Mediator jako świadek (art. 259¹ KPC)
+(✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/468/text.pdf, 2026-11-27]; pełne zestawienie KPC/KPK: SKILL.md, „ŚWIADEK W SPRAWIE CYWILNEJ A KARNEJ”)
+- Przebieg: najpierw „co i z jakiego źródła wiadomo”, potem pytania sędziów i stron (art. 271 § 1 KPC) — art. 271 NIE zakazuje pytań sugerujących; ich uchylenie to kierowanie rozprawą przez przewodniczącego
+- Kto nie może być świadkiem (art. 259 KPC); mediator — chyba że strony zwolnią go z tajemnicy (art. 259¹ KPC)
+- PRAWO odmowy zeznań: małżonek, wstępni, zstępni, rodzeństwo, powinowaci, przysposobienie; niedopuszczalne w sprawach o prawa stanu poza rozwodem (art. 261 § 1 KPC)
+- Odmowa odpowiedzi: odpowiedzialność karna, hańba, dotkliwa szkoda majątkowa, istotna tajemnica zawodowa; spowiedź (art. 261 § 2 KPC)
 
 ### KPK
 
-- Dowody z naruszeniem przepisów (art. 168a KPK)
-- Tajemnica — zwolnienie przez sąd (art. 180 KPK)
-- Zakaz zastępowania zeznań notatkami (art. 174 KPK)
-- Prawo odmowy zeznań — osoba najbliższa (art. 182 KPK)
-- Prawo odmowy odpowiedzi — narażenie na odpowiedzialność (art. 183 KPK)
+(✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/490/text.pdf, 2026-11-27])
+- Zakaz pytań sugerujących treść odpowiedzi, uchylanie ich i pytań nieistotnych (art. 171 § 4, § 6; art. 370 § 4 KPK); pytania o życie seksualne tylko gdy niezbędne (§ 4a)
+- Dowód uzyskany z naruszeniem przepisów NIE jest niedopuszczalny wyłącznie z tego powodu — poza wyjątkami (zabójstwo, umyślny uszczerbek, pozbawienie wolności przez funkcjonariusza) (art. 168a KPK)
+- Tajemnica — zwolnienie przez sąd/prokuratora; tajemnica adwokacka, radcowska, lekarska i inne tylko gdy niezbędne i nie do ustalenia innym dowodem (art. 180 § 1–2 KPK)
+- Zakaz przesłuchania: obrońca, adwokat/radca z art. 245 § 1, duchowny — spowiedź (art. 178 KPK); oświadczenia wobec biegłego/lekarza (art. 199 KPK)
+- Zakaz zastępowania zeznań pismami, zapiskami, notatkami urzędowymi (art. 174 KPK)
+- Odmowa zeznań osoby najbliższej (art. 182 KPK), odmowa odpowiedzi (art. 183 KPK), zwolnienie przy szczególnie bliskim stosunku (art. 185 KPK)
 - Odczytanie zeznań z postępowania przygotowawczego (art. 391 KPK)
 
 ### KPW / KPA
 
-- KPW: odesłanie do KPK (art. 39, 41 KPW) — weryfikuj zakres
-- KPA: zeznania świadka (art. 83), wyłączenia (art. 83 §2)
+- KPW: przy dowodzie art. 171–173 KPK (art. 39 § 2 KPW), do świadka art. 177, 178, 178a, 182, 183, 185–190, 191 § 1–2, 192 KPK (art. 41 § 1 KPW) ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/1336/text.pdf, 2026-11-27]
+- KPA: prawo odmowy zeznań (art. 83 § 1), odmowa odpowiedzi (art. 83 § 2), pouczenie (art. 83 § 3); art. 86 to przesłuchanie strony ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2025/1691/text.pdf, 2026-11-27]
 
 ---
 

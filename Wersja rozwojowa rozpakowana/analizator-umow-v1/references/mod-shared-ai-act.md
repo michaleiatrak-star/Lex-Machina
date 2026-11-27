@@ -12,7 +12,9 @@
 
 > ⛔ HARD GATE — AI Act (Rozporządzenie UE 2024/1689) weryfikuj w EUR-Lex:
 > eur-lex.europa.eu → szukaj: "2024/1689" lub "Artificial Intelligence Act"
-> Harmonogram: Zakazy od 02.02.2025 · GPAI od 02.08.2025 · Systemy WR od 02.08.2026
+> Harmonogram (art. 113 po zmianie rozporządzeniem (UE) 2026/1744): zakazy od 02.02.2025 · GPAI od 02.08.2025 ·
+> pozostałe przepisy (m.in. art. 50) od 02.08.2026 · systemy WR z zał. III od 02.12.2027 · z zał. I od 02.08.2028
+> ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
 
 ---
 
@@ -24,14 +26,20 @@ Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2024/1689 z 13.06.2024
 Wejście w życie: 01.08.2024 r.
 Weryfikuj: eur-lex.europa.eu → "2024/1689"
 
-HARMONOGRAM STOSOWANIA (weryfikuj aktualny stan):
-  02.02.2025 → Zakazy praktyk niedopuszczalnych (Art. 5 AI Act)
-               Wymóg AI literacy (Art. 4) — od tej daty obowiązuje
-  02.08.2025 → Przepisy o modelach GPAI ogólnego przeznaczenia (rozdz. V)
-               Kary za naruszenia (rozdz. XII) z wyjątkiem art. 101
-  02.08.2026 → Pełne obowiązki dla systemów AI wysokiego ryzyka (Art. 6 ust. 2)
-               Systemy z Załącznika III (lista wysokiego ryzyka)
-  02.08.2027 → Art. 6 ust. 1 (systemy wbudowane w produkty)
+HARMONOGRAM STOSOWANIA — art. 113 w brzmieniu tekstu skonsolidowanego
+02024R1689-20260727 (zmiana: rozporządzenie (UE) 2026/1744 z 8.07.2026, Dz.U. UE L 1744
+z 24.7.2026) ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]:
+  02.02.2025 → rozdz. I i II (m.in. art. 4 AI literacy, art. 5 zakazy); wyjątek: art. 5
+               ust. 1 akapit pierwszy lit. ba) i bb) oraz ust. 1a i 1b — od 02.12.2026
+  02.08.2025 → rozdz. III sekcja 4, rozdz. V (GPAI), VII, XII (kary, bez art. 101), art. 78
+  27.07.2026 → art. 102–110
+  02.08.2026 → ogólna data stosowania (pozostałe przepisy, m.in. art. 50)
+  02.12.2027 → rozdz. III sekcje 1–3 (wymogi i obowiązki, m.in. art. 16, art. 26)
+               dla systemów wysokiego ryzyka z art. 6 ust. 2 i ZAŁĄCZNIKA III
+  02.08.2028 → rozdz. III sekcje 1–3 dla systemów z art. 6 ust. 1 i ZAŁĄCZNIKA I
+  ⛔ Daty 02.08.2026 (zał. III) i 02.08.2027 (zał. I) z pierwotnego tekstu są NIEAKTUALNE.
+  Systemy wprowadzone przed datą stosowania rozdz. III: art. 111 ust. 2 (tylko przy istotnych
+  zmianach projektu; systemy dla organów publicznych — zgodność do 02.08.2030).
 
 KARY:
   Zakazy (Art. 5): do 35 mln EUR lub 7% globalnego obrotu
@@ -220,6 +228,61 @@ KLAUZULA:
 ```
 
 ---
+
+### AI.4.5 Umowa od strony dostawcy — przejście roli, klasyfikacja, instrukcja obsługi (dodane 2026-11-27)
+
+> Atrybucja (Apache 2.0): zakres zagadnień na podstawie commercial-legal-pl v0.8
+> (baza-wiedzy/17-ai-act-rola-dostawcy), opracowanie własne, brzmienia z tekstu
+> skonsolidowanego 02024R1689-20260727.
+
+```
+1. KTO JEST DOSTAWCĄ — art. 25 ust. 1 AI Act ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
+   Dystrybutor, importer, podmiot stosujący lub inna strona trzecia staje się dostawcą
+   systemu AI wysokiego ryzyka (z obowiązkami z art. 16), gdy:
+   a) umieszcza swoją nazwę lub znak towarowy w systemie już wprowadzonym do obrotu
+      (white-label) — „bez uszczerbku dla ustaleń umownych” o innym podziale obowiązków;
+   b) dokonuje istotnej zmiany systemu, który pozostaje systemem wysokiego ryzyka;
+   c) zmienia przeznaczenie systemu (także AI ogólnego przeznaczenia) tak, że staje się
+      on systemem wysokiego ryzyka.
+   Skutek (art. 25 ust. 2): pierwotny dostawca przestaje być dostawcą tego systemu, ale
+   ma obowiązek współpracy (dokumentacja do oceny zgodności, znane ograniczenia i tryby
+   awaryjne, ukierunkowany dostęp techniczny) — chyba że wyraźnie określił, że jego
+   systemu nie można zmienić w system wysokiego ryzyka.
+   Umowa z poddostawcą komponentu (art. 25 ust. 4): informacje, zdolności, dostęp
+   techniczny i pomoc wskazuje się W DRODZE PISEMNEJ UMOWY.
+
+   KLAUZULE / CHECKLIST:
+   □ Rebranding (white-label): kto przyjmuje rolę dostawcy i obowiązki z art. 16; umowny
+     podział obowiązków nie zmienia kwalifikacji wobec organów.
+   □ Definicja „istotnej zmiany” i zakaz zmian przeznaczenia bez zgody dostawcy.
+   □ Oświadczenie pierwotnego dostawcy z art. 25 ust. 2 akapit ostatni (system nie może
+     zostać zmieniony w system WR) — gdy jest, nie ma obowiązku współpracy; sprawdź.
+   □ Pisemna umowa z dostawcą komponentu/modelu (art. 25 ust. 4).
+
+2. KLASYFIKACJA — art. 6 ust. 3 AI Act ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
+   System z zał. III nie jest systemem wysokiego ryzyka, gdy nie stwarza znaczącego
+   ryzyka (zadanie wąsko proceduralne, poprawa wyniku pracy człowieka, wykrywanie
+   wzorców bez zastępowania oceny człowieka, zadania przygotowawcze) — ALE system
+   z zał. III „zawsze” jest systemem wysokiego ryzyka, gdy dokonuje PROFILOWANIA osób
+   fizycznych. Dostawca, który uznaje system za niebędący WR, dokumentuje ocenę przed
+   wprowadzeniem do obrotu (art. 6 ust. 4) i podlega rejestracji (art. 49 ust. 2).
+   □ Umowa: kto dokonał oceny z art. 6 ust. 3–4, przekazanie dokumentacji oceny,
+     zapewnienie, że system nie profiluje (albo przyjęcie kwalifikacji WR).
+
+3. INSTRUKCJA OBSŁUGI — art. 13 ust. 3 AI Act ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
+   Minimum treści: tożsamość i kontakt dostawcy; przeznaczenie, poziom dokładności,
+   solidności i cyberbezpieczeństwa (art. 15) i okoliczności wpływające na nie; ryzyka
+   (art. 9 ust. 2); w stosownych przypadkach wyjaśnialność wyników, działanie wobec
+   grup osób, dane wejściowe/treningowe; zmiany zaplanowane z góry; środki nadzoru
+   człowieka (art. 14); zasoby, cykl życia, konserwacja i aktualizacje; mechanizmy
+   rejestrów zdarzeń (art. 12).
+   □ Instrukcja jako załącznik do umowy; obowiązek aktualizacji; brak instrukcji =
+     przeszkoda w wykonaniu obowiązków podmiotu stosującego (art. 26 ust. 1).
+
+⏳ Stosowanie: obowiązki z rozdz. III sekcje 1–3 (m.in. art. 13, 16, 26) dla systemów
+   z zał. III od 02.12.2027, z zał. I od 02.08.2028 (art. 113). Umowy zawierane dziś na
+   okres obejmujący te daty — klauzule wpisuj już teraz.
+```
 
 ## AI.5 PUŁAPKI W UMOWACH NA SYSTEMY AI
 

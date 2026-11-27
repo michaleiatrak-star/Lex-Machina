@@ -1,7 +1,7 @@
 0053d557b3770071af8e0a415eaae342e885a09269f638ea5f38bd38e4bf087b  ./JURYSDYKCJA.md
 f1cdf3365cc65a0884824ee41adb40058b6541d2073a03b2d7b6978e1d62d5f9  ./PORTABILITY-MANIFEST.md
-c37864fb72e31776a8bcc309279fe85f1fdd0cd06e1321a50b652843afdb9f9c  ./ROUTING-MAP.md
-516910860d1b4e5a64efbaab7c04ba5fcbd518e89a37a8c160274584bdde33c4  ./SKILL.md
+ab0d73f1338b584052f118485a4f6afbf01bbfe52d01c67188171e454e957b1c  ./ROUTING-MAP.md
+6daaeaab4bc19fa068b77aa27522cbce1120234bbd24c279ba39453554002409  ./SKILL.md
 9534a6fc6d1ced5da09bf3de3cd8763e08a0cbe70a3b41813ce56de9f74c9015  ./agents/openai.yaml
 51a6923974188748638a424aa59b42b6afad2d910f910a1d43bb13ee10f3ce26  ./assets/icon.svg
 c07fe8367fe79ca5c5e2b5338523373f221a16a7a6f88eea95cda4bd7a825653  ./krajowe/analiza-sadowa-v6/references/koszty-terminy.md
@@ -16,7 +16,7 @@ a2a5cb3b0f922f20967bf7fd2bf6969291c280451e3c39e87a87176301f280a2  ./krajowe/anal
 fbfcb6d2a218e4f95a04f90de0316ca9cf77575bdde7e1554c5c85f8f4b3f083  ./krajowe/analizator-umow-v1/references/mod-J0-routing.md
 939169e787dddf42bd4d1f850699160833544f2f95ccface4e8698ee9acbf023  ./krajowe/analizator-umow-v1/references/mod-J10-ubezpieczenia.md
 bb9069225fb8ab913e07cbfb251c264bd734b78d8bb4e0a8b98c70502518ed36  ./krajowe/analizator-umow-v1/references/mod-J2-nieruchomosci.md
-eaf91865fc50ef48d9454621ac97ef6ae2e407c157929628ac4c2255b636c79c  ./krajowe/analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md
+9fa9e98d52c6c19222eea53a5544da72c6f40a97e696842e1e5307ce32ee2b1d  ./krajowe/analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md
 7dfc5c6a03aa3bda24d1f55e0a7dc247ad582ec2c8b7387f8d36842161a64252  ./krajowe/analizator-umow-v1/references/mod-J4-finansowanie.md
 953671c27e6219edf3f10f25dae0df857e1ff297815b1599b6bd2c5574e8bedb  ./krajowe/analizator-umow-v1/references/mod-J5-umowy-wykonawcze.md
 e8e7432ec46c9b81529e7f7d2832908fa68326fd18c03a46c69da778b7d979a2  ./krajowe/analizator-umow-v1/references/mod-J7-pzp.md
@@ -25,7 +25,7 @@ ead22e203403dd938d440bedace734ea5f28513ff37f994ea2d4662317e267a3  ./krajowe/anal
 fc5ca3129907321783eb95ab620cf281e12da6e844b6827d09e293e6921a0809  ./krajowe/analizator-umow-v1/references/mod-shared-abusive-clauses.md
 9b1f380f2022a9cd6cf36238ec3f7503a57f340084f763f1be6d076e43b14919  ./krajowe/analizator-umow-v1/references/mod-shared-fm-hardship.md
 4b4f7c509acf1fa61303d5ad744b25d8efd549e4fd7f3d5c9335e16e0f6c8b44  ./krajowe/analizator-umow-v1/references/mod-shared-orzecznictwo-umow.md
-78b95e6a7f3be2aec0856bc5f0d37db1db5f31b460f00bb3cdf9b4f8ac6ee5fe  ./krajowe/analizator-umow-v1/references/mod-shared-rodo.md
+af878655b962d26e65d7b7bf17bee8d71a9d94bc176508c3ff6173f10d13321d  ./krajowe/analizator-umow-v1/references/mod-shared-rodo.md
 2d545c23fb988778f236092f3d26f5bff7bcc65244b6d3b7e41d560b3331e7eb  ./krajowe/analizator-umow-v1/references/umowy-o-prace.md
 d7c643ab970c0f32c592952b3dd05706b2ff44acda1c7226b9630e5531ab9920  ./krajowe/analizator-umow-v1/references/zakaz-konkurencji.md
 0a1ea7e887257ab343f7002e7a122391d078c5e65c1b547bc0d32a3496d6f652  ./krajowe/pisma-procesowe-v3/modules/MOD-OPLATY.md
@@ -39,7 +39,7 @@ d4ebe88ae828c795301dd559965d2ba0299a9d1500b804693f0a4e12558a61a2  ./krajowe/pism
 fe25618bff7062b4ab1a42533b5cd7a35d16957b558e31bb66eb636936597165  ./krajowe/pisma-proste-v2/references/SPH-inne.md
 b132af827b582c2bfdb6d7871d443ac1b0f62e9a344750de5c47fad80d10b530  ./krajowe/pisma-proste-v2/references/SPJ-interpretacja-zus.md
 0ea2e10db16e9c1853e3a7491c9261c0189e51897294eb5620bd795f44e9b24d  ./krajowe/pisma-proste-v2/references/SPL-skarga-komornik.md
-ad8d88f2d7b3b8ca1d70dd70ed42b6ed45d648463d590381b2ab23589a65a1fc  ./krajowe/przesluchanie-swiadkow-v2-min90/references/PRAWO-HARDGATE-WITNESS.md
+e2b76e16e867555d1e6801b73a2b06a90a22a38b96e86887b17f5e709691e79c  ./krajowe/przesluchanie-swiadkow-v2-min90/references/PRAWO-HARDGATE-WITNESS.md
 c1841ad6f5a9ea2320c2d44e2d491832925ac598877cf3891c1f710811cbcd99  ./krajowe/shared/BRAKI-FORMALNE.md
 dd6c027949d9c5cac13694bb7e7860ebdf844fcc3d25265fd907237e0e906855  ./krajowe/shared/FORMAL-CHECK.md
 1bfe93669d93f94b3ae9c6294895e2c6bf18971ceeb378a1256550e850d7e179  ./krajowe/shared/FORMAT-CYTOWANIA.md
@@ -52,7 +52,7 @@ df82047619819ad2c7a552f4206ee63d4d75f536b9feabdf47ffe695f9dcaaae  ./krajowe/shar
 31af9a7506e9edd134a3d6e1697b8a07a14deae4171afe36596d079b4949d506  ./krajowe/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
 b111ffe1f6b2a8ad7b1fa87415b9f80435e9a76a5dbe10c184c5c93b5fe7377e  ./krajowe/shared/MODULE-STANDARD-POLISH-LAW.md
 48d77a8d93d171cbea375ef1ee947757fb16498d3141046f72a497ecb920b898  ./krajowe/shared/NAZEWNICTWO-STRON.md
-87809ca6d9bb3e44f16a8a25ecdb763f619712759e283303f71baf3a33b7245a  ./krajowe/shared/ORKA-BAS-VIII-X-KADENCJA.md
+d0815437be098bcf9b5a84f5c8ccf7dc7bcbf5f4165f911082778e63792f290b  ./krajowe/shared/ORKA-BAS-VIII-X-KADENCJA.md
 284a42059c29c6fee57ac70a7f33f0d4d3e5ea1eb4a145e0636be5cf63eb4d9d  ./krajowe/shared/ORZECZENIA-HIERARCHIA.md
 9e90fcd27d043ddfe21eef4877211a072c3eceba5ff6c310431269fd3751d8aa  ./krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md
 6fdb3b6237d30b28da973edefb5cdbcc8bca800e873198e23117d8006caf50b8  ./krajowe/shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md
@@ -194,5 +194,5 @@ f7fae1f207120d39495399a975f2efe8c88850c28f895abc4a34f0a24f83a86d  ./mcp-servers/
 37db3fcf1fd27379de4b60519712293c7456b62dadf3a55deffb25cc45b44921  ./mcp-servers/wspolne/sesja-przegladarki.mjs
 dd57ad59b047ce6e68151a423de62c7f51a995ef146374808a2db819e709ce5a  ./mcp-servers/wspolne/test_siec.mjs
 bb692d5e777e49ac05c434e1fa7b570e08191f5a166b39ccf68d97c49f0db24e  ./mcp-servers/zbuduj_pakiet.py
-51b51424f56d689b076592d716433c7a966d36032c7b5b015ac2a4fc28089bd1  ./references/CHANGELOG.md
+727d4f7d6bd779af0f3993e725a033f384e526bbd38eed4c5444d1512fc96e53  ./references/CHANGELOG.md
 68b8052c1361e3a07733ee1fd2ad97e9169620b287e603c50b217ba4ffb57c48  ./references/HISTORIA-ZMIAN-PLIKOW.md

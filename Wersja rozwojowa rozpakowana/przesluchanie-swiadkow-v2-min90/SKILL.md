@@ -1,6 +1,6 @@
 ---
 name: przesluchanie-swiadkow-v2-min90
-version: "3.33"
+version: "3.34"
 type: legal-skill
 domain: litigation-witness-examination
 status: production
@@ -63,7 +63,8 @@ pipeline:
     - W5-BINDER
     - W6-LIVE-DIRECT
 changelog: |
-  Wersja bieżąca: 3.33 (2026-10-06): PRAWO-HARDGATE-WITNESS: sn.pl wyszukiwarka-orzeczen, link = karta
+  Wersja bieżąca: 3.34 (2026-11-27): commercial-legal-pl v0.8 (Apache 2.0, opracowanie własne): monitoring pracowników z AI (J21.7b), AI Act od strony dostawcy (AI.4.5), DPA (RO.4b), NDA K-8, nowe pola eksploatacji, doręczenia, rozpiska terminów; AI Act art. 113 po rozp. (UE) 2026/1744 — systemy WR zał. III od 02.12.2027, zał. I od 02.08.2028 (EUR-Lex 02024R1689-20260727); świadek KPC/KPK — poprawione art. 271 i 261 KPC, 168a KPK, tabela różnic (ELI: KPC 2026/468, KPK 2026/490, KPW 2026/1336, KPA 2025/1691)
+  3.33 (2026-10-06): PRAWO-HARDGATE-WITNESS: sn.pl wyszukiwarka-orzeczen, link = karta
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -1356,13 +1357,48 @@ Podtyp RYZYKO-ODPOWIEDŹ.
 ⛔ HARDGATE — przed podaniem jakiejkolwiek podstawy prawnej:
   view JUR:weryfikacja-przepisow-kanon
 
-Podstawy wymagające weryfikacji online (przykłady — nie wyczerpująca lista):
-  KPC: pytania sugestywne (art. 271), zakaz zeznań co do faktów objętych tajemnicą
-       (art. 261), zakaz zeznań małżonka i bliskich (art. 261 §1)
-  KPK: zakaz dowodowy (art. 168a, 174, 178, 199), prawo do odmowy zeznań (art. 182),
-       zwolnienie z zachowania tajemnicy (art. 180), konfrontacja (art. 172)
-  KPW: odpowiednie stosowanie KPK (art. 39, 41)
-  KPA: zeznania w postępowaniu administracyjnym (art. 83, 86)
+ŚWIADEK W SPRAWIE CYWILNEJ A KARNEJ — RÓŻNICE (KPC t.j. Dz.U. 2026 poz. 468 ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/468/text.pdf, 2026-11-27];
+KPK t.j. Dz.U. 2026 poz. 490 ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/490/text.pdf, 2026-11-27]):
+  Kwestia               | KPC (cywilne)                                   | KPK (karne)
+  Przebieg              | art. 271 § 1: najpierw odpowiedź na pytanie      | art. 171 § 1: swobodna wypowiedź, potem pytania
+                        | przewodniczącego „co i z jakiego źródła wiadomo”, | uzupełniające/wyjaśniające/kontrolne; art. 370
+                        | potem pytania sędziów i stron                    | § 1–2: kolejność pytających; strona wnioskująca pierwsza
+  Pytania sugerujące    | KPC nie zawiera wprost zakazu (art. 271 go NIE    | art. 171 § 4: „Nie wolno zadawać pytań sugerujących”
+                        | zawiera) — uchylenie pytania w ramach kierowania | — bez wyjątku dla pytań strony przeciwnej; § 6 i
+                        | rozprawą przez przewodniczącego                  | art. 370 § 4: organ/przewodniczący je uchyla
+  Kto nie może być      | art. 259 (m.in. niezdolni do spostrzegania,      | art. 178 (obrońca, adwokat/radca z art. 245 § 1 —
+  świadkiem             | przedstawiciele ustawowi stron, współuczestnicy  | co do faktów z porady/sprawy; duchowny — spowiedź);
+                        | jednolici); art. 259¹ mediator (chyba że zwolnią) | art. 199 (oświadczenia wobec biegłego/lekarza)
+  Odmowa zeznań         | art. 261 § 1: PRAWO odmowy — małżonek, wstępni,   | art. 182 § 1: osoba najbliższa dla oskarżonego;
+  (bliscy)              | zstępni, rodzeństwo, powinowaci, przysposobienie; | § 3: współoskarżony w innej sprawie; art. 185:
+                        | niedopuszczalna w sprawach o prawa stanu (poza    | zwolnienie przy szczególnie bliskim stosunku
+                        | rozwodem)                                        |
+  Odmowa odpowiedzi     | art. 261 § 2: odpowiedzialność karna, hańba,      | art. 183 § 1: odpowiedzialność za przestępstwo
+                        | dotkliwa szkoda majątkowa, istotna tajemnica      | lub przestępstwo skarbowe; § 2: wyłączenie jawności
+                        | zawodowa; duchowny — spowiedź                    | przy groźbie hańby
+  Tajemnica zawodowa    | art. 261 § 2 (odmowa odpowiedzi)                 | art. 180 § 1–2: zwolnienie przez sąd/prokuratora;
+                        |                                                  | tajemnica adwokacka/radcowska itd. — tylko gdy
+                        |                                                  | niezbędne i nie do ustalenia innym dowodem
+                        |                                                  | (§ 2 z „psychologiem” od 19.05.2028)
+  Konfrontacja          | art. 272                                         | art. 172 (niedopuszczalna w wypadku z art. 184)
+  Notatki zamiast zeznań| —                                                | art. 174: zakaz zastępowania zeznań pismami,
+                        |                                                  | zapiskami, notatkami urzędowymi
+  Dowód z naruszeniem   | —                                                | art. 168a: dowodu NIE uznaje się za niedopuszczalny
+  przepisów             |                                                  | wyłącznie z tego powodu, z wyjątkiem dowodu uzyskanego
+                        |                                                  | przez funkcjonariusza w wyniku zabójstwa, umyślnego
+                        |                                                  | uszczerbku na zdrowiu lub pozbawienia wolności
+  ⛔ Typ postępowania ustal PRZED pytaniami (pole „Typ postępowania”); pytania do świadka
+     w sprawie karnej przy bliskim oskarżonego — zacznij od pouczenia o art. 182/185.
+  ⛔ Postępowanie pracownicze = KPC (sąd pracy).
+  ⛔ Wykroczenia — KPW ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/1336/text.pdf, 2026-11-27]: art. 39 § 2 — przy przeprowadzaniu dowodu
+     art. 171–173 KPK (więc także zakaz pytań sugerujących); § 4 — zakaz zastępowania zeznań
+     notatkami; art. 41 § 1 — do świadka art. 177, 178, 178a, 182, 183, 185–190, 191 § 1–2, 192 KPK.
+  ⛔ Administracyjne — KPA ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2025/1691/text.pdf, 2026-11-27]: art. 83 § 1 — prawo odmowy zeznań (małżonek,
+     wstępni, zstępni, rodzeństwo, powinowaci I stopnia, przysposobienie, opieka, kuratela);
+     § 2 — odmowa odpowiedzi; § 3 — pouczenie; art. 86 — przesłuchanie STRONY (nie świadka).
+  (Poprawka 2026-11-27: dotąd „KPC: pytania sugestywne (art. 271)” — art. 271 nie zawiera
+  takiego zakazu; „zakaz zeznań małżonka i bliskich (art. 261 §1)” — to prawo odmowy, nie
+  zakaz; „art. 168a — zakaz dowodowy” — przepis stanowi odwrotnie.)
 
 Dla każdej powołanej podstawy → odczyt z ELI (RZĄD 1) → oznacz ✅ [VER: ELI DU/RRRR/NNN, data]
 ```

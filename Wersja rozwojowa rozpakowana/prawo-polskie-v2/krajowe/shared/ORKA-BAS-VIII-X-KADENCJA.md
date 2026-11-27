@@ -678,7 +678,7 @@ REGUŁA: lit. f RODO nie jest "wyjściem awaryjnym" gdy brak innej podstawy —
 
 ## CZĘŚĆ XII — AI ACT 2026 — NOWA DEFINICJA KLUCZOWA DLA PRAKTYKI (DR-04/DR-11)
 
-### BAS-W36 — System AI wysokiego ryzyka (AI Act art. 6 + Annex III) ⚠️⚠️ TERMIN 02.08.2026
+### BAS-W36 — System AI wysokiego ryzyka (AI Act art. 6 + Annex III) ⚠️ TERMIN 02.12.2027 (przesunięty z 02.08.2026)
 ```
 ⚠️⚠️ NAJWYŻSZY PRIORYTET — TERMIN ZA < 2 MIESIĄCE (stan na 12.06.2026)
 
@@ -694,9 +694,10 @@ HARMONOGRAM WEJŚCIA W ŻYCIE (rozporządzenie weszło w życie 01.08.2024,
     w przestrzeni publicznej z wyjątkami) + obowiązek AI literacy (art. 4)
   02.08.2025 — przepisy o organach nadzoru rynku, modele AI ogólnego
     przeznaczenia (GPAI), system kar
-  ⚠️ 02.08.2026 — SYSTEMY WYSOKIEGO RYZYKA (Annex III) — PEŁNE OBOWIĄZKI
-  02.08.2027 — systemy wysokiego ryzyka jako komponenty produktów
-    podlegających odrębnym normom (np. wyroby medyczne)
+  02.08.2026 — ogólna data stosowania (pozostałe przepisy, m.in. art. 50)
+  ⚠️ 02.12.2027 — SYSTEMY WYSOKIEGO RYZYKA (Annex III) — PEŁNE OBOWIĄZKI
+  02.08.2028 — systemy wysokiego ryzyka jako komponenty produktów (Annex I)
+  (art. 113 po zmianie rozporządzeniem (UE) 2026/1744 z 8.07.2026) ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
 
 DEFINICJA — SYSTEM AI WYSOKIEGO RYZYKA (art. 6 + Annex III):
   System AI uznaje się za system wysokiego ryzyka, jeżeli jest przeznaczony
@@ -746,7 +747,7 @@ POLSKA USTAWA WDROŻENIOWA — STATUS (06.2026):
     INTELIGENCJI — nadzór rynkowy nad AI w Polsce
   → Projekt na etapie prac rządowych — BRAK jeszcze uchwalenia (06.2026)
   ⚠️ Rozporządzenie UE STOSUJE SIĘ NIEZALEŻNIE od ustawy krajowej —
-    obowiązki z art. 6 + Annex III obowiązują od 02.08.2026 nawet
+    obowiązki z art. 6 + Annex III obowiązują od 02.12.2027 nawet
     bez polskiej ustawy (organ nadzoru może być tymczasowo niewyznaczony,
     co nie zwalnia podmiotów z obowiązków materialnych)
 

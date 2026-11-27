@@ -588,6 +588,72 @@ RÓŻNICA WOBEC KLAUZUL KONTRAKTOWYCH (mod-shared-ai-act.md):
 
 ---
 
+### J21.7b MONITORING PRACOWNIKÓW Z UŻYCIEM AI (nagrania, analiza rozmów, ocena wydajności) (dodane 2026-11-27)
+
+> Atrybucja (Apache 2.0): zakres zagadnień na podstawie commercial-legal-pl v0.8
+> (baza-klauzul/22-monitoring-pracownikow), opracowanie własne; brzmienia z ELI
+> i z tekstu skonsolidowanego AI Act.
+> Wczytaj gdy: pracodawca nagrywa lub analizuje rozmowy, poczte, aktywność albo
+> wydajność pracowników narzędziem AI (call center, scoring, transkrypcje,
+> „produktywność”). Trzy reżimy naraz: KP, RODO, AI Act.
+
+```
+1. KP — PODSTAWA I PROCEDURA ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/1245/text.pdf, 2026-11-27]
+   □ Monitoring obrazu: art. 22² § 1 (katalog celów), § 1¹–§ 2 (wyłączenia: pomieszczenia
+     ZZ, sanitarne, szatnie, stołówki, palarnie), § 3 (nagrania do 3 miesięcy), § 4
+     (przedłużenie, gdy nagranie jest dowodem w postępowaniu).
+   □ Poczta służbowa: art. 22³ § 1–2; INNE FORMY MONITORINGU (w tym nagrywanie i analiza
+     rozmów, aktywności w systemach): art. 22³ § 4 — tylko gdy konieczne do celów z § 1
+     (organizacja pracy, pełne wykorzystanie czasu pracy, właściwe użytkowanie narzędzi);
+     nie może naruszać tajemnicy korespondencji ani dóbr osobistych (§ 2).
+   □ Procedura (art. 22³ § 3 → art. 22² § 6–10): cele, zakres i sposób ustala się w układzie
+     zbiorowym, regulaminie pracy albo obwieszczeniu; informacja dla pracowników najpóźniej
+     2 tygodnie przed uruchomieniem; informacja przed dopuszczeniem do pracy w postaci
+     papierowej lub elektronicznej (§ 8, w brzmieniu od 27.01.2026, Dz.U. 2026 poz. 25);
+     oznaczenie obszaru najpóźniej dzień wcześniej (§ 9).
+
+2. RODO — ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:32016R0679, 2026-11-27]
+   □ Art. 22 ust. 1: prawo do niepodlegania decyzji opartej WYŁĄCZNIE na
+     zautomatyzowanym przetwarzaniu, w tym profilowaniu, wywołującej skutki prawne lub
+     podobnie istotnie wpływającej (decyzja kadrowa, premia, zwolnienie). Wyjątki
+     z ust. 2 i środki z ust. 3 (co najmniej interwencja człowieka, własne stanowisko,
+     zakwestionowanie decyzji).
+   □ Klauzula informacyjna art. 13 (zob. J21.2) — osobny cel: monitoring/analiza AI.
+   □ Ocena skutków (art. 35 ust. 1): przed rozpoczęciem przetwarzania, gdy rodzaj
+     przetwarzania — w szczególności z użyciem nowych technologii — z dużym
+     prawdopodobieństwem powoduje wysokie ryzyko; wymagana w szczególności przy
+     systematycznej, kompleksowej ocenie czynników osobowych opartej na zautomatyzowanym
+     przetwarzaniu, w tym profilowaniu, będącej podstawą decyzji o skutkach prawnych lub
+     podobnie znaczących (ust. 3 lit. a). Konsultacja z IOD, jeśli wyznaczony (ust. 2).
+
+3. AI ACT — ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
+   □ Zał. III pkt 4 lit. b: system AI do „monitorowania lub oceny wydajności i zachowania
+     osób pozostających w takich stosunkach” (oraz decyzje o warunkach pracy, awansie,
+     rozwiązaniu, przydziale zadań) = system WYSOKIEGO RYZYKA.
+   □ Art. 6 ust. 3: system z zał. III, który PROFILUJE osoby fizyczne, jest zawsze
+     systemem wysokiego ryzyka (bez odstępstwa).
+   □ Art. 26 ust. 7: pracodawca jako podmiot stosujący informuje przedstawicieli
+     pracowników i pracowników przed oddaniem systemu do użytku w miejscu pracy.
+   ⏳ Obowiązki z rozdz. III (m.in. art. 26) dla zał. III stosuje się od 02.12.2027
+     (art. 113 lit. c pkt i po zmianie 2026/1744). KP i RODO obowiązują JUŻ.
+
+KLAUZULA DO REGULAMINU (szkic, uzupełnij ⬛):
+  § ⬛. 1. Pracodawca stosuje [system ⬛] do [cel z art. 22³ § 1 KP ⬛] w zakresie [⬛].
+  2. Wynik analizy systemu nie jest wyłączną ani automatycznie rozstrzygającą podstawą
+     decyzji dotyczącej pracownika; decyzję podejmuje [osoba ⬛] po własnej ocenie,
+     a pracownik może przedstawić stanowisko i zakwestionować decyzję.
+  3. Nagrania i wyniki analizy przechowuje się przez [⬛, nie dłużej niż wynika z KP/celu].
+  4. System nie obejmuje [pomieszczeń i treści wyłączonych ⬛] ani korespondencji prywatnej.
+  5. O wprowadzeniu systemu pracodawca informuje pracowników na co najmniej 2 tygodnie
+     przed uruchomieniem, a nowego pracownika przed dopuszczeniem do pracy.
+
+CHECKLIST: □ cel z art. 22³ § 1 i konieczność · □ regulamin/układ/obwieszczenie ·
+  □ terminy informacji (2 tyg., przed dopuszczeniem) · □ klauzula art. 13 RODO ·
+  □ brak decyzji wyłącznie automatycznej (art. 22 RODO) · □ ocena skutków ·
+  □ klasyfikacja AI Act (zał. III pkt 4 lit. b, profilowanie) i plan na 02.12.2027 ·
+  □ informacja z art. 26 ust. 7 AI Act · □ umowa z dostawcą (mod-shared-ai-act AI.4.5).
+```
+
 ## J21.8 MASTER CHECKLISTA — UZUPEŁNIENIE DLA DOKUMENTÓW RODO/ARCHIWIZACJI/REGULAMINÓW
 
 ```

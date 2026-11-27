@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: "3.64"
+version: "3.65"
 description: "Prawo pracy, ZUS i świadczenia: KP, zatrudnienie, rozwiązanie stosunku pracy, ubezpieczenia społeczne, emerytury, renty, KRUS, PFRON i pomoc społeczna."
 dependencies:
   requires:
@@ -89,7 +89,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W15 Choroba zawodowa — 2 przesłanki (art. 235¹ KP + wykaz RM)
 - BAS-W16 Godziny ponadwymiarowe nauczycieli (Karta Nauczyciela art. 35)
 - BAS-W20 Mobbing — granice (art. 94³ KP — 5 przesłanek, "ofiara rozsądna")
-- BAS-W36 ⚠️⚠️ TERMIN 02.08.2026: AI Act — system AI wysokiego ryzyka (Annex III
+- BAS-W36 ⚠️ TERMIN 02.12.2027 (zał. III, przesunięty z 02.08.2026 rozp. (UE) 2026/1744): AI Act — system AI wysokiego ryzyka (Annex III
   pkt 4) — rekrutacja, ocena kandydatów, decyzje o awansie/zwolnieniu,
   monitorowanie wydajności pracowników przez AI. Obowiązki: FRIA, nadzór
   ludzki, zgodność z prawem pracy. Pracownik: prawo do informacji o logice

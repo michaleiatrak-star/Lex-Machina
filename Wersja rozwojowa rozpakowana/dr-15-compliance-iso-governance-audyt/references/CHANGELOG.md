@@ -1,5 +1,6 @@
 # CHANGELOG — dr-15-compliance-iso-governance-audyt
 
+- 3.27 (2026-11-27): commercial-legal-pl v0.8 (Apache 2.0, opracowanie własne): monitoring pracowników z AI (J21.7b), AI Act od strony dostawcy (AI.4.5), DPA (RO.4b), NDA K-8, nowe pola eksploatacji, doręczenia, rozpiska terminów; AI Act art. 113 po rozp. (UE) 2026/1744 — systemy WR zał. III od 02.12.2027, zał. I od 02.08.2028 (EUR-Lex 02024R1689-20260727); świadek KPC/KPK — poprawione art. 271 i 261 KPC, 168a KPK, tabela różnic (ELI: KPC 2026/468, KPK 2026/490, KPW 2026/1336, KPA 2025/1691)
 - 3.26 (2026-11-15): DR-02: testy prawa upadłościowego (okno znacznika poziomu A); odesłania do KATALOG-TJ w DR; mapy_tj zachowuje katalog w przebiegu dziennym; check_procedowane zarejestrowany
 - 3.25 (2026-11-15): Pełny katalog obowiązujących t.j. (2 664 akty z ELI) w KATALOG-TJ dziedzin i prawo-polskie-v2: dziedzina z nagłówka modułu, podstawy prawnej aktu wykonawczego albo tytułu; monitoring projektów ustaw (PROJEKTY-W-TOKU), lista zmian od ostatniej aktualizacji systemu (ZMIANY-OD-AKTUALIZACJI, STAN-AKTUALIZACJI.json)
 - 3.24 (2026-11-14): Konwencja t.j.: KATALOG-TJ.md w DR-01…15 i prawo-polskie-v2 (akty z nagłówków modułów), MAPA-AKTOW tylko routing z sufiksem t.j., scripts/mapy_tj.py w dziennym workflow ELI

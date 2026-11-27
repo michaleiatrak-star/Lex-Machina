@@ -52,6 +52,19 @@ FORMAT KALENDARZA:
   [RRRR-MM-DD]  | Opcja przedłużenia — złożyć  | [Klient]       | ⚠ WYSOKI
   [RRRR-MM-DD]  | Przegląd cen (klauzula §X)   | [Obie]         | ℹ INFO
   [RRRR-MM-DD]  | Koniec umowy / odnowienie    | [Monitorować]  | ⚠ WYSOKI
+
+ROZPISKA TERMINÓW JAKO OSOBNY PRODUKT (dodane 2026-11-27; atrybucja Apache 2.0: zasada
+z commercial-legal-pl v0.8, matematyka-kontraktowa, opracowanie własne):
+  □ Przy analizie i przy projekcie umowy: osobna sekcja odpowiedzi (albo załącznik)
+    z tabelą powyżej, nie terminy rozproszone w tekście analizy.
+  □ Każdy wiersz: postanowienie źródłowe (§ / ust.), zdarzenie początkowe, sposób
+    liczenia, wynik. Reguły KC ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf, 2026-11-27]:
+    art. 111 (termin w dniach kończy się z upływem ostatniego dnia; dnia zdarzenia nie
+    liczy się), art. 112 (tygodnie/miesiące/lata — dzień odpowiadający nazwą lub datą,
+    brak takiego dnia → ostatni dzień miesiąca), art. 114 (bez ciągłości: miesiąc = 30
+    dni, rok = 365), art. 115 (koniec w dzień wolny lub sobotę → następny dzień roboczy).
+  □ Daty i okresy liczy narzędzie `shared/tools/kontrakt_rachunek.py` (F-215), nie model;
+    termin bez zdarzenia początkowego w umowie = ⬛ BRAK_ZRODLA, nie data szacowana.
 ```
 
 ---

@@ -8,6 +8,7 @@
 > potrzebujesz historii konkretnej naprawy (SKILL.md trzyma tylko krótkie
 > podsumowanie bieżącej wersji jako kontekst).
 
+- 3.34 (2026-11-27): commercial-legal-pl v0.8 (Apache 2.0, opracowanie własne): monitoring pracowników z AI (J21.7b), AI Act od strony dostawcy (AI.4.5), DPA (RO.4b), NDA K-8, nowe pola eksploatacji, doręczenia, rozpiska terminów; AI Act art. 113 po rozp. (UE) 2026/1744 — systemy WR zał. III od 02.12.2027, zał. I od 02.08.2028 (EUR-Lex 02024R1689-20260727); świadek KPC/KPK — poprawione art. 271 i 261 KPC, 168a KPK, tabela różnic (ELI: KPC 2026/468, KPK 2026/490, KPW 2026/1336, KPA 2025/1691)
 - 3.33 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
 - 3.32 (2026-10-06): PRAWO-HARDGATE-WITNESS: sn.pl wyszukiwarka-orzeczen, link = karta
 

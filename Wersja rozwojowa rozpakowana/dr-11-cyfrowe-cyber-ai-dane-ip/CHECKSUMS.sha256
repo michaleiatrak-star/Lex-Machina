@@ -2,10 +2,10 @@
 35b179df1b20d842683ebb654c9a9414a6569cb8668f8f23016432d58e085e4b  ./MAPA-AKTOW.md
 35b3a4d5e748e47ee80ca3c8e89c39da077b03045fc0fbddb3a60862f55554d6  ./MAPA-POKRYCIA.md
 6c3d025cebaf55649c653846e434164faad4a8ed618f3489bcc72a53f0447ddc  ./PORTABILITY-MANIFEST.md
-816cf4b206ea4a1f52cf86665dc2251f21357169658dd60857596cd671258155  ./SKILL.md
+eb20e4d5fd8d606b3f08ed0b82c3944e44a658dffd79dced9993e00fb1dec223  ./SKILL.md
 d27a6bc6669c2682e6f6b034bae8e340e317cacdd03d8bb5411ab000182eebd0  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
-c8c87018e27f13abd9171dda4747311c7d974513066bb60b65492b688e595fdb  ./modules/mod-AI-Act-framework.md
+8c57424eca2cb19a09e14734df3d18375e9b369fbe9201fcdb5f68a468801167  ./modules/mod-AI-Act-framework.md
 c1f3103d8d387329e5679db58a56c4c05e8bdec714e65995d150e92854864d54  ./modules/mod-DMA-digital-markets-act.md
 4484d2b69ef2b70c61fd90f925eafb1de861aa49dab7543352e5ddb5e9e359db  ./modules/mod-DORA-eIDAS-cyfrowe-finanse.md
 c68f08a336726036e87b37f3868c55a3bafbcea3ab5090512418b80dac5c0018  ./modules/mod-DSA-digital-services-act.md
@@ -27,4 +27,4 @@ c5d7e996c3e93d3896fc870e18fd92ad2edb0772a0f75552f8d7cf2bef2866c8  ./modules/mod-
 03dd6b7fa3500c7236470929e1791f16d13b8bb22d2c09ed3f2ab87e3b48e3da  ./modules/mod-ustawa-podpis-elektroniczny.md
 c0f8db09fee3c862b9bda3541ebb5fa4d71ab753647978c056895bc6e13be5ff  ./modules/mod-ustawa-prawo-wlasnosci-przemyslowej.md
 57d84e78bbe28a2eecbb292d3749abe595c7219b340e5d545f1f9696338d988c  ./modules/mod-ustawa-uslugi-elektroniczne.md
-20ac7195ede9ccede9d4ebb496ac9ea6102bba0e62a1c0b8d4843ed38db51252  ./references/CHANGELOG.md
+5213cca6e8e7e9ee3b0a4939c5813f54246e620a5e655cd5c6016a130fd582ad  ./references/CHANGELOG.md

@@ -1,6 +1,6 @@
 ---
 name: dr-11-cyfrowe-cyber-ai-dane-ip
-version: "3.41"
+version: "3.42"
 description: "Prawo cyfrowe, cyber, AI, dane i IP: RODO, KSC/NIS2, AI Act, usługi cyfrowe, prywatność, cyberbezpieczeństwo, prawo autorskie i własność intelektualna."
 dependencies:
   requires:
@@ -39,7 +39,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 Kluczowe daty na 2026-06-05:
 - ✅ AI Act art. 5 zakazy + AI Literacy: obowiązują od 02.02.2025
 - ✅ AI Act GPAI: obowiązuje od 02.08.2025
-- ⏳ AI Act systemy wysokiego ryzyka (Aneks III): od 02.08.2026
+- ⏳ AI Act systemy wysokiego ryzyka: zał. III od 02.12.2027, zał. I od 02.08.2028 (art. 113 po zmianie rozp. (UE) 2026/1744) ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
 - ✅ KSC nowelizacja NIS2: Dz.U. 2026 poz. 252, w życie 03.04.2026
 - ✅ DORA: obowiązuje od 17.01.2025
 - ✅ MiCA: w pełni od 30.12.2024
@@ -79,9 +79,9 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   przetwarzanie, naruszenie ochrony danych)
 - BAS-W25 Uzasadniony interes administratora (art. 6 ust. 1 lit. f RODO —
   test 3-etapowy LIA, decyzje UODO i NSA III OSK 2700/22)
-- BAS-W36 ⚠️⚠️ TERMIN 02.08.2026: AI Act (rozp. UE 2024/1689) — system AI
+- BAS-W36 ⚠️ TERMIN 02.12.2027 (zał. III; przesunięty z 02.08.2026 rozp. (UE) 2026/1744): AI Act (rozp. UE 2024/1689) — system AI
   wysokiego ryzyka (art. 6 + Annex III). Pełny harmonogram wejścia w życie
-  (02.2025/08.2025/08.2026/08.2027), obowiązki dostawcy i użytkownika,
+  (02.2025/08.2025/08.2026 pozostałe przepisy/12.2027 zał. III/08.2028 zał. I), obowiązki dostawcy i użytkownika,
   FRIA vs DPIA (kumulacja z RODO), status polskiej ustawy wdrożeniowej
   (Komisja Rozwoju i Bezpieczeństwa AI — projekt, brak uchwalenia 06.2026)
 

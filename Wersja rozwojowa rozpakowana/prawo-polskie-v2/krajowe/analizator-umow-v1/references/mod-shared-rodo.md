@@ -193,6 +193,47 @@ PUŁAPKA RO-5 — Brak prawa do audytu (MEDIUM RISK)
 
 ---
 
+## RO.4b DPA — ORGAN PAŃSTWA TRZECIEGO, ART. 82 A INDEMNIFIKACJA, WARSTWA AI (dodane 2026-11-27)
+
+> Atrybucja (Apache 2.0): zakres zagadnień na podstawie commercial-legal-pl v0.8
+> (checklist-dpa-art28, baza-klauzul/11-odpowiedzialnosc), opracowanie własne.
+
+```
+1. ŻĄDANIE ORGANU PAŃSTWA TRZECIEGO ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:32016R0679, 2026-11-27]
+   Art. 28 ust. 3 lit. a: podmiot przetwarzający przetwarza dane wyłącznie na
+   udokumentowane polecenie administratora — także co do przekazania do państwa
+   trzeciego — chyba że obowiązek nakłada prawo Unii lub państwa członkowskiego;
+   wtedy informuje administratora przed rozpoczęciem przetwarzania.
+   Art. 48: wyrok sądu lub decyzja organu państwa trzeciego żądające przekazania lub
+   ujawnienia danych są uznawane lub egzekwowalne tylko na podstawie umowy
+   międzynarodowej (np. o wzajemnej pomocy prawnej).
+   □ Klauzula: procesor niezwłocznie informuje administratora o żądaniu organu państwa
+     trzeciego (o ile prawo nie zakazuje), nie ujawnia danych bez podstawy z art. 48 /
+     rozdz. V, kwestionuje żądanie nadmierne, dokumentuje sprawę.
+
+2. ART. 82 RODO A UMOWNY PODZIAŁ RYZYKA ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:32016R0679, 2026-11-27]
+   Art. 82 ust. 1–2: odszkodowanie od administratora LUB podmiotu przetwarzającego;
+   procesor odpowiada, gdy nie dopełnił obowiązków nałożonych bezpośrednio na niego
+   albo działał poza instrukcjami / wbrew nim. Ust. 3: zwolnienie po wykazaniu braku winy.
+   Ust. 4: odpowiedzialność SOLIDARNA wobec osoby, której dane dotyczą; ust. 5: regres.
+   □ Limit odpowiedzialności i indemnifikacja działają tylko MIĘDZY STRONAMI (regres
+     z ust. 5) — nie ograniczają roszczenia osoby, której dane dotyczą (ust. 4).
+   □ Wyłączenie odpowiedzialności procesora za działanie wbrew instrukcjom jest
+     sprzeczne z ust. 2 zdanie drugie — oznacz jako ryzyko.
+
+3. WARSTWA AI W DPA
+   □ Zakaz wykorzystywania danych administratora (i informacji poufnych) do trenowania,
+     dostrajania lub ewaluacji modeli bez udokumentowanego polecenia (art. 28 ust. 3
+     lit. a — przetwarzanie tylko na polecenie).
+   □ Podprocesorzy dostarczający modele (API LLM) — w wykazie podprocesorów, z lokalizacją
+     przetwarzania i podstawą przekazania (rozdz. V).
+   □ Retencja promptów, logów i wyników: art. 28 ust. 3 lit. g — po zakończeniu usług
+     procesor, zależnie od decyzji administratora, usuwa lub zwraca dane i usuwa ich
+     kopie, chyba że prawo Unii lub państwa członkowskiego nakazuje przechowywanie;
+     kopie w logach i cache dostawcy modelu też są „kopiami”.
+   □ Powiązanie z AI Act (system wysokiego ryzyka, art. 26) → mod-shared-ai-act.
+```
+
 ## RO.5 SZABLON MINIMALNEJ KLAUZULI DPA (ZGODNEJ Z ART. 28 RODO)
 
 ```

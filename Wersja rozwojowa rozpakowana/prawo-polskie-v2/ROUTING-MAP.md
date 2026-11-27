@@ -78,14 +78,13 @@ w obie strony w tej samej sesji.
   → DR-03: BAS-W23 (mienie znacznej/wielkiej wartości, art. 115 §5-6 KK)
     POTWIERDZONE zamrożone od 2010 (prawo.pl 26.08.2025) — bez nowelizacji
   → DR-04/DR-11: ⚠️⚠️ NAJWYŻSZY PRIORYTET — BAS-W36, AI Act art. 6 + Annex III
-    "system wysokiego ryzyka" — TERMIN nominalnie 02.08.2026 (rekrutacja,
+    "system wysokiego ryzyka" — TERMIN 02.12.2027 (zał. III; przesunięty z 02.08.2026 rozp. (UE) 2026/1744, ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]) (rekrutacja,
     ocena pracowników, decyzje o awansie/zwolnieniu przez AI). Rozporządzenie
     UE stosowane bezpośrednio, niezależnie od polskiej ustawy wdrożeniowej.
-    ⚠️ VER 2026-07-13 — ZMIANA NA POZIOMIE UE (niepotwierdzona ostatecznie):
-    w ramach "Digital Omnibus" Parlament Europejski zatwierdził 16.06.2026
-    przesunięcie obowiązku dla samodzielnych systemów z Annex III z 02.08.2026
-    na 02.12.2027 — wymaga jeszcze formalnego przyjęcia przez Radę UE, NIE
-    traktować jako pewne do czasu publikacji w Dz.Urz. UE. Polska ustawa
+    ✅ 2026-11-27 — ZMIANA OGŁOSZONA: rozporządzenie (UE) 2026/1744 z 8.07.2026
+    (Dz.U. UE L 1744 z 24.7.2026) przesunęło obowiązki dla systemów z Annex III
+    na 02.12.2027, a z Annex I na 02.08.2028 (art. 113 lit. c w tekście
+    skonsolidowanym 02024R1689-20260727). Polska ustawa
     wdrożeniowa: przyjęta przez Radę Ministrów 31.03.2026, skierowana do
     Sejmu, I czytanie ok. końca kwietnia 2026 — dalszy status niepewny wg
     źródeł wtórnych, wymaga potwierdzenia w toku prac sejmowych

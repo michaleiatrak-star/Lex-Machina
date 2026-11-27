@@ -16,8 +16,9 @@ Weryfikuj aktualne wymagania AI Act w eur-lex.europa.eu oraz wytycznych EAIA (EU
   Stosowanie etapami:
   → 02.02.2025: zakazy systemów AI o niedopuszczalnym ryzyku (Rozdz. II)
   → 08.08.2025: obowiązki dla GPAI (modeli ogólnego przeznaczenia) + organy nadzorcze
-  → 02.08.2026: pełne stosowanie (systemy wysokiego ryzyka, pozostałe)
-  [WYMAGA WERYFIKACJI: sprawdź aktualne daty wdrożenia — mogły nastąpić zmiany]
+  → 02.08.2026: ogólna data stosowania (pozostałe przepisy)
+  → 02.12.2027: systemy wysokiego ryzyka z zał. III; 02.08.2028: z zał. I
+  (art. 113 po zmianie rozp. (UE) 2026/1744) ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
 - ISO/IEC 42001:2023 — Artificial intelligence. Management system
   [VER: iso.org/standard/81230.html — norma obowiązująca od 18.12.2023]
   Certyfikacja przez jednostki akredytowane przy PCA (pca.gov.pl)
@@ -79,7 +80,7 @@ AI Act stosowany etapami — zawsze weryfikuj, które przepisy już obowiązują
 Kara: do 35 mln EUR lub 7% rocznego obrotu globalnego
 ```
 
-### Poziom 2 — Wysokie ryzyko (Aneks III — obowiązki od 02.08.2026)
+### Poziom 2 — Wysokie ryzyko (Aneks III — obowiązki od 02.12.2027, art. 113 po zmianie 2026/1744)
 ```
 Sektory wysokiego ryzyka (Aneks III AI Act):
 1. Infrastruktura krytyczna
@@ -209,7 +210,7 @@ Priorytety:
 
 1. Zawsze zaczynaj od klasyfikacji ryzyka — determinuje cały zakres obowiązków,
 2. Zakazy AI (art. 5) obowiązują od 02.02.2025 — wszelkie wdrożenia z tym ryzykiem: natychmiast audytuj,
-3. Systemy wysokiego ryzyka: pełne obowiązki od 02.08.2026 — przygotuj się wcześniej,
+3. Systemy wysokiego ryzyka: pełne obowiązki od 02.12.2027 (zał. III) i 02.08.2028 (zał. I) — przygotuj się wcześniej,
 4. GPAI (LLM, modele fundamentalne): obowiązki od 08.2025 — monitruj wytyczne EU AI Office,
 5. Dla deployerów: FRIA i monitoring są tak samo ważne jak obowiązki dostawcy,
 6. ISO 42001 jako rama zarządcza — uzupełnia AI Act, nie zastępuje go,

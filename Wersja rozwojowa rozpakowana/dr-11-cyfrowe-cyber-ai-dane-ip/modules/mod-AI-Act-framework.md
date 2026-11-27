@@ -34,8 +34,10 @@ PRAWO UE (bezpośrednio stosowane w Polsce — bez transpozycji):
 ETAPY STOSOWANIA AI Act (zweryfikowano 2026-05-25):
   02.02.2025  → Przepisy o systemach zakazanych (art. 5) + AI Literacy (art. 4)
   02.08.2025  → Organy krajowe + kary za naruszenia zakazów + modele GPAI (art. 51–55)
-  02.08.2026  → Systemy wysokiego ryzyka (aneks III) — pełne obowiązki
-  02.08.2027  → Niektóre systemy wbudowane (aneks I)
+  02.08.2026  → ogólna data stosowania (pozostałe przepisy, m.in. art. 50)
+  02.12.2027  → Systemy wysokiego ryzyka (aneks III) — rozdz. III sekcje 1–3
+  02.08.2028  → Systemy wysokiego ryzyka z art. 6 ust. 1 (aneks I)
+  (art. 113 po zmianie rozporządzeniem (UE) 2026/1744 ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27])
 
 PRAWO POLSKIE:
   ⚡ POPRAWKA PILNA 2026-07-27 (FAZA 3E/ZASADA 14) — moduł był
@@ -96,7 +98,7 @@ POWIĄZANE:
 □ Rozpoznawanie emocji w miejscu pracy i edukacji (wyjątki: medycyna, bezpieczeństwo)
 ```
 
-### Systemy WYSOKIEGO RYZYKA (Aneks III — od 02.08.2026)
+### Systemy WYSOKIEGO RYZYKA (Aneks III — od 02.12.2027, art. 113 po zmianie 2026/1744)
 
 ```
 ⚡ POPRAWKA 2026-09-27 (FAZA 3E, F-205, U-14) — lista niżej była BŁĘDNA:
@@ -443,10 +445,10 @@ AI Act (Rozp. UE 2024/1689):
   → Etapy stosowania (OBOWIĄZUJĄCE na 2026-07-27):
     ✅ 02.02.2025: Zakazy (art. 5) + AI Literacy (art. 4) — OBOWIĄZUJĄ
     ✅ 02.08.2025: GPAI (art. 51–55) + organy krajowe — OBOWIĄZUJĄ
-    ⏳ 02.08.2026: Systemy wysokiego ryzyka (Aneks III) — ZA OK. TYDZIEŃ,
-       jeszcze nie weszło w życie na dzień audytu (26.07.2026), ale BARDZO
-       BLISKO — sprawdź ponownie przy każdym użyciu w lipcu/sierpniu 2026
-    ⏳ 02.08.2027: Systemy wbudowane (Aneks I) — JESZCZE NIE
+    ⏳ 02.12.2027: Systemy wysokiego ryzyka (Aneks III) — przesunięte z 02.08.2026
+       rozporządzeniem (UE) 2026/1744 (tekst skonsolidowany 02024R1689-20260727)
+    ⏳ 02.08.2028: Systemy wysokiego ryzyka z Aneksu I — JESZCZE NIE
+    ✅ [VER: https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:02024R1689-20260727, 2026-11-27]
 
 Polska ustawa o systemach AI:
   ⚡ PODPISANA PRZEZ PREZYDENTA 24.07.2026 r. — prace parlamentarne
@@ -483,5 +485,5 @@ Polska ustawa o systemach AI:
     krajowej — ustawa krajowa dotyczy nadzoru/egzekwowania
 
 web_search: "ustawa o systemach sztucznej inteligencji Dziennik Ustaw data wejścia w życie"
-web_search: "AI Act systemy wysokiego ryzyka 2 sierpnia 2026"
+web_search: "AI Act art. 113 tekst skonsolidowany systemy wysokiego ryzyka 2027"
 ```

@@ -108,6 +108,21 @@ stronę lub sąd (routing: `mod-shared-wykladnia.md` przy sporach o zakres).
    egzemplarzach, po [liczba] dla każdej ze Stron." [pomiń przy podpisie
    kwalifikowanym elektronicznym — jeden plik, dopisz zamiast tego zdanie o
    dacie zawarcia liczonej od ostatniego podpisu].
+7. Doręczenia — konstrukcja trzyczłonowa (dodane 2026-11-27; atrybucja Apache 2.0:
+   zasada z commercial-legal-pl v0.8, baza-klauzul/17, opracowanie własne):
+   „1. Oświadczenia związane z Umową Strony kierują na adresy wskazane w komparycji
+   [oraz adresy e-mail: ⬛]. 2. Strona niezwłocznie, nie później niż w terminie [⬛] dni,
+   zawiadamia drugą Stronę na piśmie [w formie dokumentowej] o zmianie adresu.
+   3. Do czasu zawiadomienia oświadczenie skierowane na ostatni wskazany adres uważa się
+   za doręczone [z chwilą pierwszej próby doręczenia / z upływem 14 dni od pierwszego
+   awizowania]."
+   → Bez ust. 3 dwa pierwsze są „bezzębne”: art. 61 § 1 KC — oświadczenie jest złożone
+     z chwilą, gdy doszło do adresata tak, że MÓGŁ zapoznać się z treścią; § 2 — postać
+     elektroniczna: gdy wprowadzono je do środka komunikacji elektronicznej tak, by
+     mógł się zapoznać ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf, 2026-11-27]. Fikcja doręczenia na ostatni adres
+     rozstrzyga spór o „dojście” po przeprowadzce kontrahenta.
+   → Wskaż kanał wiodący dla oświadczeń kształtujących (wypowiedzenie, odstąpienie,
+     kara umowna) i formę — e-mail bez podpisu kwalifikowanego to postać dokumentowa.
 ```
 
 ## B.5 Zwrot materiałów i dokumentacji (klauzula exit)

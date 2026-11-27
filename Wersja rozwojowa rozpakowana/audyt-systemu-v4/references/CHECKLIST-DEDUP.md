@@ -174,7 +174,7 @@ Definicje ogólne BAS-W34 pozostają w shared; nie duplikowano ich katalogu.
 | Odsetki: kapitałowe/za opóźnienie/handlowe | `shared/ORKA-BAS-LEKSYKON.md` BAS-W34 | DR-02, DR-16 | ✅ |
 | Nakaz zapłaty: sprzeciw vs zarzuty vs EPU | `shared/ORKA-BAS-LEKSYKON.md` BAS-W35 | DR-02, DR-16 | ✅ |
 | Moc dowodowa dok. urzędowy vs prywatny (art.243-245 KPC) | `shared/ORKA-BAS-LEKSYKON.md` BAS-W30 | DR-02, DR-16 | ✅ |
-| AI Act — system wysokiego ryzyka (termin 02.08.2026) | `prawo-polskie-v2/krajowe/shared/ORKA-BAS-VIII-X-KADENCJA.md` BAS-W36 | DR-04, DR-11 | ✅ |
+| AI Act — system wysokiego ryzyka (termin 02.12.2027, zał. III) | `prawo-polskie-v2/krajowe/shared/ORKA-BAS-VIII-X-KADENCJA.md` BAS-W36 | DR-04, DR-11 | ✅ |
 | Pracownik/pracodawca (definicje podmiotowe, A.4) | `prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md` | DR-04 | ✅ |
 | Przedsiębiorca/konsument (A.2-A.3) | `prawo-polskie-v2/krajowe/shared/definicje/DEF-PODMIOTY-WLASNOSC.md` | DR-02 | ✅ |
 | Nieruchomość/posiadanie/własność (B.1-B.3) | `prawo-polskie-v2/krajowe/shared/definicje/DEF-PODMIOTY-WLASNOSC.md` | DR-02 | ✅ |

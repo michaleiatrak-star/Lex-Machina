@@ -209,6 +209,38 @@ przepis szczególny wobec niniejszej klauzuli poufności." Patrz też
 
 ---
 
+### PUŁAPKA K-8 — NDA z kancelarią, NDA jednostronne i karmienie modeli AI (dodane 2026-11-27)
+
+> Atrybucja (Apache 2.0): zakres z commercial-legal-pl v0.8 (baza-klauzul/09-poufnosc), opracowanie własne.
+
+```
+TAJEMNICA ZAWODOWA RADCY PRAWNEGO I ADWOKATA
+  u.r.p. (t.j. Dz.U. 2024 poz. 499 ze zm.) ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2024/499/text.pdf, 2026-11-27]:
+  art. 3 ust. 3 — obowiązek zachowania w tajemnicy „wszystkiego, o czym dowiedział się
+  w związku z udzieleniem pomocy prawnej”; ust. 4 — nie może być ograniczony w czasie;
+  ust. 5 — brak zwolnienia co do faktów poznanych przy udzielaniu pomocy prawnej lub
+  prowadzeniu sprawy.
+  art. 3 ust. 6 w brzmieniu od 01.10.2026 (Dz.U. 2026 poz. 846, art. 3) ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/846/text.pdf, 2026-11-27]:
+  wyjątek WYŁĄCZNIE dla informacji udostępnianych na podstawie przepisów o przeciwdziałaniu
+  praniu pieniędzy i finansowaniu terroryzmu (wyjątek z Ordynacji podatkowej usunięty).
+  art. 5b (od 18.06.2026, Dz.U. 2026 poz. 731) ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/731/text.pdf, 2026-11-27] — tajemnica z art. 3
+  ust. 3–6 nie ustaje, gdy ujawnienia żąda organ nadzorczy w rozumieniu art. 4 pkt 22 RODO.
+  Prawo o adwokaturze (t.j. Dz.U. 2024 poz. 1564 ze zm.) ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2024/1564/text.pdf, 2026-11-27]: art. 6 ust. 1–3
+  analogicznie; art. 6 ust. 4 od 01.10.2026 — wyjątek tylko AML (Dz.U. 2026 poz. 846, art. 2)
+  ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/846/text.pdf, 2026-11-27]; art. 16b (Dz.U. 2026 poz. 1290, od 17.10.2026) — tajemnica z art. 6 nie
+  ustaje przy żądaniu organu nadzorczego ✅ [VER: https://api.sejm.gov.pl/eli/acts/DU/2026/1290/text.pdf, 2026-11-27].
+  → NDA z radcą/adwokatem/kancelarią: klauzula umowna nie zastępuje tajemnicy ustawowej
+    ani jej nie zawęża; limit czasowy w NDA nie skraca obowiązku bezterminowego.
+
+NDA JEDNOSTRONNE: przy przepływie informacji w obie strony (due diligence, wdrożenie IT)
+  — jednostronność to ryzyko strony ujawniającej z drugiej strony (por. K-1).
+
+KARMIENIE MODELI AI: □ zakaz wprowadzania informacji poufnych do narzędzi AI, które
+  używają danych wejściowych do trenowania lub udostępniają je dostawcy, bez zgody
+  strony ujawniającej; □ lista dozwolonych narzędzi / wymóg wersji „bez trenowania”;
+  □ obowiązek usunięcia z historii i logów narzędzia po zakończeniu (jak zwrot materiałów).
+```
+
 ## K.4 CHECKLISTA FORMALNA (klauzula poufności w umowie głównej lub odrębne NDA)
 ```
 □ Strony precyzyjnie określone (firma + NIP, lub imię/nazwisko/PESEL)
